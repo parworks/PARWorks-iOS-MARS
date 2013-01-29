@@ -12,11 +12,17 @@
 #import "PVNearbySitesViewController.h"
 #import "PVSearchViewController.h"
 #import "PVTechnologyViewController.h"
+#import "ARManager.h"
+#import "ARManager+MARS_Extensions.h"
 
 @implementation PVAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // fetch data that we want to revalidate from our cache
+    [[ARManager shared] setApiKey:@"0d889de1-e1f9-4f5f-84fc-6c6f566b1866" andSecret:@"79cf5c70-ad89-4624-951f-2e2a2acfe413"];
+    [[ARManager shared] restoreMARSState];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     // Override point for customization after application launch.
@@ -37,6 +43,8 @@
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+
+    [[ARManager shared] stashMARSState];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application

@@ -75,8 +75,6 @@
 		435E174216B79E1100CC8DA3 /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 435E16E716B79E1100CC8DA3 /* ASIHTTPRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		435E174316B79E1100CC8DA3 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 435E16EB16B79E1100CC8DA3 /* ASIInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		435E174416B79E1100CC8DA3 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 435E16ED16B79E1100CC8DA3 /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		435E174516B79E1100CC8DA3 /* ASIOARequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 435E16F116B79E1100CC8DA3 /* ASIOARequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		435E174616B79E1100CC8DA3 /* ASIOAuthParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 435E16F316B79E1100CC8DA3 /* ASIOAuthParameter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		435E174716B79E1100CC8DA3 /* README-GHUnit in Resources */ = {isa = PBXBuildFile; fileRef = 435E16F616B79E1100CC8DA3 /* README-GHUnit */; };
 		435E174816B79E1100CC8DA3 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 435E16F916B79E1100CC8DA3 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		435E174916B79E1100CC8DA3 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 435E16FD16B79E1100CC8DA3 /* NSObject+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -219,10 +217,6 @@
 		435E16EC16B79E1100CC8DA3 /* ASINetworkQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASINetworkQueue.h; sourceTree = "<group>"; };
 		435E16ED16B79E1100CC8DA3 /* ASINetworkQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASINetworkQueue.m; sourceTree = "<group>"; };
 		435E16EE16B79E1100CC8DA3 /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
-		435E16F016B79E1100CC8DA3 /* ASIOARequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIOARequest.h; sourceTree = "<group>"; };
-		435E16F116B79E1100CC8DA3 /* ASIOARequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIOARequest.m; sourceTree = "<group>"; };
-		435E16F216B79E1100CC8DA3 /* ASIOAuthParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIOAuthParameter.h; sourceTree = "<group>"; };
-		435E16F316B79E1100CC8DA3 /* ASIOAuthParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIOAuthParameter.m; sourceTree = "<group>"; };
 		435E16F616B79E1100CC8DA3 /* README-GHUnit */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "README-GHUnit"; sourceTree = "<group>"; };
 		435E16F816B79E1100CC8DA3 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		435E16F916B79E1100CC8DA3 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -533,20 +527,8 @@
 				435E16EC16B79E1100CC8DA3 /* ASINetworkQueue.h */,
 				435E16ED16B79E1100CC8DA3 /* ASINetworkQueue.m */,
 				435E16EE16B79E1100CC8DA3 /* ASIProgressDelegate.h */,
-				435E16EF16B79E1100CC8DA3 /* OAuth */,
 			);
 			path = Classes;
-			sourceTree = "<group>";
-		};
-		435E16EF16B79E1100CC8DA3 /* OAuth */ = {
-			isa = PBXGroup;
-			children = (
-				435E16F016B79E1100CC8DA3 /* ASIOARequest.h */,
-				435E16F116B79E1100CC8DA3 /* ASIOARequest.m */,
-				435E16F216B79E1100CC8DA3 /* ASIOAuthParameter.h */,
-				435E16F316B79E1100CC8DA3 /* ASIOAuthParameter.m */,
-			);
-			path = OAuth;
 			sourceTree = "<group>";
 		};
 		435E16F416B79E1100CC8DA3 /* External */ = {
@@ -760,8 +742,6 @@
 				435E174216B79E1100CC8DA3 /* ASIHTTPRequest.m in Sources */,
 				435E174316B79E1100CC8DA3 /* ASIInputStream.m in Sources */,
 				435E174416B79E1100CC8DA3 /* ASINetworkQueue.m in Sources */,
-				435E174516B79E1100CC8DA3 /* ASIOARequest.m in Sources */,
-				435E174616B79E1100CC8DA3 /* ASIOAuthParameter.m in Sources */,
 				435E174816B79E1100CC8DA3 /* Reachability.m in Sources */,
 				435E174916B79E1100CC8DA3 /* NSObject+SBJSON.m in Sources */,
 				435E174A16B79E1100CC8DA3 /* NSString+SBJSON.m in Sources */,

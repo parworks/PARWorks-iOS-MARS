@@ -9,6 +9,7 @@
 #import "PVTrendingSitesController.h"
 #import "ASIHTTPRequest.h"
 #import "ARManager.h"
+#import "ARManager+MARS_Extensions.h"
 
 @interface PVTrendingSitesController ()
 
@@ -29,6 +30,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // subscribe to receive updates about the trending sites list
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(trendingSitesUpdated:) name:NOTIF_TRENDING_SITES_UPDATED object:nil];
+
+    // make sure our cached data is up-to-date
+    [[ARManager shared] fetchTrendingSites];
+}
+
+- (void)trendingSitesUpdated:(NSNotification*)notif
+{
+    // trigger update of our views
 }
 
 - (void)didReceiveMemoryWarning

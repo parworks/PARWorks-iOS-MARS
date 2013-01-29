@@ -10,6 +10,16 @@
 #import "ASIHTTPRequest+JSONAdditions.h"
 #import "ARSite.h"
 
+#import <objc/runtime.h>
+
+#define TRENDING_SITES_PATH [@"~/Documents/Trending.plist" stringByExpandingTildeInPath]
+#define FEATURED_TAGS_PATH [@"~/Documents/FeaturedTags.plist" stringByExpandingTildeInPath]
+#define AVAILABLE_TAGS_PATH [@"~/Documents/AvailableTags.plist" stringByExpandingTildeInPath]
+
+static char TRENDING_SITES_KEY;
+static char AVAILABLE_TAGS_KEY;
+static char FEATURED_TAGS_KEY;
+static char CACHED_SITES_KEY;
 
 @implementation ARManager (MARS_Extensions)
 
@@ -24,6 +34,21 @@
     [cache setCountLimit: 40];
     [self setCachedSites: cache];
 }
+
+- (void)stashMARSState
+{
+    [self.trendingSites writeToFile: TRENDING_SITES_PATH atomically:NO];
+    [self.availableTags writeToFile: AVAILABLE_TAGS_PATH atomically:NO];
+    [self.featuredTags writeToFile: FEATURED_TAGS_PATH atomically:NO];
+}
+
+- (void)restoreMARSState
+{
+    [self setTrendingSites: [NSArray arrayWithContentsOfFile: TRENDING_SITES_PATH]];
+    [self setAvailableTags: [NSArray arrayWithContentsOfFile: AVAILABLE_TAGS_PATH]];
+    [self setFeaturedTags: [NSArray arrayWithContentsOfFile: FEATURED_TAGS_PATH]];
+}
+
 
 - (void)fetchTrendingSites
 {
@@ -84,6 +109,51 @@
         
         callback(tagName, sites);
     }];
+}
+
+#pragma mark Associated Objects
+
+- (NSMutableArray*)trendingSites
+{
+    return (NSMutableArray*)objc_getAssociatedObject(self, &TRENDING_SITES_KEY);
+}
+
+- (void)setTrendingSites:(NSArray *)trendingSites
+{
+    objc_setAssociatedObject(self, &TRENDING_SITES_KEY, trendingSites, OBJC_ASSOCIATION_RETAIN);
+}
+
+
+- (NSMutableArray*)availableTags
+{
+    return (NSMutableArray*)objc_getAssociatedObject(self, &AVAILABLE_TAGS_KEY);
+}
+
+- (void)setAvailableTags:(NSArray *)availableTags
+{
+    objc_setAssociatedObject(self, &AVAILABLE_TAGS_KEY, availableTags, OBJC_ASSOCIATION_RETAIN);
+}
+
+
+- (NSMutableArray*)featuredTags
+{
+    return (NSMutableArray*)objc_getAssociatedObject(self, &FEATURED_TAGS_KEY);
+}
+
+- (void)setFeaturedTags:(NSArray *)featuredTags
+{
+    objc_setAssociatedObject(self, &FEATURED_TAGS_KEY, featuredTags, OBJC_ASSOCIATION_RETAIN);
+}
+
+
+- (NSMutableArray*)cachedSites
+{
+    return (NSMutableArray*)objc_getAssociatedObject(self, &CACHED_SITES_KEY);
+}
+
+- (void)setCachedSites:(NSCache *)cachedSites
+{
+    objc_setAssociatedObject(self, &CACHED_SITES_KEY, cachedSites, OBJC_ASSOCIATION_RETAIN);
 }
 
 @end

@@ -10,6 +10,10 @@
 #import "ASIHTTPRequest+JSONAdditions.h"
 #import "ARManager.h"
 
+#import <objc/runtime.h>
+
+static char COMMENTS_KEY;
+
 @implementation ARSite (MARS_Extensions)
 
 @dynamic comments;
@@ -64,6 +68,18 @@
         else
             callback(@"Sorry, your comment could not be deleted.");
     }];
+}
+
+#pragma mark Associated Objects
+
+- (NSMutableArray*)comments
+{
+    return (NSMutableArray*)objc_getAssociatedObject(self, &COMMENTS_KEY);
+}
+
+- (void)setComments:(NSMutableArray*)comments
+{
+    objc_setAssociatedObject(self, &COMMENTS_KEY, comments, OBJC_ASSOCIATION_RETAIN);
 }
 
 @end

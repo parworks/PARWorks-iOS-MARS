@@ -19,6 +19,9 @@
 @property (nonatomic, retain) NSArray * availableTags;
 @property (nonatomic, retain) NSArray * featuredTags;
 
+- (void)stashMARSState;
+- (void)restoreMARSState;
+
 - (void)fetchTrendingSites;
 - (void)fetchTags;
 - (void)fetchTagResults:(NSString*)tagName withCallback:(void(^)(NSString * tagName, NSArray * sites))callback;
