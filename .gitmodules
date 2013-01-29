@@ -1,3 +1,6 @@
 [submodule "Submodules/AFNetworking"]
 	path = Submodules/AFNetworking
 	url = git://github.com/AFNetworking/AFNetworking.git
+[submodule "Submodules/PARWorks-iOS"]
+	path = Submodules/PARWorks-iOS
+	url = git@github.com:parworks/PARWorks-iOS.git
