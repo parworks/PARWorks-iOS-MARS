@@ -7,9 +7,11 @@
 //
 
 #import "PVTrendingSitesController.h"
+#import "PVSiteDetailViewController.h"
 #import "ASIHTTPRequest.h"
 #import "ARManager.h"
 #import "ARManager+MARS_Extensions.h"
+#import "ARSite.h"
 
 @interface PVTrendingSitesController ()
 
@@ -41,6 +43,11 @@
 - (void)trendingSitesUpdated:(NSNotification*)notif
 {
     // trigger update of our views
+    
+    // TEMPORARY: drill down into a site
+    ARSite * site = [[[ARManager shared] trendingSites] lastObject];
+    PVSiteDetailViewController * pv = [[PVSiteDetailViewController alloc] initWithSite: site];
+    [self presentViewController:pv animated:YES completion:NULL];
 }
 
 - (void)didReceiveMemoryWarning

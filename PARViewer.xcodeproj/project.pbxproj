@@ -99,6 +99,8 @@
 		435E175E16B79E1100CC8DA3 /* GridCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 435E172916B79E1100CC8DA3 /* GridCellView.m */; };
 		435E175F16B79E1100CC8DA3 /* GridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 435E172B16B79E1100CC8DA3 /* GridView.m */; };
 		435E176016B79E1100CC8DA3 /* PointCloudView.m in Sources */ = {isa = PBXBuildFile; fileRef = 435E172D16B79E1100CC8DA3 /* PointCloudView.m */; };
+		435E176416B89E6100CC8DA3 /* PVSiteDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 435E176216B89E6100CC8DA3 /* PVSiteDetailViewController.m */; };
+		435E176516B89E6100CC8DA3 /* PVSiteDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 435E176316B89E6100CC8DA3 /* PVSiteDetailViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -266,6 +268,9 @@
 		435E172B16B79E1100CC8DA3 /* GridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridView.m; sourceTree = "<group>"; };
 		435E172C16B79E1100CC8DA3 /* PointCloudView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointCloudView.h; sourceTree = "<group>"; };
 		435E172D16B79E1100CC8DA3 /* PointCloudView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointCloudView.m; sourceTree = "<group>"; };
+		435E176116B89E6100CC8DA3 /* PVSiteDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVSiteDetailViewController.h; sourceTree = "<group>"; };
+		435E176216B89E6100CC8DA3 /* PVSiteDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVSiteDetailViewController.m; sourceTree = "<group>"; };
+		435E176316B89E6100CC8DA3 /* PVSiteDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PVSiteDetailViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -347,6 +352,9 @@
 				4351D0CF16B4C5DB0039FE88 /* PVTrendingSitesController.h */,
 				4351D0D016B4C5DB0039FE88 /* PVTrendingSitesController.m */,
 				4351D10016B4C71A0039FE88 /* PVTrendingSitesController.xib */,
+				435E176116B89E6100CC8DA3 /* PVSiteDetailViewController.h */,
+				435E176216B89E6100CC8DA3 /* PVSiteDetailViewController.m */,
+				435E176316B89E6100CC8DA3 /* PVSiteDetailViewController.xib */,
 				4351D0D616B4C5DB0039FE88 /* PVTechnologyViewController.h */,
 				4351D0D716B4C5DB0039FE88 /* PVTechnologyViewController.m */,
 				4351D0FF16B4C71A0039FE88 /* PVTechnologyViewController.xib */,
@@ -695,6 +703,7 @@
 				435E173916B79E1100CC8DA3 /* AROverlayDataEditorViewController.xib in Resources */,
 				435E173B16B79E1100CC8DA3 /* ARPhotoViewController.xib in Resources */,
 				435E174716B79E1100CC8DA3 /* README-GHUnit in Resources */,
+				435E176516B89E6100CC8DA3 /* PVSiteDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -765,6 +774,7 @@
 				435E175E16B79E1100CC8DA3 /* GridCellView.m in Sources */,
 				435E175F16B79E1100CC8DA3 /* GridView.m in Sources */,
 				435E176016B79E1100CC8DA3 /* PointCloudView.m in Sources */,
+				435E176416B89E6100CC8DA3 /* PVSiteDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
