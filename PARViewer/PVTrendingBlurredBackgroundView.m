@@ -39,6 +39,10 @@
     _nextImageView = [[GPUImageView alloc] initWithFrame: _imageViewRect];
     [_nextImageView setFillMode: kGPUImageFillModePreserveAspectRatioAndFill];
     [self addSubview: _nextImageView];
+    
+    UIView * darkView = [[UIView alloc] initWithFrame: self.bounds];
+    [darkView setBackgroundColor: [UIColor colorWithWhite:0 alpha:0.45]];
+    [self addSubview: darkView];
 }
 
 - (void)setFloatingPointIndex:(float)index

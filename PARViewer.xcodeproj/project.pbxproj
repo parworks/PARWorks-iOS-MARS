@@ -120,6 +120,7 @@
 		43E6734216BB94DF007E7708 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E6734116BB94DF007E7708 /* CoreMedia.framework */; };
 		43E6734416BB94EA007E7708 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E6734316BB94EA007E7708 /* CoreVideo.framework */; };
 		43E6734616BB94FC007E7708 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E6734516BB94FC007E7708 /* AVFoundation.framework */; };
+		43E6734916BBA0A6007E7708 /* UIColor+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E6734816BBA0A6007E7708 /* UIColor+Utils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -342,6 +343,8 @@
 		43E6734116BB94DF007E7708 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		43E6734316BB94EA007E7708 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		43E6734516BB94FC007E7708 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		43E6734716BBA0A6007E7708 /* UIColor+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Utils.h"; sourceTree = "<group>"; };
+		43E6734816BBA0A6007E7708 /* UIColor+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Utils.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -585,6 +588,8 @@
 		435E16C416B79E1100CC8DA3 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				43E6734716BBA0A6007E7708 /* UIColor+Utils.h */,
+				43E6734816BBA0A6007E7708 /* UIColor+Utils.m */,
 				435E16C516B79E1100CC8DA3 /* ASIHTTPRequest+JSONAdditions.h */,
 				435E16C616B79E1100CC8DA3 /* ASIHTTPRequest+JSONAdditions.m */,
 				435E16C716B79E1100CC8DA3 /* NSData+Base64Encode.h */,
@@ -941,6 +946,7 @@
 				43591B5C16BB7B3500860F11 /* PVSiteCardView.m in Sources */,
 				43E6733D16BB8A3B007E7708 /* PVImageCacheManager.m in Sources */,
 				43E6734016BB8E3E007E7708 /* PVTrendingBlurredBackgroundView.m in Sources */,
+				43E6734916BBA0A6007E7708 /* UIColor+Utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
