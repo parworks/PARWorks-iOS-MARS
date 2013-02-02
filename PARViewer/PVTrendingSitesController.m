@@ -12,7 +12,6 @@
 #import "ARManager.h"
 #import "ARManager+MARS_Extensions.h"
 #import "ARSite.h"
-#import "PVSiteCardView.h"
 
 static NSString *cellIdentifier = @"TestCell";
 
@@ -89,9 +88,18 @@ static NSString *cellIdentifier = @"TestCell";
     ARSite * site = [[[ARManager shared] trendingSites] objectAtIndex: [indexPath row]];
     
     [cell setSite: site];
-
+    
     return cell;
 }
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    ARSite * site = [[[ARManager shared] trendingSites] objectAtIndex: [indexPath row]];
+    PVSiteDetailViewController * detail = [[PVSiteDetailViewController alloc] initWithSite: site];
+    [self presentViewController: detail animated:YES completion:NULL];
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+}
+
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
