@@ -121,6 +121,16 @@
 		43E6734416BB94EA007E7708 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E6734316BB94EA007E7708 /* CoreVideo.framework */; };
 		43E6734616BB94FC007E7708 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E6734516BB94FC007E7708 /* AVFoundation.framework */; };
 		43E6734916BBA0A6007E7708 /* UIColor+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E6734816BBA0A6007E7708 /* UIColor+Utils.m */; };
+		43EB600D16BCEE6E00A3EE29 /* JSSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43EB600C16BCEE6E00A3EE29 /* JSSlidingViewController.m */; };
+		43EB601316BCEE7A00A3EE29 /* frontViewControllerDropShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 43EB601116BCEE7A00A3EE29 /* frontViewControllerDropShadow.png */; };
+		43EB601416BCEE7A00A3EE29 /* frontViewControllerDropShadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43EB601216BCEE7A00A3EE29 /* frontViewControllerDropShadow@2x.png */; };
+		43EB601816BCEF2100A3EE29 /* PVSidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43EB601616BCEF2100A3EE29 /* PVSidebarViewController.m */; };
+		43EB601916BCEF2100A3EE29 /* PVSidebarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EB601716BCEF2100A3EE29 /* PVSidebarViewController.xib */; };
+		43EB601C16BCF16D00A3EE29 /* PVBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43EB601B16BCF16D00A3EE29 /* PVBaseViewController.m */; };
+		43EB602116BCF29B00A3EE29 /* navigationBar_menuButton_highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 43EB601D16BCF29B00A3EE29 /* navigationBar_menuButton_highlighted.png */; };
+		43EB602216BCF29B00A3EE29 /* navigationBar_menuButton_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43EB601E16BCF29B00A3EE29 /* navigationBar_menuButton_highlighted@2x.png */; };
+		43EB602316BCF29B00A3EE29 /* navigationBar_menuButton_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 43EB601F16BCF29B00A3EE29 /* navigationBar_menuButton_normal.png */; };
+		43EB602416BCF29B00A3EE29 /* navigationBar_menuButton_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43EB602016BCF29B00A3EE29 /* navigationBar_menuButton_normal@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -345,6 +355,19 @@
 		43E6734516BB94FC007E7708 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		43E6734716BBA0A6007E7708 /* UIColor+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Utils.h"; sourceTree = "<group>"; };
 		43E6734816BBA0A6007E7708 /* UIColor+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Utils.m"; sourceTree = "<group>"; };
+		43EB600B16BCEE6E00A3EE29 /* JSSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSSlidingViewController.h; sourceTree = "<group>"; };
+		43EB600C16BCEE6E00A3EE29 /* JSSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSSlidingViewController.m; sourceTree = "<group>"; };
+		43EB601116BCEE7A00A3EE29 /* frontViewControllerDropShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frontViewControllerDropShadow.png; sourceTree = "<group>"; };
+		43EB601216BCEE7A00A3EE29 /* frontViewControllerDropShadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "frontViewControllerDropShadow@2x.png"; sourceTree = "<group>"; };
+		43EB601516BCEF2100A3EE29 /* PVSidebarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVSidebarViewController.h; sourceTree = "<group>"; };
+		43EB601616BCEF2100A3EE29 /* PVSidebarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVSidebarViewController.m; sourceTree = "<group>"; };
+		43EB601716BCEF2100A3EE29 /* PVSidebarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PVSidebarViewController.xib; sourceTree = "<group>"; };
+		43EB601A16BCF16D00A3EE29 /* PVBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVBaseViewController.h; sourceTree = "<group>"; };
+		43EB601B16BCF16D00A3EE29 /* PVBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVBaseViewController.m; sourceTree = "<group>"; };
+		43EB601D16BCF29B00A3EE29 /* navigationBar_menuButton_highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = navigationBar_menuButton_highlighted.png; path = "../../../../../../../Users/bengotow/Downloads/JSSlidingViewController-master/JSSlidingViewControllerSample/JSSlidingViewControllerSample/ImagesForTestProjectOnly/navigationBar_menuButton_highlighted.png"; sourceTree = "<group>"; };
+		43EB601E16BCF29B00A3EE29 /* navigationBar_menuButton_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navigationBar_menuButton_highlighted@2x.png"; path = "../../../../../../../Users/bengotow/Downloads/JSSlidingViewController-master/JSSlidingViewControllerSample/JSSlidingViewControllerSample/ImagesForTestProjectOnly/navigationBar_menuButton_highlighted@2x.png"; sourceTree = "<group>"; };
+		43EB601F16BCF29B00A3EE29 /* navigationBar_menuButton_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = navigationBar_menuButton_normal.png; path = "../../../../../../../Users/bengotow/Downloads/JSSlidingViewController-master/JSSlidingViewControllerSample/JSSlidingViewControllerSample/ImagesForTestProjectOnly/navigationBar_menuButton_normal.png"; sourceTree = "<group>"; };
+		43EB602016BCF29B00A3EE29 /* navigationBar_menuButton_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navigationBar_menuButton_normal@2x.png"; path = "../../../../../../../Users/bengotow/Downloads/JSSlidingViewController-master/JSSlidingViewControllerSample/JSSlidingViewControllerSample/ImagesForTestProjectOnly/navigationBar_menuButton_normal@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -420,12 +443,19 @@
 		4351D0BD16B4C5DB0039FE88 /* PARViewer */ = {
 			isa = PBXGroup;
 			children = (
+				43EB600B16BCEE6E00A3EE29 /* JSSlidingViewController.h */,
+				43EB600C16BCEE6E00A3EE29 /* JSSlidingViewController.m */,
 				435E16BA16B79E1100CC8DA3 /* AR Core */,
 				4351D11F16B4CDDA0039FE88 /* AFNetworking */,
 				43591B3116BB721600860F11 /* PSTCollectionView */,
 				4351D13C16B4CDEF0039FE88 /* Model */,
 				4351D0C616B4C5DB0039FE88 /* PVAppDelegate.h */,
 				4351D0C716B4C5DB0039FE88 /* PVAppDelegate.m */,
+				43EB601A16BCF16D00A3EE29 /* PVBaseViewController.h */,
+				43EB601B16BCF16D00A3EE29 /* PVBaseViewController.m */,
+				43EB601516BCEF2100A3EE29 /* PVSidebarViewController.h */,
+				43EB601616BCEF2100A3EE29 /* PVSidebarViewController.m */,
+				43EB601716BCEF2100A3EE29 /* PVSidebarViewController.xib */,
 				43E6733B16BB8A3A007E7708 /* PVImageCacheManager.h */,
 				43E6733C16BB8A3A007E7708 /* PVImageCacheManager.m */,
 				4351D0FA16B4C70C0039FE88 /* PVSearchViewController.h */,
@@ -464,6 +494,12 @@
 		4351D0E816B4C6CA0039FE88 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				43EB601D16BCF29B00A3EE29 /* navigationBar_menuButton_highlighted.png */,
+				43EB601E16BCF29B00A3EE29 /* navigationBar_menuButton_highlighted@2x.png */,
+				43EB601F16BCF29B00A3EE29 /* navigationBar_menuButton_normal.png */,
+				43EB602016BCF29B00A3EE29 /* navigationBar_menuButton_normal@2x.png */,
+				43EB601116BCEE7A00A3EE29 /* frontViewControllerDropShadow.png */,
+				43EB601216BCEE7A00A3EE29 /* frontViewControllerDropShadow@2x.png */,
 				4351D0E916B4C6CA0039FE88 /* Default-568h@2x.png */,
 				4351D0EA16B4C6CA0039FE88 /* Default.png */,
 				4351D0EB16B4C6CA0039FE88 /* Default@2x.png */,
@@ -860,6 +896,13 @@
 				435E173B16B79E1100CC8DA3 /* ARPhotoViewController.xib in Resources */,
 				435E174716B79E1100CC8DA3 /* README-GHUnit in Resources */,
 				435E176516B89E6100CC8DA3 /* PVSiteDetailViewController.xib in Resources */,
+				43EB601316BCEE7A00A3EE29 /* frontViewControllerDropShadow.png in Resources */,
+				43EB601416BCEE7A00A3EE29 /* frontViewControllerDropShadow@2x.png in Resources */,
+				43EB601916BCEF2100A3EE29 /* PVSidebarViewController.xib in Resources */,
+				43EB602116BCF29B00A3EE29 /* navigationBar_menuButton_highlighted.png in Resources */,
+				43EB602216BCF29B00A3EE29 /* navigationBar_menuButton_highlighted@2x.png in Resources */,
+				43EB602316BCF29B00A3EE29 /* navigationBar_menuButton_normal.png in Resources */,
+				43EB602416BCF29B00A3EE29 /* navigationBar_menuButton_normal@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -947,6 +990,9 @@
 				43E6733D16BB8A3B007E7708 /* PVImageCacheManager.m in Sources */,
 				43E6734016BB8E3E007E7708 /* PVTrendingBlurredBackgroundView.m in Sources */,
 				43E6734916BBA0A6007E7708 /* UIColor+Utils.m in Sources */,
+				43EB600D16BCEE6E00A3EE29 /* JSSlidingViewController.m in Sources */,
+				43EB601816BCEF2100A3EE29 /* PVSidebarViewController.m in Sources */,
+				43EB601C16BCF16D00A3EE29 /* PVBaseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

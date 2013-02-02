@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PVBaseViewController.h"
 
-@interface PVTechnologyViewController : UIViewController
+@interface PVTechnologyViewController : PVBaseViewController
 
 @end

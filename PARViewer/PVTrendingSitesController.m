@@ -41,6 +41,8 @@ static NSString *cellIdentifier = @"TestCell";
     
     [_backgroundView setFloatingPointIndex: 0];
     [_collectionView registerClass: [PVSiteCardView class] forCellWithReuseIdentifier: cellIdentifier];
+    [_collectionView setShowsHorizontalScrollIndicator: NO];
+    [_collectionView setPagingEnabled: YES];
     [_backgroundView setDelegate: self];
 }
 

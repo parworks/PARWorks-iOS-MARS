@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PVBaseViewController.h"
 
-@interface PVNearbySitesViewController : UIViewController
+@interface PVNearbySitesViewController : PVBaseViewController
 
 @end
