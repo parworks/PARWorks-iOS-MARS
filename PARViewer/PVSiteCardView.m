@@ -8,6 +8,7 @@
 
 #import "PVSiteCardView.h"
 #import "PVImageCacheManager.h"
+#import "PVTrendingSitesController.h"
 
 @implementation PVSiteCardView
 
@@ -50,6 +51,11 @@
 
     }
     return self;
+}
+
+- (ARSite*)site
+{
+    return _site;
 }
 
 - (void)setSite:(ARSite*)site
@@ -105,4 +111,6 @@
     
 	return retPath;
 }
+
+
 @end
