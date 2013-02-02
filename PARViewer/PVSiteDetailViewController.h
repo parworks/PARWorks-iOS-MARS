@@ -6,12 +6,16 @@
 //  Copyright (c) 2013 Ben Gotow. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "ARSite.h"
+#import "PVParallaxTableView.h"
 
-@interface PVSiteDetailViewController : UIViewController
+@interface PVSiteDetailViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, retain) ARSite * site;
+@property (nonatomic, strong) ARSite * site;
+
+@property (nonatomic, strong) UIImageView *headerImageView;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) PVParallaxTableView *parallaxView;
 
 - (id)initWithSite:(ARSite *)site;
 

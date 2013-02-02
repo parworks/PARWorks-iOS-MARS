@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42809ECE16BB95D0007B60F5 /* PVParallaxTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42809ECD16BB95D0007B60F5 /* PVParallaxTableView.m */; };
+		42809ED116BB9B05007B60F5 /* posterImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 42809ECF16BB9B05007B60F5 /* posterImage.png */; };
+		42809ED216BB9B05007B60F5 /* posterImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 42809ED016BB9B05007B60F5 /* posterImage@2x.png */; };
 		4351D0B816B4C5DB0039FE88 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4351D0B716B4C5DB0039FE88 /* UIKit.framework */; };
 		4351D0BA16B4C5DB0039FE88 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4351D0B916B4C5DB0039FE88 /* Foundation.framework */; };
 		4351D0BC16B4C5DB0039FE88 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4351D0BB16B4C5DB0039FE88 /* CoreGraphics.framework */; };
@@ -104,6 +107,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		42809ECC16BB95CF007B60F5 /* PVParallaxTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVParallaxTableView.h; sourceTree = "<group>"; };
+		42809ECD16BB95D0007B60F5 /* PVParallaxTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVParallaxTableView.m; sourceTree = "<group>"; };
+		42809ECF16BB9B05007B60F5 /* posterImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = posterImage.png; sourceTree = "<group>"; };
+		42809ED016BB9B05007B60F5 /* posterImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "posterImage@2x.png"; sourceTree = "<group>"; };
 		4351D0B316B4C5DB0039FE88 /* PARViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PARViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4351D0B716B4C5DB0039FE88 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4351D0B916B4C5DB0039FE88 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -358,6 +365,8 @@
 				4351D0D616B4C5DB0039FE88 /* PVTechnologyViewController.h */,
 				4351D0D716B4C5DB0039FE88 /* PVTechnologyViewController.m */,
 				4351D0FF16B4C71A0039FE88 /* PVTechnologyViewController.xib */,
+				42809ECC16BB95CF007B60F5 /* PVParallaxTableView.h */,
+				42809ECD16BB95D0007B60F5 /* PVParallaxTableView.m */,
 				4351D0BE16B4C5DB0039FE88 /* Supporting Files */,
 			);
 			path = PARViewer;
@@ -388,6 +397,8 @@
 				4351D10D16B4C9670039FE88 /* tab_tech@2x.png */,
 				4351D10E16B4C9670039FE88 /* tab_trending.png */,
 				4351D10F16B4C9670039FE88 /* tab_trending@2x.png */,
+				42809ECF16BB9B05007B60F5 /* posterImage.png */,
+				42809ED016BB9B05007B60F5 /* posterImage@2x.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -704,6 +715,8 @@
 				435E173B16B79E1100CC8DA3 /* ARPhotoViewController.xib in Resources */,
 				435E174716B79E1100CC8DA3 /* README-GHUnit in Resources */,
 				435E176516B89E6100CC8DA3 /* PVSiteDetailViewController.xib in Resources */,
+				42809ED116BB9B05007B60F5 /* posterImage.png in Resources */,
+				42809ED216BB9B05007B60F5 /* posterImage@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -775,6 +788,7 @@
 				435E175F16B79E1100CC8DA3 /* GridView.m in Sources */,
 				435E176016B79E1100CC8DA3 /* PointCloudView.m in Sources */,
 				435E176416B89E6100CC8DA3 /* PVSiteDetailViewController.m in Sources */,
+				42809ECE16BB95D0007B60F5 /* PVParallaxTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
