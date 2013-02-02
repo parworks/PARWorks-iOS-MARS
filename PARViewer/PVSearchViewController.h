@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PVBaseViewController.h"
 
-@interface PVSearchViewController : UIViewController
+@interface PVSearchViewController : PVBaseViewController
 
 @end

@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PSTCollectionView.h"
+#import "PVTrendingBlurredBackgroundView.h"
+#import "PVBaseViewController.h"
 
-@interface PVTrendingSitesController : UIViewController
+@interface PVTrendingSitesController : PVBaseViewController <PVTrendingBlurredBackgroundViewDelegate, PSUICollectionViewDataSource, PSUICollectionViewDelegate>
+
+@property (weak, nonatomic) IBOutlet PVTrendingBlurredBackgroundView *backgroundView;
+@property (weak, nonatomic) IBOutlet PSUICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 
 @end

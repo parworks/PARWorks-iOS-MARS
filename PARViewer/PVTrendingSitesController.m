@@ -12,10 +12,10 @@
 #import "ARManager.h"
 #import "ARManager+MARS_Extensions.h"
 #import "ARSite.h"
+#import "PVSiteCardView.h"
 
-@interface PVTrendingSitesController ()
+static NSString *cellIdentifier = @"TestCell";
 
-@end
 
 @implementation PVTrendingSitesController
 
@@ -38,21 +38,69 @@
 
     // make sure our cached data is up-to-date
     [[ARManager shared] fetchTrendingSites];
+    
+    [_backgroundView setFloatingPointIndex: 0];
+    [_collectionView registerClass: [PVSiteCardView class] forCellWithReuseIdentifier: cellIdentifier];
+    [_collectionView setShowsHorizontalScrollIndicator: NO];
+    [_collectionView setPagingEnabled: YES];
+    [_backgroundView setDelegate: self];
 }
 
 - (void)trendingSitesUpdated:(NSNotification*)notif
 {
     // trigger update of our views
+    [_collectionView reloadData];
+    [_pageControl setNumberOfPages: [[[ARManager shared] trendingSites] count]];
+}
+
+- (NSURL*)urlForSiteAtIndex:(int)ii
+{
+    if (ii < 0)
+        return nil;
+    if (ii >= [[[ARManager shared] trendingSites] count])
+        return nil;
     
-    // TEMPORARY: drill down into a site
-    ARSite * site = [[[ARManager shared] trendingSites] lastObject];
-    PVSiteDetailViewController * pv = [[PVSiteDetailViewController alloc] initWithSite: site];
-    [self presentViewController:pv animated:YES completion:NULL];
+    return [[[[ARManager shared] trendingSites] objectAtIndex: ii] posterImageURL];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+
+#pragma mark -
+#pragma mark PSUICollectionView stuff
+
+- (NSInteger)numberOfSectionsInCollectionView:(PSUICollectionView *)collectionView
+{
+    return 1;
+}
+
+
+- (NSInteger)collectionView:(PSUICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return [[[ARManager shared] trendingSites] count];
+}
+
+- (PSUICollectionViewCell *)collectionView:(PSUICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    PVSiteCardView *cell = (PVSiteCardView *)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    ARSite * site = [[[ARManager shared] trendingSites] objectAtIndex: [indexPath row]];
+    
+    [cell setSite: site];
+
+    return cell;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    // determine visible index based on scroll offset
+    int page = [[_collectionView indexPathForItemAtPoint: CGPointMake(scrollView.contentOffset.x + self.view.center.x, self.view.center.y)] row];
+    [_pageControl setCurrentPage: page];
+    
+    // adjust the background parallax view
+    [_backgroundView setFloatingPointIndex: scrollView.contentOffset.x / scrollView.frame.size.width];
 }
 
 @end

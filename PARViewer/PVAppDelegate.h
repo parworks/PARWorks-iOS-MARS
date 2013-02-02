@@ -7,11 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JSSlidingViewController.h"
+#import "PVTrendingSitesController.h"
+#import "PVNearbySitesViewController.h"
+#import "PVSearchViewController.h"
+#import "PVTechnologyViewController.h"
+#import "PVSidebarViewController.h"
 
-@interface PVAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
+@interface PVAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate, JSSlidingViewControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) JSSlidingViewController * slidingViewController;
+@property (strong, nonatomic) NSMutableArray * contentControllers;
+@property (strong, nonatomic) PVSidebarViewController * sidebarController;
 
-@property (strong, nonatomic) UITabBarController *tabBarController;
+- (void)switchToController:(int)index;
 
 @end

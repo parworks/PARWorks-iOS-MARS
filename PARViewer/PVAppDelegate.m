@@ -7,11 +7,6 @@
 //
 
 #import "PVAppDelegate.h"
-
-#import "PVTrendingSitesController.h"
-#import "PVNearbySitesViewController.h"
-#import "PVSearchViewController.h"
-#import "PVTechnologyViewController.h"
 #import "ARManager.h"
 #import "ARManager+MARS_Extensions.h"
 
@@ -25,15 +20,20 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-    // Override point for customization after application launch.
-    UIViewController *trendingController = [[PVTrendingSitesController alloc] init];
-    UIViewController *techController = [[PVTechnologyViewController alloc] init];
-    UIViewController *searchController = [[PVSearchViewController alloc] init];
-    UIViewController *nearbyController = [[PVNearbySitesViewController alloc] init];
+    _contentControllers = [[NSMutableArray alloc] init];
+    [_contentControllers addObject: [[UINavigationController alloc] initWithRootViewController: [[PVTrendingSitesController alloc] init]]];
+    [_contentControllers addObject: [[UINavigationController alloc] initWithRootViewController: [[PVTechnologyViewController alloc] init]]];
+    [_contentControllers addObject: [[UINavigationController alloc] initWithRootViewController: [[PVSearchViewController alloc] init]]];
+    [_contentControllers addObject: [[UINavigationController alloc] initWithRootViewController: [[PVNearbySitesViewController alloc] init]]];
+    
+    // the sidebar controller automatically displays the items in the contentControllers array,
+    // pulling images and titles from the tabBarItem and title of each controller.
+    
+    _sidebarController = [[PVSidebarViewController alloc] init];
+    _slidingViewController = [[JSSlidingViewController alloc] initWithFrontViewController: [_contentControllers objectAtIndex: 0] backViewController: _sidebarController];
+    _slidingViewController.delegate = self;
 
-    self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[trendingController, nearbyController,searchController,techController];
-    self.window.rootViewController = self.tabBarController;
+    self.window.rootViewController = _slidingViewController;
     [self.window makeKeyAndVisible];
     
     return YES;
@@ -68,18 +68,14 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-/*
-// Optional UITabBarControllerDelegate method.
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+- (void)switchToController:(int)index
 {
-}
-*/
+    UIViewController * controller = [_contentControllers objectAtIndex: index];
 
-/*
-// Optional UITabBarControllerDelegate method.
-- (void)tabBarController:(UITabBarController *)tabBarController didEndCustomizingViewControllers:(NSArray *)viewControllers changed:(BOOL)changed
-{
+    if ([_slidingViewController frontViewController] != controller)
+        [_slidingViewController setFrontViewController:controller animated:YES completion:nil];
+    
+    [_slidingViewController closeSlider:YES completion:NULL];
 }
-*/
 
 @end

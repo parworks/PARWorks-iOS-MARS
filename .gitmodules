@@ -4,3 +4,9 @@
 [submodule "Submodules/PARWorks-iOS"]
 	path = Submodules/PARWorks-iOS
 	url = git@github.com:parworks/PARWorks-iOS.git
+[submodule "Submodules/PSTCollectionView"]
+	path = Submodules/PSTCollectionView
+	url = git://github.com/steipete/PSTCollectionView.git
+[submodule "Submodules/GPUImage"]
+	path = Submodules/GPUImage
+	url = git://github.com/BradLarson/GPUImage.git
