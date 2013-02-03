@@ -11,4 +11,6 @@
 
 @interface PVSearchViewController : PVBaseViewController
 
+@property (weak, nonatomic) IBOutlet UITextField *searchTextField;
+
 @end

@@ -18,13 +18,30 @@
     [[ARManager shared] setApiKey:@"0d889de1-e1f9-4f5f-84fc-6c6f566b1866" andSecret:@"79cf5c70-ad89-4624-951f-2e2a2acfe413"];
     [[ARManager shared] restoreMARSState];
     
+    
+    // setup appearance
+    NSMutableDictionary * navigationTextAttributes = [NSMutableDictionary dictionary];
+    UINavigationBar * navigationBarAppearance = [UINavigationBar appearance];
+    [navigationTextAttributes setObject:[UIColor colorWithWhite:0.2 alpha:1] forKey: UITextAttributeTextColor];
+    [navigationTextAttributes setObject:[UIFont fontWithName:@"HiraKakuProN-W3" size:18] forKey: UITextAttributeFont];
+    [navigationTextAttributes setObject:[UIColor whiteColor] forKey: UITextAttributeTextShadowColor];
+    [navigationTextAttributes setObject:[NSValue valueWithCGPoint: CGPointMake(0,1)] forKey: UITextAttributeTextShadowOffset];
+    [navigationBarAppearance setTitleTextAttributes: navigationTextAttributes];
+    
+    UIImage * navBarImage = [[UIImage imageNamed:@"navigation_bar_background"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7.0, 0, 7.0)];
+    [navigationBarAppearance setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsDefault];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-
+    [[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackOpaque animated: YES];
+    
     _contentControllers = [[NSMutableArray alloc] init];
     [_contentControllers addObject: [[UINavigationController alloc] initWithRootViewController: [[PVTrendingSitesController alloc] init]]];
     [_contentControllers addObject: [[UINavigationController alloc] initWithRootViewController: [[PVTechnologyViewController alloc] init]]];
     [_contentControllers addObject: [[UINavigationController alloc] initWithRootViewController: [[PVSearchViewController alloc] init]]];
     [_contentControllers addObject: [[UINavigationController alloc] initWithRootViewController: [[PVNearbySitesViewController alloc] init]]];
+    
+    for (UIViewController * c in _contentControllers)
+        [[[c view] layer] setCornerRadius: 5];
     
     // the sidebar controller automatically displays the items in the contentControllers array,
     // pulling images and titles from the tabBarItem and title of each controller.
@@ -72,10 +89,11 @@
 {
     UIViewController * controller = [_contentControllers objectAtIndex: index];
 
-    if ([_slidingViewController frontViewController] != controller)
-        [_slidingViewController setFrontViewController:controller animated:YES completion:nil];
-    
-    [_slidingViewController closeSlider:YES completion:NULL];
+    if (![_slidingViewController animating]) {
+        if ([_slidingViewController frontViewController] != controller)
+            [_slidingViewController setFrontViewController:controller animated:YES completion:nil];
+        [_slidingViewController closeSlider:YES completion:NULL];
+    }
 }
 
 @end

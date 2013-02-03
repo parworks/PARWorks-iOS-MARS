@@ -7,10 +7,8 @@
 //
 
 #import "PVSearchViewController.h"
+#import "JSSlidingViewController.h"
 
-@interface PVSearchViewController ()
-
-@end
 
 @implementation PVSearchViewController
 
@@ -19,9 +17,16 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"Search", @"Search");
-        self.tabBarItem.image = [UIImage imageNamed:@"tab_search"];
+        self.tabBarItem.image = [UIImage imageNamed:@"icon_search"];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissKeyboard) name:JSSlidingViewControllerWillOpenNotification object:nil];
     }
     return self;
+}
+
+- (void)dismissKeyboard
+{
+    [_searchTextField resignFirstResponder];
 }
 
 - (void)viewDidLoad

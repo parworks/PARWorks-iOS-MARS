@@ -19,7 +19,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"Nearby", @"Nearby");
-        self.tabBarItem.image = [UIImage imageNamed:@"tab_nearby"];
+        self.tabBarItem.image = [UIImage imageNamed:@"icon_nearby"];
     }
     return self;
 }
