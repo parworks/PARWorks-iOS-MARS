@@ -123,6 +123,7 @@
 		43998BBA16BDE1A8008B34C2 /* bar_item_sidebar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43998BB916BDE1A8008B34C2 /* bar_item_sidebar@2x.png */; };
 		43998BBD16BDE2C9008B34C2 /* UINavigationItem+PVAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 43998BBC16BDE2C9008B34C2 /* UINavigationItem+PVAdditions.m */; };
 		43998BBF16BDE647008B34C2 /* search_bar_cover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43998BBE16BDE647008B34C2 /* search_bar_cover@2x.png */; };
+		43998BC216BDF090008B34C2 /* PVFeaturedTagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43998BC116BDF090008B34C2 /* PVFeaturedTagCell.m */; };
 		43E6733A16BB883E007E7708 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E6733716BB8839007E7708 /* libGPUImage.a */; };
 		43E6733D16BB8A3B007E7708 /* PVImageCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E6733C16BB8A3A007E7708 /* PVImageCacheManager.m */; };
 		43E6734016BB8E3E007E7708 /* PVTrendingBlurredBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E6733F16BB8E3D007E7708 /* PVTrendingBlurredBackgroundView.m */; };
@@ -364,6 +365,8 @@
 		43998BBB16BDE2C9008B34C2 /* UINavigationItem+PVAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+PVAdditions.h"; sourceTree = "<group>"; };
 		43998BBC16BDE2C9008B34C2 /* UINavigationItem+PVAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+PVAdditions.m"; sourceTree = "<group>"; };
 		43998BBE16BDE647008B34C2 /* search_bar_cover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search_bar_cover@2x.png"; sourceTree = "<group>"; };
+		43998BC016BDF090008B34C2 /* PVFeaturedTagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVFeaturedTagCell.h; sourceTree = "<group>"; };
+		43998BC116BDF090008B34C2 /* PVFeaturedTagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVFeaturedTagCell.m; sourceTree = "<group>"; };
 		43E6733016BB8839007E7708 /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = Submodules/GPUImage/framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
 		43E6733B16BB8A3A007E7708 /* PVImageCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVImageCacheManager.h; sourceTree = "<group>"; };
 		43E6733C16BB8A3A007E7708 /* PVImageCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVImageCacheManager.m; sourceTree = "<group>"; };
@@ -484,6 +487,8 @@
 				4351D0FA16B4C70C0039FE88 /* PVSearchViewController.h */,
 				4351D0FB16B4C70C0039FE88 /* PVSearchViewController.m */,
 				4351D0FC16B4C70C0039FE88 /* PVSearchViewController.xib */,
+				43998BC016BDF090008B34C2 /* PVFeaturedTagCell.h */,
+				43998BC116BDF090008B34C2 /* PVFeaturedTagCell.m */,
 				4351D10316B4C7470039FE88 /* PVNearbySitesViewController.h */,
 				4351D10416B4C7470039FE88 /* PVNearbySitesViewController.m */,
 				4351D10516B4C7470039FE88 /* PVNearbySitesViewController.xib */,
@@ -1037,6 +1042,7 @@
 				43EB601C16BCF16D00A3EE29 /* PVBaseViewController.m in Sources */,
 				43998BAC16BDD2B9008B34C2 /* PVSidebarTableViewCell.m in Sources */,
 				43998BBD16BDE2C9008B34C2 /* UINavigationItem+PVAdditions.m in Sources */,
+				43998BC216BDF090008B34C2 /* PVFeaturedTagCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
