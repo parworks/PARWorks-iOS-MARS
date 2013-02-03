@@ -7,6 +7,7 @@
 //
 
 #import "PVCommentTableViewCell.h"
+#import "NSString+DateConversion.h"
 
 @implementation PVCommentTableViewCell
 
@@ -42,14 +43,24 @@
         [_timestampLabel setFont:[UIFont systemFontOfSize:15.0]];
         [self.contentView addSubview:_timestampLabel];
         
-        self.contentLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        [_contentLabel setBackgroundColor:[UIColor clearColor]];
-        [_contentLabel setUserInteractionEnabled:NO];
-        [_contentLabel setTextColor:[UIColor colorWithRed:115.0/255.0 green:115.0/255.0 blue:115.0/255.0 alpha:1.0]];
-        [_contentLabel setFont:[UIFont systemFontOfSize:15.0]];
-        [_contentLabel setNumberOfLines:0];
-        [_contentLabel setLineBreakMode:NSLineBreakByWordWrapping];
-        [self.contentView addSubview:_contentLabel];
+//        self.contentLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+//        [_contentLabel setBackgroundColor:[UIColor clearColor]];
+//        [_contentLabel setUserInteractionEnabled:NO];
+//        [_contentLabel setTextColor:[UIColor colorWithRed:115.0/255.0 green:115.0/255.0 blue:115.0/255.0 alpha:1.0]];
+//        [_contentLabel setFont:[UIFont systemFontOfSize:15.0]];
+//        [_contentLabel setNumberOfLines:0];
+//        [_contentLabel setLineBreakMode:NSLineBreakByWordWrapping];
+//        [self.contentView addSubview:_contentLabel];
+        
+        self.contentTextView = [[UITextView alloc] initWithFrame:CGRectZero];
+		[_contentTextView setBackgroundColor:[UIColor clearColor]];
+        [_contentTextView setTextColor:[UIColor colorWithRed:115.0/255.0 green:115.0/255.0 blue:115.0/255.0 alpha:1.0]];
+        [_contentTextView setFont:[UIFont systemFontOfSize:15.0]];
+        [_contentTextView setDataDetectorTypes:UIDataDetectorTypeAddress | UIDataDetectorTypeLink | UIDataDetectorTypePhoneNumber];
+        [_contentTextView setScrollEnabled:NO];
+        [_contentTextView setEditable:NO];
+        [_contentTextView setClipsToBounds:YES];
+        [self.contentView addSubview:_contentTextView];
         
         _borderLayer = [CAShapeLayer layer];
         [_borderLayer setBorderWidth: 1];
@@ -73,10 +84,11 @@
     [_nameLabel setFrame:CGRectMake(_avatarImageView.frame.origin.x + _avatarImageView.frame.size.width + 10.0, _avatarImageView.frame.origin.y - 2.0, 247.0, 18.0)];
     [_timestampLabel setFrame:CGRectMake(_nameLabel.frame.origin.x, _nameLabel.frame.origin.y + _nameLabel.frame.size.height, _nameLabel.frame.size.width, _nameLabel.frame.size.height)];
     
-    CGSize size = [_contentLabel.text sizeWithFont:_contentLabel.font
+    CGSize size = [_contentTextView.text sizeWithFont:_contentTextView.font
                               constrainedToSize:CGSizeMake(247.0, MAXFLOAT)
-                                  lineBreakMode:UILineBreakModeWordWrap];
-    [_contentLabel setFrame:CGRectMake(_nameLabel.frame.origin.x, _timestampLabel.frame.origin.y + _timestampLabel.frame.size.height, _nameLabel.frame.size.width, size.height)];
+                                  lineBreakMode:NSLineBreakByWordWrapping];
+//    [_contentLabel setFrame:CGRectMake(_nameLabel.frame.origin.x, _timestampLabel.frame.origin.y + _timestampLabel.frame.size.height, _nameLabel.frame.size.width, size.height)];
+    [_contentTextView setFrame:CGRectMake(_nameLabel.frame.origin.x - 8.0, _timestampLabel.frame.origin.y + _timestampLabel.frame.size.height - 8.0, _nameLabel.frame.size.width + 16.0, size.height + 16.0)];
     
     CGRect frame = [_bgImageView frame];
     frame.origin.y = _first ? 0 : -1;
@@ -93,8 +105,9 @@
 - (void)setComment:(ARSiteComment *)comment{
     _comment = comment;
     _nameLabel.text = _comment.userName;
-    _timestampLabel.text = [NSString stringWithFormat:@"%@", _comment.timestamp];
-    _contentLabel.text = _comment.body;
+    _timestampLabel.text = [NSString stringWithDate:_comment.timestamp format:@"MMM d',' h':'mm aaa"];
+//    _contentLabel.text = _comment.body;
+    _contentTextView.text = _comment.body;
 }
 
 @end

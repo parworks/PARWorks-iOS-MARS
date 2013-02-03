@@ -26,7 +26,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     [self addSubview:_photoCountLabel];
     
     PSUICollectionViewFlowLayout *aFlowLayout = [[PSUICollectionViewFlowLayout alloc] init];
-    [aFlowLayout setItemSize:CGSizeMake(80, 80)];
+    [aFlowLayout setItemSize:CGSizeMake(78, 78)];
     [aFlowLayout setMinimumInteritemSpacing:7.0];
     [aFlowLayout setMinimumLineSpacing:7.0];
     [aFlowLayout setSectionInset: UIEdgeInsetsMake(0, 7, 0, 7)];

@@ -18,7 +18,8 @@
 @property (nonatomic, strong) UIImageView *avatarImageView;
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *timestampLabel;
-@property (nonatomic, strong) UILabel *contentLabel;
+//@property (nonatomic, strong) UILabel *contentLabel;
+@property (nonatomic, strong) UITextView *contentTextView;
 
 - (void)setIsFirstRow:(BOOL)first;
 

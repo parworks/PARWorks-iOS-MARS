@@ -37,7 +37,7 @@
     // set the poster image
     UIImage * img = [[PVImageCacheManager shared] imageForURL:[NSURL URLWithString:_recentlyAugmentedImageUrl]];
     if (!img) {
-        img = [UIImage imageNamed: @"empty.png"];
+        img = [UIImage imageNamed: @"missing_image_78x78.png"];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteImageReady:) name:NOTIF_IMAGE_READY object:_recentlyAugmentedImageUrl];
     }
     [_augmentedImageView setImage: img];

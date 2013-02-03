@@ -81,10 +81,15 @@
     [addCommentButton addTarget:self action:@selector(addCommentButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [addCommentButton setBackgroundColor:[UIColor colorWithRed:240.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1.0]];
     [addCommentButton setTitle:@"Leave a Comment" forState:UIControlStateNormal];
-    [addCommentButton setTitleColor:[UIColor colorWithRed:42.0/255.0 green:92.0/255.0 blue:145.0 alpha:1.0] forState:UIControlStateNormal];
+    [addCommentButton setTitleColor:[UIColor colorWithRed:50.0/255.0 green:98.0/255.0 blue:162.0/255.0 alpha:1.0] forState:UIControlStateNormal];
     [addCommentButton.titleLabel setFont:[UIFont boldSystemFontOfSize:14.0]];
     [addCommentButton.layer setBorderWidth:1.0];
     [addCommentButton.layer setBorderColor:[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1.0].CGColor];
+    [addCommentButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];
+    [addCommentButton setImage:[UIImage imageNamed:@"leave_comment.png"] forState:UIControlStateNormal];
+    [addCommentButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 15.0)];
+    [addCommentButton setAdjustsImageWhenHighlighted:NO];
+    [addCommentButton setShowsTouchWhenHighlighted:YES];
     [tableFooterView addSubview:addCommentButton];
     _tableView.tableFooterView = tableFooterView;
     

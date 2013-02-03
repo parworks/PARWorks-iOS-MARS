@@ -12,6 +12,11 @@
 		425345A116BE5B7700D5A00A /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 42809EF616BE33BA007B60F5 /* MapAnnotation.m */; };
 		425345A216BE5B7A00D5A00A /* PVRecentAugmentedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4253459316BE44CF00D5A00A /* PVRecentAugmentedView.m */; };
 		425345A316BE5B7E00D5A00A /* PVCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4253459916BE5A1E00D5A00A /* PVCommentTableViewCell.m */; };
+		425345A616BE768E00D5A00A /* leave_comment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 425345A416BE768D00D5A00A /* leave_comment@2x.png */; };
+		425345A716BE768E00D5A00A /* missing_image_78x78@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 425345A516BE768D00D5A00A /* missing_image_78x78@2x.png */; };
+		425345AA16BE769900D5A00A /* leave_comment.png in Resources */ = {isa = PBXBuildFile; fileRef = 425345A816BE769900D5A00A /* leave_comment.png */; };
+		425345AB16BE769900D5A00A /* missing_image_78x78.png in Resources */ = {isa = PBXBuildFile; fileRef = 425345A916BE769900D5A00A /* missing_image_78x78.png */; };
+		425345AE16BE7AE100D5A00A /* NSString+DateConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 425345AD16BE7AE000D5A00A /* NSString+DateConversion.m */; };
 		42809EE316BE023C007B60F5 /* PVParallaxTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42809ECD16BB95D0007B60F5 /* PVParallaxTableView.m */; };
 		42809EE716BE023E007B60F5 /* PVAddCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42809EDE16BDE258007B60F5 /* PVAddCommentViewController.m */; };
 		42809EE916BE163B007B60F5 /* PVAddCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42809EDF16BDE259007B60F5 /* PVAddCommentViewController.xib */; };
@@ -201,6 +206,12 @@
 		4253459316BE44CF00D5A00A /* PVRecentAugmentedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVRecentAugmentedView.m; sourceTree = "<group>"; };
 		4253459816BE5A1D00D5A00A /* PVCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVCommentTableViewCell.h; sourceTree = "<group>"; };
 		4253459916BE5A1E00D5A00A /* PVCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVCommentTableViewCell.m; sourceTree = "<group>"; };
+		425345A416BE768D00D5A00A /* leave_comment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "leave_comment@2x.png"; sourceTree = "<group>"; };
+		425345A516BE768D00D5A00A /* missing_image_78x78@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "missing_image_78x78@2x.png"; sourceTree = "<group>"; };
+		425345A816BE769900D5A00A /* leave_comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leave_comment.png; sourceTree = "<group>"; };
+		425345A916BE769900D5A00A /* missing_image_78x78.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = missing_image_78x78.png; sourceTree = "<group>"; };
+		425345AC16BE7ADF00D5A00A /* NSString+DateConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DateConversion.h"; sourceTree = "<group>"; };
+		425345AD16BE7AE000D5A00A /* NSString+DateConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DateConversion.m"; sourceTree = "<group>"; };
 		42809ECC16BB95CF007B60F5 /* PVParallaxTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVParallaxTableView.h; sourceTree = "<group>"; };
 		42809ECD16BB95D0007B60F5 /* PVParallaxTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVParallaxTableView.m; sourceTree = "<group>"; };
 		42809EDD16BDE257007B60F5 /* PVAddCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVAddCommentViewController.h; sourceTree = "<group>"; };
@@ -620,6 +631,8 @@
 				4253459316BE44CF00D5A00A /* PVRecentAugmentedView.m */,
 				4253459816BE5A1D00D5A00A /* PVCommentTableViewCell.h */,
 				4253459916BE5A1E00D5A00A /* PVCommentTableViewCell.m */,
+				425345AC16BE7ADF00D5A00A /* NSString+DateConversion.h */,
+				425345AD16BE7AE000D5A00A /* NSString+DateConversion.m */,
 				4351D0BE16B4C5DB0039FE88 /* Supporting Files */,
 			);
 			path = PARViewer;
@@ -648,6 +661,8 @@
 				43998B9416BDD164008B34C2 /* icon_search.png */,
 				43998B9516BDD164008B34C2 /* icon_technology.png */,
 				43998B9616BDD164008B34C2 /* icon_trending.png */,
+				425345A816BE769900D5A00A /* leave_comment.png */,
+				425345A916BE769900D5A00A /* missing_image_78x78.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1016,6 +1031,8 @@
 				43998BA016BDD24A008B34C2 /* icon_search@2x.png */,
 				43998BA116BDD24A008B34C2 /* icon_technology@2x.png */,
 				43998BA216BDD24A008B34C2 /* icon_trending@2x.png */,
+				425345A416BE768D00D5A00A /* leave_comment@2x.png */,
+				425345A516BE768D00D5A00A /* missing_image_78x78@2x.png */,
 			);
 			path = "Resources@2x";
 			sourceTree = "<group>";
@@ -1152,6 +1169,10 @@
 				437C3FD216BE249800822EDD /* toolbar_show.png in Resources */,
 				437C3FD316BE249800822EDD /* toolbar_show@2x.png in Resources */,
 				439C504D16BE3C700035783E /* missing_image_300x150.png in Resources */,
+				425345A616BE768E00D5A00A /* leave_comment@2x.png in Resources */,
+				425345A716BE768E00D5A00A /* missing_image_78x78@2x.png in Resources */,
+				425345AA16BE769900D5A00A /* leave_comment.png in Resources */,
+				425345AB16BE769900D5A00A /* missing_image_78x78.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1267,6 +1288,7 @@
 				437C3FE716BE260100822EDD /* AROverlayViewFactory.m in Sources */,
 				437C3FEA16BE300B00822EDD /* PVSiteTableViewCell.m in Sources */,
 				439C505316BE46D70035783E /* UIColor+ThemeAdditions.m in Sources */,
+				425345AE16BE7AE100D5A00A /* NSString+DateConversion.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
