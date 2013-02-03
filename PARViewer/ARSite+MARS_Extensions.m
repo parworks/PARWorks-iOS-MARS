@@ -42,17 +42,18 @@ static char COMMENTS_KEY;
     NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithObject:self.identifier forKey:@"site"];
     [dict setObject: [comment userName] forKey:@"userName"];
     [dict setObject: [comment userID] forKey:@"userId"];
-    [dict setObject: [comment body] forKey:@"body"];
+    [dict setObject: [comment body] forKey:@"comment"];
     
     ASIHTTPRequest * req = [[ARManager shared] createRequest:@"/ar/site/comment/add" withMethod:@"GET" withArguments: dict];
     ASIHTTPRequest * __weak __req = req;
     [req setCompletionBlock: ^(void) {
         NSDictionary * response = [__req responseJSON];
-        if ([[response objectForKey: @"success"] isEqualToString: @"true"])
+        if ([[response objectForKey: @"success"] intValue] == 1)
             callback(NULL);
         else
             callback(@"Sorry, your comment could not be saved.");
     }];
+    [req startAsynchronous];
 }
 
 - (void)removeComment:(ARSiteComment*)comment withCallback:(void(^)(NSString * err))callback
