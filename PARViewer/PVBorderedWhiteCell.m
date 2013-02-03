@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Ben Gotow. All rights reserved.
 //
 
-#import "PVFeaturedTagCell.h"
+#import "PVBorderedWhiteCell.h"
 #import "UIColor+ThemeAdditions.h"
 
-@implementation PVFeaturedTagCell
+@implementation PVBorderedWhiteCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

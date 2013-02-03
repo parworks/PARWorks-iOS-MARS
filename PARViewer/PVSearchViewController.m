@@ -10,7 +10,7 @@
 #import "JSSlidingViewController.h"
 #import "ARManager.h"
 #import "ARManager+MARS_Extensions.h"
-#import "PVFeaturedTagCell.h"
+#import "PVBorderedWhiteCell.h"
 #import "PVSiteDetailViewController.h"
 #import "PVSiteTableViewCell.h"
 
@@ -141,9 +141,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == _filteredTagsTableView) {
-        PVFeaturedTagCell * c = (PVFeaturedTagCell*)[tableView dequeueReusableCellWithIdentifier: @"cell"];
+        PVBorderedWhiteCell * c = (PVBorderedWhiteCell*)[tableView dequeueReusableCellWithIdentifier: @"cell"];
         if (!c){
-            c = [[PVFeaturedTagCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+            c = [[PVBorderedWhiteCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         }
         
         NSString * tag = [_filteredTags objectAtIndex: [indexPath row]];

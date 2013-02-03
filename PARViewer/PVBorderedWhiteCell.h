@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PVFeaturedTagCell : UITableViewCell
+@interface PVBorderedWhiteCell : UITableViewCell
 {
     CALayer * _borderLayer;
     BOOL _first;
