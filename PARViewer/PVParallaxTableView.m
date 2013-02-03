@@ -29,13 +29,12 @@
 static CGFloat const kMDCParallaxViewDefaultHeight = 150.0f;
 
 
-@interface PVParallaxTableView () <UITableViewDelegate>
+@interface PVParallaxTableView ()
 @property (nonatomic, strong) UIView *backgroundView;
 @property (nonatomic, strong) UIScrollView *backgroundScrollView;
 @property (nonatomic, strong) UITableView *foregroundTableView;
 - (void)updateBackgroundFrame;
 - (void)updateForegroundFrame;
-- (void)updateContentOffset;
 @end
 
 
@@ -59,7 +58,6 @@ static CGFloat const kMDCParallaxViewDefaultHeight = 150.0f;
         [self addSubview:_backgroundScrollView];
         
         _foregroundTableView = foregroundTableView;
-        _foregroundTableView.delegate = self;
         [self addSubview:_foregroundTableView];
     }
     return self;
@@ -68,40 +66,7 @@ static CGFloat const kMDCParallaxViewDefaultHeight = 150.0f;
 
 #pragma mark - NSObject Overrides
 
-- (void)forwardInvocation:(NSInvocation *)anInvocation {
-    if ([self.tableViewDelegate respondsToSelector:[anInvocation selector]]) {
-        [anInvocation invokeWithTarget:self.tableViewDelegate];
-    } else {
-        [super forwardInvocation:anInvocation];
-    }
-}
 
-- (BOOL)respondsToSelector:(SEL)aSelector {
-    return ([super respondsToSelector:aSelector] ||
-            [self.tableViewDelegate respondsToSelector:aSelector]);
-}
-
-- (void)setDelegate:(id <UITableViewDelegate>)delegate
-{
-    if (delegate == self)
-        return;
-    
-    self.tableViewDelegate = delegate;
-    [_foregroundTableView setDelegate:self];
-}
-
-//- (BOOL)respondsToSelector:(SEL)aSelector
-//{
-//    if ([super respondsToSelector:aSelector])
-//        return YES;
-//    
-//    return [self.tableViewDelegate respondsToSelector:aSelector];
-//}
-
-- (id)forwardingTargetForSelector:(SEL)aSelector
-{
-    return self.tableViewDelegate;
-}
 
 #pragma mark - UIView Overrides
 
@@ -120,14 +85,14 @@ static CGFloat const kMDCParallaxViewDefaultHeight = 150.0f;
 }
 
 
-#pragma mark - UIScrollViewDelegate Protocol Methods
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self updateContentOffset];
-    if ([self.tableViewDelegate respondsToSelector:_cmd]) {
-        [self.tableViewDelegate scrollViewDidScroll:scrollView];
-    }
-}
+//#pragma mark - UIScrollViewDelegate Protocol Methods
+//
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    [self updateContentOffset];
+////    if ([self.tableViewDelegate respondsToSelector:_cmd]) {
+////        [self.tableViewDelegate scrollViewDidScroll:scrollView];
+////    }
+//}
 
 #pragma mark - Public Interface
 

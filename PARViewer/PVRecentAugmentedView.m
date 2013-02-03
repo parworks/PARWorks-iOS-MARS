@@ -18,7 +18,7 @@
     if (self) {        
         [self setBackgroundColor:[UIColor clearColor]];
         
-        self.augmentedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5.0, 5.0, self.bounds.size.width - 10.0, self.bounds.size.height - 10.0)];
+        self.augmentedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.bounds.size.width, self.bounds.size.height)];
         _augmentedImageView.contentMode = UIViewContentModeScaleAspectFill;
         _augmentedImageView.clipsToBounds = YES;
         [_augmentedImageView.layer setBorderColor:[UIColor colorWithRed:197.0/255.0 green:197.0/255.0 blue:197.0/255.0 alpha:1.0].CGColor];
