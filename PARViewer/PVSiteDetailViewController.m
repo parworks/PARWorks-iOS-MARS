@@ -7,16 +7,15 @@
 //
 
 #import "PVSiteDetailViewController.h"
+#import "PVAugmentedPhotoViewController.h"
 #import "ARSite+MARS_Extensions.h"
 #import "UIImageView+AFNetworking.h"
 #import "PVImageCacheManager.h"
 #import "PVAppDelegate.h"
 #import "GPUImagePicture.h"
 #import "GPUImageGaussianBlurFilter.h"
-
-@interface PVSiteDetailViewController ()
-
-@end
+#import "UINavigationItem+PVAdditions.h"
+#import "UIColor+ThemeAdditions.h"
 
 @implementation PVSiteDetailViewController
 
@@ -36,10 +35,15 @@
     return self;
 }
 
+- (void)backButtonPressed:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [self update];
-    
+
     // register to receive updates about the site in the future
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:NOTIF_SITE_UPDATED object: self.site];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:NOTIF_SITE_COMMENTS_UPDATED object: self.site];
@@ -54,8 +58,8 @@
 {
     [super viewDidLoad];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed)];
-    
+    [self setupNavigationItem];
+
     self.headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, [UIImage imageNamed:@"posterImage.png"].size.height)];
     _headerImageView.contentMode = UIViewContentModeScaleAspectFill;
     _headerImageView.backgroundColor = [UIColor colorWithRed:222.0/255.0 green:222.0/255.0 blue:222.0/255.0 alpha:1.0];
@@ -102,6 +106,40 @@
     [self.view addSubview:_parallaxView];
 }
 
+- (void)setupNavigationItem
+{
+    // Add the button in the upper left that opens the sidebar
+    UIButton *customButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [customButton setBackgroundImage:[UIImage imageNamed:@"bar_item_back"] forState:UIControlStateNormal];
+    [customButton setBackgroundImage:[UIImage imageNamed:@"bar_item_back_highlighted"] forState:UIControlStateHighlighted];
+    customButton.frame = CGRectMake(0, 0, 57, 46);
+    [customButton addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.navigationItem setUnpaddedLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:customButton] animated:NO];
+    [self.navigationItem setLeftJustifiedTitle: _site.name];
+    
+    // Attach the "Augment Photo" icon to the upper right
+    self.takePhotoButton = [UIButton buttonWithType: UIButtonTypeCustom];
+    [_takePhotoButton setBackgroundColor: [UIColor parworksSelectionBlue]];
+    [_takePhotoButton addTarget:self action:@selector(takePhoto:) forControlEvents:UIControlEventTouchUpInside];
+    [_takePhotoButton.layer setAnchorPoint: CGPointMake(1, 0)];
+    [_takePhotoButton setFrame: CGRectMake(0, 0, 100, 40)];
+    
+    UIView * takePhotoContainer = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 100, 46)];
+    CATransform3D t = takePhotoContainer.layer.transform;
+    t.m34 = -0.0025;
+    takePhotoContainer.layer.sublayerTransform = t;
+    [takePhotoContainer addSubview: _takePhotoButton];
+    [self.navigationItem setUnpaddedRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView: takePhotoContainer] animated:NO];
+}
+
+- (void)takePhoto:(id)sender
+{
+    PVAugmentedPhotoViewController * p = [[PVAugmentedPhotoViewController alloc] init];
+    [p setSite: _site];
+    [self presentViewController:p animated:YES completion:nil];
+}
+
 - (void)siteImageReady:(NSNotification*)notif
 {
     UIImage * img = [[PVImageCacheManager shared] imageForURL: [_site posterImageURL]];
@@ -113,7 +151,8 @@
     [_tableView reloadData];
 }
 
-- (void)addCommentButtonPressed{ 
+- (void)addCommentButtonPressed
+{
     PVAppDelegate * delegate = (PVAppDelegate*)[[UIApplication sharedApplication] delegate];
     
     if(_bgCopyImageView == nil){

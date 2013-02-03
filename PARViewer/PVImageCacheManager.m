@@ -74,6 +74,9 @@ static PVImageCacheManager * sharedImageCacheManager;
                 return nil;
         
         AFImageRequestOperation * op = [AFImageRequestOperation imageRequestOperationWithRequest:req success:^(UIImage *image) {
+            if (!image) {
+                return NSLog(@"No image returned for %@", [url description]);
+            }
             [_imageCache setObject: image forKey: url];
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIF_IMAGE_READY object:url];
         }];

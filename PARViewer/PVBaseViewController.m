@@ -21,7 +21,7 @@
     UIButton *customButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [customButton setBackgroundImage:[UIImage imageNamed:@"bar_item_sidebar"] forState:UIControlStateNormal];
     [customButton setBackgroundImage:[UIImage imageNamed:@"bar_item_sidebar_highlighted"] forState:UIControlStateHighlighted];
-    customButton.frame = CGRectMake(0, 0, 49, 46);
+    customButton.frame = CGRectMake(0, 0, 57, 46);
     [customButton addTarget:self action:@selector(menuButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.navigationItem setUnpaddedLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:customButton] animated:NO];

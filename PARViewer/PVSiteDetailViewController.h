@@ -13,7 +13,8 @@
 #import "PVDetailsMapView.h"
 #import "PVDetailsPhotoScrollView.h"
 
-@interface PVSiteDetailViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, PVAddCommentViewControllerDelegate>{
+@interface PVSiteDetailViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, PVAddCommentViewControllerDelegate>
+{
     PVAddCommentViewController *_addCommentViewController;
     GPUImageView    * _bgCopyImageView;
 }
@@ -22,6 +23,7 @@
 
 @property (nonatomic, strong) UIImageView *headerImageView;
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UIButton * takePhotoButton;
 @property (nonatomic, strong) PVParallaxTableView *parallaxView;
 @property (nonatomic, strong) PVDetailsMapView *detailsMapView;
 @property (nonatomic, strong) PVDetailsPhotoScrollView *detailsPhotoScrollView;
