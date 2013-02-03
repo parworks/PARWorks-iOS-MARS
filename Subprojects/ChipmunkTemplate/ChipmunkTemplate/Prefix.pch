@@ -1,0 +1,23 @@
+//
+// Prefix header for all source files of the 'Test' target in the 'Test' project
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iPhone SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "ObjectiveChipmunk.h"
+#import "CCPhysicsDebugNode.h"
+#import "chipmunk.h"
+#import "cocos2d.h"
+
+#import <OpenGLES/EAGL.h>
+#import <OpenGLES/EAGLDrawable.h>
+#import <OpenGLES/ES1/gl.h>
+#import <OpenGLES/ES1/glext.h>
+#endif

@@ -12,8 +12,16 @@
 #import "PVBaseViewController.h"
 #import "PVSiteCardView.h"
 
-@interface PVTrendingSitesController : PVBaseViewController <PVTrendingBlurredBackgroundViewDelegate, PSUICollectionViewDataSource, PSUICollectionViewDelegate>
+@class ChipmunkSpace;
 
+@interface PVTrendingSitesController : PVBaseViewController <PVTrendingBlurredBackgroundViewDelegate, PSUICollectionViewDataSource, PSUICollectionViewDelegate>
+{
+    // Chipmunk stuff
+    ChipmunkSpace *_space;
+    ChipmunkBody *_posterBody, *_shingleBody;
+    ChipmunkShape *_posterShape, *_shingleShape;
+    CADisplayLink *_displayLink;
+}
 @property (weak, nonatomic) IBOutlet PVTrendingBlurredBackgroundView *backgroundView;
 @property (weak, nonatomic) IBOutlet PSUICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;

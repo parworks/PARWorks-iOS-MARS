@@ -168,6 +168,8 @@
 		43EB601816BCEF2100A3EE29 /* PVSidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43EB601616BCEF2100A3EE29 /* PVSidebarViewController.m */; };
 		43EB601916BCEF2100A3EE29 /* PVSidebarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EB601716BCEF2100A3EE29 /* PVSidebarViewController.xib */; };
 		43EB601C16BCF16D00A3EE29 /* PVBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43EB601B16BCF16D00A3EE29 /* PVBaseViewController.m */; };
+		A0A44D9016BE2E12003809D3 /* libChipmunk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A44D8F16BE2DF7003809D3 /* libChipmunk.a */; };
+		A0A44D9116BE2E12003809D3 /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A44D7716BE2D8D003809D3 /* libcocos2d.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -184,6 +186,41 @@
 			proxyType = 2;
 			remoteGlobalIDString = BCF1A34414DDB1EC00852800;
 			remoteInfo = GPUImageTests;
+		};
+		A0A44D7416BE2D8D003809D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A0A44D6F16BE2D8C003809D3 /* ChipmunkTemplate.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A050E1C616A376AE00FD8802;
+			remoteInfo = ChipmunkTemplate;
+		};
+		A0A44D7616BE2D8D003809D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A0A44D6F16BE2D8C003809D3 /* ChipmunkTemplate.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A096B95316AA53F70059F219;
+			remoteInfo = cocos2d;
+		};
+		A0A44D8916BE2DF7003809D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A0A44D6F16BE2D8C003809D3 /* ChipmunkTemplate.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A096B95216AA53F70059F219;
+			remoteInfo = cocos2d;
+		};
+		A0A44D8B16BE2DF7003809D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A0A44D6F16BE2D8C003809D3 /* ChipmunkTemplate.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A0A44D7B16BE2DC8003809D3;
+			remoteInfo = Chipmunk;
+		};
+		A0A44D8E16BE2DF7003809D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A0A44D6F16BE2D8C003809D3 /* ChipmunkTemplate.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A0A44D7C16BE2DC8003809D3;
+			remoteInfo = Chipmunk;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -460,6 +497,7 @@
 		43EB601716BCEF2100A3EE29 /* PVSidebarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PVSidebarViewController.xib; sourceTree = "<group>"; };
 		43EB601A16BCF16D00A3EE29 /* PVBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVBaseViewController.h; sourceTree = "<group>"; };
 		43EB601B16BCF16D00A3EE29 /* PVBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVBaseViewController.m; sourceTree = "<group>"; };
+		A0A44D6F16BE2D8C003809D3 /* ChipmunkTemplate.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ChipmunkTemplate.xcodeproj; path = Subprojects/ChipmunkTemplate/ChipmunkTemplate.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -467,6 +505,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0A44D9016BE2E12003809D3 /* libChipmunk.a in Frameworks */,
+				A0A44D9116BE2E12003809D3 /* libcocos2d.a in Frameworks */,
 				43E6734616BB94FC007E7708 /* AVFoundation.framework in Frameworks */,
 				43E6734416BB94EA007E7708 /* CoreVideo.framework in Frameworks */,
 				43E6734216BB94DF007E7708 /* CoreMedia.framework in Frameworks */,
@@ -492,26 +532,13 @@
 		4351D0A816B4C5DB0039FE88 = {
 			isa = PBXGroup;
 			children = (
-				43E6734516BB94FC007E7708 /* AVFoundation.framework */,
-				43E6734316BB94EA007E7708 /* CoreVideo.framework */,
-				43E6734116BB94DF007E7708 /* CoreMedia.framework */,
-				43E6733016BB8839007E7708 /* GPUImage.xcodeproj */,
-				435E158E16B780E500CC8DA3 /* MobileCoreServices.framework */,
-				435E158C16B780CD00CC8DA3 /* MediaPlayer.framework */,
-				435E158A16B780C100CC8DA3 /* GLKit.framework */,
-				435E158816B780A800CC8DA3 /* libz.dylib */,
-				435E158616B780A200CC8DA3 /* SystemConfiguration.framework */,
-				435E158416B7809E00CC8DA3 /* CoreLocation.framework */,
-				435E158216B7809500CC8DA3 /* CFNetwork.framework */,
-				435E158016B7808B00CC8DA3 /* Security.framework */,
-				435E157D16B7807D00CC8DA3 /* OpenGLES.framework */,
-				435E157B16B7805800CC8DA3 /* CoreFoundation.framework */,
-				435E14D216B77F7500CC8DA3 /* QuartzCore.framework */,
 				4351D0BD16B4C5DB0039FE88 /* PARViewer */,
 				43998B9B16BDD24A008B34C2 /* Resources@2x */,
 				4351D0E816B4C6CA0039FE88 /* Resources */,
 				4351D0B616B4C5DB0039FE88 /* Frameworks */,
 				4351D0B416B4C5DB0039FE88 /* Products */,
+				43E6733016BB8839007E7708 /* GPUImage.xcodeproj */,
+				A0A44D6F16BE2D8C003809D3 /* ChipmunkTemplate.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -526,6 +553,20 @@
 		4351D0B616B4C5DB0039FE88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				43E6734516BB94FC007E7708 /* AVFoundation.framework */,
+				43E6734316BB94EA007E7708 /* CoreVideo.framework */,
+				43E6734116BB94DF007E7708 /* CoreMedia.framework */,
+				435E158E16B780E500CC8DA3 /* MobileCoreServices.framework */,
+				435E158C16B780CD00CC8DA3 /* MediaPlayer.framework */,
+				435E158A16B780C100CC8DA3 /* GLKit.framework */,
+				435E158816B780A800CC8DA3 /* libz.dylib */,
+				435E158616B780A200CC8DA3 /* SystemConfiguration.framework */,
+				435E158416B7809E00CC8DA3 /* CoreLocation.framework */,
+				435E158216B7809500CC8DA3 /* CFNetwork.framework */,
+				435E158016B7808B00CC8DA3 /* Security.framework */,
+				435E157D16B7807D00CC8DA3 /* OpenGLES.framework */,
+				435E157B16B7805800CC8DA3 /* CoreFoundation.framework */,
+				435E14D216B77F7500CC8DA3 /* QuartzCore.framework */,
 				4351D0B716B4C5DB0039FE88 /* UIKit.framework */,
 				4351D0B916B4C5DB0039FE88 /* Foundation.framework */,
 				4351D0BB16B4C5DB0039FE88 /* CoreGraphics.framework */,
@@ -987,6 +1028,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		A0A44D7016BE2D8C003809D3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A0A44D7516BE2D8D003809D3 /* ChipmunkTemplate.app */,
+				A0A44D7716BE2D8D003809D3 /* libcocos2d.a */,
+				A0A44D8F16BE2DF7003809D3 /* libChipmunk.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1001,6 +1052,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				A0A44D8A16BE2DF7003809D3 /* PBXTargetDependency */,
+				A0A44D8C16BE2DF7003809D3 /* PBXTargetDependency */,
 			);
 			name = PARViewer;
 			productName = PARViewer;
@@ -1029,6 +1082,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = A0A44D7016BE2D8C003809D3 /* Products */;
+					ProjectRef = A0A44D6F16BE2D8C003809D3 /* ChipmunkTemplate.xcodeproj */;
+				},
+				{
 					ProductGroup = 43E6733116BB8839007E7708 /* Products */;
 					ProjectRef = 43E6733016BB8839007E7708 /* GPUImage.xcodeproj */;
 				},
@@ -1053,6 +1110,27 @@
 			fileType = wrapper.cfbundle;
 			path = GPUImageTests.octest;
 			remoteRef = 43E6733816BB8839007E7708 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A0A44D7516BE2D8D003809D3 /* ChipmunkTemplate.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = ChipmunkTemplate.app;
+			remoteRef = A0A44D7416BE2D8D003809D3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A0A44D7716BE2D8D003809D3 /* libcocos2d.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libcocos2d.a;
+			remoteRef = A0A44D7616BE2D8D003809D3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A0A44D8F16BE2DF7003809D3 /* libChipmunk.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libChipmunk.a;
+			remoteRef = A0A44D8E16BE2DF7003809D3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1222,6 +1300,19 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		A0A44D8A16BE2DF7003809D3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = cocos2d;
+			targetProxy = A0A44D8916BE2DF7003809D3 /* PBXContainerItemProxy */;
+		};
+		A0A44D8C16BE2DF7003809D3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Chipmunk;
+			targetProxy = A0A44D8B16BE2DF7003809D3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		4351D0C016B4C5DB0039FE88 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
@@ -1289,8 +1380,16 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PARViewer/PARViewer-Prefix.pch";
-				HEADER_SEARCH_PATHS = Submodules/GPUImage/framework/Source;
+				HEADER_SEARCH_PATHS = (
+					Submodules/GPUImage/framework/Source,
+					"Subprojects/ChipmunkTemplate/ChipmunkTemplate/libs/**",
+					Subprojects/ChipmunkTemplate/ChipmunkTemplate/libs/kazmath/include,
+				);
 				INFOPLIST_FILE = "PARViewer/PARViewer-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Subprojects/ChipmunkTemplate/ChipmunkTemplate/libs/ChipmunkPro-iPhone\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1301,8 +1400,16 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PARViewer/PARViewer-Prefix.pch";
-				HEADER_SEARCH_PATHS = Submodules/GPUImage/framework/Source;
+				HEADER_SEARCH_PATHS = (
+					Submodules/GPUImage/framework/Source,
+					"Subprojects/ChipmunkTemplate/ChipmunkTemplate/libs/**",
+					Subprojects/ChipmunkTemplate/ChipmunkTemplate/libs/kazmath/include,
+				);
 				INFOPLIST_FILE = "PARViewer/PARViewer-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Subprojects/ChipmunkTemplate/ChipmunkTemplate/libs/ChipmunkPro-iPhone\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
