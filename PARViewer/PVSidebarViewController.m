@@ -7,6 +7,7 @@
 //
 
 #import "PVSidebarViewController.h"
+#import "PVSidebarTableViewCell.h"
 #import "PVAppDelegate.h"
 
 @implementation PVSidebarViewController
@@ -26,6 +27,7 @@
     
     // select the first item in the sidebar
     [_sidebarTableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
+    [[_sidebarTableView layer] setCornerRadius: 5];
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,10 +46,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PVAppDelegate * delegate = (PVAppDelegate*)[[UIApplication sharedApplication] delegate];
-    UITableViewCell * c = [tableView dequeueReusableCellWithIdentifier: @"cell"];
+    PVSidebarTableViewCell * c = (PVSidebarTableViewCell*)[tableView dequeueReusableCellWithIdentifier: @"cell"];
 
     if (!c)
-        c = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        c = [[PVSidebarTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
 
     // populate the cell with the image and title of the view controller
     UINavigationController * navController = [[delegate contentControllers] objectAtIndex: [indexPath row]];

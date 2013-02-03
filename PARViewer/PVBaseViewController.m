@@ -8,6 +8,7 @@
 
 #import "PVBaseViewController.h"
 #import "JSSlidingViewController.h"
+#import "UINavigationItem+PVAdditions.h"
 
 
 @implementation PVBaseViewController
@@ -18,11 +19,13 @@
     
     // Add the button in the upper left that opens the sidebar
     UIButton *customButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [customButton setBackgroundImage:[UIImage imageNamed:@"navigationBar_menuButton_normal.png"] forState:UIControlStateNormal];
-    [customButton setBackgroundImage:[UIImage imageNamed:@"navigationBar_menuButton_highlighted.png"] forState:UIControlStateHighlighted];
-    customButton.frame = CGRectMake(0, 0, 48, 30);
+    [customButton setBackgroundImage:[UIImage imageNamed:@"bar_item_sidebar"] forState:UIControlStateNormal];
+    [customButton setBackgroundImage:[UIImage imageNamed:@"bar_item_sidebar_highlighted"] forState:UIControlStateHighlighted];
+    customButton.frame = CGRectMake(0, 0, 49, 46);
     [customButton addTarget:self action:@selector(menuButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:customButton];
+    
+    [self.navigationItem setUnpaddedLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:customButton] animated:NO];
+    [self.navigationItem setLeftJustifiedTitle: self.title];
 }
 
 - (void)menuButtonPressed:(id)sender

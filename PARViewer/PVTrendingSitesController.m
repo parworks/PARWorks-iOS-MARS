@@ -23,7 +23,7 @@ static NSString *cellIdentifier = @"TestCell";
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"Trending", @"Trending");
-        self.tabBarItem.image = [UIImage imageNamed:@"tab_trending"];
+        self.tabBarItem.image = [UIImage imageNamed:@"icon_trending"];
     }
     return self;
 }
