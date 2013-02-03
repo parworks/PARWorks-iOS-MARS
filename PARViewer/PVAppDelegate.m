@@ -28,6 +28,19 @@
     [navigationTextAttributes setObject:[NSValue valueWithCGPoint: CGPointMake(0,1)] forKey: UITextAttributeTextShadowOffset];
     [navigationBarAppearance setTitleTextAttributes: navigationTextAttributes];
     
+    UIBarButtonItem * barButtonItemAppearance = [UIBarButtonItem appearance];
+    
+    NSMutableDictionary * barButtonItemTextAttributes = [NSMutableDictionary dictionary];
+    [barButtonItemTextAttributes setObject:[UIColor colorWithWhite:0.2 alpha:1] forKey: UITextAttributeTextColor];
+    [barButtonItemTextAttributes setObject:[UIFont fontWithName:@"HiraKakuProN-W3" size:12] forKey: UITextAttributeFont];
+    [barButtonItemTextAttributes setObject:[UIColor whiteColor] forKey: UITextAttributeTextShadowColor];
+    [barButtonItemTextAttributes setObject:[NSValue valueWithCGPoint: CGPointMake(0,1)] forKey: UITextAttributeTextShadowOffset];
+
+    [barButtonItemAppearance setTitleTextAttributes:barButtonItemTextAttributes forState:UIControlStateNormal];
+    
+    [barButtonItemAppearance setTintColor:[UIColor colorWithRed:235.0/255.0 green:235.0/255.0 blue:235.0/255.0 alpha:1.0]];
+    [barButtonItemAppearance setTitlePositionAdjustment:UIOffsetMake(0.0, 3.0) forBarMetrics:UIBarMetricsDefault];
+    
     UIImage * navBarImage = [[UIImage imageNamed:@"navigation_bar_background"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7.0, 0, 7.0)];
     [navigationBarAppearance setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsDefault];
     

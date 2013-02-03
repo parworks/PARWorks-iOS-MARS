@@ -7,12 +7,14 @@
 //
 
 #import "PVBaseViewController.h"
+#import "ARSite.h"
 
 @protocol PVAddCommentViewControllerDelegate;
 
 @interface PVAddCommentViewController : UIViewController
 
-@property (nonatomic, assign) id <PVAddCommentViewControllerDelegate> delegate;
+@property (nonatomic, weak) id <PVAddCommentViewControllerDelegate> delegate;
+@property (nonatomic, strong) ARSite * site;
 @property (nonatomic, strong) IBOutlet UIView *addCommentView;
 @property (nonatomic, strong) IBOutlet UITextView *commentTextView;
 
@@ -25,6 +27,6 @@
 @protocol PVAddCommentViewControllerDelegate <NSObject>
 
 @required
-- (void)postButtonPressed:(PVAddCommentViewController *)vc;
+- (void)postedCommentSuccessfully:(PVAddCommentViewController *)vc;
 - (void)cancelButtonPressed:(PVAddCommentViewController *)vc;
 @end

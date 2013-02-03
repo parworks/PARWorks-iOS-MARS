@@ -103,17 +103,7 @@
     [_tableView reloadData];
 }
 
-- (void)addCommentButtonPressed{
-    //    NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithObject:@"Grayson" forKey:@"userName"];
-    //    [dict setObject:@"667325981268" forKey:@"userId"];
-    //    [dict setObject:@"new comment" forKey:@"comment"];
-    //
-    //    ARSiteComment *comment = [[ARSiteComment alloc] initWithDictionary:dict];
-    //    UITableView * __weak __tableView = _tableView;
-    //    [_site addComment:comment withCallback:^(NSString *err){
-    //        [__tableView reloadData];
-    //    }];
-    
+- (void)addCommentButtonPressed{ 
     PVAppDelegate * delegate = (PVAppDelegate*)[[UIApplication sharedApplication] delegate];
     
     if(_bgCopyImageView == nil){
@@ -124,6 +114,7 @@
         UIGraphicsEndImageContext();
         
         _bgCopyImageView = [[GPUImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
+        _bgCopyImageView.alpha = 0.0;
         [_bgCopyImageView setFillMode: kGPUImageFillModePreserveAspectRatioAndFill];
         
         CGSize size = CGSizeMake(image.size.width / 2.5, image.size.height / 2.5);
@@ -136,17 +127,21 @@
         [blurFilter addTarget: _bgCopyImageView];
         [_bgCopyPicture processImage];
         
-        [delegate.window addSubview:_bgCopyImageView];
+        [delegate.window addSubview:_bgCopyImageView];        
     }
     
-    if(!_addCommentViewController){
-        _addCommentViewController = [[PVAddCommentViewController alloc] initWithNibName:@"PVAddCommentViewController" bundle:nil];
-        _addCommentViewController.delegate = self;
-    }
-    
-    
-    [delegate.window addSubview:_addCommentViewController.view];
-    [_addCommentViewController viewWillAppear:NO];
+    [UIView transitionWithView:self.view duration:0.3 options:UIViewAnimationOptionTransitionNone animations:^{
+        _bgCopyImageView.alpha = 1.0;
+    } completion:^(BOOL finished){
+        if(!_addCommentViewController){
+            _addCommentViewController = [[PVAddCommentViewController alloc] initWithNibName:@"PVAddCommentViewController" bundle:nil];
+            _addCommentViewController.delegate = self;
+            _addCommentViewController.site = _site;
+        }
+                
+        [delegate.window addSubview:_addCommentViewController.view];
+        [_addCommentViewController viewWillAppear:NO];
+    }];
 }
 
 - (void)backButtonPressed{
@@ -199,8 +194,9 @@
 #pragma mark
 #pragma mark PVAddCommentViewControllerDelegate methods
 
-- (void)postButtonPressed:(PVAddCommentViewController *)vc{
+- (void)postedCommentSuccessfully:(PVAddCommentViewController *)vc{
     [self hideAddComment:vc];
+    [_tableView reloadData];
 }
 
 - (void)cancelButtonPressed:(PVAddCommentViewController *)vc{
@@ -208,12 +204,14 @@
 }
 
 - (void)hideAddComment:(PVAddCommentViewController*)vc{
-    if(vc!=nil){
-        //        [vc fadeOut];
-        
+    if(vc!=nil){        
         if(_bgCopyImageView != nil){
-            [_bgCopyImageView removeFromSuperview];
-            _bgCopyImageView = nil;
+            [UIView transitionWithView:self.view duration:0.3 options:UIViewAnimationOptionTransitionNone animations:^{
+                _bgCopyImageView.alpha = 0.0;
+            } completion:^(BOOL finished){
+                [_bgCopyImageView removeFromSuperview];
+                _bgCopyImageView = nil;
+            }];
         }
         
         if(_addCommentViewController != nil){
