@@ -58,8 +58,8 @@
     _finalView = finalView;
     _hudView = hudView;
     
-    [self runScanlineAnimation];
-    [self performSelectorOnMainThread:@selector(showAugmentingViewWithImage:) withObject: image waitUntilDone:NO];
+    [self runOutAnimation];
+    [self performSelectorOnMainThread:@selector(sliceImageAndCreateLayers:) withObject: image waitUntilDone:NO];
 
 }
 
@@ -67,7 +67,7 @@
 {
     _finalViewReady = YES;
     
-    if (!_scanlineAnimationRunning) {
+    if (!_outAnimationRunning) {
         [self translateLayersInWithCompletionBlock:^{
             [UIView animateWithDuration:0.5 animations:^{
                 [_finalView setAlpha: 1];
@@ -80,14 +80,14 @@
 
 - (BOOL)isRunning
 {
-    return _scanlineAnimationRunning;
+    return _outAnimationRunning;
 }
 
 // Internal Methods
 
-- (void)runScanlineAnimation
+- (void)runOutAnimation
 {
-    _scanlineAnimationRunning = YES;
+    _outAnimationRunning = YES;
     
     [CATransaction begin];
     [CATransaction setDisableActions: YES];
@@ -103,13 +103,15 @@
     
     CALayer *firstLayer = [_layers objectAtIndex:0];
     
+    // Step 1: "Charge" the scanline by making it alpha = 1
     [UIView transitionWithView:_scanline duration:0.3 options: UIViewAnimationOptionCurveEaseOut animations:^{
         _scanline.frame = CGRectMake(0, CGRectGetMinY(firstLayer.frame)-_scanline.frame.size.height/2, _scanline.frame.size.width, _scanline.frame.size.height);
         [_scanline setAlpha: 1];
 
+    // Step 2: Translate the tiny cubes offscreen
     } completion: ^(BOOL finished) {
         [self translateLayersOutWithCompletionBlock:^{
-            _scanlineAnimationRunning = NO;
+            _outAnimationRunning = NO;
             if (_finalViewReady) {
                 [self finalViewReady];
             } else {
@@ -120,7 +122,7 @@
     }];
 }
 
-- (void)showAugmentingViewWithImage:(UIImage *)image
+- (void)sliceImageAndCreateLayers:(UIImage *)image
 {
     [_layers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     [_layers removeAllObjects];
@@ -132,27 +134,19 @@
     int ySteps = image.size.height / HEIGHT;
     int count = xSteps * ySteps;
     
+    // Step 1, create the layers
     for (int i = 0; i < count; i++) {
         CALayer *layer = [CALayer layer];
         [_layers addObject:layer];
         [self.layer insertSublayer:layer below:_shrinking.layer];
     }
     
+    // Step 2: Render the layer contents one by one
     [EPUtil smallImagesWithWidth:WIDTH height:HEIGHT fromImage:_image withImageReadyCallback: ^(int i, UIImage* img) {
         [(CALayer*)[_layers objectAtIndex: i] performSelectorOnMainThread:@selector(setContents:) withObject:(id)[img CGImage] waitUntilDone:NO];
     }];
     
-    [self layoutLayersInGrid];
-}
-
-#pragma mark - Layout
-
-- (void)layoutLayersInGrid
-{
-    int xSteps = _image.size.width / WIDTH;
-    int ySteps = _image.size.height / HEIGHT;
-    int count = xSteps * ySteps;
-    
+    // Step 3: Lay out the layers in a grid
     [CATransaction begin];
     [CATransaction setDisableActions:YES];
     
@@ -169,14 +163,8 @@
     [CATransaction commit];
 }
 
+#pragma mark - Layout
 
-- (void)resetLayerTransforms
-{
-    for (CALayer *l in _layers) {
-        l.transform = CATransform3DIdentity;
-        l.opacity = 1.0;
-    }
-}
 
 - (void)translateLayersOutWithCompletionBlock:(void (^)(void))completionBlock
 {

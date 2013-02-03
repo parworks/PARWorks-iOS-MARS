@@ -18,7 +18,7 @@
     UIImageView                 * _shrinking;
     CALayer                     * _shrinkingMask;
     UIImageView                 * _scanline;
-    BOOL                          _scanlineAnimationRunning;
+    BOOL                          _outAnimationRunning;
 
     NSMutableArray              * _layers;
     CATextLayer                 * _loadingLayer;
