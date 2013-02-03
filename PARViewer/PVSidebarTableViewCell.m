@@ -7,6 +7,7 @@
 //
 
 #import "PVSidebarTableViewCell.h"
+#import "UIColor+ThemeAdditions.h"
 
 @implementation PVSidebarTableViewCell
 
@@ -37,7 +38,7 @@
     if (self.selected) {
         CGRect fillRect = rect;
         fillRect.size.height = rect.size.height - 1;
-        CGContextSetFillColorWithColor(c, [[UIColor colorWithRed:50.0/255.0 green:98.0/255.0 blue:162.0/255.0 alpha:1] CGColor]);
+        CGContextSetFillColorWithColor(c, [[UIColor parworksSelectionBlue] CGColor]);
         CGContextFillRect(c, fillRect);
     }
     

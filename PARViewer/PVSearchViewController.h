@@ -10,8 +10,13 @@
 #import "PVBaseViewController.h"
 
 @interface PVSearchViewController : PVBaseViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+{
+    ;
+}
 
-@property (weak, nonatomic) IBOutlet UITextField *searchTextField;
-@property (weak, nonatomic) IBOutlet UITableView *popularSitesTableView;
+@property (weak, nonatomic) IBOutlet UITextField * searchTextField;
+@property (strong, nonatomic) IBOutlet NSArray * searchResultSites;
+@property (weak, nonatomic) IBOutlet UITableView * searchResultsTableView;
+@property (weak, nonatomic) IBOutlet UITableView * popularSitesTableView;
 
 @end

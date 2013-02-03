@@ -137,6 +137,7 @@
 		437C3FE316BE249800822EDD /* AROverlayWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 437C3F9416BE249800822EDD /* AROverlayWebView.m */; };
 		437C3FE416BE249800822EDD /* PointCloudView.m in Sources */ = {isa = PBXBuildFile; fileRef = 437C3F9616BE249800822EDD /* PointCloudView.m */; };
 		437C3FE716BE260100822EDD /* AROverlayViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 437C3FE616BE260100822EDD /* AROverlayViewFactory.m */; };
+		437C3FEA16BE300B00822EDD /* PVSiteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 437C3FE916BE300B00822EDD /* PVSiteTableViewCell.m */; };
 		43998B9716BDD164008B34C2 /* icon_nearby.png in Resources */ = {isa = PBXBuildFile; fileRef = 43998B9316BDD164008B34C2 /* icon_nearby.png */; };
 		43998B9816BDD164008B34C2 /* icon_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 43998B9416BDD164008B34C2 /* icon_search.png */; };
 		43998B9916BDD164008B34C2 /* icon_technology.png in Resources */ = {isa = PBXBuildFile; fileRef = 43998B9516BDD164008B34C2 /* icon_technology.png */; };
@@ -157,6 +158,8 @@
 		43998BBD16BDE2C9008B34C2 /* UINavigationItem+PVAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 43998BBC16BDE2C9008B34C2 /* UINavigationItem+PVAdditions.m */; };
 		43998BBF16BDE647008B34C2 /* search_bar_cover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43998BBE16BDE647008B34C2 /* search_bar_cover@2x.png */; };
 		43998BC216BDF090008B34C2 /* PVFeaturedTagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43998BC116BDF090008B34C2 /* PVFeaturedTagCell.m */; };
+		439C504D16BE3C700035783E /* missing_image_300x150.png in Resources */ = {isa = PBXBuildFile; fileRef = 439C504C16BE3C700035783E /* missing_image_300x150.png */; };
+		439C505316BE46D70035783E /* UIColor+ThemeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 439C505216BE46D70035783E /* UIColor+ThemeAdditions.m */; };
 		43E6733A16BB883E007E7708 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E6733716BB8839007E7708 /* libGPUImage.a */; };
 		43E6733D16BB8A3B007E7708 /* PVImageCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E6733C16BB8A3A007E7708 /* PVImageCacheManager.m */; };
 		43E6734016BB8E3E007E7708 /* PVTrendingBlurredBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E6733F16BB8E3D007E7708 /* PVTrendingBlurredBackgroundView.m */; };
@@ -421,6 +424,8 @@
 		437C3F9616BE249800822EDD /* PointCloudView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointCloudView.m; sourceTree = "<group>"; };
 		437C3FE516BE260100822EDD /* AROverlayViewFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AROverlayViewFactory.h; sourceTree = "<group>"; };
 		437C3FE616BE260100822EDD /* AROverlayViewFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AROverlayViewFactory.m; sourceTree = "<group>"; };
+		437C3FE816BE300B00822EDD /* PVSiteTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVSiteTableViewCell.h; sourceTree = "<group>"; };
+		437C3FE916BE300B00822EDD /* PVSiteTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVSiteTableViewCell.m; sourceTree = "<group>"; };
 		43998B9316BDD164008B34C2 /* icon_nearby.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_nearby.png; sourceTree = "<group>"; };
 		43998B9416BDD164008B34C2 /* icon_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_search.png; sourceTree = "<group>"; };
 		43998B9516BDD164008B34C2 /* icon_technology.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_technology.png; sourceTree = "<group>"; };
@@ -444,6 +449,9 @@
 		43998BBE16BDE647008B34C2 /* search_bar_cover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search_bar_cover@2x.png"; sourceTree = "<group>"; };
 		43998BC016BDF090008B34C2 /* PVFeaturedTagCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVFeaturedTagCell.h; sourceTree = "<group>"; };
 		43998BC116BDF090008B34C2 /* PVFeaturedTagCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVFeaturedTagCell.m; sourceTree = "<group>"; };
+		439C504C16BE3C700035783E /* missing_image_300x150.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = missing_image_300x150.png; path = "Resources@2x/missing_image_300x150.png"; sourceTree = SOURCE_ROOT; };
+		439C505116BE46D70035783E /* UIColor+ThemeAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ThemeAdditions.h"; sourceTree = "<group>"; };
+		439C505216BE46D70035783E /* UIColor+ThemeAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ThemeAdditions.m"; sourceTree = "<group>"; };
 		43E6733016BB8839007E7708 /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = Submodules/GPUImage/framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
 		43E6733B16BB8A3A007E7708 /* PVImageCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVImageCacheManager.h; sourceTree = "<group>"; };
 		43E6733C16BB8A3A007E7708 /* PVImageCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVImageCacheManager.m; sourceTree = "<group>"; };
@@ -555,9 +563,13 @@
 				43EB601716BCEF2100A3EE29 /* PVSidebarViewController.xib */,
 				43E6733B16BB8A3A007E7708 /* PVImageCacheManager.h */,
 				43E6733C16BB8A3A007E7708 /* PVImageCacheManager.m */,
+				439C505116BE46D70035783E /* UIColor+ThemeAdditions.h */,
+				439C505216BE46D70035783E /* UIColor+ThemeAdditions.m */,
 				4351D0FA16B4C70C0039FE88 /* PVSearchViewController.h */,
 				4351D0FB16B4C70C0039FE88 /* PVSearchViewController.m */,
 				4351D0FC16B4C70C0039FE88 /* PVSearchViewController.xib */,
+				437C3FE816BE300B00822EDD /* PVSiteTableViewCell.h */,
+				437C3FE916BE300B00822EDD /* PVSiteTableViewCell.m */,
 				43998BC016BDF090008B34C2 /* PVFeaturedTagCell.h */,
 				43998BC116BDF090008B34C2 /* PVFeaturedTagCell.m */,
 				4351D10316B4C7470039FE88 /* PVNearbySitesViewController.h */,
@@ -600,6 +612,7 @@
 			children = (
 				43998BB316BDDADA008B34C2 /* parworks.png */,
 				43998BB516BDDD3E008B34C2 /* navigation_bar_background.png */,
+				439C504C16BE3C700035783E /* missing_image_300x150.png */,
 				43EB601116BCEE7A00A3EE29 /* frontViewControllerDropShadow.png */,
 				4351D0EA16B4C6CA0039FE88 /* Default.png */,
 				43998B9316BDD164008B34C2 /* icon_nearby.png */,
@@ -1109,6 +1122,7 @@
 				437C3FD116BE249800822EDD /* toolbar_hide@2x.png in Resources */,
 				437C3FD216BE249800822EDD /* toolbar_show.png in Resources */,
 				437C3FD316BE249800822EDD /* toolbar_show@2x.png in Resources */,
+				439C504D16BE3C700035783E /* missing_image_300x150.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1217,6 +1231,8 @@
 				437C3FE316BE249800822EDD /* AROverlayWebView.m in Sources */,
 				437C3FE416BE249800822EDD /* PointCloudView.m in Sources */,
 				437C3FE716BE260100822EDD /* AROverlayViewFactory.m in Sources */,
+				437C3FEA16BE300B00822EDD /* PVSiteTableViewCell.m in Sources */,
+				439C505316BE46D70035783E /* UIColor+ThemeAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

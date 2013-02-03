@@ -7,6 +7,7 @@
 //
 
 #import "PVFeaturedTagCell.h"
+#import "UIColor+ThemeAdditions.h"
 
 @implementation PVFeaturedTagCell
 
@@ -14,7 +15,6 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        [self setBackgroundColor: [UIColor whiteColor]];
         [[self textLabel] setBackgroundColor: [UIColor clearColor]];
         [[self textLabel] setFont: [UIFont fontWithName:@"HiraKakuProN-W3" size:16]];
 
@@ -53,23 +53,15 @@
 {
     [super setHighlighted:highlighted animated:animated];
     if (highlighted) {
+        [self setBackgroundColor: [UIColor parworksSelectionBlue]];
         [[self textLabel] setTextColor: [UIColor colorWithWhite:1 alpha:1]];
         [_borderLayer setBorderColor: [[UIColor colorWithWhite:0 alpha:0.2] CGColor]];
     } else {
+        [self setBackgroundColor: [UIColor whiteColor]];
         [[self textLabel] setTextColor: [UIColor colorWithWhite:0.15 alpha:1]];
         [_borderLayer setBorderColor: [[UIColor colorWithWhite:0.85 alpha:1] CGColor]];
     }
     [self setNeedsDisplay];
-}
-
-- (void)drawRect:(CGRect)rect
-{
-    CGContextRef c = UIGraphicsGetCurrentContext();
-    
-    if (self.highlighted) {
-        CGContextSetFillColorWithColor(c, [[UIColor colorWithRed:50.0/255.0 green:98.0/255.0 blue:162.0/255.0 alpha:1] CGColor]);
-        CGContextFillRect(c, rect);
-    }
 }
 
 @end
