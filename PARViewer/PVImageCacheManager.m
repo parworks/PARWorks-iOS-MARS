@@ -59,9 +59,13 @@ static PVImageCacheManager * sharedImageCacheManager;
 
 - (UIImage*)imageForURL:(NSURL*)url
 {
-    if ([_imageCache objectForKey: url])
+    if (!url) {
+        return nil;
+
+    } else if ([_imageCache objectForKey: url]) {
         return [_imageCache objectForKey: url];
-    else {
+
+    } else {
         NSURLRequest * req = [NSURLRequest requestWithURL: url];
         
         // make sure there's not an open request for this image already

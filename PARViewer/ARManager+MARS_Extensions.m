@@ -78,16 +78,27 @@ static char CACHED_SITES_KEY;
 
 - (void)fetchTags
 {
-    // doesn't work yet
-    [self setAvailableTags: @[@"#SXSW", @"#PRIUS", @"Foundry376", @"PARwesome", @"HelloWorld", @"Alphabet"]];
-    [self setFeaturedTags: @[@"#SXSW", @"#PRIUS", @"Foundry376", @"PARwesome"]];
+    ASIHTTPRequest * req = [[ARManager shared] createRequest:@"/ar/site/tag/all" withMethod:@"GET" withArguments: nil];
+    ASIHTTPRequest * __weak __req = req;
+    [req setCompletionBlock: ^(void) {
+        [self setAvailableTags: [__req responseJSON]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIF_TAGS_UPDATED object:nil];
+    }];
+    [req startAsynchronous];
 
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIF_TAGS_UPDATED object:nil];
+    ASIHTTPRequest * featuredReq = [[ARManager shared] createRequest:@"/ar/site/tag/suggested" withMethod:@"GET" withArguments: nil];
+    ASIHTTPRequest * __weak __featuredReq = featuredReq;
+    [featuredReq setCompletionBlock: ^(void) {
+        [self setFeaturedTags: [__featuredReq responseJSON]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIF_TAGS_UPDATED object:nil];
+    }];
+    [featuredReq startAsynchronous];
 }
 
 - (void)fetchTagResults:(NSString*)tagName withCallback:(void(^)(NSString * tagName, NSArray * sites))callback
 {
-    ASIHTTPRequest * req = [[ARManager shared] createRequest:@"/ar/site/list/trending" withMethod:@"GET" withArguments:nil];
+    NSDictionary * args = [NSDictionary dictionaryWithObject:[tagName stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding] forKey:@"tag"];
+    ASIHTTPRequest * req = [[ARManager shared] createRequest:@"/ar/site/tag/list" withMethod:@"GET" withArguments: args];
     ASIHTTPRequest * __weak __req = req;
     
     if (self.cachedSites == nil)
@@ -101,7 +112,7 @@ static char CACHED_SITES_KEY;
             ARSite * site = [self.cachedSites objectForKey: siteID];
             if (!site) {
                 site = [[ARSite alloc] initWithIdentifier: siteID];
-                [self.cachedSites setObject:siteID forKey:siteID];
+                [self.cachedSites setObject:site forKey:siteID];
                 [site fetchInfo];
             }
             [sites addObject: site];
@@ -109,6 +120,8 @@ static char CACHED_SITES_KEY;
         
         callback(tagName, sites);
     }];
+    
+    [req startAsynchronous];
 }
 
 #pragma mark Associated Objects

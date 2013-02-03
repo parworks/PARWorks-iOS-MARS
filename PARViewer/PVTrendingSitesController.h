@@ -25,6 +25,5 @@
 - (NSURL*)urlForSiteAtIndex:(int)ii;
 - (void)didReceiveMemoryWarning;
 
-- (void)cardTapped:(PVSiteCardView*)card;
 
 @end

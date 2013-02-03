@@ -104,7 +104,9 @@
 
     if (![_slidingViewController animating]) {
         if ([_slidingViewController frontViewController] != controller)
-            [_slidingViewController setFrontViewController:controller animated:YES completion:nil];
+            [_slidingViewController setFrontViewController:controller animated:YES completion:^{
+                [controller viewDidAppear: YES];
+            }];
         [_slidingViewController closeSlider:YES completion:NULL];
     }
 }
