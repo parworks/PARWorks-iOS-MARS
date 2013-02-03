@@ -9,6 +9,10 @@
 #import "PVSiteDetailViewController.h"
 #import "ARSite+MARS_Extensions.h"
 #import "UIImageView+AFNetworking.h"
+#import "PVImageCacheManager.h"
+#import "PVAppDelegate.h"
+#import "GPUImagePicture.h"
+#import "GPUImageGaussianBlurFilter.h"
 
 @interface PVSiteDetailViewController ()
 
@@ -16,22 +20,16 @@
 
 @implementation PVSiteDetailViewController
 
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+}
+
 - (id)initWithSite:(ARSite *)site
 {
     self = [super init];
     if (self) {
-        self.site = site;        
-        
-//        NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithObject:@"Grayson" forKey:@"userName"];
-//        [dict setObject:@"667325981268" forKey:@"userId"];
-//        [dict setObject:@"test comment" forKey:@"comment"];
-//        
-//        ARSiteComment *comment = [[ARSiteComment alloc] initWithDictionary:dict];
-//        
-//        [_site addComment:comment withCallback:^(NSString *err){
-//            // start refreshing the site comments
-//            [site fetchComments];
-//        }];
+        self.site = site;
         
         [site fetchComments];
     }
@@ -55,18 +53,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-            
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed)];
+    
     self.headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, [UIImage imageNamed:@"posterImage.png"].size.height)];
     _headerImageView.contentMode = UIViewContentModeScaleAspectFill;
     _headerImageView.backgroundColor = [UIColor colorWithRed:222.0/255.0 green:222.0/255.0 blue:222.0/255.0 alpha:1.0];
-//    [_headerImageView setImageWithURL:[NSURL URLWithString:_site.posterImageURL] placeholderImage:[UIImage imageNamed:@"posterImage.png"]];
-    [_headerImageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://s3.amazonaws.com/hd4ar-dev-us-east-1/physical_models/FirstSite/registrations/940a4f72-8d72-4b56-a4b2-8a639b679f76.jpg"]]
-                            placeholderImage:[UIImage imageNamed:@"posterImage.png"]
-                                     success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image){
-                                         NSLog(@"%@", response);
-                                     }failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error){
-                                         NSLog(@"%@", response);                                         
-                                     }];
+    
+    UIImage * img = [[PVImageCacheManager shared] imageForURL: [_site posterImageURL]];
+    if (!img) {
+        img = [UIImage imageNamed:@"posterImage.png"];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteImageReady:) name:NOTIF_IMAGE_READY object: [_site posterImageURL]];
+    }
+    [_headerImageView setImage: img];
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     _tableView.backgroundColor = [UIColor clearColor];
@@ -74,27 +73,84 @@
     _tableView.dataSource = self;
     _tableView.delegate = self;
     
+    UIButton *addCommentButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)];
+    [addCommentButton addTarget:self action:@selector(addCommentButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [addCommentButton setTitle:@"Add Comment" forState:UIControlStateNormal];
+    _tableView.tableFooterView = addCommentButton;
+    
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 0.0)];
     [headerView setBackgroundColor:[UIColor colorWithRed:222.0/255.0 green:222.0/255.0 blue:222.0/255.0 alpha:1.0]];
     
     self.parallaxView = [[PVParallaxTableView alloc] initWithBackgroundView:_headerImageView
-                                                                foregroundTableView:_tableView];
-    _parallaxView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+                                                        foregroundTableView:_tableView];
+    _parallaxView.frame = CGRectMake(0, 0, self.view.frame.size.width, [UIScreen mainScreen].applicationFrame.size.height - self.navigationController.navigationBar.frame.size.height);
     _parallaxView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     _parallaxView.backgroundHeight = 150.0f;
     _parallaxView.tableViewDelegate = self;
+    _parallaxView.backgroundColor = [UIColor greenColor];
     [_parallaxView setTableHeaderView:headerView];
     [self.view addSubview:_parallaxView];
 }
 
-- (void)didReceiveMemoryWarning
+- (void)siteImageReady:(NSNotification*)notif
 {
-    [super didReceiveMemoryWarning];
+    UIImage * img = [[PVImageCacheManager shared] imageForURL: [_site posterImageURL]];
+    [_headerImageView setImage: img];
 }
 
 - (void)update
 {
     [_tableView reloadData];
+}
+
+- (void)addCommentButtonPressed{
+    //    NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithObject:@"Grayson" forKey:@"userName"];
+    //    [dict setObject:@"667325981268" forKey:@"userId"];
+    //    [dict setObject:@"new comment" forKey:@"comment"];
+    //
+    //    ARSiteComment *comment = [[ARSiteComment alloc] initWithDictionary:dict];
+    //    UITableView * __weak __tableView = _tableView;
+    //    [_site addComment:comment withCallback:^(NSString *err){
+    //        [__tableView reloadData];
+    //    }];
+    
+    PVAppDelegate * delegate = (PVAppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    if(_bgCopyImageView == nil){
+        
+        UIGraphicsBeginImageContext(self.view.frame.size);
+        [delegate.window.layer renderInContext:UIGraphicsGetCurrentContext()];
+        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        _bgCopyImageView = [[GPUImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
+        [_bgCopyImageView setFillMode: kGPUImageFillModePreserveAspectRatioAndFill];
+        
+        CGSize size = CGSizeMake(image.size.width / 2.5, image.size.height / 2.5);
+        
+        GPUImagePicture *_bgCopyPicture = [[GPUImagePicture alloc] initWithImage:image smoothlyScaleOutput:YES];
+        GPUImageGaussianBlurFilter * blurFilter = [[GPUImageGaussianBlurFilter alloc] init];
+        [blurFilter setBlurSize: 1.06];
+        [blurFilter forceProcessingAtSize: size];
+        [_bgCopyPicture addTarget: blurFilter];
+        [blurFilter addTarget: _bgCopyImageView];
+        [_bgCopyPicture processImage];
+        
+        [delegate.window addSubview:_bgCopyImageView];
+    }
+    
+    if(!_addCommentViewController){
+        _addCommentViewController = [[PVAddCommentViewController alloc] initWithNibName:@"PVAddCommentViewController" bundle:nil];
+        _addCommentViewController.delegate = self;
+    }
+    
+    
+    [delegate.window addSubview:_addCommentViewController.view];
+    [_addCommentViewController viewWillAppear:NO];
+}
+
+- (void)backButtonPressed{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark -
@@ -111,7 +167,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"CellIdentifier";
     
-    ARSiteComment *comment = (ARSiteComment*)[_site.comments objectAtIndex:indexPath.row];    
+    ARSiteComment *comment = (ARSiteComment*)[_site.comments objectAtIndex:indexPath.row];
     
     UITableViewCell *cell = [tableView
                              dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -140,6 +196,31 @@
 }
 
 
+#pragma mark
+#pragma mark PVAddCommentViewControllerDelegate methods
+
+- (void)postButtonPressed:(PVAddCommentViewController *)vc{
+    [self hideAddComment:vc];
+}
+
+- (void)cancelButtonPressed:(PVAddCommentViewController *)vc{
+    [self hideAddComment:vc];
+}
+
+- (void)hideAddComment:(PVAddCommentViewController*)vc{
+    if(vc!=nil){
+        //        [vc fadeOut];
+        
+        if(_bgCopyImageView != nil){
+            [_bgCopyImageView removeFromSuperview];
+            _bgCopyImageView = nil;
+        }
+        
+        if(_addCommentViewController != nil){
+            _addCommentViewController = nil;
+        }
+    }
+}
 
 
 @end

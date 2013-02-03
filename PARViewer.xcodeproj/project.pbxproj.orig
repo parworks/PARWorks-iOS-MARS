@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		42809ED916BDCF2C007B60F5 /* PVParallaxTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42809ECD16BB95D0007B60F5 /* PVParallaxTableView.m */; };
-		42809EE016BDE25A007B60F5 /* PVAddCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42809EDE16BDE258007B60F5 /* PVAddCommentViewController.m */; };
-		42809EE116BDE25A007B60F5 /* PVAddCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42809EDF16BDE259007B60F5 /* PVAddCommentViewController.xib */; };
+		42809ECE16BB95D0007B60F5 /* PVParallaxTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42809ECD16BB95D0007B60F5 /* PVParallaxTableView.m */; };
+		42809ED116BB9B05007B60F5 /* posterImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 42809ECF16BB9B05007B60F5 /* posterImage.png */; };
+		42809ED216BB9B05007B60F5 /* posterImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 42809ED016BB9B05007B60F5 /* posterImage@2x.png */; };
 		4351D0B816B4C5DB0039FE88 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4351D0B716B4C5DB0039FE88 /* UIKit.framework */; };
 		4351D0BA16B4C5DB0039FE88 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4351D0B916B4C5DB0039FE88 /* Foundation.framework */; };
 		4351D0BC16B4C5DB0039FE88 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4351D0BB16B4C5DB0039FE88 /* CoreGraphics.framework */; };
@@ -130,6 +130,10 @@
 		43EB601816BCEF2100A3EE29 /* PVSidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43EB601616BCEF2100A3EE29 /* PVSidebarViewController.m */; };
 		43EB601916BCEF2100A3EE29 /* PVSidebarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EB601716BCEF2100A3EE29 /* PVSidebarViewController.xib */; };
 		43EB601C16BCF16D00A3EE29 /* PVBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43EB601B16BCF16D00A3EE29 /* PVBaseViewController.m */; };
+		43EB602116BCF29B00A3EE29 /* navigationBar_menuButton_highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 43EB601D16BCF29B00A3EE29 /* navigationBar_menuButton_highlighted.png */; };
+		43EB602216BCF29B00A3EE29 /* navigationBar_menuButton_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43EB601E16BCF29B00A3EE29 /* navigationBar_menuButton_highlighted@2x.png */; };
+		43EB602316BCF29B00A3EE29 /* navigationBar_menuButton_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 43EB601F16BCF29B00A3EE29 /* navigationBar_menuButton_normal.png */; };
+		43EB602416BCF29B00A3EE29 /* navigationBar_menuButton_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43EB602016BCF29B00A3EE29 /* navigationBar_menuButton_normal@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -154,9 +158,6 @@
 		42809ECD16BB95D0007B60F5 /* PVParallaxTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVParallaxTableView.m; sourceTree = "<group>"; };
 		42809ECF16BB9B05007B60F5 /* posterImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = posterImage.png; sourceTree = "<group>"; };
 		42809ED016BB9B05007B60F5 /* posterImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "posterImage@2x.png"; sourceTree = "<group>"; };
-		42809EDD16BDE257007B60F5 /* PVAddCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVAddCommentViewController.h; sourceTree = "<group>"; };
-		42809EDE16BDE258007B60F5 /* PVAddCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVAddCommentViewController.m; sourceTree = "<group>"; };
-		42809EDF16BDE259007B60F5 /* PVAddCommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PVAddCommentViewController.xib; sourceTree = "<group>"; };
 		4351D0B316B4C5DB0039FE88 /* PARViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PARViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4351D0B716B4C5DB0039FE88 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4351D0B916B4C5DB0039FE88 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -370,6 +371,10 @@
 		43EB601716BCEF2100A3EE29 /* PVSidebarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PVSidebarViewController.xib; sourceTree = "<group>"; };
 		43EB601A16BCF16D00A3EE29 /* PVBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVBaseViewController.h; sourceTree = "<group>"; };
 		43EB601B16BCF16D00A3EE29 /* PVBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVBaseViewController.m; sourceTree = "<group>"; };
+		43EB601D16BCF29B00A3EE29 /* navigationBar_menuButton_highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = navigationBar_menuButton_highlighted.png; path = "../../../../../../../Users/bengotow/Downloads/JSSlidingViewController-master/JSSlidingViewControllerSample/JSSlidingViewControllerSample/ImagesForTestProjectOnly/navigationBar_menuButton_highlighted.png"; sourceTree = "<group>"; };
+		43EB601E16BCF29B00A3EE29 /* navigationBar_menuButton_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navigationBar_menuButton_highlighted@2x.png"; path = "../../../../../../../Users/bengotow/Downloads/JSSlidingViewController-master/JSSlidingViewControllerSample/JSSlidingViewControllerSample/ImagesForTestProjectOnly/navigationBar_menuButton_highlighted@2x.png"; sourceTree = "<group>"; };
+		43EB601F16BCF29B00A3EE29 /* navigationBar_menuButton_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = navigationBar_menuButton_normal.png; path = "../../../../../../../Users/bengotow/Downloads/JSSlidingViewController-master/JSSlidingViewControllerSample/JSSlidingViewControllerSample/ImagesForTestProjectOnly/navigationBar_menuButton_normal.png"; sourceTree = "<group>"; };
+		43EB602016BCF29B00A3EE29 /* navigationBar_menuButton_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navigationBar_menuButton_normal@2x.png"; path = "../../../../../../../Users/bengotow/Downloads/JSSlidingViewController-master/JSSlidingViewControllerSample/JSSlidingViewControllerSample/ImagesForTestProjectOnly/navigationBar_menuButton_normal@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -477,9 +482,6 @@
 				4351D0D616B4C5DB0039FE88 /* PVTechnologyViewController.h */,
 				4351D0D716B4C5DB0039FE88 /* PVTechnologyViewController.m */,
 				4351D0FF16B4C71A0039FE88 /* PVTechnologyViewController.xib */,
-				42809EDD16BDE257007B60F5 /* PVAddCommentViewController.h */,
-				42809EDE16BDE258007B60F5 /* PVAddCommentViewController.m */,
-				42809EDF16BDE259007B60F5 /* PVAddCommentViewController.xib */,
 				42809ECC16BB95CF007B60F5 /* PVParallaxTableView.h */,
 				42809ECD16BB95D0007B60F5 /* PVParallaxTableView.m */,
 				4351D0BE16B4C5DB0039FE88 /* Supporting Files */,
@@ -501,6 +503,10 @@
 		4351D0E816B4C6CA0039FE88 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				43EB601D16BCF29B00A3EE29 /* navigationBar_menuButton_highlighted.png */,
+				43EB601E16BCF29B00A3EE29 /* navigationBar_menuButton_highlighted@2x.png */,
+				43EB601F16BCF29B00A3EE29 /* navigationBar_menuButton_normal.png */,
+				43EB602016BCF29B00A3EE29 /* navigationBar_menuButton_normal@2x.png */,
 				43EB601116BCEE7A00A3EE29 /* frontViewControllerDropShadow.png */,
 				43EB601216BCEE7A00A3EE29 /* frontViewControllerDropShadow@2x.png */,
 				4351D0E916B4C6CA0039FE88 /* Default-568h@2x.png */,
@@ -901,10 +907,18 @@
 				435E173B16B79E1100CC8DA3 /* ARPhotoViewController.xib in Resources */,
 				435E174716B79E1100CC8DA3 /* README-GHUnit in Resources */,
 				435E176516B89E6100CC8DA3 /* PVSiteDetailViewController.xib in Resources */,
+<<<<<<< HEAD
+				42809ED116BB9B05007B60F5 /* posterImage.png in Resources */,
+				42809ED216BB9B05007B60F5 /* posterImage@2x.png in Resources */,
+=======
 				43EB601316BCEE7A00A3EE29 /* frontViewControllerDropShadow.png in Resources */,
 				43EB601416BCEE7A00A3EE29 /* frontViewControllerDropShadow@2x.png in Resources */,
 				43EB601916BCEF2100A3EE29 /* PVSidebarViewController.xib in Resources */,
-				42809EE116BDE25A007B60F5 /* PVAddCommentViewController.xib in Resources */,
+				43EB602116BCF29B00A3EE29 /* navigationBar_menuButton_highlighted.png in Resources */,
+				43EB602216BCF29B00A3EE29 /* navigationBar_menuButton_highlighted@2x.png in Resources */,
+				43EB602316BCF29B00A3EE29 /* navigationBar_menuButton_normal.png in Resources */,
+				43EB602416BCF29B00A3EE29 /* navigationBar_menuButton_normal@2x.png in Resources */,
+>>>>>>> a062270c7c9edec654b450352da6cb7a35902ad2
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -976,6 +990,9 @@
 				435E175F16B79E1100CC8DA3 /* GridView.m in Sources */,
 				435E176016B79E1100CC8DA3 /* PointCloudView.m in Sources */,
 				435E176416B89E6100CC8DA3 /* PVSiteDetailViewController.m in Sources */,
+<<<<<<< HEAD
+				42809ECE16BB95D0007B60F5 /* PVParallaxTableView.m in Sources */,
+=======
 				43591B4B16BB721700860F11 /* PSTCollectionView.m in Sources */,
 				43591B4C16BB721700860F11 /* PSTCollectionViewCell.m in Sources */,
 				43591B4D16BB721700860F11 /* PSTCollectionViewController.m in Sources */,
@@ -995,8 +1012,7 @@
 				43EB600D16BCEE6E00A3EE29 /* JSSlidingViewController.m in Sources */,
 				43EB601816BCEF2100A3EE29 /* PVSidebarViewController.m in Sources */,
 				43EB601C16BCF16D00A3EE29 /* PVBaseViewController.m in Sources */,
-				42809ED916BDCF2C007B60F5 /* PVParallaxTableView.m in Sources */,
-				42809EE016BDE25A007B60F5 /* PVAddCommentViewController.m in Sources */,
+>>>>>>> a062270c7c9edec654b450352da6cb7a35902ad2
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

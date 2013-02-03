@@ -8,8 +8,13 @@
 
 #import "ARSite.h"
 #import "PVParallaxTableView.h"
+#import "PVAddCommentViewController.h"
+#import "GPUImageView.h"
 
-@interface PVSiteDetailViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface PVSiteDetailViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, PVAddCommentViewControllerDelegate>{
+    PVAddCommentViewController *_addCommentViewController;
+    GPUImageView    * _bgCopyImageView;
+}
 
 @property (nonatomic, strong) ARSite * site;
 

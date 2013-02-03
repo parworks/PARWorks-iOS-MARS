@@ -95,8 +95,7 @@ static NSString *cellIdentifier = @"TestCell";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ARSite * site = [[[ARManager shared] trendingSites] objectAtIndex: [indexPath row]];
-    PVSiteDetailViewController * detail = [[PVSiteDetailViewController alloc] initWithSite: site];
-    [self presentViewController: detail animated:YES completion:NULL];
+    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[[PVSiteDetailViewController alloc] initWithSite: site]] animated:YES completion:NULL];
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
 }
 
