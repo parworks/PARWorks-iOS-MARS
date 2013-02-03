@@ -40,4 +40,5 @@
         foregroundTableView:(UITableView *)foregroundTableView;
 - (void)setTableHeaderView:(UIView*)view;
 
+
 @end

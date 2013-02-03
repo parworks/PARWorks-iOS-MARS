@@ -60,7 +60,7 @@ static CGFloat const kMDCParallaxViewDefaultHeight = 150.0f;
         
         _foregroundTableView = foregroundTableView;
         _foregroundTableView.delegate = self;
-        [self addSubview:_foregroundTableView];        
+        [self addSubview:_foregroundTableView];
     }
     return self;
 }
@@ -81,6 +81,27 @@ static CGFloat const kMDCParallaxViewDefaultHeight = 150.0f;
             [self.tableViewDelegate respondsToSelector:aSelector]);
 }
 
+- (void)setDelegate:(id <UITableViewDelegate>)delegate
+{
+    if (delegate == self)
+        return;
+    
+    self.tableViewDelegate = delegate;
+    [_foregroundTableView setDelegate:self];
+}
+
+//- (BOOL)respondsToSelector:(SEL)aSelector
+//{
+//    if ([super respondsToSelector:aSelector])
+//        return YES;
+//    
+//    return [self.tableViewDelegate respondsToSelector:aSelector];
+//}
+
+- (id)forwardingTargetForSelector:(SEL)aSelector
+{
+    return self.tableViewDelegate;
+}
 
 #pragma mark - UIView Overrides
 

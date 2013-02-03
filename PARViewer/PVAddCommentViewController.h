@@ -15,10 +15,9 @@
 
 @property (nonatomic, weak) id <PVAddCommentViewControllerDelegate> delegate;
 @property (nonatomic, strong) ARSite * site;
-@property (nonatomic, strong) IBOutlet UIView *addCommentView;
-@property (nonatomic, strong) IBOutlet UITextView *commentTextView;
+@property (nonatomic, weak) IBOutlet UIView *addCommentView;
+@property (nonatomic, weak) IBOutlet UITextView *commentTextView;
 
-- (void)setViewFrame:(CGRect)frame;
 - (IBAction)postButtonPressed:(id)sender;
 - (IBAction)cancelButtonPressed:(id)sender;
 

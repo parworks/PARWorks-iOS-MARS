@@ -10,6 +10,8 @@
 #import "PVParallaxTableView.h"
 #import "PVAddCommentViewController.h"
 #import "GPUImageView.h"
+#import "PVDetailsMapView.h"
+#import "PVDetailsPhotoScrollView.h"
 
 @interface PVSiteDetailViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, PVAddCommentViewControllerDelegate>{
     PVAddCommentViewController *_addCommentViewController;
@@ -21,6 +23,8 @@
 @property (nonatomic, strong) UIImageView *headerImageView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) PVParallaxTableView *parallaxView;
+@property (nonatomic, strong) PVDetailsMapView *detailsMapView;
+@property (nonatomic, strong) PVDetailsPhotoScrollView *detailsPhotoScrollView;
 
 - (id)initWithSite:(ARSite *)site;
 

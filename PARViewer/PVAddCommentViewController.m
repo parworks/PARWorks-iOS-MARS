@@ -29,7 +29,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
     _commentTextView.font = [UIFont systemFontOfSize:18.0];
     [self addLines];
     
@@ -74,17 +73,11 @@
 }
 
 
-- (void)setViewFrame:(CGRect)frame{
-    [self.view setFrame:frame];
-    //    [_vBackground setFrame:self.view.frame];
-    //    [_vContainer setFrame:CGRectMake(_vContainer.frame.origin.x, _vContainer.frame.origin.y, _vContainer.frame.size.width, _vContainer.frame.size.height)];
-    //    _vContainer.center = _vBackground.center;
-}
-
 - (void)slideIn{
+//    [_commentTextView resignFirstResponder];
     _addCommentView.frame = CGRectMake(_addCommentView.frame.origin.x, -_addCommentView.frame.size.height, _addCommentView.frame.size.width, _addCommentView.frame.size.height);
-    UITextView * __weak __commentTextView = _commentTextView;
-    [UIView transitionWithView:self.view duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    __weak UITextView *__commentTextView = _commentTextView;
+    [UIView transitionWithView:self.view duration:0.25 options:UIViewAnimationOptionTransitionNone animations:^{
         _addCommentView.frame = CGRectMake(_addCommentView.frame.origin.x, 50.0, _addCommentView.frame.size.width, _addCommentView.frame.size.height);
         [__commentTextView becomeFirstResponder];
     } completion:nil];
@@ -92,7 +85,7 @@
 
 - (void)slideOut{
     __weak UITextView *__commentTextView = _commentTextView;
-    [UIView transitionWithView:self.view duration:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView transitionWithView:self.view duration:0.25 options:UIViewAnimationOptionTransitionNone animations:^{
         _addCommentView.frame = CGRectMake(_addCommentView.frame.origin.x, -_addCommentView.frame.size.height, _addCommentView.frame.size.width, _addCommentView.frame.size.height);
         [__commentTextView resignFirstResponder];
     } completion:^(BOOL finished){
@@ -110,7 +103,7 @@
         __weak PVAddCommentViewController *__self = self;
         [_site addComment:comment withCallback:^(NSString *err){
             [__self slideOut];
-            [_delegate postedCommentSuccessfully:__self];
+            [__self.delegate postedCommentSuccessfully:__self];
         }];
     }
     else{
