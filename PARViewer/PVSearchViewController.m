@@ -39,10 +39,10 @@
 - (void)viewDidLoad
 {
     // Prepare to animate in the popular sites
-    CGRect tableViewFrame = [_popularSitesTableView frame];
+    CGRect tableViewFrame = [_filteredTagsTableView frame];
     tableViewFrame.origin.y += 15;
-    [_popularSitesTableView setFrame: tableViewFrame];
-    [_popularSitesTableView setAlpha: 0];
+    [_filteredTagsTableView setFrame: tableViewFrame];
+    [_filteredTagsTableView setAlpha: 0];
     [_searchResultsTableView setAlpha: 0];
     
     [super viewDidLoad];
@@ -61,26 +61,40 @@
 
 - (void)refreshSuggestions
 {
-    [_popularSitesTableView reloadData];
+    NSString * query = [_searchTextField text];
+    
+    if ([query length] == 0) {
+        self.filteredTags = [NSMutableArray arrayWithArray: [[ARManager shared] featuredTags]];
+    } else {
+        self.filteredTags = [NSMutableArray array];
+        for (NSString * tag in [[ARManager shared] availableTags]) {
+            if ([tag rangeOfString: query].location != NSNotFound)
+                [_filteredTags addObject: tag];
+        }
+    }
+    
+    [_filteredTagsTableView reloadData];
 }
 
 - (void)hidePopularSites
 {
-    if ([_popularSitesTableView alpha] == 0)
+    if ([_filteredTagsTableView alpha] == 0)
         return;
     
     [UIView beginAnimations:nil context: nil];
     [UIView setAnimationDuration: 0.2];
-    CGRect tableViewFrame = [_popularSitesTableView frame];
+    CGRect tableViewFrame = [_filteredTagsTableView frame];
     tableViewFrame.origin.y += 15;
-    [_popularSitesTableView setFrame: tableViewFrame];
-    [_popularSitesTableView setAlpha: 0];
+    [_filteredTagsTableView setFrame: tableViewFrame];
+    [_filteredTagsTableView setAlpha: 0];
     [UIView commitAnimations];
 }
 
 - (void)showPopularSites
 {
-    if ([_popularSitesTableView alpha] == 1)
+    [self refreshSuggestions];
+    
+    if ([_filteredTagsTableView alpha] == 1)
         return;
     
     [UIView beginAnimations:nil context: nil];
@@ -90,10 +104,10 @@
 
     [UIView beginAnimations:nil context: nil];
     [UIView setAnimationDuration: 0.3];
-    CGRect tableViewFrame = [_popularSitesTableView frame];
+    CGRect tableViewFrame = [_filteredTagsTableView frame];
     tableViewFrame.origin.y -= 15;
-    [_popularSitesTableView setFrame: tableViewFrame];
-    [_popularSitesTableView setAlpha: 1];
+    [_filteredTagsTableView setFrame: tableViewFrame];
+    [_filteredTagsTableView setAlpha: 1];
     [UIView commitAnimations];
 }
 
@@ -118,21 +132,21 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (tableView == _popularSitesTableView)
-        return [[[ARManager shared] featuredTags] count];
+    if (tableView == _filteredTagsTableView)
+        return [_filteredTags count];
     else
         return [_searchResultSites count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView == _popularSitesTableView) {
+    if (tableView == _filteredTagsTableView) {
         PVFeaturedTagCell * c = (PVFeaturedTagCell*)[tableView dequeueReusableCellWithIdentifier: @"cell"];
         if (!c){
             c = [[PVFeaturedTagCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         }
         
-        NSString * tag = [[[ARManager shared] featuredTags] objectAtIndex: [indexPath row]];
+        NSString * tag = [_filteredTags objectAtIndex: [indexPath row]];
         [[c textLabel] setText: tag];
         [c setIsFirstRow: ([indexPath row] == 0)];
         return c;
@@ -151,8 +165,8 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 
-    if (tableView == _popularSitesTableView) {
-        NSString * tag = [[[ARManager shared] featuredTags] objectAtIndex: [indexPath row]];
+    if (tableView == _filteredTagsTableView) {
+        NSString * tag = [_filteredTags objectAtIndex: [indexPath row]];
         [_searchTextField setText: tag];
         [_searchTextField resignFirstResponder];
         [self hidePopularSites];
@@ -177,7 +191,7 @@
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField
 {
-    [self showPopularSites];
+    [self performSelectorOnMainThread:@selector(showPopularSites) withObject:nil waitUntilDone:NO];
     return YES;
 }
 
@@ -185,9 +199,9 @@
 {
     NSString * newText = [[textField text] stringByReplacingCharactersInRange:range withString:string];
     if ([newText length] == 0) {
-        [self showPopularSites];
+        [self performSelectorOnMainThread:@selector(showPopularSites) withObject:nil waitUntilDone:NO];
     } else {
-        [self hidePopularSites];
+        [self performSelectorOnMainThread:@selector(refreshSuggestions) withObject:nil waitUntilDone:NO];
     }
     return YES;
 }

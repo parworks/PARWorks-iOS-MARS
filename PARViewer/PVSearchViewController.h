@@ -11,12 +11,13 @@
 
 @interface PVSearchViewController : PVBaseViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
-    ;
 }
 
 @property (weak, nonatomic) IBOutlet UITextField * searchTextField;
-@property (strong, nonatomic) IBOutlet NSArray * searchResultSites;
+@property (strong, nonatomic) NSArray * searchResultSites;
 @property (weak, nonatomic) IBOutlet UITableView * searchResultsTableView;
-@property (weak, nonatomic) IBOutlet UITableView * popularSitesTableView;
+
+@property (weak, nonatomic) IBOutlet UITableView * filteredTagsTableView;
+@property (strong, nonatomic) NSMutableArray * filteredTags;
 
 @end

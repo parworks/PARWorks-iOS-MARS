@@ -239,19 +239,19 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">popularSitesTableView</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="538291478"/>
-					</object>
-					<int key="connectionID">34</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">searchResultsTableView</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="820536669"/>
 					</object>
 					<int key="connectionID">41</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">filteredTagsTableView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="538291478"/>
+					</object>
+					<int key="connectionID">42</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -343,7 +343,7 @@
 							<reference ref="60798701"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
-						<string key="objectName">Populr Sites Table View</string>
+						<string key="objectName">Tags Table View</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">33</int>
@@ -383,7 +383,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">41</int>
+			<int key="maxID">42</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -399,19 +399,14 @@
 					<string key="className">PVSearchViewController</string>
 					<string key="superclassName">PVBaseViewController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="popularSitesTableView">UITableView</string>
-						<string key="searchResultSites">NSArray</string>
+						<string key="filteredTagsTableView">UITableView</string>
 						<string key="searchResultsTableView">UITableView</string>
 						<string key="searchTextField">UITextField</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="popularSitesTableView">
-							<string key="name">popularSitesTableView</string>
+						<object class="IBToOneOutletInfo" key="filteredTagsTableView">
+							<string key="name">filteredTagsTableView</string>
 							<string key="candidateClassName">UITableView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="searchResultSites">
-							<string key="name">searchResultSites</string>
-							<string key="candidateClassName">NSArray</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="searchResultsTableView">
 							<string key="name">searchResultsTableView</string>
