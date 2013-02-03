@@ -74,7 +74,6 @@
     if ([_popularSitesTableView alpha] == 1)
         return;
     
-    [_searchTextField resignFirstResponder];
     [UIView beginAnimations:nil context: nil];
     [UIView setAnimationDuration: 0.2];
     CGRect tableViewFrame = [_popularSitesTableView frame];
@@ -122,6 +121,9 @@
     NSString * newText = [[textField text] stringByReplacingCharactersInRange:range withString:string];
     if ([newText length] == 0) {
         [self showPopularSites];
+        [_searchTextField resignFirstResponder];
+    } else {
+        [self hidePopularSitesAndSearch];
     }
     return YES;
 }
