@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4253459C16BE5B6800D5A00A /* PVDetailsMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42809EEE16BE281F007B60F5 /* PVDetailsMapView.m */; };
+		425345A016BE5B7400D5A00A /* PVDetailsPhotoScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42809EF116BE288E007B60F5 /* PVDetailsPhotoScrollView.m */; };
+		425345A116BE5B7700D5A00A /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 42809EF616BE33BA007B60F5 /* MapAnnotation.m */; };
+		425345A216BE5B7A00D5A00A /* PVRecentAugmentedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4253459316BE44CF00D5A00A /* PVRecentAugmentedView.m */; };
+		425345A316BE5B7E00D5A00A /* PVCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4253459916BE5A1E00D5A00A /* PVCommentTableViewCell.m */; };
 		42809EE316BE023C007B60F5 /* PVParallaxTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42809ECD16BB95D0007B60F5 /* PVParallaxTableView.m */; };
 		42809EE716BE023E007B60F5 /* PVAddCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42809EDE16BDE258007B60F5 /* PVAddCommentViewController.m */; };
 		42809EE916BE163B007B60F5 /* PVAddCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42809EDF16BDE259007B60F5 /* PVAddCommentViewController.xib */; };
-		42809EEF16BE2820007B60F5 /* PVDetailsMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42809EEE16BE281F007B60F5 /* PVDetailsMapView.m */; };
-		42809EF216BE2890007B60F5 /* PVDetailsPhotoScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42809EF116BE288E007B60F5 /* PVDetailsPhotoScrollView.m */; };
 		42809EF416BE28E3007B60F5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42809EF316BE28E2007B60F5 /* MapKit.framework */; };
-		42809EF716BE33BC007B60F5 /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 42809EF616BE33BA007B60F5 /* MapAnnotation.m */; };
 		4351D0B816B4C5DB0039FE88 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4351D0B716B4C5DB0039FE88 /* UIKit.framework */; };
 		4351D0BA16B4C5DB0039FE88 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4351D0B916B4C5DB0039FE88 /* Foundation.framework */; };
 		4351D0BC16B4C5DB0039FE88 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4351D0BB16B4C5DB0039FE88 /* CoreGraphics.framework */; };
@@ -1183,6 +1185,11 @@
 				43591B4B16BB721700860F11 /* PSTCollectionView.m in Sources */,
 				43591B4C16BB721700860F11 /* PSTCollectionViewCell.m in Sources */,
 				43591B4D16BB721700860F11 /* PSTCollectionViewController.m in Sources */,
+				4253459C16BE5B6800D5A00A /* PVDetailsMapView.m in Sources */,
+				425345A016BE5B7400D5A00A /* PVDetailsPhotoScrollView.m in Sources */,
+				425345A116BE5B7700D5A00A /* MapAnnotation.m in Sources */,
+				425345A216BE5B7A00D5A00A /* PVRecentAugmentedView.m in Sources */,
+				425345A316BE5B7E00D5A00A /* PVCommentTableViewCell.m in Sources */,
 				43591B4E16BB721700860F11 /* PSTCollectionViewData.m in Sources */,
 				43591B4F16BB721700860F11 /* PSTCollectionViewFlowLayout.m in Sources */,
 				43591B5016BB721700860F11 /* PSTCollectionViewItemKey.m in Sources */,
