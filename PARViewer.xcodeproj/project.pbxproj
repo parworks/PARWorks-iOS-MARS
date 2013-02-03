@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		42809EE316BE023C007B60F5 /* PVParallaxTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42809ECD16BB95D0007B60F5 /* PVParallaxTableView.m */; };
 		42809EE716BE023E007B60F5 /* PVAddCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42809EDE16BDE258007B60F5 /* PVAddCommentViewController.m */; };
+		42809EE916BE163B007B60F5 /* PVAddCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42809EDF16BDE259007B60F5 /* PVAddCommentViewController.xib */; };
 		4351D0B816B4C5DB0039FE88 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4351D0B716B4C5DB0039FE88 /* UIKit.framework */; };
 		4351D0BA16B4C5DB0039FE88 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4351D0B916B4C5DB0039FE88 /* Foundation.framework */; };
 		4351D0BC16B4C5DB0039FE88 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4351D0BB16B4C5DB0039FE88 /* CoreGraphics.framework */; };
@@ -941,6 +942,7 @@
 				43998BB816BDDD42008B34C2 /* navigation_bar_background@2x.png in Resources */,
 				43998BBA16BDE1A8008B34C2 /* bar_item_sidebar@2x.png in Resources */,
 				43998BBF16BDE647008B34C2 /* search_bar_cover@2x.png in Resources */,
+				42809EE916BE163B007B60F5 /* PVAddCommentViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
