@@ -11,8 +11,13 @@
 #import "PVTrendingBlurredBackgroundView.h"
 #import "PVBaseViewController.h"
 #import "PVSiteCardView.h"
+#import "SiteCardPhysicsContainer.h"
 
 @interface PVTrendingSitesController : PVBaseViewController <PVTrendingBlurredBackgroundViewDelegate, PSUICollectionViewDataSource, PSUICollectionViewDelegate>
+{
+    CADisplayLink * _displayLink;
+    SiteCardPhysicsContainer * _physicsContainer;
+}
 
 @property (weak, nonatomic) IBOutlet PVTrendingBlurredBackgroundView *backgroundView;
 @property (weak, nonatomic) IBOutlet PSUICollectionView *collectionView;
