@@ -94,9 +94,10 @@
     [_shrinking setImage: _image];
     [_shrinkingMask setFrame: self.bounds];
     [_shrinking setFrame: self.bounds];
-    [_hudView setAlpha: 0.0];
+    [_hudView setAlpha: 0];
     [_finalView setAlpha: 0];
-    [_scanline setAlpha: 0.0];
+    [_scanline setAlpha: 0];
+    [_loadingLayer setOpacity: 0];
     [_scanline setAnimationRepeatCount: 1000];
     _scanline.frame = CGRectMake(0, -_scanline.frame.size.height, _scanline.frame.size.width, _scanline.frame.size.height);
     [CATransaction commit];
