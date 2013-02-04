@@ -66,6 +66,18 @@ static PVImageCacheManager * sharedImageCacheManager;
         return [_imageCache objectForKey: url];
 
     } else {
+    
+        // check the disk cache
+        NSData * data = [self diskCacheContentsFor: url];
+        if (data) {
+            UIImage * img = [UIImage imageWithData: data];
+            if (img) {
+                [_imageCache setObject: img forKey: url];
+                return img;
+            } else
+                [self clearDiskCacheContentsFor: url];
+        }
+    
         NSURLRequest * req = [NSURLRequest requestWithURL: url];
         
         // make sure there's not an open request for this image already
@@ -73,14 +85,48 @@ static PVImageCacheManager * sharedImageCacheManager;
             if ([[[op request] URL] isEqual: url])
                 return nil;
         
-        AFImageRequestOperation * op = [AFImageRequestOperation imageRequestOperationWithRequest:req success:^(UIImage *image) {
+        AFHTTPRequestOperation * op = [[AFHTTPRequestOperation alloc] initWithRequest: req];
+        [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            if ([responseObject isKindOfClass: [NSData class]] == NO)
+                return NSLog(@"No data returned for %@", [url description]);
+
+            UIImage * image = [UIImage imageWithData: responseObject];
+            if (!image)
+                return NSLog(@"No image returned for %@", [url description]);
+            
             [_imageCache setObject: image forKey: url];
+            [self writeToDiskCache:responseObject fromURL: url];
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIF_IMAGE_READY object:url];
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            return NSLog(@"Error returned for %@", [error description]);
         }];
         [_fetchQueue addOperation: op];
 
         return nil;
     }
+}
+
+- (NSString*)diskCachePathFor:(NSURL*)url
+{
+    NSString * path = [[NSString stringWithFormat: @"~/tmp/cache/%@/%@?%@", [url host], [url path], [url query]] stringByExpandingTildeInPath];
+    [[NSFileManager defaultManager] createDirectoryAtPath:[path stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:nil];
+    return path;
+}
+
+- (NSData*)diskCacheContentsFor:(NSURL*)url
+{
+    return [NSData dataWithContentsOfFile: [self diskCachePathFor: url]];
+}
+
+- (void)writeToDiskCache:(NSData*)data fromURL:(NSURL*)url
+{
+    [data writeToFile:[self diskCachePathFor: url] atomically: NO];
+}
+
+- (void)clearDiskCacheContentsFor:(NSURL*)url
+{
+    [[NSFileManager defaultManager] removeItemAtPath:[self diskCachePathFor: url] error:nil];
 }
 
 @end

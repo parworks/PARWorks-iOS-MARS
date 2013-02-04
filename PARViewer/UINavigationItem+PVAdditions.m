@@ -23,7 +23,7 @@
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     negativeSpacer.width = -5;
     
-    self.leftBarButtonItems = [NSArray arrayWithObjects:item, negativeSpacer, nil];
+    self.rightBarButtonItems = [NSArray arrayWithObjects:item, negativeSpacer, nil];
 }
 
 - (void)setLeftJustifiedTitle:(NSString*)title

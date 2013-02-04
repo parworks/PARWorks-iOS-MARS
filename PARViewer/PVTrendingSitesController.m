@@ -49,6 +49,7 @@ static NSString *cellIdentifier = @"TestCell";
 {
     // trigger update of our views
     [_collectionView reloadData];
+    [_backgroundView setFloatingPointIndex: _collectionView.contentOffset.x / _collectionView.frame.size.width];
     [_pageControl setNumberOfPages: [[[ARManager shared] trendingSites] count]];
 }
 

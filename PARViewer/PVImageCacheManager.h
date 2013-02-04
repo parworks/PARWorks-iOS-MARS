@@ -22,4 +22,8 @@
 
 - (UIImage*)imageForURL:(NSURL*)url;
 
+- (NSString*)diskCachePathFor:(NSURL*)url;
+- (NSData*)diskCacheContentsFor:(NSURL*)url;
+- (void)writeToDiskCache:(NSData*)data fromURL:(NSURL*)url;
+
 @end
