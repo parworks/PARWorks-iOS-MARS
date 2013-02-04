@@ -26,8 +26,8 @@
 
 /// The scrollView used to display the parallax effect.
 @property (nonatomic, readonly) UIScrollView *scrollView;
-/// The delegate of scrollView. You must use this property when setting the scrollView delegate--attempting to set the scrollView delegate directly using `scrollView.delegate` will cause the parallax effect to stop updating.
-@property (nonatomic, weak) id<UITableViewDelegate> tableViewDelegate;
+///// The delegate of scrollView. You must use this property when setting the scrollView delegate--attempting to set the scrollView delegate directly using `scrollView.delegate` will cause the parallax effect to stop updating.
+//@property (nonatomic, weak) id<UITableViewDelegate> tableViewDelegate;
 /// The height of the background view when at rest.
 @property (nonatomic, assign) CGFloat backgroundHeight;
 
@@ -39,6 +39,7 @@
 - (id)initWithBackgroundView:(UIView *)backgroundView
         foregroundTableView:(UITableView *)foregroundTableView;
 - (void)setTableHeaderView:(UIView*)view;
+- (void)updateContentOffset;
 
 
 @end

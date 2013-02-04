@@ -16,6 +16,12 @@
 #import "GPUImageGaussianBlurFilter.h"
 #import "UINavigationItem+PVAdditions.h"
 #import "UIColor+ThemeAdditions.h"
+#import "PVCommentTableViewCell.h"
+
+@interface PVSiteDetailViewController ()
+
+@end
+>>>>>>> 1cfff3211f3240607aa4f64ed51329061b601ac2
 
 @implementation PVSiteDetailViewController
 
@@ -75,12 +81,26 @@
     _tableView.backgroundColor = [UIColor clearColor];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.dataSource = self;
-//    _tableView.delegate = self;
+    _tableView.delegate = self;
     
-    UIButton *addCommentButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)];
+    UIView *tableFooterView = [[UIView alloc]initWithFrame:CGRectMake(0.0, 10.0, 320.0, 51.0)];
+    [tableFooterView setBackgroundColor:[UIColor clearColor]];
+    
+    UIButton *addCommentButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0, 10.0, 300.0, 31.0)];
     [addCommentButton addTarget:self action:@selector(addCommentButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    [addCommentButton setTitle:@"Add Comment" forState:UIControlStateNormal];
-    _tableView.tableFooterView = addCommentButton;
+    [addCommentButton setBackgroundColor:[UIColor colorWithRed:240.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1.0]];
+    [addCommentButton setTitle:@"Leave a Comment" forState:UIControlStateNormal];
+    [addCommentButton setTitleColor:[UIColor colorWithRed:50.0/255.0 green:98.0/255.0 blue:162.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+    [addCommentButton.titleLabel setFont:[UIFont boldSystemFontOfSize:14.0]];
+    [addCommentButton.layer setBorderWidth:1.0];
+    [addCommentButton.layer setBorderColor:[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1.0].CGColor];
+    [addCommentButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];
+    [addCommentButton setImage:[UIImage imageNamed:@"leave_comment.png"] forState:UIControlStateNormal];
+    [addCommentButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 15.0)];
+    [addCommentButton setAdjustsImageWhenHighlighted:NO];
+    [addCommentButton setShowsTouchWhenHighlighted:YES];
+    [tableFooterView addSubview:addCommentButton];
+    _tableView.tableFooterView = tableFooterView;
     
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 0.0)];
     [headerView setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0]];
@@ -100,8 +120,8 @@
     _parallaxView.frame = CGRectMake(0, 0, self.view.frame.size.width, [UIScreen mainScreen].applicationFrame.size.height - self.navigationController.navigationBar.frame.size.height);
     _parallaxView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     _parallaxView.backgroundHeight = 150.0f;
-    _parallaxView.tableViewDelegate = self;
-    _parallaxView.backgroundColor = [UIColor greenColor];
+    //    _parallaxView.tableViewDelegate = self;
+    _parallaxView.backgroundColor = [UIColor clearColor];
     [_parallaxView setTableHeaderView:headerView];
     [self.view addSubview:_parallaxView];
 }
@@ -176,7 +196,7 @@
         [blurFilter addTarget: _bgCopyImageView];
         [_bgCopyPicture processImage];
         
-        [delegate.window addSubview:_bgCopyImageView];        
+        [delegate.window addSubview:_bgCopyImageView];
     }
     
     [UIView transitionWithView:self.view duration:0.3 options:UIViewAnimationOptionTransitionNone animations:^{
@@ -187,7 +207,7 @@
             _addCommentViewController.delegate = self;
             _addCommentViewController.site = _site;
         }
-                
+        
         [delegate.window addSubview:_addCommentViewController.view];
         [_addCommentViewController viewWillAppear:NO];
     }];
@@ -219,10 +239,10 @@
     }
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 35.0)];
-    [view setBackgroundColor:[UIColor clearColor]];
+    [view setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0]];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 0.0, 300.0, 35.0)];
-    [label setBackgroundColor:[UIColor clearColor]];    
+    [label setBackgroundColor:[UIColor clearColor]];
     [label setTextColor:[UIColor colorWithRed:115.0/255.0 green:115.0/255.0 blue:115.0/255.0 alpha:1.0]];
     [label setFont:[UIFont systemFontOfSize:12.0]];
     label.text = sectionTitle;
@@ -234,7 +254,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 35;        
+    return 35;
 }
 
 
@@ -243,17 +263,18 @@
     
     ARSiteComment *comment = (ARSiteComment*)[_site.comments objectAtIndex:indexPath.row];
     
-    UITableViewCell *cell = [tableView
-                             dequeueReusableCellWithIdentifier:CellIdentifier];
+    PVCommentTableViewCell *cell = [tableView
+                                    dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc]
+        cell = [[PVCommentTableViewCell alloc]
                 initWithStyle:UITableViewCellStyleDefault
                 reuseIdentifier:CellIdentifier];
-        [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
     
-    cell.textLabel.text = comment.body;
+    cell.comment = comment;
+    [cell setIsFirstRow: ([indexPath row] == 0)];
     
     return cell;
 }
@@ -266,9 +287,22 @@
 
 - (CGFloat) tableView: (UITableView *) tableView heightForRowAtIndexPath: (NSIndexPath *) indexPath
 {
-    return 44.0;
+    ARSiteComment *comment = (ARSiteComment*)[_site.comments objectAtIndex:indexPath.row];
+    
+    CGSize size = [comment.body sizeWithFont:[UIFont systemFontOfSize:15.0]
+                           constrainedToSize:CGSizeMake(247.0, MAXFLOAT)
+                               lineBreakMode:NSLineBreakByWordWrapping];
+    CGFloat contentHeight = MAX(size.height, 20.0);
+    CGFloat newHeight = contentHeight + 54.0;
+    return MAX(newHeight, 74.0);
 }
 
+
+#pragma mark - UIScrollViewDelegate Protocol Methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [_parallaxView updateContentOffset];
+}
 
 #pragma mark
 #pragma mark PVAddCommentViewControllerDelegate methods
@@ -283,7 +317,7 @@
 }
 
 - (void)hideAddComment:(PVAddCommentViewController*)vc{
-    if(vc!=nil){        
+    if(vc!=nil){
         if(_bgCopyImageView != nil){
             [UIView transitionWithView:self.view duration:0.3 options:UIViewAnimationOptionTransitionNone animations:^{
                 _bgCopyImageView.alpha = 0.0;
