@@ -5,3 +5,7 @@
 /build/
 /DerivedData/
 /Submodules/.DS_Store
+/Subprojects/ChipmunkTemplate/build/
+/Subprojects/ChipmunkTemplate/ChipmunkTemplate.xcodeproj/project.xcworkspace/xcuserdata/bengotow.xcuserdatad/
+/Subprojects/ChipmunkTemplate/ChipmunkTemplate.xcodeproj/xcuserdata/bengotow.xcuserdatad/
+/Subprojects/ChipmunkTemplate/DerivedData/
