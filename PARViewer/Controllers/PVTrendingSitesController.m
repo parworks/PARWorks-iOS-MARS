@@ -55,9 +55,7 @@ static NSString * cellIdentifier = @"TestCell";
 - (void)viewDidAppear:(BOOL)animated
 {
     // trigger update of our views
-    [_collectionView reloadData];
-    [_backgroundView setFloatingPointIndex: _collectionView.contentOffset.x / _collectionView.frame.size.width];
-    [_pageControl setNumberOfPages: [[[ARManager shared] trendingSites] count]];
+    [self trendingSitesUpdated: nil];
 
 	[_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:UITrackingRunLoopMode];
 	[_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
@@ -91,6 +89,7 @@ static NSString * cellIdentifier = @"TestCell";
 {
 	// trigger update of our views
 	[_collectionView reloadData];
+    [_backgroundView setFloatingPointIndex: _collectionView.contentOffset.x / _collectionView.frame.size.width];
 	[_pageControl setNumberOfPages:[[[ARManager shared] trendingSites] count]];
 }
 

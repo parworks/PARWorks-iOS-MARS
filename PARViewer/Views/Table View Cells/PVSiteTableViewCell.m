@@ -54,6 +54,9 @@
 
 - (void)setSite:(ARSite*)site
 {
+    if (site == _site)
+        return;
+    
     _site = site;
     [self siteUpdated: nil];
 
