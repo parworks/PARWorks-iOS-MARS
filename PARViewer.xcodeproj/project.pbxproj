@@ -163,6 +163,7 @@
 		43E6734216BB94DF007E7708 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E6734116BB94DF007E7708 /* CoreMedia.framework */; };
 		43E6734416BB94EA007E7708 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E6734316BB94EA007E7708 /* CoreVideo.framework */; };
 		43E6734616BB94FC007E7708 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E6734516BB94FC007E7708 /* AVFoundation.framework */; };
+		43E9F6D416BF946700AC2672 /* SiteCardPhysicsContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E9F6D316BF946700AC2672 /* SiteCardPhysicsContainer.m */; };
 		43EB600D16BCEE6E00A3EE29 /* JSSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43EB600C16BCEE6E00A3EE29 /* JSSlidingViewController.m */; };
 		43EB601316BCEE7A00A3EE29 /* frontViewControllerDropShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 43EB601116BCEE7A00A3EE29 /* frontViewControllerDropShadow.png */; };
 		43EB601816BCEF2100A3EE29 /* PVSidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43EB601616BCEF2100A3EE29 /* PVSidebarViewController.m */; };
@@ -489,6 +490,8 @@
 		43E6734116BB94DF007E7708 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		43E6734316BB94EA007E7708 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		43E6734516BB94FC007E7708 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		43E9F6D216BF946700AC2672 /* SiteCardPhysicsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SiteCardPhysicsContainer.h; sourceTree = "<group>"; };
+		43E9F6D316BF946700AC2672 /* SiteCardPhysicsContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SiteCardPhysicsContainer.m; sourceTree = "<group>"; };
 		43EB600B16BCEE6E00A3EE29 /* JSSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSSlidingViewController.h; sourceTree = "<group>"; };
 		43EB600C16BCEE6E00A3EE29 /* JSSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSSlidingViewController.m; sourceTree = "<group>"; };
 		43EB601116BCEE7A00A3EE29 /* frontViewControllerDropShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frontViewControllerDropShadow.png; sourceTree = "<group>"; };
@@ -607,6 +610,7 @@
 				4351D0CF16B4C5DB0039FE88 /* PVTrendingSitesController.h */,
 				4351D0D016B4C5DB0039FE88 /* PVTrendingSitesController.m */,
 				4351D10016B4C71A0039FE88 /* PVTrendingSitesController.xib */,
+				43E9F6D116BF946700AC2672 /* Physics */,
 				43E6733E16BB8E3D007E7708 /* PVTrendingBlurredBackgroundView.h */,
 				43E6733F16BB8E3D007E7708 /* PVTrendingBlurredBackgroundView.m */,
 				435E176116B89E6100CC8DA3 /* PVSiteDetailViewController.h */,
@@ -1028,6 +1032,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		43E9F6D116BF946700AC2672 /* Physics */ = {
+			isa = PBXGroup;
+			children = (
+				43E9F6D216BF946700AC2672 /* SiteCardPhysicsContainer.h */,
+				43E9F6D316BF946700AC2672 /* SiteCardPhysicsContainer.m */,
+			);
+			path = Physics;
+			sourceTree = "<group>";
+		};
 		A0A44D7016BE2D8C003809D3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1295,6 +1308,7 @@
 				437C3FE316BE249800822EDD /* AROverlayWebView.m in Sources */,
 				437C3FE416BE249800822EDD /* PointCloudView.m in Sources */,
 				437C3FE716BE260100822EDD /* AROverlayViewFactory.m in Sources */,
+				43E9F6D416BF946700AC2672 /* SiteCardPhysicsContainer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

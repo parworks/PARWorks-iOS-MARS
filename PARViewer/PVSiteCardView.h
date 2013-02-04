@@ -23,6 +23,7 @@
 @property (nonatomic, strong) PVCardShingleView *shingleView;
 
 - (void)setSite:(ARSite*)site;
+- (void)setShingleOffset:(CGPoint)offset andRotation:(float)rotation;
 
 @end
 
@@ -33,7 +34,5 @@
 @property(nonatomic, strong) UILabel *nameLabel;
 @property(nonatomic, strong) UILabel *augmentationLabel;
 @property(nonatomic, strong) ARSite *site;
-
-- (void)updatePositionWithBody:(ChipmunkBody *)body;
 
 @end

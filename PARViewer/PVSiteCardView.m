@@ -129,6 +129,12 @@
 	return retPath;
 }
 
+- (void)setShingleOffset:(CGPoint)offset andRotation:(float)rotation
+{
+    CGPoint shingleCenter = CGPointMake(self.posterContainer.center.x - offset.x, self.posterContainer.center.y - offset.y + 100);
+    [self.shingleView setCenter: shingleCenter];
+    [self.shingleView setTransform: CGAffineTransformMakeRotation(rotation)];
+}
 
 @end
 
@@ -159,21 +165,6 @@
         [self addSubview:_augmentationLabel];        
     }
     return self;
-}
-
-
-- (void)updatePositionWithBody:(ChipmunkBody *)body
-{
-	// ChipmunkBodies have a handy affineTransform property that makes working with Cocoa or Cocos2D a snap.
-	// This is all you have to do to move a button along with the physics!
-//	self.transform = body.affineTransform;
-    CGAffineTransform t = CGAffineTransformMake(body.affineTransform.a,
-                                                body.affineTransform.b,
-                                                body.affineTransform.c,
-                                                body.affineTransform.d,
-                                                body.affineTransform.tx - 40,
-                                                body.affineTransform.ty - 77);
-    self.transform = t;
 }
 
 - (void)layoutSubviews
