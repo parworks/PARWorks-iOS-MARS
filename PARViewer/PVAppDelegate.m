@@ -49,12 +49,18 @@
     
     _contentControllers = [[NSMutableArray alloc] init];
     [_contentControllers addObject: [[UINavigationController alloc] initWithRootViewController: [[PVTrendingSitesController alloc] init]]];
-    [_contentControllers addObject: [[UINavigationController alloc] initWithRootViewController: [[PVTechnologyViewController alloc] init]]];
-    [_contentControllers addObject: [[UINavigationController alloc] initWithRootViewController: [[PVSearchViewController alloc] init]]];
     [_contentControllers addObject: [[UINavigationController alloc] initWithRootViewController: [[PVNearbySitesViewController alloc] init]]];
+    [_contentControllers addObject: [[UINavigationController alloc] initWithRootViewController: [[PVSearchViewController alloc] init]]];
+    [_contentControllers addObject: [[UINavigationController alloc] initWithRootViewController: [[PVTechnologyViewController alloc] init]]];
     
-    for (UIViewController * c in _contentControllers)
+    for (UINavigationController * c in _contentControllers) {
         [[[c view] layer] setCornerRadius: 5];
+        if ([[[c viewControllers] lastObject] isKindOfClass: [PVSearchViewController class]] == NO) {
+            [[[c navigationBar] layer] setShadowRadius: 3];
+            [[[c navigationBar] layer] setShadowOffset: CGSizeMake(0, 1)];
+            [[[c navigationBar] layer] setShadowOpacity: 0.3];
+        }
+    }
     
     // the sidebar controller automatically displays the items in the contentControllers array,
     // pulling images and titles from the tabBarItem and title of each controller.
