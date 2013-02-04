@@ -13,6 +13,9 @@
 #import "PVSearchViewController.h"
 #import "PVTechnologyViewController.h"
 #import "PVSidebarViewController.h"
+#import "FacebookSDK.h"
+
+extern NSString *const FBSessionStateChangedNotification;
 
 @interface PVAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate, JSSlidingViewControllerDelegate>
 
@@ -22,5 +25,11 @@
 @property (strong, nonatomic) PVSidebarViewController * sidebarController;
 
 - (void)switchToController:(int)index;
+- (BOOL)authorizeFacebook:(BOOL)allowLoginUI;
+- (void)logoutFacebook;
 
 @end
+
+#define FACEBOOK_APP_ID              @"410586319030328"
+#define NOTIF_FACEBOOK_INFO_REQUEST  @"NOTIF_FACEBOOK_INFO_REQUEST"
+#define NOTIF_FACEBOOK_LOGGED_IN     @"NOTIF_FACEBOOK_LOGGED_IN"

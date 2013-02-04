@@ -10,3 +10,6 @@
 [submodule "Submodules/GPUImage"]
 	path = Submodules/GPUImage
 	url = git://github.com/BradLarson/GPUImage.git
+[submodule "Submodules/Facebook"]
+	path = Submodules/Facebook
+	url = git@github.com:facebook/facebook-ios-sdk.git

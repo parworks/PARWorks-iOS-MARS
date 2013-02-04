@@ -10,6 +10,8 @@
 #import "ARManager.h"
 #import "ARManager+MARS_Extensions.h"
 
+NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Login:FBSessionStateChangedNotification";
+
 @implementation PVAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -91,11 +93,18 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [FBSession.activeSession handleDidBecomeActive];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [FBSession.activeSession close];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [FBSession.activeSession handleOpenURL:url];
 }
 
 - (void)switchToController:(int)index
@@ -110,5 +119,130 @@
         [_slidingViewController closeSlider:YES completion:NULL];
     }
 }
+
+
+
+#pragma mark
+#pragma mark Facebook methods
+
+
+
+/*
+ * Callback for session changes.
+ */
+- (void)sessionStateChanged:(FBSession *)session
+                      state:(FBSessionState) state
+                      error:(NSError *)error
+{
+    switch (state) {
+        case FBSessionStateOpen:
+            if (!error) {
+                // We have a valid session
+                //Log(@"User session found");
+                [self fbDidLogin];
+            }
+            break;
+        case FBSessionStateClosed:
+        case FBSessionStateClosedLoginFailed:
+            [FBSession.activeSession closeAndClearTokenInformation];
+            [self fbDidLogout];
+            break;
+        default:
+            break;
+    }
+    
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:FBSessionStateChangedNotification
+     object:session];
+    
+    if (error) {
+        NSLog(@"Error code: %d", error.code);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"Facebook cannot be accessed until you give permission. Go to Settings > Privacy > Facebook to reset."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Ok"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+/*
+ * Opens a Facebook session and optionally shows the login UX.
+ */
+
+- (BOOL)authorizeFacebook:(BOOL)allowLoginUI{
+    return [FBSession openActiveSessionWithReadPermissions:[NSArray arrayWithObjects:@"email", nil]
+                                              allowLoginUI:allowLoginUI
+                                         completionHandler:^(FBSession *session,
+                                                             FBSessionState state,
+                                                             NSError *error) {
+                                             [self sessionStateChanged:session
+                                                                 state:state
+                                                                 error:error];
+                                         }];
+}
+
+- (void)logoutFacebook{
+    [FBSession.activeSession closeAndClearTokenInformation];
+    [self fbDidLogout];
+}
+
+- (void)fbDidLogin {
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIF_FACEBOOK_INFO_REQUEST object:nil];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[FBSession.activeSession accessToken] forKey:@"FBAccessTokenKey"];
+    [defaults setObject:[FBSession.activeSession expirationDate] forKey:@"FBExpirationDateKey"];
+    [defaults synchronize];
+    
+    if (FBSession.activeSession.isOpen && [defaults objectForKey:@"FBId"]){
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIF_FACEBOOK_LOGGED_IN object:@"YES"];
+    }    
+    else if (FBSession.activeSession.isOpen) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        [[FBRequest requestForMe] startWithCompletionHandler:
+         ^(FBRequestConnection *connection,
+           NSDictionary<FBGraphUser> *user,
+           NSError *error) {
+             if (!error) {
+                 if ([user isKindOfClass:[NSDictionary class]]){
+                     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                     [defaults setObject:[user objectForKey:@"name"] forKey:@"FBName"];
+                     [defaults setObject:[user objectForKey:@"email"] forKey:@"FBEmail"];
+                     [defaults setObject:[user objectForKey:@"id"] forKey:@"FBId"];
+                     [defaults synchronize];
+                 }
+                 
+                 [[NSNotificationCenter defaultCenter] postNotificationName:NOTIF_FACEBOOK_LOGGED_IN object:@"YES"];
+             }
+             else{
+                 NSLog(@"Error code: %d", error.code);
+                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                 message:@"Facebook cannot be accessed until you give permission. Go to Settings > Privacy > Facebook to reset."
+                                                                delegate:nil
+                                                       cancelButtonTitle:@"Ok"
+                                                       otherButtonTitles:nil];
+                 [alert show];
+             }
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+         }];
+    }
+}
+
+
+- (void) fbDidLogout {
+    // Remove saved authorization information if it exists
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"]) {
+        [defaults removeObjectForKey:@"FBAccessTokenKey"];
+        [defaults removeObjectForKey:@"FBExpirationDateKey"];
+        [defaults removeObjectForKey:@"FBName"];
+        [defaults removeObjectForKey:@"FBEmail"];
+        [defaults removeObjectForKey:@"FBLocation"];
+        [defaults removeObjectForKey:@"FBId"];
+        [defaults synchronize];
+    }
+}
+
+
 
 @end

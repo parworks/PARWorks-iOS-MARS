@@ -11,7 +11,9 @@
 
 @protocol PVAddCommentViewControllerDelegate;
 
-@interface PVAddCommentViewController : UIViewController
+@interface PVAddCommentViewController : UIViewController{
+    CGFloat _addCommentYOrigin;
+}
 
 @property (nonatomic, weak) id <PVAddCommentViewControllerDelegate> delegate;
 @property (nonatomic, strong) ARSite * site;

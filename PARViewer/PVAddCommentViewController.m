@@ -8,6 +8,7 @@
 
 #import "PVAddCommentViewController.h"
 #import "ARSite+MARS_Extensions.h"
+#import "PVAppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface PVAddCommentViewController ()
@@ -29,6 +30,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    if([self isIPhone5])
+        _addCommentYOrigin = 98.0;
+    else
+        _addCommentYOrigin = 50.0;
+        
     _commentTextView.font = [UIFont systemFontOfSize:18.0];
     [self addLines];
     
@@ -78,7 +84,7 @@
     _addCommentView.frame = CGRectMake(_addCommentView.frame.origin.x, -_addCommentView.frame.size.height, _addCommentView.frame.size.width, _addCommentView.frame.size.height);
     __weak UITextView *__commentTextView = _commentTextView;
     [UIView transitionWithView:self.view duration:0.25 options:UIViewAnimationOptionTransitionNone animations:^{
-        _addCommentView.frame = CGRectMake(_addCommentView.frame.origin.x, 50.0, _addCommentView.frame.size.width, _addCommentView.frame.size.height);
+        _addCommentView.frame = CGRectMake(_addCommentView.frame.origin.x, _addCommentYOrigin, _addCommentView.frame.size.width, _addCommentView.frame.size.height);
         [__commentTextView becomeFirstResponder];
     } completion:nil];
 }
@@ -95,8 +101,9 @@
 
 - (IBAction)postButtonPressed:(id)sender{
     if([_commentTextView.text length] > 0){
-        NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithObject:@"Grayson" forKey:@"userName"];
-        [dict setObject:@"667325981268" forKey:@"userId"];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithObject:[defaults objectForKey:@"FBName"]forKey:@"userName"];
+        [dict setObject:[defaults objectForKey:@"FBId"] forKey:@"userId"];
         [dict setObject:_commentTextView.text forKey:@"comment"];
         
         ARSiteComment *comment = [[ARSiteComment alloc] initWithDictionary:dict];
@@ -169,6 +176,11 @@
 	CGPathCloseSubpath(retPath);
     
 	return retPath;
+}
+
+- (BOOL)isIPhone5{
+    PVAppDelegate * delegate = (PVAppDelegate*)[[UIApplication sharedApplication] delegate];
+    return delegate.window.frame.size.height == 568.0;
 }
 
 @end

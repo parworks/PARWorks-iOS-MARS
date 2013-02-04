@@ -8,6 +8,7 @@
 
 #import "PVCommentTableViewCell.h"
 #import "NSString+DateConversion.h"
+#import "PVImageCacheManager.h"
 
 @implementation PVCommentTableViewCell
 
@@ -106,8 +107,21 @@
     _comment = comment;
     _nameLabel.text = _comment.userName;
     _timestampLabel.text = [NSString stringWithDate:_comment.timestamp format:@"MMM d',' h':'mm aaa"];
-//    _contentLabel.text = _comment.body;
     _contentTextView.text = _comment.body;
+    
+    NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=52&height=52", _comment.userID]];
+    UIImage * img = [[PVImageCacheManager shared] imageForURL:imageURL];
+    if (!img) {        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteImageReady:) name:NOTIF_IMAGE_READY object:imageURL];
+    }
+    [_avatarImageView setImage: img];
+    
+}
+
+- (void)siteImageReady:(NSNotification*)notif
+{
+    UIImage * img = [[PVImageCacheManager shared] imageForURL:notif.object];
+    [_avatarImageView setImage: img];
 }
 
 @end

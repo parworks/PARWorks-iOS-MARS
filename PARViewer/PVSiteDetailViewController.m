@@ -49,6 +49,7 @@
     // register to receive updates about the site in the future
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:NOTIF_SITE_UPDATED object: self.site];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:NOTIF_SITE_COMMENTS_UPDATED object: self.site];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedFacebookNotification:) name:NOTIF_FACEBOOK_LOGGED_IN object: nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -169,6 +170,11 @@
 
 - (void)addCommentButtonPressed
 {
+    PVAppDelegate * delegate = (PVAppDelegate*)[[UIApplication sharedApplication] delegate];
+    [delegate authorizeFacebook:YES];
+}
+
+- (void)showAddCommentViewController{
     PVAppDelegate * delegate = (PVAppDelegate*)[[UIApplication sharedApplication] delegate];
     
     if(_bgCopyImageView == nil){
@@ -329,5 +335,13 @@
     }
 }
 
+- (void)receivedFacebookNotification:(NSNotification *)notification {
+    if([[notification name] isEqualToString:NOTIF_FACEBOOK_INFO_REQUEST]){
+       
+    }
+    if([[notification name] isEqualToString:NOTIF_FACEBOOK_LOGGED_IN] && [[notification object] isEqualToString:@"YES"]){
+        [self showAddCommentViewController];
+    }
+}
 
 @end
