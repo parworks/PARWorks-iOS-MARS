@@ -12,12 +12,11 @@
 		425345AA16BE769900D5A00A /* leave_comment.png in Resources */ = {isa = PBXBuildFile; fileRef = 425345A816BE769900D5A00A /* leave_comment.png */; };
 		425345AB16BE769900D5A00A /* missing_image_78x78.png in Resources */ = {isa = PBXBuildFile; fileRef = 425345A916BE769900D5A00A /* missing_image_78x78.png */; };
 		42809EF416BE28E3007B60F5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42809EF316BE28E2007B60F5 /* MapKit.framework */; };
-		42AEFE7E16BF8CA500BFE97C /* SparkInspector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = HYXIFWTDXJPPRRMDCEPMDTJH /* SparkInspector.framework */; };
-		42AEFE8816BF951700BFE97C /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42AEFE8516BF910600BFE97C /* libfacebook_ios_sdk.a */; };
-		42AEFE8A16BF95CA00BFE97C /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42AEFE8916BF95C900BFE97C /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		42AEFE8C16BF95DB00BFE97C /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42AEFE8B16BF95DB00BFE97C /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		42AEFE8E16BF95EA00BFE97C /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42AEFE8D16BF95EA00BFE97C /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		42AEFE9016BF960100BFE97C /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 42AEFE8F16BF960100BFE97C /* libsqlite3.0.dylib */; };
+		42AEFEAC16BFB12A00BFE97C /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42AEFEA616BFB11A00BFE97C /* libfacebook_ios_sdk.a */; };
+		42AEFEAE16BFB16700BFE97C /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42AEFEAD16BFB16700BFE97C /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		42AEFEB016BFB17100BFE97C /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42AEFEAF16BFB17100BFE97C /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		42AEFEB216BFB17A00BFE97C /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42AEFEB116BFB17A00BFE97C /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		42AEFEB416BFB18400BFE97C /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 42AEFEB316BFB18400BFE97C /* libsqlite3.0.dylib */; };
 		4351D0B816B4C5DB0039FE88 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4351D0B716B4C5DB0039FE88 /* UIKit.framework */; };
 		4351D0BA16B4C5DB0039FE88 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4351D0B916B4C5DB0039FE88 /* Foundation.framework */; };
 		4351D0BC16B4C5DB0039FE88 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4351D0BB16B4C5DB0039FE88 /* CoreGraphics.framework */; };
@@ -200,6 +199,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		42AEFEA516BFB11A00BFE97C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 42AEFE9F16BFB11A00BFE97C /* facebook-ios-sdk.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = "facebook-ios-sdk";
+		};
+		42AEFEA716BFB11A00BFE97C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 42AEFE9F16BFB11A00BFE97C /* facebook-ios-sdk.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B9CBC519152537270036AA71;
+			remoteInfo = FacebookSDKTests;
+		};
 		43E9F6E416BFA16D00AC2672 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 43E9F6DF16BFA16D00AC2672 /* GPUImage.xcodeproj */;
@@ -257,6 +270,11 @@
 		425345A816BE769900D5A00A /* leave_comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leave_comment.png; sourceTree = "<group>"; };
 		425345A916BE769900D5A00A /* missing_image_78x78.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = missing_image_78x78.png; sourceTree = "<group>"; };
 		42809EF316BE28E2007B60F5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		42AEFE9F16BFB11A00BFE97C /* facebook-ios-sdk.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "facebook-ios-sdk.xcodeproj"; path = "Submodules/Facebook/src/facebook-ios-sdk.xcodeproj"; sourceTree = "<group>"; };
+		42AEFEAD16BFB16700BFE97C /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		42AEFEAF16BFB17100BFE97C /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		42AEFEB116BFB17A00BFE97C /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		42AEFEB316BFB18400BFE97C /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		4351D0B316B4C5DB0039FE88 /* PARViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PARViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4351D0B716B4C5DB0039FE88 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4351D0B916B4C5DB0039FE88 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -570,12 +588,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42AEFEB416BFB18400BFE97C /* libsqlite3.0.dylib in Frameworks */,
+				42AEFEB216BFB17A00BFE97C /* AdSupport.framework in Frameworks */,
+				42AEFEB016BFB17100BFE97C /* Accounts.framework in Frameworks */,
+				42AEFEAE16BFB16700BFE97C /* Social.framework in Frameworks */,
+				42AEFEAC16BFB12A00BFE97C /* libfacebook_ios_sdk.a in Frameworks */,
 				43E9F6E916BFA18800AC2672 /* libGPUImage.a in Frameworks */,
-				42AEFE9016BF960100BFE97C /* libsqlite3.0.dylib in Frameworks */,
-				42AEFE8E16BF95EA00BFE97C /* Accounts.framework in Frameworks */,
-				42AEFE8C16BF95DB00BFE97C /* AdSupport.framework in Frameworks */,
-				42AEFE8A16BF95CA00BFE97C /* Social.framework in Frameworks */,
-				42AEFE8816BF951700BFE97C /* libfacebook_ios_sdk.a in Frameworks */,
 				42809EF416BE28E3007B60F5 /* MapKit.framework in Frameworks */,
 				A0A44D9016BE2E12003809D3 /* libChipmunk.a in Frameworks */,
 				A0A44D9116BE2E12003809D3 /* libcocos2d.a in Frameworks */,
@@ -592,7 +610,6 @@
 				435E157E16B7807D00CC8DA3 /* OpenGLES.framework in Frameworks */,
 				435E14D316B77F7500CC8DA3 /* QuartzCore.framework in Frameworks */,
 				4351D0B816B4C5DB0039FE88 /* UIKit.framework in Frameworks */,
-				42AEFE7E16BF8CA500BFE97C /* SparkInspector.framework in Frameworks */,
 				4351D0BA16B4C5DB0039FE88 /* Foundation.framework in Frameworks */,
 				4351D0BC16B4C5DB0039FE88 /* CoreGraphics.framework in Frameworks */,
 			);
@@ -601,11 +618,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		42AEFE8016BF910500BFE97C /* Products */ = {
+		42AEFEA016BFB11A00BFE97C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				42AEFE8516BF910600BFE97C /* libfacebook_ios_sdk.a */,
-				42AEFE8716BF910600BFE97C /* FacebookSDKTests.octest */,
+				42AEFEA616BFB11A00BFE97C /* libfacebook_ios_sdk.a */,
+				42AEFEA816BFB11A00BFE97C /* FacebookSDKTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -613,6 +630,7 @@
 		4351D0A816B4C5DB0039FE88 = {
 			isa = PBXGroup;
 			children = (
+				42AEFE9F16BFB11A00BFE97C /* facebook-ios-sdk.xcodeproj */,
 				43E9F6DF16BFA16D00AC2672 /* GPUImage.xcodeproj */,
 				A0A44D6F16BE2D8C003809D3 /* ChipmunkTemplate.xcodeproj */,
 				4351D0BD16B4C5DB0039FE88 /* PARViewer */,
@@ -634,6 +652,10 @@
 		4351D0B616B4C5DB0039FE88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				42AEFEB316BFB18400BFE97C /* libsqlite3.0.dylib */,
+				42AEFEB116BFB17A00BFE97C /* AdSupport.framework */,
+				42AEFEAF16BFB17100BFE97C /* Accounts.framework */,
+				42AEFEAD16BFB16700BFE97C /* Social.framework */,
 				42809EF316BE28E2007B60F5 /* MapKit.framework */,
 				43E6734516BB94FC007E7708 /* AVFoundation.framework */,
 				43E6734316BB94EA007E7708 /* CoreVideo.framework */,
@@ -1265,12 +1287,10 @@
 				{
 					ProductGroup = A0A44D7016BE2D8C003809D3 /* Products */;
 					ProjectRef = A0A44D6F16BE2D8C003809D3 /* ChipmunkTemplate.xcodeproj */;
-					ProductGroup = 42AEFE8016BF910500BFE97C /* Products */;
-					ProjectRef = 42AEFE7F16BF910500BFE97C /* facebook-ios-sdk.xcodeproj */;
 				},
 				{
-					ProductGroup = 43E6733116BB8839007E7708 /* Products */;
-					ProjectRef = 43E6733016BB8839007E7708 /* GPUImage.xcodeproj */;
+					ProductGroup = 42AEFEA016BFB11A00BFE97C /* Products */;
+					ProjectRef = 42AEFE9F16BFB11A00BFE97C /* facebook-ios-sdk.xcodeproj */;
 				},
 				{
 					ProductGroup = 43E9F6E016BFA16D00AC2672 /* Products */;
@@ -1285,22 +1305,21 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		43E9F6E516BFA16D00AC2672 /* GPUImageTests.octest */ = {
-		42AEFE8516BF910600BFE97C /* libfacebook_ios_sdk.a */ = {
+		42AEFEA616BFB11A00BFE97C /* libfacebook_ios_sdk.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libfacebook_ios_sdk.a;
-			remoteRef = 42AEFE8416BF910600BFE97C /* PBXContainerItemProxy */;
+			remoteRef = 42AEFEA516BFB11A00BFE97C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		42AEFE8716BF910600BFE97C /* FacebookSDKTests.octest */ = {
+		42AEFEA816BFB11A00BFE97C /* FacebookSDKTests.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = FacebookSDKTests.octest;
-			remoteRef = 42AEFE8616BF910600BFE97C /* PBXContainerItemProxy */;
+			remoteRef = 42AEFEA716BFB11A00BFE97C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		43E6733716BB8839007E7708 /* libGPUImage.a */ = {
+		43E9F6E516BFA16D00AC2672 /* GPUImageTests.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = GPUImageTests.octest;
@@ -1601,18 +1620,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"/Users/graysonsharpe/Library/Containers/com.foundry376.sparkinspector/Data/Library/Application Support/Spark Inspector\"",
+					"\"/Users/bengotow/Library/Containers/com.foundry376.sparkinspector/Data/Library/Application Support/Spark Inspector\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PARViewer/PARViewer-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					Submodules/GPUImage/framework/Source,
-					Submodules/Facebook/src,
-				);
-				HEADER_SEARCH_PATHS = (
-					Submodules/GPUImage/framework/Source,
 					"Subprojects/ChipmunkTemplate/ChipmunkTemplate/libs/**",
 					Subprojects/ChipmunkTemplate/ChipmunkTemplate/libs/kazmath/include,
+					Submodules/Facebook/src,
 				);
 				INFOPLIST_FILE = "PARViewer/PARViewer-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
@@ -1628,7 +1644,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"/Users/graysonsharpe/Library/Containers/com.foundry376.sparkinspector/Data/Library/Application Support/Spark Inspector\"",
+					"\"/Users/bengotow/Library/Containers/com.foundry376.sparkinspector/Data/Library/Application Support/Spark Inspector\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PARViewer/PARViewer-Prefix.pch";
@@ -1636,9 +1652,6 @@
 					Submodules/GPUImage/framework/Source,
 					"Subprojects/ChipmunkTemplate/ChipmunkTemplate/libs/**",
 					Subprojects/ChipmunkTemplate/ChipmunkTemplate/libs/kazmath/include,
-				);
-				HEADER_SEARCH_PATHS = (
-					Submodules/GPUImage/framework/Source,
 					Submodules/Facebook/src,
 				);
 				INFOPLIST_FILE = "PARViewer/PARViewer-Info.plist";
