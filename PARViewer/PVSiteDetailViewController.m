@@ -18,10 +18,6 @@
 #import "UIColor+ThemeAdditions.h"
 #import "PVCommentTableViewCell.h"
 
-@interface PVSiteDetailViewController ()
-
-@end
->>>>>>> 1cfff3211f3240607aa4f64ed51329061b601ac2
 
 @implementation PVSiteDetailViewController
 
