@@ -152,7 +152,6 @@
 		43E9F6AB16BE65D700AC2672 /* EPUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E9F6A816BE65D700AC2672 /* EPUtil.m */; };
 		43E9F6B416BE668F00AC2672 /* CATextLayer+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E9F6B116BE668F00AC2672 /* CATextLayer+Loading.m */; };
 		43E9F6B516BE668F00AC2672 /* UIImageView+AnimationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E9F6B316BE668F00AC2672 /* UIImageView+AnimationAdditions.m */; };
-		43E9F6B916BE6A5100AC2672 /* camera-graphic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43E9F6B616BE6A5100AC2672 /* camera-graphic@2x.png */; };
 		43E9F6BA16BE6A5100AC2672 /* camera-icon-down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43E9F6B716BE6A5100AC2672 /* camera-icon-down@2x.png */; };
 		43E9F6BB16BE6A5100AC2672 /* camera-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43E9F6B816BE6A5100AC2672 /* camera-icon@2x.png */; };
 		43E9F6E916BFA18800AC2672 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E9F6E816BFA18800AC2672 /* libGPUImage.a */; };
@@ -581,6 +580,7 @@
 		43E9F76216BFA49800AC2672 /* PVSiteCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVSiteCardView.m; sourceTree = "<group>"; };
 		43EB601116BCEE7A00A3EE29 /* frontViewControllerDropShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frontViewControllerDropShadow.png; sourceTree = "<group>"; };
 		A0A44D6F16BE2D8C003809D3 /* ChipmunkTemplate.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ChipmunkTemplate.xcodeproj; path = Subprojects/ChipmunkTemplate/ChipmunkTemplate.xcodeproj; sourceTree = "<group>"; };
+		HYXIFWTDXJPPRRMDCEPMDTJH /* SparkInspector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SparkInspector.framework; path = "/Users/graysonsharpe/Library/Containers/com.foundry376.sparkinspector/Data/Library/Application Support/Spark Inspector/SparkInspector.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -688,6 +688,7 @@
 				4351D0B716B4C5DB0039FE88 /* UIKit.framework */,
 				4351D0B916B4C5DB0039FE88 /* Foundation.framework */,
 				4351D0BB16B4C5DB0039FE88 /* CoreGraphics.framework */,
+				HYXIFWTDXJPPRRMDCEPMDTJH /* SparkInspector.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1403,7 +1404,6 @@
 				437C3FD316BE249800822EDD /* toolbar_show@2x.png in Resources */,
 				439C504D16BE3C700035783E /* missing_image_300x150.png in Resources */,
 				43988B2D16BE5CA0005DB5E8 /* bar_item_back@2x.png in Resources */,
-				43E9F6B916BE6A5100AC2672 /* camera-graphic@2x.png in Resources */,
 				43E9F6BA16BE6A5100AC2672 /* camera-icon-down@2x.png in Resources */,
 				43E9F6BB16BE6A5100AC2672 /* camera-icon@2x.png in Resources */,
 				425345A616BE768E00D5A00A /* leave_comment@2x.png in Resources */,
@@ -1620,7 +1620,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"/Users/bengotow/Library/Containers/com.foundry376.sparkinspector/Data/Library/Application Support/Spark Inspector\"",
+					"\"/Users/graysonsharpe/Library/Containers/com.foundry376.sparkinspector/Data/Library/Application Support/Spark Inspector\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PARViewer/PARViewer-Prefix.pch";
@@ -1635,6 +1635,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Subprojects/ChipmunkTemplate/ChipmunkTemplate/libs/ChipmunkPro-iPhone\"",
 				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1644,7 +1645,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"/Users/bengotow/Library/Containers/com.foundry376.sparkinspector/Data/Library/Application Support/Spark Inspector\"",
+					"\"/Users/graysonsharpe/Library/Containers/com.foundry376.sparkinspector/Data/Library/Application Support/Spark Inspector\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PARViewer/PARViewer-Prefix.pch";
@@ -1659,6 +1660,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Subprojects/ChipmunkTemplate/ChipmunkTemplate/libs/ChipmunkPro-iPhone\"",
 				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

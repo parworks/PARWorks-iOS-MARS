@@ -1,29 +1,17 @@
-//  MDCParallaxView.h
 //
-//  Copyright (c) 2012 modocache
+//  PVParallaxTableView.h
+//  PARViewer
 //
-//  Permission is hereby granted, free of charge, to any person obtaining
-//  a copy of this software and associated documentation files (the
-//  "Software"), to deal in the Software without restriction, including
-//  without limitation the rights to use, copy, modify, merge, publish,
-//  distribute, sublicense, and/or sell copies of the Software, and to
-//  permit persons to whom the Software is furnished to do so, subject to
-//  the following conditions:
+//  Created by Grayson Sharpe on 2/2/13.
+//  Copyright (c) 2013 Ben Gotow. All rights reserved.
 //
-//  The above copyright notice and this permission notice shall be
-//  included in all copies or substantial portions of the Software.
-//
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-//  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-//  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-//  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-//  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-//  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-//  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-//
+
+
+@protocol PVParallaxTableViewDelegate;
 
 @interface PVParallaxTableView : UIView
 
+@property (nonatomic, weak) id<PVParallaxTableViewDelegate> delegate;
 /// The scrollView used to display the parallax effect.
 @property (nonatomic, readonly) UIScrollView *scrollView;
 ///// The delegate of scrollView. You must use this property when setting the scrollView delegate--attempting to set the scrollView delegate directly using `scrollView.delegate` will cause the parallax effect to stop updating.
@@ -31,6 +19,8 @@
 /// The height of the background view when at rest.
 @property (nonatomic, assign) CGFloat windowHeight;
 @property (nonatomic, assign) CGFloat imageHeight;
+@property (nonatomic, assign) BOOL isExpanded;
+@property (nonatomic, assign) BOOL headerExpansionEnabled;
 
 /// *Designated initializer.* Creates a MDCParallaxView with the given views.
 /// @param backgroundView The view to be displayed in the background. This view scrolls slower than the foreground, creating the illusion that it is "further away".
@@ -40,9 +30,15 @@
 - (id)initWithBackgroundView:(UIView *)backgroundView
          foregroundTableView:(UITableView *)foregroundTableView
                 windowHeight:(CGFloat)windowHeight;
-- (void)setTableHeaderView:(UIView*)view;
+- (void)setTableHeaderView:(UIView*)view headerExpansionEnabled:(BOOL)enabled;
 - (void)updateContentOffset;
 - (void)setLocalDelegate:(id <UITableViewDelegate>)delegate;
+- (void)windowButtonPressed;
 
+@end
 
+@protocol PVParallaxTableViewDelegate <NSObject>
+
+@optional
+- (void)windowButtonPressed:(BOOL)isExpanded;
 @end

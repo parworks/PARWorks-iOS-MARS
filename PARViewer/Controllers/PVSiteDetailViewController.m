@@ -94,7 +94,7 @@
     _parallaxView.frame = CGRectMake(0, 0, self.view.frame.size.width, [UIScreen mainScreen].applicationFrame.size.height - self.navigationController.navigationBar.frame.size.height);
     _parallaxView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     _parallaxView.backgroundColor = [UIColor clearColor];
-    [_parallaxView setTableHeaderView:_tableHeaderView];
+    [_parallaxView setTableHeaderView:_tableHeaderView headerExpansionEnabled:NO];
     [_parallaxView setLocalDelegate:self];
     [self.view addSubview:_parallaxView];
 }
@@ -182,8 +182,13 @@
 
 - (void)addCommentButtonPressed
 {
-    PVAppDelegate * delegate = (PVAppDelegate*)[[UIApplication sharedApplication] delegate];
-    [delegate authorizeFacebook:YES];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if([defaults objectForKey:@"FBId"])
+        [self showAddCommentViewController];
+    else{
+        PVAppDelegate * delegate = (PVAppDelegate*)[[UIApplication sharedApplication] delegate];
+        [delegate authorizeFacebook:YES];
+    }
 }
 
 - (void)showAddCommentViewController{

@@ -1,25 +1,9 @@
-//  MDCParallaxView.m
 //
-//  Copyright (c) 2012 modocache
+//  PVParallaxTableView.m
+//  PARViewer
 //
-//  Permission is hereby granted, free of charge, to any person obtaining
-//  a copy of this software and associated documentation files (the
-//  "Software"), to deal in the Software without restriction, including
-//  without limitation the rights to use, copy, modify, merge, publish,
-//  distribute, sublicense, and/or sell copies of the Software, and to
-//  permit persons to whom the Software is furnished to do so, subject to
-//  the following conditions:
-//
-//  The above copyright notice and this permission notice shall be
-//  included in all copies or substantial portions of the Software.
-//
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-//  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-//  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-//  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-//  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-//  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-//  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+//  Created by Grayson Sharpe on 2/2/13.
+//  Copyright (c) 2013 Ben Gotow. All rights reserved.
 //
 
 
@@ -41,10 +25,8 @@
          foregroundTableView:(UITableView *)foregroundTableView
                 windowHeight:(CGFloat)windowHeight{
     self = [super init];
-    if (self) {
-        
+    if (self) {        
         _windowHeight = windowHeight;
-//        _imageHeight  = 300.0;
         
         _backgroundView = backgroundView;
         _imageHeight = _backgroundView.frame.size.height;
@@ -53,12 +35,13 @@
         _backgroundScrollView.backgroundColor = [UIColor clearColor];
         _backgroundScrollView.showsHorizontalScrollIndicator = NO;
         _backgroundScrollView.showsVerticalScrollIndicator = NO;
+        _backgroundScrollView.userInteractionEnabled = YES;
         [_backgroundScrollView addSubview:_backgroundView];
         [self addSubview:_backgroundScrollView];
-        
+             
         _foregroundTableView = foregroundTableView;
         [self addSubview:_foregroundTableView];
-        
+                
         [self updateBounds];
 
     }
@@ -85,6 +68,29 @@
     
     [self layoutImage];
     [self updateContentOffset];
+}
+
+- (void)windowButtonPressed{
+    NSLog(@"windowButtonPressed");
+    if(_isExpanded){
+        [UIView transitionWithView:self duration:0.3 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            _backgroundView.frame = CGRectMake(0.0, 0.0, 320.0, _windowHeight);
+        } completion:^(BOOL finished){
+            [self layoutImage];
+            [self bringSubviewToFront:_foregroundTableView];
+            _isExpanded = NO;
+        }];
+    }
+    else{
+        _backgroundView.frame = CGRectMake(0.0, 0.0, 320.0, _windowHeight);
+        [self bringSubviewToFront:_backgroundScrollView];
+        [UIView transitionWithView:self duration:0.3 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            _backgroundView.frame = CGRectMake(_backgroundView.frame.origin.x, 0.0, self.bounds.size.width, self.bounds.size.height);
+        } completion:^(BOOL finished){
+            _isExpanded = YES;
+        }];
+    }
+    [_delegate windowButtonPressed:_isExpanded];
 }
 
 #pragma mark - NSObject Overrides
@@ -159,12 +165,21 @@
     }
 }
 
-- (void)setTableHeaderView:(UIView*)view{
-    UIView *tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.foregroundTableView.frame.size.width, _windowHeight + view.frame.size.height)];
+- (void)setTableHeaderView:(UIView*)view headerExpansionEnabled:(BOOL)enabled{
+    self.headerExpansionEnabled = enabled;
+    
+    UIControl *tableHeaderView = [[UIControl alloc] initWithFrame:CGRectMake(0.0, 0.0, self.foregroundTableView.frame.size.width, _windowHeight + view.frame.size.height)];
     [tableHeaderView setBackgroundColor:[UIColor clearColor]];
-    [view setFrame:CGRectMake(0.0, _windowHeight, view.frame.size.width, view.frame.size.height)];
+    
+    UIButton *windowButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, tableHeaderView.frame.size.width, _windowHeight)];
+    [windowButton addTarget:self action:@selector(windowButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [windowButton setBackgroundColor:[UIColor clearColor]];
+    [windowButton setEnabled:_headerExpansionEnabled];
+    [tableHeaderView addSubview:windowButton];
+    
+    [view setFrame:CGRectMake(0.0, windowButton.frame.origin.y + windowButton.frame.size.height, view.frame.size.width, view.frame.size.height)];
     [tableHeaderView addSubview:view];
-
+    
     self.foregroundTableView.tableHeaderView = tableHeaderView;
 }
 

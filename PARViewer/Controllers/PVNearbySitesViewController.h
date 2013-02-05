@@ -6,9 +6,21 @@
 //  Copyright (c) 2013 Ben Gotow. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "PVBaseViewController.h"
+#import "PVParallaxTableView.h"
+#import <MapKit/MapKit.h>
 
-@interface PVNearbySitesViewController : PVBaseViewController
+@interface PVNearbySitesViewController : PVBaseViewController<UITableViewDataSource, UITableViewDelegate, PVParallaxTableViewDelegate, MKMapViewDelegate>{
+    CLLocationCoordinate2D centerCoordinate;
+    MKCoordinateRegion region;
+    BOOL bLoadedOnce;
+}
+
+@property (nonatomic, strong) MKMapView *mapView;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) PVParallaxTableView *parallaxView;
+@property (nonatomic, strong) UIView *tableHeaderView;
+@property (nonatomic, strong) NSArray *nearbySites;
+@property (nonatomic, strong) NSMutableArray *annotations;
 
 @end
