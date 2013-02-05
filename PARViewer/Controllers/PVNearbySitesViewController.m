@@ -136,6 +136,7 @@
     else{
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(closeMap)];
     }
+    [_mapView setRegion:region animated:YES];
 }
 
 - (void)refetchAnnotations{
