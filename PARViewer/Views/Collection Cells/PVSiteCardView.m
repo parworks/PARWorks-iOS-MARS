@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Ben Gotow. All rights reserved.
 //
 
+#import "EPUtil.h"
 #import "PVSiteCardView.h"
 #import "PVImageCacheManager.h"
 #import "PVTrendingSitesController.h"
@@ -42,7 +43,7 @@
         self.posterImageView.clipsToBounds = YES;
         self.posterImageView.layer.cornerRadius = 5;
         [_posterContainer addSubview: _posterImageView];
-
+    
         CAShapeLayer * l = [CAShapeLayer layer];
         
         // white top border
@@ -63,9 +64,16 @@
         [self.posterImageView.layer addSublayer: l];
         
         _shingleView = [[PVCardShingleView alloc] init];
-        _shingleView.frame = CGRectMake(18, _posterContainer.bounds.size.width + 22, _shingleView.frame.size.width, _shingleView.frame.size.height);
-        
+        _shingleView.frame = CGRectMake(18, _posterContainer.bounds.size.height + 22, _shingleView.frame.size.width, _shingleView.frame.size.height);
         [self addSubview:_shingleView];
+        
+        self.leftRopePoint = CGPointMake(_posterContainer.center.x - (_posterContainer.frame.size.width/3), _posterContainer.frame.size.height - 5);
+        self.rightRopePoint = CGPointMake(_posterContainer.center.x + (_posterContainer.frame.size.width/3), _posterContainer.frame.size.height - 5);
+        
+        self.ropeView = [[PVCardRopeView alloc] initWithFrame:CGRectInset(self.bounds, -50, 0)];
+        _ropeView.posterView = self;
+        _ropeView.shingleView = _shingleView;
+        [self addSubview:_ropeView];
     }
     return self;
 }
@@ -134,9 +142,13 @@
     CGPoint shingleCenter = CGPointMake(self.posterContainer.center.x - offset.x, self.posterContainer.center.y - offset.y + 100);
     [self.shingleView setCenter: shingleCenter];
     [self.shingleView setTransform: CGAffineTransformMakeRotation(rotation)];
+    [_ropeView setNeedsDisplay];
 }
 
 @end
+
+
+
 
 @implementation PVCardShingleView 
 
@@ -151,7 +163,6 @@
         NSURL *url = [NSURL URLWithString:@"http://upload.wikimedia.org/wikipedia/en/thumb/3/3b/Chipotle_Mexican_Grill_logo.svg/200px-Chipotle_Mexican_Grill_logo.svg.png"];
         [_logoView setImageWithURL:url];
 
-        
         self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 130, 24)];
         _nameLabel.backgroundColor = [UIColor redColor];
         _nameLabel.text = @"<Company Name>";
@@ -162,7 +173,10 @@
         _augmentationLabel.backgroundColor = [UIColor purpleColor];
         _augmentationLabel.text = @"<augmentations>";
         _augmentationLabel.font = [UIFont systemFontOfSize:12];
-        [self addSubview:_augmentationLabel];        
+        [self addSubview:_augmentationLabel];
+        
+        self.leftRopePoint = CGPointMake(self.center.x - (self.frame.size.width/3.4), 5);
+        self.rightRopePoint = CGPointMake(self.center.x + (self.frame.size.width/3.4), 5);
     }
     return self;
 }
@@ -183,6 +197,37 @@
     // TODO: Set to site's logo url
     NSURL *url = [NSURL URLWithString:@"http://upload.wikimedia.org/wikipedia/en/thumb/3/3b/Chipotle_Mexican_Grill_logo.svg/200px-Chipotle_Mexican_Grill_logo.svg.png"];
     [_logoView setImageWithURL:url];
+}
+
+@end
+
+
+
+@implementation PVCardRopeView
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.userInteractionEnabled = NO;
+        self.clipsToBounds = NO;
+        self.backgroundColor = [UIColor clearColor];
+    }
+    return self;
+}
+
+- (void)drawRect:(CGRect)rect
+{
+    if (_posterView && _shingleView) {
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        CGPoint convertedPosterLeft = [self convertPoint:_posterView.leftRopePoint fromView:_posterView];
+        CGPoint convertedPosterRight = [self convertPoint:_posterView.rightRopePoint fromView:_posterView];
+        CGPoint convertedShingleLeft = [self convertPoint:_shingleView.leftRopePoint fromView:_shingleView];
+        CGPoint convertedShingleRight = [self convertPoint:_shingleView.rightRopePoint fromView:_shingleView];
+        
+        draw1PxStroke(context, convertedPosterLeft, convertedShingleLeft, [UIColor orangeColor]);
+        draw1PxStroke(context, convertedPosterRight, convertedShingleRight, [UIColor cyanColor]);
+    }
 }
 
 @end
