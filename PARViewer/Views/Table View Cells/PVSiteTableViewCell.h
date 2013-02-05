@@ -9,13 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "ARSite.h"
 
+@class ARAugmentedView;
+
 @interface PVSiteTableViewCell : UITableViewCell
 {
     ARSite * _site;
 }
 
 @property (nonatomic, strong) CALayer * whiteLayer;
-@property (nonatomic, strong) UIImageView * posterImageView;
+@property (nonatomic, strong) ARAugmentedView * posterImageView;
 
 - (void)setSite:(ARSite*)site;
 

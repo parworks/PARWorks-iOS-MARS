@@ -196,6 +196,9 @@
 		43EB601316BCEE7A00A3EE29 /* frontViewControllerDropShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 43EB601116BCEE7A00A3EE29 /* frontViewControllerDropShadow.png */; };
 		A0A44D9016BE2E12003809D3 /* libChipmunk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A44D8F16BE2DF7003809D3 /* libChipmunk.a */; };
 		A0A44D9116BE2E12003809D3 /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A44D7716BE2D8D003809D3 /* libcocos2d.a */; };
+		A0AF6F5C16C0E2E7003457A2 /* overlay_spec_example_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A0AF6F5A16C0E2E7003457A2 /* overlay_spec_example_1.jpg */; };
+		A0AF6F5D16C0E2E7003457A2 /* overlay_spec_example_1.pm in Resources */ = {isa = PBXBuildFile; fileRef = A0AF6F5B16C0E2E7003457A2 /* overlay_spec_example_1.pm */; };
+		A0AF6F6616C0EE17003457A2 /* ARTotalAugmentedImagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0AF6F6516C0EE17003457A2 /* ARTotalAugmentedImagesView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -581,6 +584,10 @@
 		43E9F76216BFA49800AC2672 /* PVSiteCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVSiteCardView.m; sourceTree = "<group>"; };
 		43EB601116BCEE7A00A3EE29 /* frontViewControllerDropShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frontViewControllerDropShadow.png; sourceTree = "<group>"; };
 		A0A44D6F16BE2D8C003809D3 /* ChipmunkTemplate.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ChipmunkTemplate.xcodeproj; path = Subprojects/ChipmunkTemplate/ChipmunkTemplate.xcodeproj; sourceTree = "<group>"; };
+		A0AF6F5A16C0E2E7003457A2 /* overlay_spec_example_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = overlay_spec_example_1.jpg; sourceTree = "<group>"; };
+		A0AF6F5B16C0E2E7003457A2 /* overlay_spec_example_1.pm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.perl; path = overlay_spec_example_1.pm; sourceTree = "<group>"; };
+		A0AF6F6416C0EE17003457A2 /* ARTotalAugmentedImagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARTotalAugmentedImagesView.h; sourceTree = "<group>"; };
+		A0AF6F6516C0EE17003457A2 /* ARTotalAugmentedImagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARTotalAugmentedImagesView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -727,6 +734,8 @@
 		4351D0E816B4C6CA0039FE88 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A0AF6F5A16C0E2E7003457A2 /* overlay_spec_example_1.jpg */,
+				A0AF6F5B16C0E2E7003457A2 /* overlay_spec_example_1.pm */,
 				43998BB316BDDADA008B34C2 /* parworks.png */,
 				43998BB516BDDD3E008B34C2 /* navigation_bar_background.png */,
 				439C504C16BE3C700035783E /* missing_image_300x150.png */,
@@ -1043,6 +1052,8 @@
 				437C3F7B16BE249800822EDD /* AROverlayBuilderView.m */,
 				437C3F7C16BE249800822EDD /* ARSiteImagesInfoView.h */,
 				437C3F7D16BE249800822EDD /* ARSiteImagesInfoView.m */,
+				A0AF6F6416C0EE17003457A2 /* ARTotalAugmentedImagesView.h */,
+				A0AF6F6516C0EE17003457A2 /* ARTotalAugmentedImagesView.m */,
 				437C3F7E16BE249800822EDD /* CachedImageView.h */,
 				437C3F7F16BE249800822EDD /* CachedImageView.m */,
 				437C3F8016BE249800822EDD /* GRCameraOverlayView.h */,
@@ -1417,6 +1428,8 @@
 				43E9F74716BFA41900AC2672 /* PVSiteDetailViewController.xib in Resources */,
 				43E9F74916BFA41900AC2672 /* PVTechnologyViewController.xib in Resources */,
 				43E9F74B16BFA41900AC2672 /* PVTrendingSitesController.xib in Resources */,
+				A0AF6F5C16C0E2E7003457A2 /* overlay_spec_example_1.jpg in Resources */,
+				A0AF6F5D16C0E2E7003457A2 /* overlay_spec_example_1.pm in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1536,6 +1549,7 @@
 				43E9F75D16BFA47300AC2672 /* PVBorderedWhiteCell.m in Sources */,
 				43E9F76316BFA49800AC2672 /* PVRecentAugmentedView.m in Sources */,
 				43E9F76416BFA49800AC2672 /* PVSiteCardView.m in Sources */,
+				A0AF6F6616C0EE17003457A2 /* ARTotalAugmentedImagesView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
