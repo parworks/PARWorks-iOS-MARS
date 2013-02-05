@@ -68,6 +68,7 @@
     _finalViewReady = YES;
     
     if (!_outAnimationRunning) {
+        _loadingLayer.opacity = 0;
         [self translateLayersInWithCompletionBlock:^{
             [UIView animateWithDuration:0.5 animations:^{
                 [_finalView setAlpha: 1];
