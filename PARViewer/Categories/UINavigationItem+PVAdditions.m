@@ -7,6 +7,7 @@
 //
 
 #import "UINavigationItem+PVAdditions.h"
+#import "UIFont+ThemeAdditions.h"
 
 @implementation UINavigationItem (PVAdditions)
 
@@ -33,7 +34,7 @@
 
     UILabel * titleLabel = [[UILabel alloc] initWithFrame: frame];
     [titleLabel setTextColor: [UIColor colorWithWhite:0.2 alpha:1]];
-    [titleLabel setFont: [UIFont fontWithName:@"HiraKakuProN-W3" size:18]];
+    [titleLabel setFont: [UIFont parworksFontWithSize:18]];
     [titleLabel setBackgroundColor: [UIColor clearColor]];
     [titleLabel setShadowColor: [UIColor whiteColor]];
     [titleLabel setShadowOffset: CGSizeMake(0,1)];
