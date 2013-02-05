@@ -25,16 +25,10 @@
 
 #import "PVParallaxTableView.h"
 
-
-static CGFloat const kMDCParallaxViewDefaultHeight = 150.0f;
-
-
-@interface PVParallaxTableView ()
+@interface PVParallaxTableView () <UITableViewDelegate>
 @property (nonatomic, strong) UIView *backgroundView;
 @property (nonatomic, strong) UIScrollView *backgroundScrollView;
 @property (nonatomic, strong) UITableView *foregroundTableView;
-- (void)updateBackgroundFrame;
-- (void)updateForegroundFrame;
 @end
 
 
@@ -44,11 +38,16 @@ static CGFloat const kMDCParallaxViewDefaultHeight = 150.0f;
 #pragma mark - Object Lifecycle
 
 - (id)initWithBackgroundView:(UIView *)backgroundView
-         foregroundTableView:(UITableView *)foregroundTableView {
+         foregroundTableView:(UITableView *)foregroundTableView
+                windowHeight:(CGFloat)windowHeight{
     self = [super init];
     if (self) {
-        _backgroundHeight = kMDCParallaxViewDefaultHeight;
+        
+        _windowHeight = windowHeight;
+//        _imageHeight  = 300.0;
+        
         _backgroundView = backgroundView;
+        _imageHeight = _backgroundView.frame.size.height;
         
         _backgroundScrollView = [UIScrollView new];
         _backgroundScrollView.backgroundColor = [UIColor clearColor];
@@ -59,22 +58,63 @@ static CGFloat const kMDCParallaxViewDefaultHeight = 150.0f;
         
         _foregroundTableView = foregroundTableView;
         [self addSubview:_foregroundTableView];
+        
+        [self updateBounds];
+
     }
     return self;
 }
 
+- (void)layoutImage {
+    CGFloat imageWidth   = _backgroundScrollView.frame.size.width;
+    CGFloat imageYOffset = floorf((_windowHeight  - _imageHeight) / 2.0);
+    
+    CGFloat imageXOffset = 0.0;
+    
+    _backgroundView.frame = CGRectMake(imageXOffset, imageYOffset, imageWidth, _imageHeight);    
+    _backgroundScrollView.contentSize = CGSizeMake(imageWidth, self.bounds.size.height);
+    _backgroundScrollView.contentOffset = CGPointMake(0.0, 0.0);
+}
+
+- (void)updateBounds{
+    CGRect bounds = self.bounds;
+    
+    _backgroundScrollView.frame = CGRectMake(0.0, 0.0, bounds.size.width, bounds.size.height);
+    _foregroundTableView.backgroundView = nil;
+    _foregroundTableView.frame = bounds;
+    
+    [self layoutImage];
+    [self updateContentOffset];
+}
 
 #pragma mark - NSObject Overrides
 
+- (void)setLocalDelegate:(id <UITableViewDelegate>)delegate
+{
+    if (delegate == self)
+        return;
+    
+    self.trueDelegate = delegate;
+    [_foregroundTableView setDelegate:self];
+}
 
+- (BOOL)respondsToSelector:(SEL)aSelector {
+    if ([super respondsToSelector:aSelector])
+        return YES;
+    
+    return [_trueDelegate respondsToSelector:aSelector];
+}
+
+- (id)forwardingTargetForSelector:(SEL)aSelector
+{
+    return _trueDelegate;
+}
 
 #pragma mark - UIView Overrides
 
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
-    [self updateBackgroundFrame];
-    [self updateForegroundFrame];
-    [self updateContentOffset];
+    [self updateBounds];    
 }
 
 - (void)setAutoresizingMask:(UIViewAutoresizing)autoresizingMask {
@@ -84,15 +124,14 @@ static CGFloat const kMDCParallaxViewDefaultHeight = 150.0f;
     self.foregroundTableView.autoresizingMask = autoresizingMask;
 }
 
+#pragma mark - UIScrollViewDelegate Protocol Methods
 
-//#pragma mark - UIScrollViewDelegate Protocol Methods
-//
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    [self updateContentOffset];
-////    if ([self.tableViewDelegate respondsToSelector:_cmd]) {
-////        [self.tableViewDelegate scrollViewDidScroll:scrollView];
-////    }
-//}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self updateContentOffset];
+    if ([self.trueDelegate respondsToSelector:_cmd]) {
+        [self.trueDelegate scrollViewDidScroll:scrollView];
+    }
+}
 
 #pragma mark - Public Interface
 
@@ -101,56 +140,29 @@ static CGFloat const kMDCParallaxViewDefaultHeight = 150.0f;
 }
 
 - (void)setBackgroundHeight:(CGFloat)backgroundHeight {
-    _backgroundHeight = backgroundHeight;
-    [self setTableHeaderView:[[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, _foregroundTableView.frame.size.width, 0.0)]];    
-    [self updateBackgroundFrame];
-    [self updateForegroundFrame];
-    [self updateContentOffset];
+    [self updateBounds];
 }
 
 
 #pragma mark - Internal Methods
 
-- (void)updateBackgroundFrame {
-    self.backgroundScrollView.frame = CGRectMake(0.0f,
-                                                 0.0f,
-                                                 self.frame.size.width,
-                                                 self.frame.size.height);
-    self.backgroundScrollView.contentSize = CGSizeMake(self.frame.size.width,
-                                                       self.frame.size.height);
-    self.backgroundScrollView.contentOffset	= CGPointZero;
-
-    self.backgroundView.frame =
-        CGRectMake(0.0f,
-                   floorf((self.backgroundHeight - self.backgroundView.frame.size.height)/2),
-                   self.frame.size.width,
-                   self.backgroundView.frame.size.height);
-}
-
-- (void)updateForegroundFrame {
-    self.foregroundTableView.frame = self.bounds;
-    self.foregroundTableView.contentSize =
-        CGSizeMake(self.foregroundTableView.frame.size.width,
-                   self.foregroundTableView.frame.size.height + self.backgroundHeight);
-}
-
 - (void)updateContentOffset {
-    CGFloat offsetY   = self.foregroundTableView.contentOffset.y + self.backgroundHeight;
-    CGFloat threshold = self.backgroundView.frame.size.height - self.backgroundHeight;
-
-    if (offsetY > -threshold && offsetY < 0.0f) {
-        self.backgroundScrollView.contentOffset = CGPointMake(0.0f, floorf(offsetY/2));
-    } else if (offsetY < 0.0f) {
-        self.backgroundScrollView.contentOffset = CGPointMake(0.0f, offsetY + floorf(threshold/2));
+    CGFloat yOffset   = _foregroundTableView.contentOffset.y;
+    CGFloat threshold = _imageHeight - _windowHeight;
+    
+    if (yOffset > -threshold && yOffset < 0) {
+        _backgroundScrollView.contentOffset = CGPointMake(0.0, floorf(yOffset / 2.0));
+    } else if (yOffset < 0) {
+        _backgroundScrollView.contentOffset = CGPointMake(0.0, yOffset + floorf(threshold / 2.0));
     } else {
-        self.backgroundScrollView.contentOffset = CGPointMake(0.0f, offsetY);
+        _backgroundScrollView.contentOffset = CGPointMake(0.0, yOffset);
     }
 }
 
 - (void)setTableHeaderView:(UIView*)view{
-    UIView *tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.foregroundTableView.frame.size.width, self.backgroundHeight + view.frame.size.height)];
+    UIView *tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.foregroundTableView.frame.size.width, _windowHeight + view.frame.size.height)];
     [tableHeaderView setBackgroundColor:[UIColor clearColor]];
-    [view setFrame:CGRectMake(0.0, self.backgroundHeight, view.frame.size.width, view.frame.size.height)];
+    [view setFrame:CGRectMake(0.0, _windowHeight, view.frame.size.width, view.frame.size.height)];
     [tableHeaderView addSubview:view];
 
     self.foregroundTableView.tableHeaderView = tableHeaderView;

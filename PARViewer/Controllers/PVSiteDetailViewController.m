@@ -18,6 +18,8 @@
 #import "UIColor+ThemeAdditions.h"
 #import "PVCommentTableViewCell.h"
 
+#define PARALLAX_WINDOW_HEIGHT 165.0
+#define PARALLAX_IMAGE_HEIGHT 300.0
 
 @implementation PVSiteDetailViewController
 
@@ -62,16 +64,19 @@
     [super viewDidLoad];
     
     [self setupNavigationItem];
+    [self setupParallaxView];
+}
 
-    self.headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, [UIImage imageNamed:@"posterImage.png"].size.height)];
-    _headerImageView.contentMode = UIViewContentModeScaleAspectFill;
-    _headerImageView.backgroundColor = [UIColor colorWithRed:222.0/255.0 green:222.0/255.0 blue:222.0/255.0 alpha:1.0];
-    
+- (void)setupParallaxView{
     UIImage * img = [[PVImageCacheManager shared] imageForURL: [_site posterImageURL]];
     if (!img) {
         img = [UIImage imageNamed:@"posterImage.png"];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteImageReady:) name:NOTIF_IMAGE_READY object: [_site posterImageURL]];
     }
+    
+    self.headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, PARALLAX_IMAGE_HEIGHT)];
+    _headerImageView.contentMode = UIViewContentModeScaleAspectFill;
+    _headerImageView.backgroundColor = [UIColor colorWithRed:222.0/255.0 green:222.0/255.0 blue:222.0/255.0 alpha:1.0];
     [_headerImageView setImage: img];
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
@@ -80,6 +85,21 @@
     _tableView.dataSource = self;
     _tableView.delegate = self;
     
+    [self setupTableFooterView];
+    [self setupTableHeaderView];
+  
+    self.parallaxView = [[PVParallaxTableView alloc] initWithBackgroundView:_headerImageView
+                                                        foregroundTableView:_tableView
+                                                               windowHeight:PARALLAX_WINDOW_HEIGHT];
+    _parallaxView.frame = CGRectMake(0, 0, self.view.frame.size.width, [UIScreen mainScreen].applicationFrame.size.height - self.navigationController.navigationBar.frame.size.height);
+    _parallaxView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    _parallaxView.backgroundColor = [UIColor clearColor];
+    [_parallaxView setTableHeaderView:_tableHeaderView];
+    [_parallaxView setLocalDelegate:self];
+    [self.view addSubview:_parallaxView];
+}
+
+- (void)setupTableFooterView{
     UIView *tableFooterView = [[UIView alloc]initWithFrame:CGRectMake(0.0, 10.0, 320.0, 51.0)];
     [tableFooterView setBackgroundColor:[UIColor clearColor]];
     
@@ -98,29 +118,21 @@
     [addCommentButton setShowsTouchWhenHighlighted:YES];
     [tableFooterView addSubview:addCommentButton];
     _tableView.tableFooterView = tableFooterView;
-    
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 0.0)];
-    [headerView setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0]];
+}
+
+- (void)setupTableHeaderView{
+    self.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 0.0)];
+    [_tableHeaderView setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0]];
     
     self.detailsMapView = [[PVDetailsMapView alloc] initWithSite:_site];
-    [_detailsMapView setFrame:CGRectMake(0.0, 0.0, headerView.frame.size.width, 165.0)];
-    [headerView addSubview:_detailsMapView];
+    [_detailsMapView setFrame:CGRectMake(0.0, 0.0, _tableHeaderView.frame.size.width, 165.0)];
+    [_tableHeaderView addSubview:_detailsMapView];
     
     self.detailsPhotoScrollView = [[PVDetailsPhotoScrollView alloc] initWithSite:_site];
-    [_detailsPhotoScrollView setFrame:CGRectMake(0.0, _detailsMapView.frame.origin.y + _detailsMapView.frame.size.height, headerView.frame.size.width, 132.0)];
-    [headerView addSubview:_detailsPhotoScrollView];
+    [_detailsPhotoScrollView setFrame:CGRectMake(0.0, _detailsMapView.frame.origin.y + _detailsMapView.frame.size.height, _tableHeaderView.frame.size.width, 132.0)];
+    [_tableHeaderView addSubview:_detailsPhotoScrollView];
     
-    [headerView setFrame:CGRectMake(headerView.frame.origin.x, headerView.frame.origin.y, headerView.frame.size.width, _detailsPhotoScrollView.frame.origin.y + _detailsPhotoScrollView.frame.size.height)];
-    
-    self.parallaxView = [[PVParallaxTableView alloc] initWithBackgroundView:_headerImageView
-                                                        foregroundTableView:_tableView];
-    _parallaxView.frame = CGRectMake(0, 0, self.view.frame.size.width, [UIScreen mainScreen].applicationFrame.size.height - self.navigationController.navigationBar.frame.size.height);
-    _parallaxView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    _parallaxView.backgroundHeight = 150.0f;
-    //    _parallaxView.tableViewDelegate = self;
-    _parallaxView.backgroundColor = [UIColor clearColor];
-    [_parallaxView setTableHeaderView:headerView];
-    [self.view addSubview:_parallaxView];
+    [_tableHeaderView setFrame:CGRectMake(_tableHeaderView.frame.origin.x, _tableHeaderView.frame.origin.y, _tableHeaderView.frame.size.width, _detailsPhotoScrollView.frame.origin.y + _detailsPhotoScrollView.frame.size.height)];
 }
 
 - (void)setupNavigationItem
@@ -315,13 +327,6 @@
     CGFloat contentHeight = MAX(size.height, 20.0);
     CGFloat newHeight = contentHeight + 54.0;
     return MAX(newHeight, 74.0);
-}
-
-
-#pragma mark - UIScrollViewDelegate Protocol Methods
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [_parallaxView updateContentOffset];
 }
 
 #pragma mark
