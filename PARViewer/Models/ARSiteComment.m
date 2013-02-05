@@ -7,6 +7,7 @@
 //
 
 #import "ARSiteComment.h"
+#import "NSContainers+NullHandlers.h"
 
 @implementation ARSiteComment
 
@@ -15,9 +16,9 @@
     self = [super init];
     if (self) {
         [self setTimestamp: [NSDate dateWithTimeIntervalSince1970: [[dict objectForKey: @"timeStamp"] doubleValue] / 1000.0]];
-        [self setUserID: [dict objectForKey: @"userId"]];
-        [self setUserName: [dict objectForKey: @"userName"]];
-        [self setBody: [dict objectForKey: @"comment"]];
+        [self setUserID: [dict objectForKey: @"userId" or:nil]];
+        [self setUserName: [dict objectForKey: @"userName" or: nil]];
+        [self setBody: [dict objectForKey: @"comment" or:nil]];
     }
     return self;
 }

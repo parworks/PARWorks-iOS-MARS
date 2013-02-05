@@ -25,6 +25,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIButton * takePhotoButton;
 @property (nonatomic, strong) PVParallaxTableView *parallaxView;
+@property (nonatomic, strong) UIView *tableHeaderView;
 @property (nonatomic, strong) PVDetailsMapView *detailsMapView;
 @property (nonatomic, strong) PVDetailsPhotoScrollView *detailsPhotoScrollView;
 

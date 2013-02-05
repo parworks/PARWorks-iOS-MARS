@@ -175,7 +175,7 @@
     } else {
         ARSite * site = [_searchResultSites objectAtIndex: [indexPath row]];
         PVSiteDetailViewController * siteDetailController = [[PVSiteDetailViewController alloc] initWithSite: site];
-        [self presentViewController:siteDetailController animated:YES completion:nil];
+        [self presentViewController:[[UINavigationController alloc] initWithRootViewController:siteDetailController] animated:YES completion:NULL];
     }
 }
 
