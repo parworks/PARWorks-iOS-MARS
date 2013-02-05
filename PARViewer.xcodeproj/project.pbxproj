@@ -17,6 +17,19 @@
 		42AEFEB016BFB17100BFE97C /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42AEFEAF16BFB17100BFE97C /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		42AEFEB216BFB17A00BFE97C /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42AEFEB116BFB17A00BFE97C /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		42AEFEB416BFB18400BFE97C /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 42AEFEB316BFB18400BFE97C /* libsqlite3.0.dylib */; };
+		4345241116C0951E005D0636 /* PVAugmentedPhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4345241016C0951E005D0636 /* PVAugmentedPhotoViewController.xib */; };
+		4345241916C0965E005D0636 /* mesh_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4345241816C0965E005D0636 /* mesh_background@2x.png */; };
+		4345241B16C09663005D0636 /* mesh_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 4345241A16C09663005D0636 /* mesh_background.png */; };
+		4345242216C09EDF005D0636 /* scanline_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4345241C16C09EDF005D0636 /* scanline_1.png */; };
+		4345242316C09EDF005D0636 /* scanline_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4345241D16C09EDF005D0636 /* scanline_2.png */; };
+		4345242416C09EDF005D0636 /* scanline_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 4345241E16C09EDF005D0636 /* scanline_3.png */; };
+		4345242516C09EDF005D0636 /* scanline_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 4345241F16C09EDF005D0636 /* scanline_4.png */; };
+		4345242616C09EDF005D0636 /* scanline_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 4345242016C09EDF005D0636 /* scanline_5.png */; };
+		4345242716C09EDF005D0636 /* toolbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4345242116C09EDF005D0636 /* toolbar.png */; };
+		4345242916C09EE5005D0636 /* toolbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4345242816C09EE5005D0636 /* toolbar@2x.png */; };
+		4345242B16C09F10005D0636 /* camera_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4345242A16C09F10005D0636 /* camera_button.png */; };
+		4345242D16C09F14005D0636 /* camera_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4345242C16C09F14005D0636 /* camera_button@2x.png */; };
+		434524A016C0E90C005D0636 /* UINavigationController+BetterRotationBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 4345249F16C0E90C005D0636 /* UINavigationController+BetterRotationBehavior.m */; };
 		4351D0B816B4C5DB0039FE88 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4351D0B716B4C5DB0039FE88 /* UIKit.framework */; };
 		4351D0BA16B4C5DB0039FE88 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4351D0B916B4C5DB0039FE88 /* Foundation.framework */; };
 		4351D0BC16B4C5DB0039FE88 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4351D0BB16B4C5DB0039FE88 /* CoreGraphics.framework */; };
@@ -278,6 +291,20 @@
 		42AEFEAF16BFB17100BFE97C /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		42AEFEB116BFB17A00BFE97C /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		42AEFEB316BFB18400BFE97C /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		4345241016C0951E005D0636 /* PVAugmentedPhotoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PVAugmentedPhotoViewController.xib; sourceTree = "<group>"; };
+		4345241816C0965E005D0636 /* mesh_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mesh_background@2x.png"; sourceTree = "<group>"; };
+		4345241A16C09663005D0636 /* mesh_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mesh_background.png; sourceTree = "<group>"; };
+		4345241C16C09EDF005D0636 /* scanline_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scanline_1.png; sourceTree = "<group>"; };
+		4345241D16C09EDF005D0636 /* scanline_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scanline_2.png; sourceTree = "<group>"; };
+		4345241E16C09EDF005D0636 /* scanline_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scanline_3.png; sourceTree = "<group>"; };
+		4345241F16C09EDF005D0636 /* scanline_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scanline_4.png; sourceTree = "<group>"; };
+		4345242016C09EDF005D0636 /* scanline_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scanline_5.png; sourceTree = "<group>"; };
+		4345242116C09EDF005D0636 /* toolbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolbar.png; sourceTree = "<group>"; };
+		4345242816C09EE5005D0636 /* toolbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "toolbar@2x.png"; path = "Resources@2x/toolbar@2x.png"; sourceTree = SOURCE_ROOT; };
+		4345242A16C09F10005D0636 /* camera_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_button.png; sourceTree = "<group>"; };
+		4345242C16C09F14005D0636 /* camera_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera_button@2x.png"; path = "Resources@2x/camera_button@2x.png"; sourceTree = SOURCE_ROOT; };
+		4345249E16C0E90B005D0636 /* UINavigationController+BetterRotationBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UINavigationController+BetterRotationBehavior.h"; path = "PARViewer/Categories/UINavigationController+BetterRotationBehavior.h"; sourceTree = SOURCE_ROOT; };
+		4345249F16C0E90C005D0636 /* UINavigationController+BetterRotationBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationController+BetterRotationBehavior.m"; path = "PARViewer/Categories/UINavigationController+BetterRotationBehavior.m"; sourceTree = SOURCE_ROOT; };
 		4351D0B316B4C5DB0039FE88 /* PARViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PARViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4351D0B716B4C5DB0039FE88 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4351D0B916B4C5DB0039FE88 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -595,6 +622,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				435E158F16B780E600CC8DA3 /* MobileCoreServices.framework in Frameworks */,
 				42AEFEB416BFB18400BFE97C /* libsqlite3.0.dylib in Frameworks */,
 				42AEFEB216BFB17A00BFE97C /* AdSupport.framework in Frameworks */,
 				42AEFEB016BFB17100BFE97C /* Accounts.framework in Frameworks */,
@@ -607,7 +635,6 @@
 				43E6734616BB94FC007E7708 /* AVFoundation.framework in Frameworks */,
 				43E6734416BB94EA007E7708 /* CoreVideo.framework in Frameworks */,
 				43E6734216BB94DF007E7708 /* CoreMedia.framework in Frameworks */,
-				435E158F16B780E600CC8DA3 /* MobileCoreServices.framework in Frameworks */,
 				435E158D16B780CD00CC8DA3 /* MediaPlayer.framework in Frameworks */,
 				435E158B16B780C100CC8DA3 /* GLKit.framework in Frameworks */,
 				435E158916B780A800CC8DA3 /* libz.dylib in Frameworks */,
@@ -737,6 +764,14 @@
 				A0AF6F5A16C0E2E7003457A2 /* overlay_spec_example_1.jpg */,
 				A0AF6F5B16C0E2E7003457A2 /* overlay_spec_example_1.pm */,
 				43998BB316BDDADA008B34C2 /* parworks.png */,
+				4345242A16C09F10005D0636 /* camera_button.png */,
+				4345241C16C09EDF005D0636 /* scanline_1.png */,
+				4345241D16C09EDF005D0636 /* scanline_2.png */,
+				4345241E16C09EDF005D0636 /* scanline_3.png */,
+				4345241F16C09EDF005D0636 /* scanline_4.png */,
+				4345242016C09EDF005D0636 /* scanline_5.png */,
+				4345242116C09EDF005D0636 /* toolbar.png */,
+				4345242816C09EE5005D0636 /* toolbar@2x.png */,
 				43998BB516BDDD3E008B34C2 /* navigation_bar_background.png */,
 				439C504C16BE3C700035783E /* missing_image_300x150.png */,
 				43EB601116BCEE7A00A3EE29 /* frontViewControllerDropShadow.png */,
@@ -745,6 +780,7 @@
 				43998B9416BDD164008B34C2 /* icon_search.png */,
 				43998B9516BDD164008B34C2 /* icon_technology.png */,
 				43998B9616BDD164008B34C2 /* icon_trending.png */,
+				4345241A16C09663005D0636 /* mesh_background.png */,
 				425345A816BE769900D5A00A /* leave_comment.png */,
 				425345A916BE769900D5A00A /* missing_image_78x78.png */,
 			);
@@ -1093,8 +1129,10 @@
 		43998B9B16BDD24A008B34C2 /* Resources@2x */ = {
 			isa = PBXGroup;
 			children = (
+				4345241816C0965E005D0636 /* mesh_background@2x.png */,
 				43988B2C16BE5CA0005DB5E8 /* bar_item_back@2x.png */,
 				43E9F6B616BE6A5100AC2672 /* camera-graphic@2x.png */,
+				4345242C16C09F14005D0636 /* camera_button@2x.png */,
 				43E9F6B716BE6A5100AC2672 /* camera-icon-down@2x.png */,
 				43E9F6B816BE6A5100AC2672 /* camera-icon@2x.png */,
 				43998BB116BDDAD7008B34C2 /* parworks@2x.png */,
@@ -1152,6 +1190,7 @@
 				43E9F6FC16BFA41800AC2672 /* PVAddCommentViewController.xib */,
 				43E9F6FD16BFA41800AC2672 /* PVAugmentedPhotoViewController.h */,
 				43E9F6FE16BFA41800AC2672 /* PVAugmentedPhotoViewController.m */,
+				4345241016C0951E005D0636 /* PVAugmentedPhotoViewController.xib */,
 				43E9F6FF16BFA41800AC2672 /* PVBaseViewController.h */,
 				43E9F70016BFA41800AC2672 /* PVBaseViewController.m */,
 				43E9F70116BFA41800AC2672 /* PVNearbySitesViewController.h */,
@@ -1171,6 +1210,8 @@
 				43E9F70F16BFA41800AC2672 /* PVTechnologyViewController.xib */,
 				43E9F71016BFA41800AC2672 /* PVTrendingSitesController.h */,
 				43E9F71116BFA41800AC2672 /* PVTrendingSitesController.m */,
+				4345249E16C0E90B005D0636 /* UINavigationController+BetterRotationBehavior.h */,
+				4345249F16C0E90C005D0636 /* UINavigationController+BetterRotationBehavior.m */,
 				43E9F71216BFA41800AC2672 /* PVTrendingSitesController.xib */,
 			);
 			path = Controllers;
@@ -1428,6 +1469,18 @@
 				43E9F74716BFA41900AC2672 /* PVSiteDetailViewController.xib in Resources */,
 				43E9F74916BFA41900AC2672 /* PVTechnologyViewController.xib in Resources */,
 				43E9F74B16BFA41900AC2672 /* PVTrendingSitesController.xib in Resources */,
+				4345241116C0951E005D0636 /* PVAugmentedPhotoViewController.xib in Resources */,
+				4345241916C0965E005D0636 /* mesh_background@2x.png in Resources */,
+				4345241B16C09663005D0636 /* mesh_background.png in Resources */,
+				4345242216C09EDF005D0636 /* scanline_1.png in Resources */,
+				4345242316C09EDF005D0636 /* scanline_2.png in Resources */,
+				4345242416C09EDF005D0636 /* scanline_3.png in Resources */,
+				4345242516C09EDF005D0636 /* scanline_4.png in Resources */,
+				4345242616C09EDF005D0636 /* scanline_5.png in Resources */,
+				4345242716C09EDF005D0636 /* toolbar.png in Resources */,
+				4345242916C09EE5005D0636 /* toolbar@2x.png in Resources */,
+				4345242B16C09F10005D0636 /* camera_button.png in Resources */,
+				4345242D16C09F14005D0636 /* camera_button@2x.png in Resources */,
 				A0AF6F5C16C0E2E7003457A2 /* overlay_spec_example_1.jpg in Resources */,
 				A0AF6F5D16C0E2E7003457A2 /* overlay_spec_example_1.pm in Resources */,
 			);
@@ -1549,6 +1602,7 @@
 				43E9F75D16BFA47300AC2672 /* PVBorderedWhiteCell.m in Sources */,
 				43E9F76316BFA49800AC2672 /* PVRecentAugmentedView.m in Sources */,
 				43E9F76416BFA49800AC2672 /* PVSiteCardView.m in Sources */,
+				434524A016C0E90C005D0636 /* UINavigationController+BetterRotationBehavior.m in Sources */,
 				A0AF6F6616C0EE17003457A2 /* ARTotalAugmentedImagesView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -12,6 +12,7 @@
 #import "ARManager.h"
 #import "ARManager+MARS_Extensions.h"
 #import "ARSite.h"
+#import "JSSlidingViewController.h"
 
 static NSString * cellIdentifier = @"TestCell";
 
@@ -75,7 +76,7 @@ static NSString * cellIdentifier = @"TestCell";
 	cpFloat dt = _displayLink.duration * _displayLink.frameInterval;
 
 	// Update the position of the card and then advance our simulation
-    [_physicsContainer setCardX: fmaxf(0, _collectionView.contentOffset.x / 2)];
+    [_physicsContainer setCardX: fmaxf(0, (self.view.superview.superview.superview.superview.frame.origin.x + _collectionView.contentOffset.x) / 2)];
     [_physicsContainer step: dt];
 
 	// Update any cards onscreen.
@@ -109,6 +110,19 @@ static NSString * cellIdentifier = @"TestCell";
 	[super didReceiveMemoryWarning];
 }
 
+
+#pragma mark - Rotation
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 #pragma mark -
 #pragma mark PSUICollectionView stuff
 
@@ -136,7 +150,8 @@ static NSString * cellIdentifier = @"TestCell";
 {
 	ARSite * site = [[[ARManager shared] trendingSites] objectAtIndex:[indexPath row]];
 
-	[self presentViewController:[[UINavigationController alloc] initWithRootViewController:[[PVSiteDetailViewController alloc] initWithSite:site]] animated:YES completion:NULL];
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:[[PVSiteDetailViewController alloc] initWithSite:site]];
+    [self presentViewController:navController animated:YES completion:NULL];
 	[collectionView deselectItemAtIndexPath:indexPath animated:YES];
 }
 

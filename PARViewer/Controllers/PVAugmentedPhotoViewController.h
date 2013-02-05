@@ -57,6 +57,7 @@
 
 #pragma mark - Presentation
 
+- (IBAction)exit:(id)sender;
 - (IBAction)showCameraPicker:(id)sender;
 - (IBAction)showLibraryPicker:(id)sender;
 - (void)showPickerWithSourceType:(UIImagePickerControllerSourceType)source animated:(BOOL)animated;
