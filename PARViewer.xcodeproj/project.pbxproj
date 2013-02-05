@@ -30,6 +30,8 @@
 		4345242B16C09F10005D0636 /* camera_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4345242A16C09F10005D0636 /* camera_button.png */; };
 		4345242D16C09F14005D0636 /* camera_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4345242C16C09F14005D0636 /* camera_button@2x.png */; };
 		434524A016C0E90C005D0636 /* UINavigationController+BetterRotationBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 4345249F16C0E90C005D0636 /* UINavigationController+BetterRotationBehavior.m */; };
+		434524A216C0EC2F005D0636 /* shingle_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 434524A116C0EC2F005D0636 /* shingle_background@2x.png */; };
+		434524A516C0EDE4005D0636 /* UIFont+ThemeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 434524A416C0EDE4005D0636 /* UIFont+ThemeAdditions.m */; };
 		4351D0B816B4C5DB0039FE88 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4351D0B716B4C5DB0039FE88 /* UIKit.framework */; };
 		4351D0BA16B4C5DB0039FE88 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4351D0B916B4C5DB0039FE88 /* Foundation.framework */; };
 		4351D0BC16B4C5DB0039FE88 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4351D0BB16B4C5DB0039FE88 /* CoreGraphics.framework */; };
@@ -302,6 +304,9 @@
 		4345242C16C09F14005D0636 /* camera_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera_button@2x.png"; path = "Resources@2x/camera_button@2x.png"; sourceTree = SOURCE_ROOT; };
 		4345249E16C0E90B005D0636 /* UINavigationController+BetterRotationBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UINavigationController+BetterRotationBehavior.h"; path = "PARViewer/Categories/UINavigationController+BetterRotationBehavior.h"; sourceTree = SOURCE_ROOT; };
 		4345249F16C0E90C005D0636 /* UINavigationController+BetterRotationBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationController+BetterRotationBehavior.m"; path = "PARViewer/Categories/UINavigationController+BetterRotationBehavior.m"; sourceTree = SOURCE_ROOT; };
+		434524A116C0EC2F005D0636 /* shingle_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shingle_background@2x.png"; sourceTree = "<group>"; };
+		434524A316C0EDE4005D0636 /* UIFont+ThemeAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIFont+ThemeAdditions.h"; path = "../../Submodules/PARWorks-iOS/SDK/AR Core/Categories/UIFont+ThemeAdditions.h"; sourceTree = "<group>"; };
+		434524A416C0EDE4005D0636 /* UIFont+ThemeAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIFont+ThemeAdditions.m"; path = "../../Submodules/PARWorks-iOS/SDK/AR Core/Categories/UIFont+ThemeAdditions.m"; sourceTree = "<group>"; };
 		4351D0B316B4C5DB0039FE88 /* PARViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PARViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4351D0B716B4C5DB0039FE88 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4351D0B916B4C5DB0039FE88 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1136,6 +1141,7 @@
 				43998BA116BDD24A008B34C2 /* icon_technology@2x.png */,
 				43998BA216BDD24A008B34C2 /* icon_trending@2x.png */,
 				425345A416BE768D00D5A00A /* leave_comment@2x.png */,
+				434524A116C0EC2F005D0636 /* shingle_background@2x.png */,
 				425345A516BE768D00D5A00A /* missing_image_78x78@2x.png */,
 			);
 			path = "Resources@2x";
@@ -1155,6 +1161,8 @@
 			children = (
 				43E9F6EB16BFA41800AC2672 /* ARManager+MARS_Extensions.h */,
 				43E9F6EC16BFA41800AC2672 /* ARManager+MARS_Extensions.m */,
+				434524A316C0EDE4005D0636 /* UIFont+ThemeAdditions.h */,
+				434524A416C0EDE4005D0636 /* UIFont+ThemeAdditions.m */,
 				43E9F6ED16BFA41800AC2672 /* ARSite+MARS_Extensions.h */,
 				43E9F6EE16BFA41800AC2672 /* ARSite+MARS_Extensions.m */,
 				43E9F6EF16BFA41800AC2672 /* NSContainers+NullHandlers.h */,
@@ -1199,9 +1207,9 @@
 				43E9F70F16BFA41800AC2672 /* PVTechnologyViewController.xib */,
 				43E9F71016BFA41800AC2672 /* PVTrendingSitesController.h */,
 				43E9F71116BFA41800AC2672 /* PVTrendingSitesController.m */,
+				43E9F71216BFA41800AC2672 /* PVTrendingSitesController.xib */,
 				4345249E16C0E90B005D0636 /* UINavigationController+BetterRotationBehavior.h */,
 				4345249F16C0E90C005D0636 /* UINavigationController+BetterRotationBehavior.m */,
-				43E9F71216BFA41800AC2672 /* PVTrendingSitesController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1470,6 +1478,7 @@
 				4345242916C09EE5005D0636 /* toolbar@2x.png in Resources */,
 				4345242B16C09F10005D0636 /* camera_button.png in Resources */,
 				4345242D16C09F14005D0636 /* camera_button@2x.png in Resources */,
+				434524A216C0EC2F005D0636 /* shingle_background@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1590,6 +1599,7 @@
 				43E9F76316BFA49800AC2672 /* PVRecentAugmentedView.m in Sources */,
 				43E9F76416BFA49800AC2672 /* PVSiteCardView.m in Sources */,
 				434524A016C0E90C005D0636 /* UINavigationController+BetterRotationBehavior.m in Sources */,
+				434524A516C0EDE4005D0636 /* UIFont+ThemeAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
