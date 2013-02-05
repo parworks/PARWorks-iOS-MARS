@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "JSSlidingViewController.h"
+#import "UINavigationController+BetterRotationBehavior.h"
 #import "PVTrendingSitesController.h"
 #import "PVNearbySitesViewController.h"
 #import "PVSearchViewController.h"

@@ -10,6 +10,7 @@
 #import "PVAppDelegate.h"
 #import "ARManager.h"
 #import "ARManager+MARS_Extensions.h"
+#import "UIFont+ThemeAdditions.h"
 
 NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Login:FBSessionStateChangedNotification";
 
@@ -29,7 +30,7 @@ NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Log
     NSMutableDictionary * navigationTextAttributes = [NSMutableDictionary dictionary];
     UINavigationBar * navigationBarAppearance = [UINavigationBar appearance];
     [navigationTextAttributes setObject:[UIColor colorWithWhite:0.2 alpha:1] forKey: UITextAttributeTextColor];
-    [navigationTextAttributes setObject:[UIFont fontWithName:@"HiraKakuProN-W3" size:18] forKey: UITextAttributeFont];
+    [navigationTextAttributes setObject:[UIFont parworksFontWithSize: 18] forKey: UITextAttributeFont];
     [navigationTextAttributes setObject:[UIColor whiteColor] forKey: UITextAttributeTextShadowColor];
     [navigationTextAttributes setObject:[NSValue valueWithCGPoint: CGPointMake(0,1)] forKey: UITextAttributeTextShadowOffset];
     [navigationBarAppearance setTitleTextAttributes: navigationTextAttributes];
@@ -38,7 +39,7 @@ NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Log
     
     NSMutableDictionary * barButtonItemTextAttributes = [NSMutableDictionary dictionary];
     [barButtonItemTextAttributes setObject:[UIColor colorWithWhite:0.2 alpha:1] forKey: UITextAttributeTextColor];
-    [barButtonItemTextAttributes setObject:[UIFont fontWithName:@"HiraKakuProN-W3" size:12] forKey: UITextAttributeFont];
+    [barButtonItemTextAttributes setObject:[UIFont parworksFontWithSize: 12] forKey: UITextAttributeFont];
     [barButtonItemTextAttributes setObject:[UIColor whiteColor] forKey: UITextAttributeTextShadowColor];
     [barButtonItemTextAttributes setObject:[NSValue valueWithCGPoint: CGPointMake(0,1)] forKey: UITextAttributeTextShadowOffset];
 
@@ -49,6 +50,7 @@ NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Log
     
     UIImage * navBarImage = [[UIImage imageNamed:@"navigation_bar_background"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7.0, 0, 7.0)];
     [navigationBarAppearance setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsDefault];
+    [navigationBarAppearance setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsLandscapePhone];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackOpaque animated: YES];

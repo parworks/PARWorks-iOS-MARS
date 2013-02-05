@@ -24,5 +24,7 @@
 
 + (int)smallImagesWithWidth:(int)width height:(int)height fromImage:(UIImage *)image withImageReadyCallback:(void (^)(int i, UIImage* img))imgCallback;
 + (int)arrayIndexForCols:(int)cols rowIndex:(int)r columnIndex:(int)c;
++ (CGPathRef)newPathForRoundedRect:(CGRect)rect radius:(CGFloat)radius;
 
+void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, UIColor *color);
 @end

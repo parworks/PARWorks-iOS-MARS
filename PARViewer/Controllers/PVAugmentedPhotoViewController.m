@@ -40,17 +40,11 @@
 {
     [super viewDidLoad];
     _firstLoad = YES;
-    
-    _toolbarContainer.alpha = 0.0;
-    _toolbarContainer.layer.shadowColor = [UIColor blackColor].CGColor;
-    _toolbarContainer.layer.shadowOffset = CGSizeZero;
-    _toolbarContainer.layer.shadowOpacity = 0.5;
-    _toolbarContainer.layer.shadowRadius = 2.0;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
     
     if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
         _cameraButton.enabled = NO;
@@ -59,8 +53,6 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
-    
     _toolbarContainer.layer.shadowPath = [UIBezierPath bezierPathWithRect:_toolbarContainer.bounds].CGPath;
     
     if (_firstLoad) {
@@ -73,6 +65,11 @@
         [self showCameraPicker:nil];
         _firstLoad = NO;
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
 }
 
 #pragma mark - Rotation
@@ -89,6 +86,11 @@
 
 
 #pragma mark - Presentation
+
+- (IBAction)exit:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (IBAction)showCameraPicker:(id)sender
 {
@@ -170,7 +172,7 @@
         
         [self.view bringSubviewToFront: _augmentedView];
         _augmentedView.transform = CGAffineTransformIdentity;
-        _augmentedView.augmentedPhoto = _augmentedPhoto;
+        [_augmentedView setAugmentedPhoto: _augmentedPhoto];
         _augmentedView.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2);
         _augmentedView.delegate = self;
         

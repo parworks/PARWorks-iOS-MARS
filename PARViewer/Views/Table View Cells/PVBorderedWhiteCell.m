@@ -8,6 +8,7 @@
 
 #import "PVBorderedWhiteCell.h"
 #import "UIColor+ThemeAdditions.h"
+#import "UIFont+ThemeAdditions.h"
 
 @implementation PVBorderedWhiteCell
 
@@ -16,7 +17,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [[self textLabel] setBackgroundColor: [UIColor clearColor]];
-        [[self textLabel] setFont: [UIFont fontWithName:@"HiraKakuProN-W3" size:16]];
+        [[self textLabel] setFont: [UIFont parworksFontWithSize: 16]];
 
         [self setSelectedBackgroundView: nil];
         [self setSelectionStyle: nil];

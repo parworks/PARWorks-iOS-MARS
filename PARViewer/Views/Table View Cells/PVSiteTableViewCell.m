@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Ben Gotow. All rights reserved.
 //
 
+#import "ARAugmentedView.h"
+#import "ARTotalAugmentedImagesView.h"
 #import "PVSiteTableViewCell.h"
 #import "PVImageCacheManager.h"
 #import "UIColor+ThemeAdditions.h"
@@ -26,8 +28,21 @@
         _whiteLayer.shadowOffset = CGSizeMake(0, 2);
         _whiteLayer.shadowRadius = 3;
         _whiteLayer.shadowOpacity = 0.2;
+        _whiteLayer.shouldRasterize = YES;
+        _whiteLayer.rasterizationScale = [UIScreen mainScreen].scale;
         [self.layer insertSublayer:_whiteLayer atIndex:0];
-        self.posterImageView = [[UIImageView alloc] init];
+        
+        NSBundle *bundle = [NSBundle mainBundle];
+        ARAugmentedPhoto *photo = [[ARAugmentedPhoto alloc] initWithImageFile:[bundle pathForResource:@"overlay_spec_example_1" ofType:@"jpg"]
+                                                                    andPMFile:[bundle pathForResource:@"overlay_spec_example_1" ofType:@"pm"]];
+        self.posterImageView = [[ARAugmentedView alloc] initWithFrame:CGRectMake(10,10,self.frame.size.width-20, 150)];
+        _posterImageView.clipsToBounds = YES;
+        _posterImageView.animateOutlineViewDrawing = NO;
+        _posterImageView.showOutlineViewsOnly = YES;
+        _posterImageView.overlayImageViewContentMode = UIViewContentModeScaleAspectFill;
+        _posterImageView.augmentedPhoto = photo;
+        _posterImageView.totalAugmentedImagesView.hidden = NO;
+        _posterImageView.totalAugmentedImagesView.count = 20;
         [self addSubview: self.posterImageView];
     }
     return self;
@@ -39,8 +54,6 @@
     
     CGRect posterImageFrame = CGRectMake(10,10,self.frame.size.width-20, 150);
     [self.posterImageView setFrame: posterImageFrame];
-    [self.posterImageView setContentMode: UIViewContentModeScaleAspectFill];
-    [self.posterImageView setClipsToBounds: YES];
     
     [self.textLabel setFrame: CGRectMake(20, 165, 280, 30)];
     [self.textLabel setBackgroundColor: [UIColor clearColor]];
@@ -50,6 +63,11 @@
     CGRect whiteLayerFrame = self.bounds;
     whiteLayerFrame.size.height -= 8;
     [self.whiteLayer setFrame: whiteLayerFrame];
+}
+
+- (CGRect)posterAugmentedViewFrame
+{
+    return CGRectMake(10,10,self.frame.size.width-20, 150);
 }
 
 - (void)setSite:(ARSite*)site
@@ -70,7 +88,8 @@
     UIImage * img = [[PVImageCacheManager shared] imageForURL: _site.posterImageURL];
     if (!img)
         img = [UIImage imageNamed: @"missing_image_300x150"];
-    [self.posterImageView setImage: img];
+//    [self.posterImageView setImage: img];
+    [self.posterImageView.totalAugmentedImagesView setCount:_site.totalAugmentedImages];
     [self.textLabel setText: [_site name] ? [_site name] : @"Loading..."];
     [self.detailTextLabel setText: @"Hiya"];
 }
