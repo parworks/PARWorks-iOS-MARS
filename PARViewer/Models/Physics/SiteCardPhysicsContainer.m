@@ -8,6 +8,8 @@
 
 #import "SiteCardPhysicsContainer.h"
 
+#define SHINGLE_STOP_THRESHOLD 0.25
+
 @implementation SiteCardPhysicsContainer
 
 
@@ -65,12 +67,23 @@
     pos.x = 200 + cardX;
     _cardBody.vel = CGPointMake(0, 0);
     _cardBody.pos = pos;
+    
+    BOOL shouldStopShingle = (powf(_shingleBody.vel.x,2) + powf(_shingleBody.vel.y, 2)) < SHINGLE_STOP_THRESHOLD;
+    if (shouldStopShingle) {
+        _shingleBody.vel = CGPointMake(0, 0);
+    }
 }
 
 - (CGPoint)signOffset
 {
     cpVect reference = _cardBody.pos;
-    return CGPointMake(_shingleBody.pos.x - reference.x, _shingleBody.pos.y - reference.y);
+    
+    BOOL shouldRoundShinglePos = (powf(_shingleBody.vel.x,2) + powf(_shingleBody.vel.y, 2)) < SHINGLE_STOP_THRESHOLD;
+    if (shouldRoundShinglePos)
+        return CGPointMake(roundf(_shingleBody.pos.x - reference.x), roundf(_shingleBody.pos.y - reference.y));
+    else
+        return CGPointMake(_shingleBody.pos.x - reference.x, _shingleBody.pos.y - reference.y);
+
 }
 
 - (float)signRotation
