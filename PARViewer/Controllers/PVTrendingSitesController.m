@@ -31,6 +31,8 @@ static NSString * cellIdentifier = @"TestCell";
         
         _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(update)];
         _displayLink.frameInterval = 1;
+        
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openingSidebar) name:JSSlidingViewControllerWillOpenNotification object:nil];
     }
 	return self;
 }
@@ -76,7 +78,7 @@ static NSString * cellIdentifier = @"TestCell";
 	cpFloat dt = _displayLink.duration * _displayLink.frameInterval;
 
 	// Update the position of the card and then advance our simulation
-    [_physicsContainer setCardX: fmaxf(0, (self.view.superview.superview.superview.superview.frame.origin.x + _collectionView.contentOffset.x) / 2)];
+    [_physicsContainer setCardX: fmaxf(0, (_collectionView.contentOffset.x) / 2)];
     [_physicsContainer step: dt];
 
 	// Update any cards onscreen.
@@ -102,7 +104,7 @@ static NSString * cellIdentifier = @"TestCell";
 	if (ii >= [[[ARManager shared] trendingSites] count])
 		return nil;
 
-	return [[[[ARManager shared] trendingSites] objectAtIndex:ii] posterImageURL];
+    return [[[[ARManager shared] trendingSites] objectAtIndex:ii] posterImageURL];
 }
 
 - (void)didReceiveMemoryWarning

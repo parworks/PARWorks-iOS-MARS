@@ -6,7 +6,6 @@
 //  Copyright (c) 2013 Ben Gotow. All rights reserved.
 //
 
-#import <SparkInspector/SparkInspector.h>
 #import "PVAppDelegate.h"
 #import "ARManager.h"
 #import "ARManager+MARS_Extensions.h"
@@ -18,9 +17,6 @@ NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Log
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Enable the Spark Inspector
-//    [SparkInspector enableObservation];
-
     // fetch data that we want to revalidate from our cache
     [[ARManager shared] setApiKey:@"0d889de1-e1f9-4f5f-84fc-6c6f566b1866" andSecret:@"79cf5c70-ad89-4624-951f-2e2a2acfe413"];
     [[ARManager shared] restoreMARSState];

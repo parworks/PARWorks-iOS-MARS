@@ -88,14 +88,14 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 
 - (NSInteger)collectionView:(PSUICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [[_site recentlyAugmentedImageURLs] count];
+    return [[_site recentlyAugmentedImages] count];
 }
 
 - (PSUICollectionViewCell *)collectionView:(PSUICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     PVRecentAugmentedView *cell = (PVRecentAugmentedView *)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-    NSString *recentlyAugmentedImageUrl = [[_site recentlyAugmentedImageURLs] objectAtIndex:[indexPath row]];    
-    [cell setRecentlyAugmentedImageUrl:recentlyAugmentedImageUrl];
+    NSDictionary * imageAttributes = [[_site recentlyAugmentedImages] objectAtIndex:[indexPath row]];
+    [cell setAugmentedImageAttributes: imageAttributes];
     
     return cell;
 }

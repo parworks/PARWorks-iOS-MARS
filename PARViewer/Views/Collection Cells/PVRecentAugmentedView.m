@@ -9,45 +9,50 @@
 #import "PVRecentAugmentedView.h"
 #import "PVImageCacheManager.h"
 #import "PVTrendingSitesController.h"
+#import "NSContainers+NullHandlers.h"
 
 @implementation PVRecentAugmentedView
 
 - (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:frame];
-    if (self) {        
-        [self setBackgroundColor:[UIColor clearColor]];
-        
-        self.augmentedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.bounds.size.width, self.bounds.size.height)];
-        _augmentedImageView.contentMode = UIViewContentModeScaleAspectFill;
-        _augmentedImageView.clipsToBounds = YES;
-        [_augmentedImageView.layer setBorderColor:[UIColor colorWithRed:197.0/255.0 green:197.0/255.0 blue:197.0/255.0 alpha:1.0].CGColor];
-        [_augmentedImageView.layer setBorderWidth:1.0];
-        [self addSubview: _augmentedImageView];
-    }
-    return self;
+	self = [super initWithFrame:frame];
+
+	if (self) {
+		[self setBackgroundColor:[UIColor clearColor]];
+
+		self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.bounds.size.width, self.bounds.size.height)];
+		_imageView.contentMode = UIViewContentModeScaleAspectFill;
+		_imageView.clipsToBounds = YES;
+		[_imageView.layer setBorderColor:[UIColor colorWithRed:197.0 / 255.0 green:197.0 / 255.0 blue:197.0 / 255.0 alpha:1.0].CGColor];
+		[_imageView.layer setBorderWidth:1.0];
+		[self addSubview:_imageView];
+	}
+	return self;
 }
 
-- (void)setRecentlyAugmentedImageUrl:(NSString *)recentlyAugmentedImageUrl{
-    // stop listening for image availability
-    [[NSNotificationCenter defaultCenter] removeObserver: self];
-    
-    _recentlyAugmentedImageUrl = recentlyAugmentedImageUrl;
-    
-    // set the poster image
-    UIImage * img = [[PVImageCacheManager shared] imageForURL:[NSURL URLWithString:_recentlyAugmentedImageUrl]];
-    if (!img) {
-        img = [UIImage imageNamed: @"missing_image_78x78.png"];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteImageReady:) name:NOTIF_IMAGE_READY object:_recentlyAugmentedImageUrl];
-    }
-    [_augmentedImageView setImage: img];
-}
-
-- (void)siteImageReady:(NSNotification*)notif
+- (void)setAugmentedImageAttributes:(NSDictionary*)attributes
 {
-    UIImage * img = [[PVImageCacheManager shared] imageForURL:[NSURL URLWithString:_recentlyAugmentedImageUrl]];
-    [_augmentedImageView setImage: img];
+	// stop listening for image availability
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    _augmentedImageAttributes = attributes;
+
+	// set the poster image
+	NSURL * url = [NSURL URLWithString: [attributes objectForKey: @"imgGalleryPath" or: nil]];
+    UIImage * img = [[PVImageCacheManager shared] imageForURL: url];
+    
+	if (!img) {
+		img = [UIImage imageNamed:@"missing_image_78x78.png"];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteImageReady:) name:NOTIF_IMAGE_READY object: url];
+	}
+	[_imageView setImage:img];
 }
 
+- (void)siteImageReady:(NSNotification *)notif
+{
+	NSURL * url = [NSURL URLWithString: [_augmentedImageAttributes objectForKey: @"imgGalleryPath" or: nil]];
+	UIImage * img = [[PVImageCacheManager shared] imageForURL: url];
+
+	[_imageView setImage:img];
+}
 
 @end

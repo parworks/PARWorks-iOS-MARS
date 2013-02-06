@@ -56,6 +56,8 @@
 {
     _space = [[ChipmunkSpace alloc] init];
     [_space setGravity: CGPointMake(0, -750)];
+    [_space setIdleSpeedThreshold: 0.2];
+    [_space setSleepTimeThreshold: 0.2];
     [_space setDamping: 0.08]; // velocity *= damping = new velocity
     CGRect rect = CGRectMake(0, 0, 100000, 100000);
     [_space addBounds:rect thickness:5 elasticity:1 friction:1 layers:CP_ALL_LAYERS group:CP_NO_GROUP collisionType:nil];

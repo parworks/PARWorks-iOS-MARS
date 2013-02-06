@@ -10,7 +10,7 @@
 
 @interface PVRecentAugmentedView : PSUICollectionViewCell
 
-@property (nonatomic, strong) NSString *recentlyAugmentedImageUrl;
-@property (nonatomic, strong) UIImageView *augmentedImageView;
+@property (nonatomic, strong) NSDictionary * augmentedImageAttributes;
+@property (nonatomic, strong) UIImageView * imageView;
 
 @end

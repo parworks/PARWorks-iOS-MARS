@@ -80,7 +80,7 @@
 
     [[NSNotificationCenter defaultCenter] removeObserver: self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteUpdated:) name:NOTIF_SITE_UPDATED object:_site];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteUpdated:) name:NOTIF_IMAGE_READY object:_site.posterImageURL];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteUpdated:) name:NOTIF_IMAGE_READY object:_site.posterImage];
 }
 
 - (void)siteUpdated:(NSNotification*)notif
