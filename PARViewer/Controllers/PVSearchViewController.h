@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PVBaseViewController.h"
 
+
 @interface PVSearchViewController : PVBaseViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
 }
@@ -19,5 +20,10 @@
 
 @property (weak, nonatomic) IBOutlet UITableView * filteredTagsTableView;
 @property (strong, nonatomic) NSMutableArray * filteredTags;
+
+@property (strong, nonatomic) IBOutlet UIView *labelsContainer;
+@property (weak, nonatomic) IBOutlet UILabel *popularSearchesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *noResultsLabel;
+@property (weak, nonatomic) IBOutlet UIControl *dimView;
 
 @end
