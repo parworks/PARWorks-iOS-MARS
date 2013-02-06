@@ -10,6 +10,7 @@
 #import "ARSite+MARS_Extensions.h"
 #import "PVRecentAugmentedView.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UIFont+ThemeAdditions.h"
 
 static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 
@@ -22,7 +23,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     [_photoCountLabel setBackgroundColor:[UIColor clearColor]];
     [_photoCountLabel setUserInteractionEnabled:NO];
     [_photoCountLabel setTextColor:[UIColor colorWithRed:115.0/255.0 green:115.0/255.0 blue:115.0/255.0 alpha:1.0]];
-    [_photoCountLabel setFont:[UIFont systemFontOfSize:12.0]];
+    [_photoCountLabel setFont:[UIFont parworksFontWithSize:12.0]];
     [self addSubview:_photoCountLabel];
     
     PSUICollectionViewFlowLayout *aFlowLayout = [[PSUICollectionViewFlowLayout alloc] init];

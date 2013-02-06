@@ -10,6 +10,7 @@
 #import "ARSite+MARS_Extensions.h"
 #import "PVAppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UIFont+ThemeAdditions.h"
 
 @interface PVAddCommentViewController ()
 
@@ -35,7 +36,7 @@
     else
         _addCommentYOrigin = 50.0;
         
-    _commentTextView.font = [UIFont systemFontOfSize:18.0];
+    _commentTextView.font = [UIFont parworksFontWithSize:18.0];
     [self addLines];
     
     _addCommentView.contentMode = UIViewContentModeScaleAspectFill;

@@ -9,6 +9,7 @@
 #import "PVDetailsMapView.h"
 #import "ARSite+MARS_Extensions.h"
 #import "MapAnnotation.h"
+#import "UIFont+ThemeAdditions.h"
 
 @implementation PVDetailsMapView
 
@@ -23,21 +24,32 @@
     [_identifierLabel setBackgroundColor:[UIColor clearColor]];
     [_identifierLabel setUserInteractionEnabled:NO];
     [_identifierLabel setTextColor:[UIColor colorWithRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1.0]];
-    [_identifierLabel setFont:[UIFont systemFontOfSize:18.0]];
+    [_identifierLabel setFont:[UIFont parworksFontWithSize:18.0]];
     [_mapButton addSubview:_identifierLabel];
     
     self.addressLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     [_addressLabel setBackgroundColor:[UIColor clearColor]];
     [_addressLabel setUserInteractionEnabled:NO];
     [_addressLabel setTextColor:[UIColor colorWithRed:115.0/255.0 green:115.0/255.0 blue:115.0/255.0 alpha:1.0]];
-    [_addressLabel setFont:[UIFont systemFontOfSize:12.0]];
+    [_addressLabel setFont:[UIFont parworksFontWithSize:12.0]];
     [_mapButton addSubview:_addressLabel];
+    
+    self.mapControl = [[UIControl alloc] initWithFrame:CGRectZero];
+    [_mapControl setBackgroundColor:[UIColor clearColor]];
+    [_mapControl addTarget:self action:@selector(mapViewPressed) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_mapControl];
     
     self.mapView = [[MKMapView alloc] initWithFrame:CGRectZero];
     [_mapView setBackgroundColor:[UIColor clearColor]];
     [_mapView setDelegate:self];
     [_mapView setUserInteractionEnabled:NO];
-    [self addSubview:_mapView];
+    [_mapControl addSubview:_mapView];
+    
+    self.mapShadowImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    [_mapShadowImageView setImage:[UIImage imageNamed:@"map_inner_shadow.png"]];
+    [_mapShadowImageView setBackgroundColor:[UIColor clearColor]];
+    [_mapShadowImageView setUserInteractionEnabled:NO];
+    [_mapControl addSubview:_mapShadowImageView];
     
 }
 
@@ -69,14 +81,20 @@
         else
             _addressLabel.text = @"No address available";
         
-        MKCoordinateRegion region;
-        region.center = _site.location;
-        region.span.latitudeDelta = 0.005;
-        region.span.longitudeDelta = 0.005;
-        [_mapView setRegion:region];
-        
-        MapAnnotation *annotation = [[MapAnnotation alloc] initWithCoordinate:_site.location andTitle:_identifierLabel.text andSubtitle:_addressLabel.text];
-        [_mapView addAnnotation:annotation];
+        if(_site.location.latitude == 0.0 && _site.location.latitude == 0.0){
+            [_mapControl setHidden:YES];
+        }
+        else{
+            [_mapControl setHidden:NO];
+            MKCoordinateRegion region;
+            region.center = _site.location;
+            region.span.latitudeDelta = 0.005;
+            region.span.longitudeDelta = 0.005;
+            [_mapView setRegion:region];
+            
+            MapAnnotation *annotation = [[MapAnnotation alloc] initWithCoordinate:_site.location andTitle:_identifierLabel.text andSubtitle:_addressLabel.text];
+            [_mapView addAnnotation:annotation];
+        }
     }
     return self;
 }
@@ -84,9 +102,16 @@
 - (void)setFrame:(CGRect)frame{
     [super setFrame:frame];
     [_mapButton setFrame:CGRectMake(0.0, 0.0, frame.size.width, 63.0)];
-    [_identifierLabel setFrame:CGRectMake(10.0, 10.0, _mapButton.frame.size.width - 20.0, 20.0)];
-    [_addressLabel setFrame:CGRectMake(_identifierLabel.frame.origin.x, _identifierLabel.frame.origin.y + _identifierLabel.frame.size.height, _identifierLabel.frame.size.width, 20.0)];
-    [_mapView setFrame:CGRectMake(10.0, _mapButton.frame.origin.y + _mapButton.frame.size.height, frame.size.width - 20.0, 101.0)];
+    [_identifierLabel setFrame:CGRectMake(10.0, 10.0, _mapButton.frame.size.width - 20.0, 24.0)];
+    [_addressLabel setFrame:CGRectMake(_identifierLabel.frame.origin.x, _identifierLabel.frame.origin.y + _identifierLabel.frame.size.height - 4.0, _identifierLabel.frame.size.width, 20.0)];
+    
+    [_mapControl setFrame:CGRectMake(10.0, _mapButton.frame.origin.y + _mapButton.frame.size.height, frame.size.width - 20.0, 100.0)];
+    [_mapView setFrame:_mapControl.bounds];
+    [_mapShadowImageView setFrame:_mapControl.bounds];
+}
+
+- (void)mapViewPressed{
+    [_delegate mapViewPressed];
 }
 
 #pragma mark -
@@ -97,11 +122,13 @@
         return nil;
     else{
         static NSString *AnnotationReuseIdentifier = @"AnnotationReuseIdentifier";
-                
-        MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[_mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationReuseIdentifier];
+        
+        MKAnnotationView *annotationView = (MKAnnotationView *)[_mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationReuseIdentifier];
         if(annotationView == nil)
         {
-            annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationReuseIdentifier];
+            annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationReuseIdentifier];
+            annotationView.image = [UIImage imageNamed:@"map_marker.png"];
+            annotationView.centerOffset = CGPointMake(1.0, -14.0);
         }
         
         return annotationView;

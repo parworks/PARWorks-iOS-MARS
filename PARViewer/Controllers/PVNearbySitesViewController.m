@@ -11,6 +11,7 @@
 #import "PVSiteDetailViewController.h"
 #import "PVSiteTableViewCell.h"
 #import "MapAnnotation.h"
+#import "UIFont+ThemeAdditions.h"
 
 #define PARALLAX_WINDOW_HEIGHT 165.0
 #define PARALLAX_IMAGE_HEIGHT 300.0
@@ -40,6 +41,12 @@
     _mapView.showsUserLocation = YES;
     _mapView.delegate = self;
     
+    self.nearbyMapSearchButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [_nearbyMapSearchButton setFrame:CGRectMake(_mapView.frame.size.width - 50.0, 10.0, 40.0, 40.0)];
+    [_nearbyMapSearchButton setAlpha:0.0];
+    [_nearbyMapSearchButton addTarget:self action:@selector(searchNearbySites) forControlEvents:UIControlEventTouchUpInside];
+    [_mapView addSubview:_nearbyMapSearchButton];
+    
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     _tableView.backgroundColor = [UIColor clearColor];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -59,20 +66,26 @@
     [_parallaxView setLocalDelegate:self];
     [self.view addSubview:_parallaxView];
     
-    
-    [[ARManager shared] findNearbySites:1.0 withCompletionBlock:^(NSArray* sites){
-        self.nearbySites = sites;
-        [self refetchAnnotations];
-        [_tableView reloadData];
-    }];
+    [self searchNearbySites];
 }
 
 - (void)setupTableHeaderView{
     self.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 0.0)];
-    [_tableHeaderView setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0]];
-    [_tableHeaderView setFrame:CGRectMake(_tableHeaderView.frame.origin.x, _tableHeaderView.frame.origin.y, _tableHeaderView.frame.size.width, 0.0)];
+    [_tableHeaderView setBackgroundColor:[UIColor whiteColor]];
 }
 
+- (void)viewDidAppear:(BOOL)animated{    
+
+}
+
+- (void)searchNearbySites{
+    [[ARManager shared] findNearbySites:1.0 withCompletionBlock:^(NSArray* sites){
+        self.nearbySites = sites;
+        bLoadedOnce = NO;
+        [self refetchAnnotations];
+        [_tableView reloadData];
+    }];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -83,17 +96,27 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_nearbySites count] + 1;
+    if([_nearbySites count] == 0)
+        return 1;
+    else
+        return [_nearbySites count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if([indexPath row] >= [_nearbySites count]){
+    if([_nearbySites count] == 0){
         UITableViewCell *c = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"emptyCell"];
         if (!c){
             c = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"emptyCell"];
             [c setBackgroundColor: [UIColor colorWithWhite:0.88 alpha:1]];
             [c setSelectionStyle: UITableViewCellSelectionStyleNone];
+            
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 10.0, c.contentView.frame.size.width, 24.0)];
+            [label setText:@"No sites nearby."];
+            [label setFont:[UIFont parworksFontWithSize:18.0]];
+            [label setTextAlignment:NSTextAlignmentCenter];
+            [label setTextColor:[UIColor colorWithRed:115.0/255.0 green:115.0/255.0 blue:115.0/255.0 alpha:1.0]];
+            [c.contentView addSubview:label];
         }
         
         return c;
@@ -111,7 +134,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if([indexPath row] < [_nearbySites count]){
+    if([_nearbySites count] > 0){
         ARSite * site = [_nearbySites objectAtIndex: [indexPath row]];
         PVSiteDetailViewController * siteDetailController = [[PVSiteDetailViewController alloc] initWithSite: site];
         [self presentViewController:[[UINavigationController alloc] initWithRootViewController:siteDetailController] animated:YES completion:NULL];
@@ -132,9 +155,15 @@
 - (void)windowButtonPressed:(BOOL)isExpanded{
     if(isExpanded){
         self.navigationItem.rightBarButtonItem = nil;
+        [UIView transitionWithView:self.view duration:0.3 options:UIViewAnimationOptionTransitionNone animations:^{
+            [_nearbyMapSearchButton setAlpha:0.0];
+        } completion:nil];
     }
     else{
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(closeMap)];
+        [UIView transitionWithView:self.view duration:0.3 options:UIViewAnimationOptionTransitionNone animations:^{
+            [_nearbyMapSearchButton setAlpha:1.0];
+        } completion:nil];
     }
     [_mapView setRegion:region animated:YES];
 }
@@ -239,17 +268,18 @@
         return nil;
     else{
         static NSString *AnnotationReuseIdentifier = @"AnnotationReuseIdentifier";
-        
-        MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[_mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationReuseIdentifier];
+                
+        MKAnnotationView *annotationView = (MKAnnotationView *)[_mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationReuseIdentifier];
         if(annotationView == nil)
         {
-            annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationReuseIdentifier];
-        }
+            annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationReuseIdentifier];
+            annotationView.image = [UIImage imageNamed:@"map_marker.png"];
+            annotationView.centerOffset = CGPointMake(1.0, -14.0);
+        }      
         
         return annotationView;
     }
 }
-
 
 #pragma mark - Rotation
 

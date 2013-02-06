@@ -169,18 +169,26 @@
     self.headerExpansionEnabled = enabled;
     
     UIControl *tableHeaderView = [[UIControl alloc] initWithFrame:CGRectMake(0.0, 0.0, self.foregroundTableView.frame.size.width, _windowHeight + view.frame.size.height)];
-    [tableHeaderView setBackgroundColor:[UIColor clearColor]];
+    [tableHeaderView setBackgroundColor:[UIColor clearColor]];    
     
     UIButton *windowButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, tableHeaderView.frame.size.width, _windowHeight)];
     [windowButton addTarget:self action:@selector(windowButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [windowButton setBackgroundColor:[UIColor clearColor]];
     [windowButton setEnabled:_headerExpansionEnabled];
+
+    UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(0.0, _windowHeight, tableHeaderView.frame.size.width, 1.0)];
+    windowButton.layer.masksToBounds = NO;
+    [windowButton.layer setShadowRadius: 3];
+    [windowButton.layer setShadowOffset: CGSizeMake(0, -1)];
+    [windowButton.layer setShadowOpacity: 0.5];
+    windowButton.layer.shadowPath = shadowPath.CGPath;
+    
     [tableHeaderView addSubview:windowButton];
     
     [view setFrame:CGRectMake(0.0, windowButton.frame.origin.y + windowButton.frame.size.height, view.frame.size.width, view.frame.size.height)];
     [tableHeaderView addSubview:view];
     
-    self.foregroundTableView.tableHeaderView = tableHeaderView;
+    self.foregroundTableView.tableHeaderView = tableHeaderView;   
 }
 
 @end

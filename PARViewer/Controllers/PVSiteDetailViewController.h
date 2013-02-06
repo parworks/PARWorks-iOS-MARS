@@ -13,7 +13,7 @@
 #import "PVDetailsMapView.h"
 #import "PVDetailsPhotoScrollView.h"
 
-@interface PVSiteDetailViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, PVAddCommentViewControllerDelegate>
+@interface PVSiteDetailViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, PVAddCommentViewControllerDelegate, PVDetailsMapViewDelegate>
 {
     PVAddCommentViewController *_addCommentViewController;
     GPUImageView    * _bgCopyImageView;

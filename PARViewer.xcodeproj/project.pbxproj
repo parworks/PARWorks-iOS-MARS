@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42028A0216C22906002FE1C2 /* map_inner_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 42028A0016C22905002FE1C2 /* map_inner_shadow@2x.png */; };
+		42028A0316C22906002FE1C2 /* map_marker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 42028A0116C22905002FE1C2 /* map_marker@2x.png */; };
+		42028A0C16C22988002FE1C2 /* map_inner_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 42028A0A16C22988002FE1C2 /* map_inner_shadow.png */; };
+		42028A0D16C22988002FE1C2 /* map_marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 42028A0B16C22988002FE1C2 /* map_marker.png */; };
+		42028A1216C24A3D002FE1C2 /* PVMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42028A1016C24A3C002FE1C2 /* PVMapViewController.m */; };
+		42028A1316C24A3D002FE1C2 /* PVMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42028A1116C24A3C002FE1C2 /* PVMapViewController.xib */; };
+		42028A1716C254D8002FE1C2 /* UINavigationBar+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 42028A1616C254D8002FE1C2 /* UINavigationBar+Additions.m */; };
 		425345A616BE768E00D5A00A /* leave_comment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 425345A416BE768D00D5A00A /* leave_comment@2x.png */; };
 		425345A716BE768E00D5A00A /* missing_image_78x78@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 425345A516BE768D00D5A00A /* missing_image_78x78@2x.png */; };
 		425345AA16BE769900D5A00A /* leave_comment.png in Resources */ = {isa = PBXBuildFile; fileRef = 425345A816BE769900D5A00A /* leave_comment.png */; };
@@ -282,6 +289,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		42028A0016C22905002FE1C2 /* map_inner_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map_inner_shadow@2x.png"; sourceTree = "<group>"; };
+		42028A0116C22905002FE1C2 /* map_marker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map_marker@2x.png"; sourceTree = "<group>"; };
+		42028A0A16C22988002FE1C2 /* map_inner_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_inner_shadow.png; sourceTree = "<group>"; };
+		42028A0B16C22988002FE1C2 /* map_marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_marker.png; sourceTree = "<group>"; };
+		42028A0F16C24A3C002FE1C2 /* PVMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVMapViewController.h; sourceTree = "<group>"; };
+		42028A1016C24A3C002FE1C2 /* PVMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVMapViewController.m; sourceTree = "<group>"; };
+		42028A1116C24A3C002FE1C2 /* PVMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PVMapViewController.xib; sourceTree = "<group>"; };
+		42028A1516C254D8002FE1C2 /* UINavigationBar+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Additions.h"; sourceTree = "<group>"; };
+		42028A1616C254D8002FE1C2 /* UINavigationBar+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Additions.m"; sourceTree = "<group>"; };
 		425345A416BE768D00D5A00A /* leave_comment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "leave_comment@2x.png"; sourceTree = "<group>"; };
 		425345A516BE768D00D5A00A /* missing_image_78x78@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "missing_image_78x78@2x.png"; sourceTree = "<group>"; };
 		425345A816BE769900D5A00A /* leave_comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leave_comment.png; sourceTree = "<group>"; };
@@ -726,7 +742,6 @@
 				4351D0B716B4C5DB0039FE88 /* UIKit.framework */,
 				4351D0B916B4C5DB0039FE88 /* Foundation.framework */,
 				4351D0BB16B4C5DB0039FE88 /* CoreGraphics.framework */,
-				HYXIFWTDXJPPRRMDCEPMDTJH /* SparkInspector.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -766,6 +781,8 @@
 		4351D0E816B4C6CA0039FE88 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				42028A0A16C22988002FE1C2 /* map_inner_shadow.png */,
+				42028A0B16C22988002FE1C2 /* map_marker.png */,
 				A0AF6F5A16C0E2E7003457A2 /* overlay_spec_example_1.jpg */,
 				A0AF6F5B16C0E2E7003457A2 /* overlay_spec_example_1.pm */,
 				43998BB316BDDADA008B34C2 /* parworks.png */,
@@ -903,6 +920,8 @@
 				437C3F1016BE249800822EDD /* UIView+ContentScaling.m */,
 				437C3F1116BE249800822EDD /* UIViewAdditions.h */,
 				437C3F1216BE249800822EDD /* UIViewAdditions.m */,
+				42028A1516C254D8002FE1C2 /* UINavigationBar+Additions.h */,
+				42028A1616C254D8002FE1C2 /* UINavigationBar+Additions.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1154,6 +1173,8 @@
 				425345A416BE768D00D5A00A /* leave_comment@2x.png */,
 				434524A116C0EC2F005D0636 /* shingle_background@2x.png */,
 				425345A516BE768D00D5A00A /* missing_image_78x78@2x.png */,
+				42028A0016C22905002FE1C2 /* map_inner_shadow@2x.png */,
+				42028A0116C22905002FE1C2 /* map_marker@2x.png */,
 			);
 			path = "Resources@2x";
 			sourceTree = "<group>";
@@ -1219,6 +1240,9 @@
 				43E9F71016BFA41800AC2672 /* PVTrendingSitesController.h */,
 				43E9F71116BFA41800AC2672 /* PVTrendingSitesController.m */,
 				43E9F71216BFA41800AC2672 /* PVTrendingSitesController.xib */,
+				42028A0F16C24A3C002FE1C2 /* PVMapViewController.h */,
+				42028A1016C24A3C002FE1C2 /* PVMapViewController.m */,
+				42028A1116C24A3C002FE1C2 /* PVMapViewController.xib */,
 				4345249E16C0E90B005D0636 /* UINavigationController+BetterRotationBehavior.h */,
 				4345249F16C0E90C005D0636 /* UINavigationController+BetterRotationBehavior.m */,
 			);
@@ -1491,6 +1515,11 @@
 				434524A216C0EC2F005D0636 /* shingle_background@2x.png in Resources */,
 				A0AF6F5C16C0E2E7003457A2 /* overlay_spec_example_1.jpg in Resources */,
 				A0AF6F5D16C0E2E7003457A2 /* overlay_spec_example_1.pm in Resources */,
+				42028A0216C22906002FE1C2 /* map_inner_shadow@2x.png in Resources */,
+				42028A0316C22906002FE1C2 /* map_marker@2x.png in Resources */,
+				42028A0C16C22988002FE1C2 /* map_inner_shadow.png in Resources */,
+				42028A0D16C22988002FE1C2 /* map_marker.png in Resources */,
+				42028A1316C24A3D002FE1C2 /* PVMapViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1613,6 +1642,8 @@
 				434524A016C0E90C005D0636 /* UINavigationController+BetterRotationBehavior.m in Sources */,
 				A0AF6F7016C0F84A003457A2 /* UIFont+ThemeAdditions.m in Sources */,
 				A0AF6F6616C0EE17003457A2 /* ARTotalAugmentedImagesView.m in Sources */,
+				42028A1216C24A3D002FE1C2 /* PVMapViewController.m in Sources */,
+				42028A1716C254D8002FE1C2 /* UINavigationBar+Additions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

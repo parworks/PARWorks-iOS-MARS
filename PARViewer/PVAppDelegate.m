@@ -10,6 +10,7 @@
 #import "ARManager.h"
 #import "ARManager+MARS_Extensions.h"
 #import "UIFont+ThemeAdditions.h"
+#import "UINavigationBar+Additions.h"
 
 NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Login:FBSessionStateChangedNotification";
 
@@ -60,9 +61,7 @@ NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Log
     for (UINavigationController * c in _contentControllers) {
         [[[c view] layer] setCornerRadius: 5];
         if ([[[c viewControllers] lastObject] isKindOfClass: [PVSearchViewController class]] == NO) {
-            [[[c navigationBar] layer] setShadowRadius: 3];
-            [[[c navigationBar] layer] setShadowOffset: CGSizeMake(0, 1)];
-            [[[c navigationBar] layer] setShadowOpacity: 0.3];
+            [[c navigationBar] addShadowEffect];
         }
     }
     

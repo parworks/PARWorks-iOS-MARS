@@ -9,6 +9,7 @@
 #import "PVCommentTableViewCell.h"
 #import "NSString+DateConversion.h"
 #import "PVImageCacheManager.h"
+#import "UIFont+ThemeAdditions.h"
 
 @implementation PVCommentTableViewCell
 
@@ -34,14 +35,14 @@
         [_nameLabel setBackgroundColor:[UIColor clearColor]];
         [_nameLabel setUserInteractionEnabled:NO];
         [_nameLabel setTextColor:[UIColor colorWithRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1.0]];
-        [_nameLabel setFont:[UIFont systemFontOfSize:15.0]];
+        [_nameLabel setFont:[UIFont parworksFontWithSize:15.0]];
         [self.contentView addSubview:_nameLabel];
         
         self.timestampLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         [_timestampLabel setBackgroundColor:[UIColor clearColor]];
         [_timestampLabel setUserInteractionEnabled:NO];
         [_timestampLabel setTextColor:[UIColor colorWithRed:115.0/255.0 green:115.0/255.0 blue:115.0/255.0 alpha:1.0]];
-        [_timestampLabel setFont:[UIFont systemFontOfSize:15.0]];
+        [_timestampLabel setFont:[UIFont parworksFontWithSize:15.0]];
         [self.contentView addSubview:_timestampLabel];
         
 //        self.contentLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -56,7 +57,7 @@
         self.contentTextView = [[UITextView alloc] initWithFrame:CGRectZero];
 		[_contentTextView setBackgroundColor:[UIColor clearColor]];
         [_contentTextView setTextColor:[UIColor colorWithRed:115.0/255.0 green:115.0/255.0 blue:115.0/255.0 alpha:1.0]];
-        [_contentTextView setFont:[UIFont systemFontOfSize:15.0]];
+        [_contentTextView setFont:[UIFont parworksFontWithSize:15.0]];
         [_contentTextView setDataDetectorTypes:UIDataDetectorTypeAddress | UIDataDetectorTypeLink | UIDataDetectorTypePhoneNumber];
         [_contentTextView setScrollEnabled:NO];
         [_contentTextView setEditable:NO];
@@ -80,9 +81,9 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    [_bgImageView setFrame:CGRectMake(10.0, 0.0, self.frame.size.width - 20.0, self.frame.size.height)];
+    [_bgImageView setFrame:CGRectMake(10.0, 0.0, self.frame.size.width - 20.0, self.frame.size.height - 1.0)];
     [_avatarImageView setFrame:CGRectMake(_bgImageView.frame.origin.x + 10.0, 10.0, 26.0, 26.0)];
-    [_nameLabel setFrame:CGRectMake(_avatarImageView.frame.origin.x + _avatarImageView.frame.size.width + 10.0, _avatarImageView.frame.origin.y - 2.0, 247.0, 18.0)];
+    [_nameLabel setFrame:CGRectMake(_avatarImageView.frame.origin.x + _avatarImageView.frame.size.width + 10.0, _avatarImageView.frame.origin.y - 2.0, 247.0, 22.0)];
     [_timestampLabel setFrame:CGRectMake(_nameLabel.frame.origin.x, _nameLabel.frame.origin.y + _nameLabel.frame.size.height, _nameLabel.frame.size.width, _nameLabel.frame.size.height)];
     
     CGSize size = [_contentTextView.text sizeWithFont:_contentTextView.font

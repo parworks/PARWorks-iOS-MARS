@@ -23,4 +23,6 @@
 @property (nonatomic, strong) NSArray *nearbySites;
 @property (nonatomic, strong) NSMutableArray *annotations;
 
+@property (nonatomic, strong) UIButton *nearbyMapSearchButton;
+
 @end

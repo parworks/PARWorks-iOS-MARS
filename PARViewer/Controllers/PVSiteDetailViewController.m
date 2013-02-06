@@ -17,6 +17,9 @@
 #import "UINavigationItem+PVAdditions.h"
 #import "UIColor+ThemeAdditions.h"
 #import "PVCommentTableViewCell.h"
+#import "UIFont+ThemeAdditions.h"
+#import "PVMapViewController.h"
+#import "UINavigationBar+Additions.h"
 
 #define PARALLAX_WINDOW_HEIGHT 165.0
 #define PARALLAX_IMAGE_HEIGHT 300.0
@@ -47,7 +50,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [self update];
-
+    
     // register to receive updates about the site in the future
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:NOTIF_SITE_UPDATED object: self.site];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:NOTIF_SITE_COMMENTS_UPDATED object: self.site];
@@ -87,13 +90,13 @@
     
     [self setupTableFooterView];
     [self setupTableHeaderView];
-  
+    
     self.parallaxView = [[PVParallaxTableView alloc] initWithBackgroundView:_headerImageView
                                                         foregroundTableView:_tableView
                                                                windowHeight:PARALLAX_WINDOW_HEIGHT];
     _parallaxView.frame = CGRectMake(0, 0, self.view.frame.size.width, [UIScreen mainScreen].applicationFrame.size.height - self.navigationController.navigationBar.frame.size.height);
     _parallaxView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    _parallaxView.backgroundColor = [UIColor clearColor];
+    _parallaxView.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
     [_parallaxView setTableHeaderView:_tableHeaderView headerExpansionEnabled:NO];
     [_parallaxView setLocalDelegate:self];
     [self.view addSubview:_parallaxView];
@@ -101,17 +104,17 @@
 
 - (void)setupTableFooterView{
     UIView *tableFooterView = [[UIView alloc]initWithFrame:CGRectMake(0.0, 10.0, 320.0, 51.0)];
-    [tableFooterView setBackgroundColor:[UIColor clearColor]];
+    [tableFooterView setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0]];
     
     UIButton *addCommentButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0, 10.0, 300.0, 31.0)];
     [addCommentButton addTarget:self action:@selector(addCommentButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [addCommentButton setBackgroundColor:[UIColor colorWithRed:240.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1.0]];
     [addCommentButton setTitle:@"Leave a Comment" forState:UIControlStateNormal];
     [addCommentButton setTitleColor:[UIColor colorWithRed:50.0/255.0 green:98.0/255.0 blue:162.0/255.0 alpha:1.0] forState:UIControlStateNormal];
-    [addCommentButton.titleLabel setFont:[UIFont boldSystemFontOfSize:14.0]];
+    [addCommentButton.titleLabel setFont:[UIFont boldParworksFontWithSize:14.0]];
     [addCommentButton.layer setBorderWidth:1.0];
     [addCommentButton.layer setBorderColor:[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1.0].CGColor];
-    [addCommentButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)];
+    [addCommentButton setTitleEdgeInsets:UIEdgeInsetsMake(10.0, 0.0, 0.0, 0.0)];
     [addCommentButton setImage:[UIImage imageNamed:@"leave_comment.png"] forState:UIControlStateNormal];
     [addCommentButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 15.0)];
     [addCommentButton setAdjustsImageWhenHighlighted:NO];
@@ -123,20 +126,32 @@
 - (void)setupTableHeaderView{
     self.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 0.0)];
     [_tableHeaderView setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0]];
+        
+    CGFloat headerHeight = 0.0;
     
     self.detailsMapView = [[PVDetailsMapView alloc] initWithSite:_site];
-    [_detailsMapView setFrame:CGRectMake(0.0, 0.0, _tableHeaderView.frame.size.width, 165.0)];
+    _detailsMapView.delegate = self;
+    if(_site.location.latitude == 0.0 && _site.location.latitude == 0.0)
+        headerHeight = 55.0;
+    else
+        headerHeight = 165.0;
+    [_detailsMapView setFrame:CGRectMake(0.0, 0.0, _tableHeaderView.frame.size.width, headerHeight)];
     [_tableHeaderView addSubview:_detailsMapView];
     
-    self.detailsPhotoScrollView = [[PVDetailsPhotoScrollView alloc] initWithSite:_site];
-    [_detailsPhotoScrollView setFrame:CGRectMake(0.0, _detailsMapView.frame.origin.y + _detailsMapView.frame.size.height, _tableHeaderView.frame.size.width, 132.0)];
-    [_tableHeaderView addSubview:_detailsPhotoScrollView];
+    if(_site.totalAugmentedImages > 0){
+        self.detailsPhotoScrollView = [[PVDetailsPhotoScrollView alloc] initWithSite:_site];
+        [_detailsPhotoScrollView setFrame:CGRectMake(0.0, _detailsMapView.frame.origin.y + _detailsMapView.frame.size.height, _tableHeaderView.frame.size.width, 132.0)];
+        [_tableHeaderView addSubview:_detailsPhotoScrollView];
+        headerHeight = _detailsPhotoScrollView.frame.origin.y + _detailsPhotoScrollView.frame.size.height;
+    }
     
-    [_tableHeaderView setFrame:CGRectMake(_tableHeaderView.frame.origin.x, _tableHeaderView.frame.origin.y, _tableHeaderView.frame.size.width, _detailsPhotoScrollView.frame.origin.y + _detailsPhotoScrollView.frame.size.height)];
+    [_tableHeaderView setFrame:CGRectMake(_tableHeaderView.frame.origin.x, _tableHeaderView.frame.origin.y, _tableHeaderView.frame.size.width, headerHeight)];
 }
 
 - (void)setupNavigationItem
 {
+    [self.navigationController.navigationBar addShadowEffect];
+    
     // Add the button in the upper left that opens the sidebar
     UIButton *customButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [customButton setBackgroundImage:[UIImage imageNamed:@"bar_item_back"] forState:UIControlStateNormal];
@@ -281,7 +296,7 @@
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 0.0, 300.0, 35.0)];
     [label setBackgroundColor:[UIColor clearColor]];
     [label setTextColor:[UIColor colorWithRed:115.0/255.0 green:115.0/255.0 blue:115.0/255.0 alpha:1.0]];
-    [label setFont:[UIFont systemFontOfSize:12.0]];
+    [label setFont:[UIFont parworksFontWithSize:12.0]];
     label.text = sectionTitle;
     [label sizeToFit];
     [label setFrame:CGRectMake(label.frame.origin.x, 15.0, label.frame.size.width, label.frame.size.height)];
@@ -326,7 +341,7 @@
 {
     ARSiteComment *comment = (ARSiteComment*)[_site.comments objectAtIndex:indexPath.row];
     
-    CGSize size = [comment.body sizeWithFont:[UIFont systemFontOfSize:15.0]
+    CGSize size = [comment.body sizeWithFont:[UIFont parworksFontWithSize:15.0]
                            constrainedToSize:CGSizeMake(247.0, MAXFLOAT)
                                lineBreakMode:NSLineBreakByWordWrapping];
     CGFloat contentHeight = MAX(size.height, 20.0);
@@ -363,9 +378,16 @@
     }
 }
 
+#pragma mark
+#pragma mark PVDetailsMapViewDelegate methods
+
+- (void)mapViewPressed{
+    [self.navigationController pushViewController:[[PVMapViewController alloc] initWithSite:_site] animated:YES];
+}
+
 - (void)receivedFacebookNotification:(NSNotification *)notification {
     if([[notification name] isEqualToString:NOTIF_FACEBOOK_INFO_REQUEST]){
-       
+        
     }
     if([[notification name] isEqualToString:NOTIF_FACEBOOK_LOGGED_IN] && [[notification object] isEqualToString:@"YES"]){
         [self showAddCommentViewController];
