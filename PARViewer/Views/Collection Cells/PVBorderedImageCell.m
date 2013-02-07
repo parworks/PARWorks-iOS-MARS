@@ -30,6 +30,24 @@
 	return self;
 }
 
+- (void)setHighlighted:(BOOL)highlighted
+{
+    if (highlighted) {
+        CAShapeLayer * l = [CAShapeLayer layer];
+        [l setBackgroundColor: [[UIColor colorWithWhite:0 alpha:0.4] CGColor]];
+        [l setName: @"highlight"];
+        [l setFrame: self.bounds];
+        [self.layer addSublayer: l];
+    } else {
+
+        CALayer * l = nil;
+        for (l in [self.layer sublayers])
+            if ([[l name] isEqualToString: @"highlight"])
+                break;
+        [l removeFromSuperlayer];
+    }
+}
+
 - (void)setUrl:(NSURL *)url
 {
 	// stop listening for image availability

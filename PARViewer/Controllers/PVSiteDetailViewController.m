@@ -192,7 +192,8 @@
         overlays = nil;
     }
     
-    ARAugmentedPhoto *photo = [[ARAugmentedPhoto alloc] initWithImage: img andOverlayJSON: overlays];
+    float scale = img.size.width / _site.originalImageWidth;
+    ARAugmentedPhoto *photo = [[ARAugmentedPhoto alloc] initWithScaledImage: img atScale: scale andOverlayJSON: overlays];
     [_headerImageView setAugmentedPhoto: photo];
 }
 
@@ -407,8 +408,9 @@
     NSURL * url = [_site URLForRecentlyAugmentedImageAtIndex: index];
     UIImage * img = [[PVImageCacheManager shared] imageForURL: url];
     NSDictionary * json = [_site overlayJSONForRecentlyAugmentedImageAtIndex: index];
-
-    ARAugmentedPhoto * photo = [[ARAugmentedPhoto alloc] initWithImage:img andOverlayJSON: json];
+    
+    float scale = img.size.width / _site.originalImageWidth;
+    ARAugmentedPhoto * photo = [[ARAugmentedPhoto alloc] initWithScaledImage:img atScale: scale andOverlayJSON: json];
     PVAugmentedPhotoViewController * c = [[PVAugmentedPhotoViewController alloc] init];
     [c setAugmentedPhoto: photo];
     [c setModalTransitionStyle: UIModalTransitionStyleCoverVertical];

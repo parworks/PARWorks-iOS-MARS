@@ -11,6 +11,7 @@
 #import "ARManager+MARS_Extensions.h"
 #import "UIFont+ThemeAdditions.h"
 #import "UINavigationBar+Additions.h"
+#import "PVSiteDetailViewController.h"
 
 NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Login:FBSessionStateChangedNotification";
 
@@ -25,27 +26,14 @@ NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Log
     
     // setup appearance
     NSMutableDictionary * navigationTextAttributes = [NSMutableDictionary dictionary];
-    UINavigationBar * navigationBarAppearance = [UINavigationBar appearance];
+    UINavigationBar * navigationBarAppearance = [UINavigationBar appearanceWhenContainedIn: [UINavigationController class], nil];
     [navigationTextAttributes setObject:[UIColor colorWithWhite:0.2 alpha:1] forKey: UITextAttributeTextColor];
     [navigationTextAttributes setObject:[UIFont parworksFontWithSize: 18] forKey: UITextAttributeFont];
     [navigationTextAttributes setObject:[UIColor whiteColor] forKey: UITextAttributeTextShadowColor];
     [navigationTextAttributes setObject:[NSValue valueWithCGPoint: CGPointMake(0,1)] forKey: UITextAttributeTextShadowOffset];
     [navigationBarAppearance setTitleTextAttributes: navigationTextAttributes];
-    
-    UIBarButtonItem * barButtonItemAppearance = [UIBarButtonItem appearance];
-    
-    NSMutableDictionary * barButtonItemTextAttributes = [NSMutableDictionary dictionary];
-    [barButtonItemTextAttributes setObject:[UIColor colorWithWhite:0.2 alpha:1] forKey: UITextAttributeTextColor];
-    [barButtonItemTextAttributes setObject:[UIFont parworksFontWithSize: 12] forKey: UITextAttributeFont];
-    [barButtonItemTextAttributes setObject:[UIColor whiteColor] forKey: UITextAttributeTextShadowColor];
-    [barButtonItemTextAttributes setObject:[NSValue valueWithCGPoint: CGPointMake(0,1)] forKey: UITextAttributeTextShadowOffset];
 
-    [barButtonItemAppearance setTitleTextAttributes:barButtonItemTextAttributes forState:UIControlStateNormal];
-    
-    [barButtonItemAppearance setTintColor:[UIColor colorWithRed:235.0/255.0 green:235.0/255.0 blue:235.0/255.0 alpha:1.0]];
-    [barButtonItemAppearance setTitlePositionAdjustment:UIOffsetMake(0.0, 3.0) forBarMetrics:UIBarMetricsDefault];
-    
-    UIImage * navBarImage = [[UIImage imageNamed:@"navigation_bar_background"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7.0, 0, 7.0)];
+    UIImage * navBarImage = [[UIImage imageNamed:@"navigation_bar_background.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7.0, 0, 7.0)];
     [navigationBarAppearance setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsDefault];
     [navigationBarAppearance setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsLandscapePhone];
     

@@ -39,6 +39,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if (_augmentedPhoto) {
+        [self setAugmentedPhoto: _augmentedPhoto];
+        [_augmentedView setAlpha: 1];
+        [_toolbarContainer setAlpha: 1];
+    }
     _firstLoad = YES;
 }
 
@@ -134,10 +139,10 @@
     _augmentedPhoto = augmentedPhoto;
     if (_augmentedPhoto.response == BackendResponseFinished) {
         [self.view bringSubviewToFront: _augmentedView];
+        [self.view bringSubviewToFront: _toolbarContainer];
         _augmentedView.transform = CGAffineTransformIdentity;
         [_augmentedView setAugmentedPhoto: _augmentedPhoto];
         _augmentedView.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2);
-        _augmentedView.delegate = self;
     }
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageAugmented:) name:NOTIF_AUGMENTED_PHOTO_UPDATED object:_augmentedPhoto];

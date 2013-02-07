@@ -82,7 +82,8 @@
         overlays = nil;
     }
     
-    ARAugmentedPhoto *photo = [[ARAugmentedPhoto alloc] initWithImage: img andOverlayJSON: overlays];
+    float scale = img.size.width / _site.originalImageWidth;
+    ARAugmentedPhoto *photo = [[ARAugmentedPhoto alloc] initWithScaledImage: img atScale: scale andOverlayJSON: overlays];
     [self.posterImageView setAugmentedPhoto: photo];
     [self.posterImageView.totalAugmentedImagesView setCount:_site.totalAugmentedImages];
     [self.textLabel setText: [_site name] ? [_site name] : @"Loading..."];
