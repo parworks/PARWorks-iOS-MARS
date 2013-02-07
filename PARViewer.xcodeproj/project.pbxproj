@@ -13,11 +13,11 @@
 		42028A0D16C22988002FE1C2 /* map_marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 42028A0B16C22988002FE1C2 /* map_marker.png */; };
 		42028A1216C24A3D002FE1C2 /* PVMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42028A1016C24A3C002FE1C2 /* PVMapViewController.m */; };
 		42028A1316C24A3D002FE1C2 /* PVMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42028A1116C24A3C002FE1C2 /* PVMapViewController.xib */; };
-		42028A1716C254D8002FE1C2 /* UINavigationBar+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 42028A1616C254D8002FE1C2 /* UINavigationBar+Additions.m */; };
 		425345A616BE768E00D5A00A /* leave_comment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 425345A416BE768D00D5A00A /* leave_comment@2x.png */; };
 		425345A716BE768E00D5A00A /* missing_image_78x78@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 425345A516BE768D00D5A00A /* missing_image_78x78@2x.png */; };
 		425345AA16BE769900D5A00A /* leave_comment.png in Resources */ = {isa = PBXBuildFile; fileRef = 425345A816BE769900D5A00A /* leave_comment.png */; };
 		425345AB16BE769900D5A00A /* missing_image_78x78.png in Resources */ = {isa = PBXBuildFile; fileRef = 425345A916BE769900D5A00A /* missing_image_78x78.png */; };
+		427EFE9416C351F1000B49C6 /* UINavigationBar+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 427EFE9316C351F1000B49C6 /* UINavigationBar+Additions.m */; };
 		42809EF416BE28E3007B60F5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42809EF316BE28E2007B60F5 /* MapKit.framework */; };
 		42AEFEAC16BFB12A00BFE97C /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42AEFEA616BFB11A00BFE97C /* libfacebook_ios_sdk.a */; };
 		42AEFEAE16BFB16700BFE97C /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42AEFEAD16BFB16700BFE97C /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -296,12 +296,12 @@
 		42028A0F16C24A3C002FE1C2 /* PVMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVMapViewController.h; sourceTree = "<group>"; };
 		42028A1016C24A3C002FE1C2 /* PVMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVMapViewController.m; sourceTree = "<group>"; };
 		42028A1116C24A3C002FE1C2 /* PVMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PVMapViewController.xib; sourceTree = "<group>"; };
-		42028A1516C254D8002FE1C2 /* UINavigationBar+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Additions.h"; sourceTree = "<group>"; };
-		42028A1616C254D8002FE1C2 /* UINavigationBar+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Additions.m"; sourceTree = "<group>"; };
 		425345A416BE768D00D5A00A /* leave_comment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "leave_comment@2x.png"; sourceTree = "<group>"; };
 		425345A516BE768D00D5A00A /* missing_image_78x78@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "missing_image_78x78@2x.png"; sourceTree = "<group>"; };
 		425345A816BE769900D5A00A /* leave_comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leave_comment.png; sourceTree = "<group>"; };
 		425345A916BE769900D5A00A /* missing_image_78x78.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = missing_image_78x78.png; sourceTree = "<group>"; };
+		427EFE9216C351F1000B49C6 /* UINavigationBar+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Additions.h"; sourceTree = "<group>"; };
+		427EFE9316C351F1000B49C6 /* UINavigationBar+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Additions.m"; sourceTree = "<group>"; };
 		42809EF316BE28E2007B60F5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		42AEFE9F16BFB11A00BFE97C /* facebook-ios-sdk.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "facebook-ios-sdk.xcodeproj"; path = "Submodules/Facebook/src/facebook-ios-sdk.xcodeproj"; sourceTree = "<group>"; };
 		42AEFEAD16BFB16700BFE97C /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -920,8 +920,6 @@
 				437C3F1016BE249800822EDD /* UIView+ContentScaling.m */,
 				437C3F1116BE249800822EDD /* UIViewAdditions.h */,
 				437C3F1216BE249800822EDD /* UIViewAdditions.m */,
-				42028A1516C254D8002FE1C2 /* UINavigationBar+Additions.h */,
-				42028A1616C254D8002FE1C2 /* UINavigationBar+Additions.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1205,6 +1203,8 @@
 				43E9F6F416BFA41800AC2672 /* UIColor+ThemeAdditions.m */,
 				43E9F6F516BFA41800AC2672 /* UINavigationItem+PVAdditions.h */,
 				43E9F6F616BFA41800AC2672 /* UINavigationItem+PVAdditions.m */,
+				427EFE9216C351F1000B49C6 /* UINavigationBar+Additions.h */,
+				427EFE9316C351F1000B49C6 /* UINavigationBar+Additions.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1643,7 +1643,7 @@
 				A0AF6F7016C0F84A003457A2 /* UIFont+ThemeAdditions.m in Sources */,
 				A0AF6F6616C0EE17003457A2 /* ARTotalAugmentedImagesView.m in Sources */,
 				42028A1216C24A3D002FE1C2 /* PVMapViewController.m in Sources */,
-				42028A1716C254D8002FE1C2 /* UINavigationBar+Additions.m in Sources */,
+				427EFE9416C351F1000B49C6 /* UINavigationBar+Additions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
