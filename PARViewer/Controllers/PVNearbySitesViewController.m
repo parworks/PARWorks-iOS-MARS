@@ -79,8 +79,9 @@
 
 }
 
-- (void)searchNearbySites{
-    [[ARManager shared] findNearbySites:1.0 withCompletionBlock:^(NSArray* sites){
+- (void)searchNearbySites
+{
+    [[ARManager shared] findNearbySites:1.0 withCompletionBlock:^(NSArray* sites, CLLocation * location){
         self.nearbySites = sites;
         bLoadedOnce = NO;
         [self refetchAnnotations];
@@ -109,7 +110,7 @@
         UITableViewCell *c = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"emptyCell"];
         if (!c){
             c = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"emptyCell"];
-            [c setBackgroundColor: [UIColor colorWithWhite:0.88 alpha:1]];
+            [c.contentView setBackgroundColor: [UIColor colorWithWhite:0.88 alpha:1]];
             [c setSelectionStyle: UITableViewCellSelectionStyleNone];
             
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 10.0, c.contentView.frame.size.width, 24.0)];

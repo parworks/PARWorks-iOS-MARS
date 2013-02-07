@@ -136,7 +136,7 @@
         self.logoView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 45, 45)];
         [self addSubview:_logoView];
 
-        self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 138, 35)];
+        self.nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _nameLabel.backgroundColor = [UIColor clearColor];
         _nameLabel.textColor = [UIColor whiteColor];
         _nameLabel.shadowColor = [UIColor colorWithWhite:0 alpha:0.5];
@@ -145,7 +145,7 @@
         _nameLabel.adjustsFontSizeToFitWidth = YES;
         [self addSubview: _nameLabel];
         
-        self.augmentationLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 138, 24)];
+        self.augmentationLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _augmentationLabel.backgroundColor = [UIColor clearColor];
         _augmentationLabel.textColor = [UIColor colorWithWhite:1 alpha:0.8];
         _augmentationLabel.shadowColor = [UIColor colorWithWhite:0 alpha:0.5];
@@ -170,9 +170,16 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    _logoView.frame = CGRectMake(7, 14, _logoView.frame.size.width, _logoView.frame.size.height);
-    _nameLabel.frame = CGRectMake(55, 14, _nameLabel.frame.size.width, _nameLabel.frame.size.height);
-    _augmentationLabel.frame = CGRectMake(55, 37, _augmentationLabel.frame.size.width, _augmentationLabel.frame.size.height);
+    
+    float labelPaddingLeft = 0;
+    if (_site.logoURL) {
+        labelPaddingLeft = _logoView.frame.size.width;
+        _logoView.frame = CGRectMake(7, 14, _logoView.frame.size.width, _logoView.frame.size.height);
+    }
+    _nameLabel.frame = CGRectMake(10 + labelPaddingLeft, 14, kPVCardShingleWidth - 22 - labelPaddingLeft, 35);
+    _nameLabel.textAlignment = _site.logoURL ? NSTextAlignmentLeft : NSTextAlignmentCenter;
+    _augmentationLabel.frame = CGRectMake(10 + labelPaddingLeft, 37, kPVCardShingleWidth - 22 - labelPaddingLeft, 24);
+    _augmentationLabel.textAlignment = _site.logoURL ? NSTextAlignmentLeft : NSTextAlignmentCenter;
 }
 
 - (void)setSite:(ARSite *)site
@@ -180,10 +187,7 @@
     _site = site;
     _nameLabel.text = _site.name;
     _augmentationLabel.text = [NSString stringWithFormat: @"%lu Augmented Photos", _site.totalAugmentedImages];
-
-    // TODO: Set to site's logo url
-    NSURL *url = [NSURL URLWithString:@"http://upload.wikimedia.org/wikipedia/en/thumb/3/3b/Chipotle_Mexican_Grill_logo.svg/200px-Chipotle_Mexican_Grill_logo.svg.png"];
-    [_logoView setImageWithURL:url];
+    [_logoView setImageWithURL: _site.logoURL];
 }
 
 @end
