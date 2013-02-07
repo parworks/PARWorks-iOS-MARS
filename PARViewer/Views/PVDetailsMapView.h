@@ -17,7 +17,6 @@
 @property (nonatomic, strong) ARSite *site;
 @property (nonatomic, strong) UILabel *identifierLabel;
 @property (nonatomic, strong) UILabel *addressLabel;
-@property (nonatomic, strong) UIButton *mapButton;
 
 @property (nonatomic, strong) UIView *mapContainerView;
 @property (nonatomic, strong) UIButton *mapShadowButton;

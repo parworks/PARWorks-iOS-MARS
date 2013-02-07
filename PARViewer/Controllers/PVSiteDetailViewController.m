@@ -138,6 +138,7 @@
     if(_site.totalAugmentedImages > 0){
         self.detailsPhotoScrollView = [[PVDetailsPhotoScrollView alloc] initWithSite:_site];
         [_detailsPhotoScrollView setFrame:CGRectMake(0.0, _detailsMapView.frame.origin.y + _detailsMapView.frame.size.height, _tableHeaderView.frame.size.width, 132.0)];
+        [_detailsPhotoScrollView setDelegate: self];
         [_tableHeaderView addSubview:_detailsPhotoScrollView];
         headerHeight = _detailsPhotoScrollView.frame.origin.y + _detailsPhotoScrollView.frame.size.height;
     }
@@ -398,5 +399,21 @@
         [self showAddCommentViewController];
     }
 }
+
+#pragma mark - PVDetailsPhotoScrollViewDelegate methods
+
+- (void)photoAtIndexTapped:(int)index
+{
+    NSURL * url = [_site URLForRecentlyAugmentedImageAtIndex: index];
+    UIImage * img = [[PVImageCacheManager shared] imageForURL: url];
+    NSDictionary * json = [_site overlayJSONForRecentlyAugmentedImageAtIndex: index];
+
+    ARAugmentedPhoto * photo = [[ARAugmentedPhoto alloc] initWithImage:img andOverlayJSON: json];
+    PVAugmentedPhotoViewController * c = [[PVAugmentedPhotoViewController alloc] init];
+    [c setAugmentedPhoto: photo];
+    [c setModalTransitionStyle: UIModalTransitionStyleCoverVertical];
+    [self presentViewController:c animated:YES completion:NULL];
+}
+
 
 @end

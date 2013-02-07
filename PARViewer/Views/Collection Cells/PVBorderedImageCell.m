@@ -6,12 +6,12 @@
 //  Copyright (c) 2013 Ben Gotow. All rights reserved.
 //
 
-#import "PVRecentAugmentedView.h"
+#import "PVBorderedImageCell.h"
 #import "PVImageCacheManager.h"
 #import "PVTrendingSitesController.h"
 #import "NSContainers+NullHandlers.h"
 
-@implementation PVRecentAugmentedView
+@implementation PVBorderedImageCell
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -30,28 +30,23 @@
 	return self;
 }
 
-- (void)setAugmentedImageAttributes:(NSDictionary*)attributes
+- (void)setUrl:(NSURL *)url
 {
 	// stop listening for image availability
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    _augmentedImageAttributes = attributes;
+    _url = url;
 
-	// set the poster image
-	NSURL * url = [NSURL URLWithString: [attributes objectForKey: @"imgGalleryPath" or: nil]];
     UIImage * img = [[PVImageCacheManager shared] imageForURL: url];
-    
 	if (!img) {
 		img = [UIImage imageNamed:@"missing_image_78x78.png"];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteImageReady:) name:NOTIF_IMAGE_READY object: url];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageReady:) name:NOTIF_IMAGE_READY object: url];
 	}
 	[_imageView setImage:img];
 }
 
-- (void)siteImageReady:(NSNotification *)notif
+- (void)imageReady:(NSNotification *)notif
 {
-	NSURL * url = [NSURL URLWithString: [_augmentedImageAttributes objectForKey: @"imgGalleryPath" or: nil]];
-	UIImage * img = [[PVImageCacheManager shared] imageForURL: url];
-
+	UIImage * img = [[PVImageCacheManager shared] imageForURL: _url];
 	[_imageView setImage:img];
 }
 

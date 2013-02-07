@@ -215,7 +215,7 @@
 		43E9F75916BFA41900AC2672 /* PVSidebarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E9F73216BFA41900AC2672 /* PVSidebarTableViewCell.m */; };
 		43E9F75A16BFA41900AC2672 /* PVSiteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E9F73416BFA41900AC2672 /* PVSiteTableViewCell.m */; };
 		43E9F75D16BFA47300AC2672 /* PVBorderedWhiteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E9F75C16BFA47300AC2672 /* PVBorderedWhiteCell.m */; };
-		43E9F76316BFA49800AC2672 /* PVRecentAugmentedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E9F76016BFA49800AC2672 /* PVRecentAugmentedView.m */; };
+		43E9F76316BFA49800AC2672 /* PVBorderedImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E9F76016BFA49800AC2672 /* PVBorderedImageCell.m */; };
 		43E9F76416BFA49800AC2672 /* PVSiteCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E9F76216BFA49800AC2672 /* PVSiteCardView.m */; };
 		43EB601316BCEE7A00A3EE29 /* frontViewControllerDropShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 43EB601116BCEE7A00A3EE29 /* frontViewControllerDropShadow.png */; };
 		A0A44D9016BE2E12003809D3 /* libChipmunk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A44D8F16BE2DF7003809D3 /* libChipmunk.a */; };
@@ -633,8 +633,8 @@
 		43E9F73416BFA41900AC2672 /* PVSiteTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVSiteTableViewCell.m; sourceTree = "<group>"; };
 		43E9F75B16BFA47300AC2672 /* PVBorderedWhiteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVBorderedWhiteCell.h; sourceTree = "<group>"; };
 		43E9F75C16BFA47300AC2672 /* PVBorderedWhiteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVBorderedWhiteCell.m; sourceTree = "<group>"; };
-		43E9F75F16BFA49800AC2672 /* PVRecentAugmentedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVRecentAugmentedView.h; sourceTree = "<group>"; };
-		43E9F76016BFA49800AC2672 /* PVRecentAugmentedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVRecentAugmentedView.m; sourceTree = "<group>"; };
+		43E9F75F16BFA49800AC2672 /* PVBorderedImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVBorderedImageCell.h; sourceTree = "<group>"; };
+		43E9F76016BFA49800AC2672 /* PVBorderedImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVBorderedImageCell.m; sourceTree = "<group>"; };
 		43E9F76116BFA49800AC2672 /* PVSiteCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVSiteCardView.h; sourceTree = "<group>"; };
 		43E9F76216BFA49800AC2672 /* PVSiteCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVSiteCardView.m; sourceTree = "<group>"; };
 		43EB601116BCEE7A00A3EE29 /* frontViewControllerDropShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frontViewControllerDropShadow.png; sourceTree = "<group>"; };
@@ -1319,8 +1319,8 @@
 		43E9F75E16BFA49800AC2672 /* Collection Cells */ = {
 			isa = PBXGroup;
 			children = (
-				43E9F75F16BFA49800AC2672 /* PVRecentAugmentedView.h */,
-				43E9F76016BFA49800AC2672 /* PVRecentAugmentedView.m */,
+				43E9F75F16BFA49800AC2672 /* PVBorderedImageCell.h */,
+				43E9F76016BFA49800AC2672 /* PVBorderedImageCell.m */,
 				43E9F76116BFA49800AC2672 /* PVSiteCardView.h */,
 				43E9F76216BFA49800AC2672 /* PVSiteCardView.m */,
 			);
@@ -1653,7 +1653,7 @@
 				43E9F75916BFA41900AC2672 /* PVSidebarTableViewCell.m in Sources */,
 				43E9F75A16BFA41900AC2672 /* PVSiteTableViewCell.m in Sources */,
 				43E9F75D16BFA47300AC2672 /* PVBorderedWhiteCell.m in Sources */,
-				43E9F76316BFA49800AC2672 /* PVRecentAugmentedView.m in Sources */,
+				43E9F76316BFA49800AC2672 /* PVBorderedImageCell.m in Sources */,
 				43E9F76416BFA49800AC2672 /* PVSiteCardView.m in Sources */,
 				434524A016C0E90C005D0636 /* UINavigationController+BetterRotationBehavior.m in Sources */,
 				A0AF6F7016C0F84A003457A2 /* UIFont+ThemeAdditions.m in Sources */,

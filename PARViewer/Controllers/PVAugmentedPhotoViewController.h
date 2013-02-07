@@ -19,6 +19,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GRCameraOverlayView.h"
+#import "ARAugmentedPhoto.h"
 #import "ARAugmentedView.h"
 #import "PVImageTransferAnimationView.h"
 
@@ -42,7 +43,7 @@
 }
 
 @property (nonatomic, weak) ARSite * site;
-
+@property (nonatomic, retain) ARAugmentedPhoto * augmentedPhoto;
 
 #pragma mark - Lifecycle
 

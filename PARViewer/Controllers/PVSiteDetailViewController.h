@@ -14,7 +14,7 @@
 #import "PVDetailsPhotoScrollView.h"
 #import "ARAugmentedView.h"
 
-@interface PVSiteDetailViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, PVAddCommentViewControllerDelegate, PVDetailsMapViewDelegate>
+@interface PVSiteDetailViewController : UIViewController<PVDetailsPhotoScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, PVAddCommentViewControllerDelegate, PVDetailsMapViewDelegate>
 {
     PVAddCommentViewController *_addCommentViewController;
     GPUImageView    * _bgCopyImageView;

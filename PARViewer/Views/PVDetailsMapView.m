@@ -16,23 +16,19 @@
 - (void)initialize{
     [self setBackgroundColor:[UIColor clearColor]];
     
-    self.mapButton = [[UIButton alloc] initWithFrame:CGRectZero];
-    [_mapButton setBackgroundColor:[UIColor clearColor]];
-    [self addSubview:_mapButton];
-    
     self.identifierLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     [_identifierLabel setBackgroundColor:[UIColor clearColor]];
     [_identifierLabel setUserInteractionEnabled:NO];
     [_identifierLabel setTextColor:[UIColor colorWithRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1.0]];
     [_identifierLabel setFont:[UIFont parworksFontWithSize:18.0]];
-    [_mapButton addSubview:_identifierLabel];
+    [self addSubview:_identifierLabel];
     
     self.addressLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     [_addressLabel setBackgroundColor:[UIColor clearColor]];
     [_addressLabel setUserInteractionEnabled:NO];
     [_addressLabel setTextColor:[UIColor colorWithRed:115.0/255.0 green:115.0/255.0 blue:115.0/255.0 alpha:1.0]];
     [_addressLabel setFont:[UIFont parworksFontWithSize:12.0]];
-    [_mapButton addSubview:_addressLabel];
+    [self addSubview:_addressLabel];
     
     self.mapContainerView = [[UIView alloc] initWithFrame:CGRectZero];
     [_mapContainerView setBackgroundColor:[UIColor clearColor]];
@@ -101,11 +97,10 @@
 {
     [super layoutSubviews];
     
-    [_mapButton setFrame:CGRectMake(0.0, 0.0, self.frame.size.width, 63.0)];
-    [_identifierLabel setFrame:CGRectMake(10.0, 10.0, _mapButton.frame.size.width - 20.0, 24.0)];
+    [_identifierLabel setFrame:CGRectMake(10.0, 14, self.frame.size.width - 20.0, 24.0)];
     [_addressLabel setFrame:CGRectMake(_identifierLabel.frame.origin.x, _identifierLabel.frame.origin.y + _identifierLabel.frame.size.height - 4.0, _identifierLabel.frame.size.width, 20.0)];
     
-    [_mapContainerView setFrame:CGRectMake(10.0, _mapButton.frame.origin.y + _mapButton.frame.size.height, self.frame.size.width - 20.0, 100.0)];
+    [_mapContainerView setFrame:CGRectMake(10.0, 60, self.frame.size.width - 20.0, 100.0)];
     [_mapView setFrame:_mapContainerView.bounds];
     [_mapShadowButton setFrame:_mapContainerView.bounds];
 }

@@ -8,7 +8,7 @@
 
 #import "PVDetailsPhotoScrollView.h"
 #import "ARSite+MARS_Extensions.h"
-#import "PVRecentAugmentedView.h"
+#import "PVBorderedImageCell.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UIFont+ThemeAdditions.h"
 
@@ -35,7 +35,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     [aFlowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     
     self.collectionView = [[PSUICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:aFlowLayout];
-    [_collectionView registerClass:[PVRecentAugmentedView class] forCellWithReuseIdentifier:cellIdentifier];
+    [_collectionView registerClass:[PVBorderedImageCell class] forCellWithReuseIdentifier:cellIdentifier];
     [_collectionView setDelegate:self];
     [_collectionView setDataSource:self];
     [_collectionView setBackgroundColor:[UIColor whiteColor]];
@@ -89,21 +89,22 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 
 - (NSInteger)collectionView:(PSUICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [[_site recentlyAugmentedImages] count];
+    return [_site recentlyAugmentedImageCount];
 }
 
 - (PSUICollectionViewCell *)collectionView:(PSUICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    PVRecentAugmentedView *cell = (PVRecentAugmentedView *)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-    NSDictionary * imageAttributes = [[_site recentlyAugmentedImages] objectAtIndex:[indexPath row]];
-    [cell setAugmentedImageAttributes: imageAttributes];
-    
+    PVBorderedImageCell *cell = (PVBorderedImageCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    [cell setUrl: [_site URLForRecentlyAugmentedImageAtIndex: [indexPath row]]];
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {        
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    
+    if ([_delegate respondsToSelector: @selector(photoAtIndexTapped:)])
+        [_delegate photoAtIndexTapped: [indexPath row]];
 }
 
 

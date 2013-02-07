@@ -8,9 +8,9 @@
 
 #import "PSTCollectionView.h"
 
-@interface PVRecentAugmentedView : PSUICollectionViewCell
+@interface PVBorderedImageCell : PSUICollectionViewCell
 
-@property (nonatomic, strong) NSDictionary * augmentedImageAttributes;
+@property (nonatomic, strong) NSURL * url;
 @property (nonatomic, strong) UIImageView * imageView;
 
 @end
