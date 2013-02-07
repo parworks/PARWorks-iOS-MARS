@@ -32,15 +32,12 @@
         _whiteLayer.rasterizationScale = [UIScreen mainScreen].scale;
         [self.layer insertSublayer:_whiteLayer atIndex:0];
         
-        NSBundle *bundle = [NSBundle mainBundle];
-        ARAugmentedPhoto *photo = [[ARAugmentedPhoto alloc] initWithImageFile:[bundle pathForResource:@"overlay_spec_example_1" ofType:@"jpg"]
-                                                                    andPMFile:[bundle pathForResource:@"overlay_spec_example_1" ofType:@"pm"]];
-        self.posterImageView = [[ARAugmentedView alloc] initWithFrame:CGRectMake(10,10,self.frame.size.width-20, 150)];
+        
+        self.posterImageView = [[ARAugmentedView alloc] initWithFrame: CGRectZero];
         _posterImageView.clipsToBounds = YES;
         _posterImageView.animateOutlineViewDrawing = NO;
         _posterImageView.showOutlineViewsOnly = YES;
         _posterImageView.overlayImageViewContentMode = UIViewContentModeScaleAspectFill;
-        _posterImageView.augmentedPhoto = photo;
         _posterImageView.totalAugmentedImagesView.hidden = NO;
         _posterImageView.totalAugmentedImagesView.count = 20;
         [self addSubview: self.posterImageView];
@@ -52,9 +49,7 @@
 {
     [super layoutSubviews];
     
-    CGRect posterImageFrame = CGRectMake(10,10,self.frame.size.width-20, 150);
-    [self.posterImageView setFrame: posterImageFrame];
-    
+    [self.posterImageView setFrame: CGRectMake(10,10,self.frame.size.width-20, 150)];
     [self.textLabel setFrame: CGRectMake(20, 165, 280, 30)];
     [self.textLabel setBackgroundColor: [UIColor clearColor]];
     [self.detailTextLabel setFrame: CGRectMake(20, 195, 280, 20)];
@@ -65,11 +60,6 @@
     [self.whiteLayer setFrame: whiteLayerFrame];
 }
 
-- (CGRect)posterAugmentedViewFrame
-{
-    return CGRectMake(10,10,self.frame.size.width-20, 150);
-}
-
 - (void)setSite:(ARSite*)site
 {
     if (site == _site)
@@ -77,18 +67,23 @@
     
     _site = site;
     [self siteUpdated: nil];
-
+    
     [[NSNotificationCenter defaultCenter] removeObserver: self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteUpdated:) name:NOTIF_SITE_UPDATED object:_site];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteUpdated:) name:NOTIF_IMAGE_READY object:_site.posterImage];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteUpdated:) name:NOTIF_IMAGE_READY object:_site.posterImageURL];
 }
 
 - (void)siteUpdated:(NSNotification*)notif
 {
     UIImage * img = [[PVImageCacheManager shared] imageForURL: _site.posterImageURL];
-    if (!img)
+    NSDictionary * overlays = _site.posterImageOverlayJSON;
+    if (!img) {
         img = [UIImage imageNamed: @"missing_image_300x150"];
-//    [self.posterImageView setImage: img];
+        overlays = nil;
+    }
+    
+    ARAugmentedPhoto *photo = [[ARAugmentedPhoto alloc] initWithImage: img andOverlayJSON: overlays];
+    [self.posterImageView setAugmentedPhoto: photo];
     [self.posterImageView.totalAugmentedImagesView setCount:_site.totalAugmentedImages];
     [self.textLabel setText: [_site name] ? [_site name] : @"Loading..."];
     [self.detailTextLabel setText: @"Hiya"];
@@ -109,4 +104,16 @@
         _whiteLayer.backgroundColor = [[UIColor whiteColor] CGColor];
     }
 }
+
+- (void)prepareForReuse
+{
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
+    [super prepareForReuse];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
+}
+
 @end

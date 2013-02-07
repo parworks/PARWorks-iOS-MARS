@@ -12,6 +12,7 @@
 #import "GPUImageView.h"
 #import "PVDetailsMapView.h"
 #import "PVDetailsPhotoScrollView.h"
+#import "ARAugmentedView.h"
 
 @interface PVSiteDetailViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, PVAddCommentViewControllerDelegate, PVDetailsMapViewDelegate>
 {
@@ -21,7 +22,7 @@
 
 @property (nonatomic, strong) ARSite * site;
 
-@property (nonatomic, strong) UIImageView *headerImageView;
+@property (nonatomic, strong) ARAugmentedView *headerImageView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIButton * takePhotoButton;
 @property (nonatomic, strong) PVParallaxTableView *parallaxView;

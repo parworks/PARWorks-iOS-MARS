@@ -36,7 +36,6 @@
     self = [super init];
     if (self) {
         self.site = site;
-        
         [site fetchComments];
     }
     return self;
@@ -70,17 +69,14 @@
     [self setupParallaxView];
 }
 
-- (void)setupParallaxView{
-    UIImage * img = [[PVImageCacheManager shared] imageForURL: [_site posterImageURL]];
-    if (!img) {
-        img = [UIImage imageNamed:@"posterImage.png"];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteImageReady:) name:NOTIF_IMAGE_READY object: [_site posterImageURL]];
-    }
-    
-    self.headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, PARALLAX_IMAGE_HEIGHT)];
-    _headerImageView.contentMode = UIViewContentModeScaleAspectFill;
+- (void)setupParallaxView
+{
+    self.headerImageView = [[ARAugmentedView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, PARALLAX_IMAGE_HEIGHT)];
     _headerImageView.backgroundColor = [UIColor colorWithRed:222.0/255.0 green:222.0/255.0 blue:222.0/255.0 alpha:1.0];
-    [_headerImageView setImage: img];
+    [_headerImageView setOverlayImageViewContentMode: UIViewContentModeScaleAspectFill];
+    [_headerImageView setShowOutlineViewsOnly:YES];
+    [_headerImageView setAnimateOutlineViewDrawing: NO];
+    [self updateHeaderImageView: nil];
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     _tableView.backgroundColor = [UIColor clearColor];
@@ -123,7 +119,8 @@
     _tableView.tableFooterView = tableFooterView;
 }
 
-- (void)setupTableHeaderView{
+- (void)setupTableHeaderView
+{
     self.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 0.0)];
     [_tableHeaderView setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0]];
         
@@ -184,10 +181,18 @@
     [self presentViewController:p animated:YES completion:nil];
 }
 
-- (void)siteImageReady:(NSNotification*)notif
+- (void)updateHeaderImageView:(NSNotification*)notif
 {
     UIImage * img = [[PVImageCacheManager shared] imageForURL: [_site posterImageURL]];
-    [_headerImageView setImage: img];
+    NSDictionary * overlays = _site.posterImageOverlayJSON;
+    if (!img) {
+        img = [UIImage imageNamed: @"missing_image_300x150"];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateHeaderImageView) name:NOTIF_IMAGE_READY object:[_site posterImageURL]];
+        overlays = nil;
+    }
+    
+    ARAugmentedPhoto *photo = [[ARAugmentedPhoto alloc] initWithImage: img andOverlayJSON: overlays];
+    [_headerImageView setAugmentedPhoto: photo];
 }
 
 - (void)update
