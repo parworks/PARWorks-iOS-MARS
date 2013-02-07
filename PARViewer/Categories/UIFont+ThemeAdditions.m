@@ -12,12 +12,12 @@
 
 + (UIFont*)boldParworksFontWithSize:(float)size
 {
-    return [UIFont fontWithName:@"HiraKakuProN-W6" size:size];
+    return [UIFont fontWithName:@"Avenir-Medium" size:size];
 }
 
 + (UIFont*)parworksFontWithSize:(float)size
 {
-    return [UIFont fontWithName:@"HiraKakuProN-W3" size:size];
+    return [UIFont fontWithName:@"Avenir-Roman" size:size];
 }
 
 @end

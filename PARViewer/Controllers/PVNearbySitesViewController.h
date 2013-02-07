@@ -14,6 +14,7 @@
     CLLocationCoordinate2D centerCoordinate;
     MKCoordinateRegion region;
     BOOL bLoadedOnce;
+    NSTimer *_panTimer;
 }
 
 @property (nonatomic, strong) MKMapView *mapView;
@@ -24,6 +25,7 @@
 @property (nonatomic, strong) NSArray *nearbySites;
 @property (nonatomic, strong) NSMutableArray *annotations;
 
-@property (nonatomic, strong) UIButton *nearbyMapSearchButton;
+@property (nonatomic, strong) UIButton *mapRefreshButton;
+@property (nonatomic, strong) UIButton *mapRecenterButton;
 
 @end
