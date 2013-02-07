@@ -42,7 +42,7 @@
     _mapView.showsUserLocation = YES;
     _mapView.delegate = self;
     
-    self.mapRecenterButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0, 10.0, 23.0, 21.0)];
+    self.mapRecenterButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0, 10.0, 46, 42)];
     [_mapRecenterButton setAlpha:0.0];
     [_mapRecenterButton addTarget:self action:@selector(findNearbySites) forControlEvents:UIControlEventTouchUpInside];
     [_mapRecenterButton setImage:[UIImage imageNamed:@"map_icon_recenter.png"] forState:UIControlStateNormal];
@@ -78,8 +78,8 @@
 
 - (void)setupMapRefreshButton{
     _mapRefreshButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_mapRefreshButton setBackgroundImage:[UIImage imageNamed:@"bar_item_up"] forState:UIControlStateNormal];
-    [_mapRefreshButton setBackgroundImage:[UIImage imageNamed:@"bar_item_up_highlighted"] forState:UIControlStateHighlighted];
+    [_mapRefreshButton setBackgroundImage:[UIImage imageNamed:@"bar_item_reload"] forState:UIControlStateNormal];
+    [_mapRefreshButton setBackgroundImage:[UIImage imageNamed:@"bar_item_reload_highlighted"] forState:UIControlStateHighlighted];
     _mapRefreshButton.frame = CGRectMake(0, 0, 57, 46);
     [_mapRefreshButton addTarget:self action:@selector(findNearbySites) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem * refresh = [[UIBarButtonItem alloc] initWithCustomView: _mapRefreshButton];

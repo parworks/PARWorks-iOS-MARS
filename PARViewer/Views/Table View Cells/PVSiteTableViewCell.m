@@ -40,6 +40,7 @@
         _posterImageView.overlayImageViewContentMode = UIViewContentModeScaleAspectFill;
         _posterImageView.totalAugmentedImagesView.hidden = NO;
         _posterImageView.totalAugmentedImagesView.count = 20;
+        _posterImageView.userInteractionEnabled = NO;
         [self addSubview: self.posterImageView];
     }
     return self;

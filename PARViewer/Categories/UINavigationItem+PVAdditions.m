@@ -29,12 +29,12 @@
 
 - (void)setLeftJustifiedTitle:(NSString*)title
 {
-    CGRect frame = CGRectMake(8.0, 5.0, 320.0, 40.0);
+    CGRect frame = CGRectMake(8.0, 2.0, 320.0, 40.0);
     UIView *view = [[UIView alloc] initWithFrame: frame];
 
     UILabel * titleLabel = [[UILabel alloc] initWithFrame: frame];
     [titleLabel setTextColor: [UIColor colorWithWhite:0.2 alpha:1]];
-    [titleLabel setFont: [UIFont parworksFontWithSize:18]];
+    [titleLabel setFont: [UIFont parworksFontWithSize:20]];
     [titleLabel setBackgroundColor: [UIColor clearColor]];
     [titleLabel setShadowColor: [UIColor whiteColor]];
     [titleLabel setShadowOffset: CGSizeMake(0,1)];

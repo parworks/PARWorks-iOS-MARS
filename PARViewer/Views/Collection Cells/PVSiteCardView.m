@@ -141,7 +141,7 @@
         _nameLabel.textColor = [UIColor whiteColor];
         _nameLabel.shadowColor = [UIColor colorWithWhite:0 alpha:0.5];
         _nameLabel.shadowOffset = CGSizeMake(0, -1);
-        _nameLabel.font = [UIFont boldParworksFontWithSize: 19];
+        _nameLabel.font = [UIFont boldParworksFontWithSize: 21];
         _nameLabel.adjustsFontSizeToFitWidth = YES;
         [self addSubview: _nameLabel];
         
@@ -176,7 +176,7 @@
         labelPaddingLeft = _logoView.frame.size.width;
         _logoView.frame = CGRectMake(7, 14, _logoView.frame.size.width, _logoView.frame.size.height);
     }
-    _nameLabel.frame = CGRectMake(10 + labelPaddingLeft, 14, kPVCardShingleWidth - 22 - labelPaddingLeft, 35);
+    _nameLabel.frame = CGRectMake(10 + labelPaddingLeft, 11, kPVCardShingleWidth - 22 - labelPaddingLeft, 35);
     _nameLabel.textAlignment = _site.logoURL ? NSTextAlignmentLeft : NSTextAlignmentCenter;
     _augmentationLabel.frame = CGRectMake(10 + labelPaddingLeft, 37, kPVCardShingleWidth - 22 - labelPaddingLeft, 24);
     _augmentationLabel.textAlignment = _site.logoURL ? NSTextAlignmentLeft : NSTextAlignmentCenter;

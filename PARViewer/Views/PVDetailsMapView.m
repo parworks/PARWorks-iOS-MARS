@@ -66,15 +66,8 @@
 - (id)initWithSite:(ARSite*)site{
     if(self = [self initWithFrame:CGRectZero]){
         self.site = site;
-        if([_site.identifier length] > 0)
-            _identifierLabel.text = _site.identifier;
-        else
-            _identifierLabel.text = @"No identifier available";
-        
-        if([_site.address length] > 0)
-            _addressLabel.text = _site.address;
-        else
-            _addressLabel.text = @"No address available";
+        _identifierLabel.text = ([_site.identifier length] > 0) ? _site.identifier :  @"No identifier available";
+        _addressLabel.text = ([_site.address length] > 0) ? _site.address : @"No address available";
         
         if(_site.location.latitude == 0.0 && _site.location.latitude == 0.0){
             [_mapContainerView setHidden:YES];
@@ -97,10 +90,10 @@
 {
     [super layoutSubviews];
     
-    [_identifierLabel setFrame:CGRectMake(10.0, 14, self.frame.size.width - 20.0, 24.0)];
+    [_identifierLabel setFrame:CGRectMake(13.0, 13.0, self.frame.size.width - 20.0, 24.0)];
     [_addressLabel setFrame:CGRectMake(_identifierLabel.frame.origin.x, _identifierLabel.frame.origin.y + _identifierLabel.frame.size.height - 4.0, _identifierLabel.frame.size.width, 20.0)];
     
-    [_mapContainerView setFrame:CGRectMake(10.0, 60, self.frame.size.width - 20.0, 100.0)];
+    [_mapContainerView setFrame:CGRectMake(13.0, 60, self.frame.size.width - 20.0, 100.0)];
     [_mapView setFrame:_mapContainerView.bounds];
     [_mapShadowButton setFrame:_mapContainerView.bounds];
 }
