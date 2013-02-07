@@ -34,22 +34,21 @@
     [_addressLabel setFont:[UIFont parworksFontWithSize:12.0]];
     [_mapButton addSubview:_addressLabel];
     
-    self.mapControl = [[UIControl alloc] initWithFrame:CGRectZero];
-    [_mapControl setBackgroundColor:[UIColor clearColor]];
-    [_mapControl addTarget:self action:@selector(mapViewPressed) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:_mapControl];
+    self.mapContainerView = [[UIView alloc] initWithFrame:CGRectZero];
+    [_mapContainerView setBackgroundColor:[UIColor clearColor]];
+    [self addSubview: _mapContainerView];
     
     self.mapView = [[MKMapView alloc] initWithFrame:CGRectZero];
     [_mapView setBackgroundColor:[UIColor clearColor]];
     [_mapView setDelegate:self];
     [_mapView setUserInteractionEnabled:NO];
-    [_mapControl addSubview:_mapView];
+    [_mapContainerView addSubview:_mapView];
     
-    self.mapShadowImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    [_mapShadowImageView setImage:[UIImage imageNamed:@"map_inner_shadow.png"]];
-    [_mapShadowImageView setBackgroundColor:[UIColor clearColor]];
-    [_mapShadowImageView setUserInteractionEnabled:NO];
-    [_mapControl addSubview:_mapShadowImageView];
+    self.mapShadowButton = [[UIButton alloc] initWithFrame:CGRectZero];
+    [_mapShadowButton addTarget:self action:@selector(mapViewPressed) forControlEvents:UIControlEventTouchUpInside];
+    [_mapShadowButton setImage:[UIImage imageNamed:@"map_inner_shadow.png"] forState: UIControlStateNormal];
+    [_mapShadowButton setImage:[UIImage imageNamed:@"map_inner_shadow_highlighted.png"] forState: UIControlStateHighlighted];
+    [_mapContainerView addSubview:_mapShadowButton];
     
 }
 
@@ -82,10 +81,9 @@
             _addressLabel.text = @"No address available";
         
         if(_site.location.latitude == 0.0 && _site.location.latitude == 0.0){
-            [_mapControl setHidden:YES];
-        }
-        else{
-            [_mapControl setHidden:NO];
+            [_mapContainerView setHidden:YES];
+        } else {
+            [_mapContainerView setHidden:NO];
             MKCoordinateRegion region;
             region.center = _site.location;
             region.span.latitudeDelta = 0.005;
@@ -99,18 +97,21 @@
     return self;
 }
 
-- (void)setFrame:(CGRect)frame{
-    [super setFrame:frame];
-    [_mapButton setFrame:CGRectMake(0.0, 0.0, frame.size.width, 63.0)];
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    [_mapButton setFrame:CGRectMake(0.0, 0.0, self.frame.size.width, 63.0)];
     [_identifierLabel setFrame:CGRectMake(10.0, 10.0, _mapButton.frame.size.width - 20.0, 24.0)];
     [_addressLabel setFrame:CGRectMake(_identifierLabel.frame.origin.x, _identifierLabel.frame.origin.y + _identifierLabel.frame.size.height - 4.0, _identifierLabel.frame.size.width, 20.0)];
     
-    [_mapControl setFrame:CGRectMake(10.0, _mapButton.frame.origin.y + _mapButton.frame.size.height, frame.size.width - 20.0, 100.0)];
-    [_mapView setFrame:_mapControl.bounds];
-    [_mapShadowImageView setFrame:_mapControl.bounds];
+    [_mapContainerView setFrame:CGRectMake(10.0, _mapButton.frame.origin.y + _mapButton.frame.size.height, self.frame.size.width - 20.0, 100.0)];
+    [_mapView setFrame:_mapContainerView.bounds];
+    [_mapShadowButton setFrame:_mapContainerView.bounds];
 }
 
-- (void)mapViewPressed{
+- (void)mapViewPressed
+{
     [_delegate mapViewPressed];
 }
 

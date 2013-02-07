@@ -19,9 +19,9 @@
 @property (nonatomic, strong) UILabel *addressLabel;
 @property (nonatomic, strong) UIButton *mapButton;
 
-@property (nonatomic, strong) UIControl *mapControl;
+@property (nonatomic, strong) UIView *mapContainerView;
+@property (nonatomic, strong) UIButton *mapShadowButton;
 @property (nonatomic, strong) MKMapView *mapView;
-@property (nonatomic, strong) UIImageView *mapShadowImageView;
 
 - (id) initWithSite:(ARSite*)site;
 

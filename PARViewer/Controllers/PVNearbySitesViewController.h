@@ -17,6 +17,7 @@
 }
 
 @property (nonatomic, strong) MKMapView *mapView;
+@property (nonatomic, strong) UIButton * mapCollapseButton;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) PVParallaxTableView *parallaxView;
 @property (nonatomic, strong) UIView *tableHeaderView;

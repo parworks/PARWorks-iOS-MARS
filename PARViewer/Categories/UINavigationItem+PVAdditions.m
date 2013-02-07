@@ -16,7 +16,7 @@
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     negativeSpacer.width = -5;
     
-    self.leftBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, item, nil];
+    [self setLeftBarButtonItems: [NSArray arrayWithObjects:negativeSpacer, item, nil] animated:animated];
 }
 
 - (void)setUnpaddedRightBarButtonItem:(UIBarButtonItem *)item animated:(BOOL)animated
@@ -24,7 +24,7 @@
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     negativeSpacer.width = -5;
     
-    self.rightBarButtonItems = [NSArray arrayWithObjects:item, negativeSpacer, nil];
+    [self setRightBarButtonItems: [NSArray arrayWithObjects:negativeSpacer, item, nil] animated:animated];
 }
 
 - (void)setLeftJustifiedTitle:(NSString*)title

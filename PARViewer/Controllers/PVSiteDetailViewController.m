@@ -98,7 +98,7 @@
     [self.view addSubview:_parallaxView];
 }
 
-- (void)setupTableFooterView{
+- (void)setupTableFooterView {
     UIView *tableFooterView = [[UIView alloc]initWithFrame:CGRectMake(0.0, 10.0, 320.0, 51.0)];
     [tableFooterView setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0]];
     

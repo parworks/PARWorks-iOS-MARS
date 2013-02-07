@@ -12,6 +12,7 @@
 #import "PVSiteTableViewCell.h"
 #import "MapAnnotation.h"
 #import "UIFont+ThemeAdditions.h"
+#import "UINavigationItem+PVAdditions.h"
 
 #define PARALLAX_WINDOW_HEIGHT 165.0
 #define PARALLAX_IMAGE_HEIGHT 300.0
@@ -145,22 +146,30 @@
     return 220.0;
 }
 
-- (void)closeMap{
+- (void)closeMap
+{
     [_parallaxView windowButtonPressed];
 }
 
 #pragma mark
 #pragma mark PVParallaxTableViewDelegate methods
 
-- (void)windowButtonPressed:(BOOL)isExpanded{
+- (void)windowButtonPressed:(BOOL)isExpanded
+{
     if(isExpanded){
-        self.navigationItem.rightBarButtonItem = nil;
         [UIView transitionWithView:self.view duration:0.3 options:UIViewAnimationOptionTransitionNone animations:^{
             [_nearbyMapSearchButton setAlpha:0.0];
+            [_mapCollapseButton setAlpha: 0.0];
         } completion:nil];
     }
     else{
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(closeMap)];
+        _mapCollapseButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_mapCollapseButton setBackgroundImage:[UIImage imageNamed:@"bar_item_up"] forState:UIControlStateNormal];
+        [_mapCollapseButton setBackgroundImage:[UIImage imageNamed:@"bar_item_up_highlighted"] forState:UIControlStateHighlighted];
+        _mapCollapseButton.frame = CGRectMake(0, 0, 57, 46);
+        [_mapCollapseButton addTarget:self action:@selector(closeMap) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem * collapse = [[UIBarButtonItem alloc] initWithCustomView: _mapCollapseButton];
+        [self.navigationItem setUnpaddedRightBarButtonItem:collapse animated: NO];
         [UIView transitionWithView:self.view duration:0.3 options:UIViewAnimationOptionTransitionNone animations:^{
             [_nearbyMapSearchButton setAlpha:1.0];
         } completion:nil];
@@ -168,7 +177,8 @@
     [_mapView setRegion:region animated:YES];
 }
 
-- (void)refetchAnnotations{
+- (void)refetchAnnotations
+{
     NSMutableArray *toRemove = [NSMutableArray array];
     for (id annotation in _mapView.annotations){
         if (annotation != _mapView.userLocation)
@@ -179,7 +189,8 @@
     [self loadAnnotationsFromStorage];
 }
 
-- (void)loadAnnotationsFromStorage {
+- (void)loadAnnotationsFromStorage
+{
 	// add a map annotation for each item's location
                 
     if([_nearbySites count] > 0){
