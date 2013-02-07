@@ -42,11 +42,11 @@
     _mapView.showsUserLocation = YES;
     _mapView.delegate = self;
     
-    self.nearbyMapSearchButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [_nearbyMapSearchButton setFrame:CGRectMake(_mapView.frame.size.width - 50.0, 10.0, 40.0, 40.0)];
-    [_nearbyMapSearchButton setAlpha:0.0];
-    [_nearbyMapSearchButton addTarget:self action:@selector(searchNearbySites) forControlEvents:UIControlEventTouchUpInside];
-    [_mapView addSubview:_nearbyMapSearchButton];
+    self.mapRecenterButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0, 10.0, 23.0, 21.0)];
+    [_mapRecenterButton setAlpha:0.0];
+    [_mapRecenterButton addTarget:self action:@selector(findNearbySites) forControlEvents:UIControlEventTouchUpInside];
+    [_mapRecenterButton setImage:[UIImage imageNamed:@"map_icon_recenter.png"] forState:UIControlStateNormal];
+    [_mapView addSubview:_mapRecenterButton];
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     _tableView.backgroundColor = [UIColor clearColor];
@@ -55,6 +55,7 @@
     _tableView.delegate = self;
     
     [self setupTableHeaderView];
+    [self setupMapRefreshButton];
     
     self.parallaxView = [[PVParallaxTableView alloc] initWithBackgroundView:_mapView
                                                         foregroundTableView:_tableView
@@ -67,7 +68,7 @@
     [_parallaxView setLocalDelegate:self];
     [self.view addSubview:_parallaxView];
     
-    [self searchNearbySites];
+    [self findNearbySites];
 }
 
 - (void)setupTableHeaderView{
@@ -75,18 +76,18 @@
     [_tableHeaderView setBackgroundColor:[UIColor whiteColor]];
 }
 
-- (void)viewDidAppear:(BOOL)animated{    
-
+- (void)setupMapRefreshButton{
+    _mapRefreshButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_mapRefreshButton setBackgroundImage:[UIImage imageNamed:@"bar_item_up"] forState:UIControlStateNormal];
+    [_mapRefreshButton setBackgroundImage:[UIImage imageNamed:@"bar_item_up_highlighted"] forState:UIControlStateHighlighted];
+    _mapRefreshButton.frame = CGRectMake(0, 0, 57, 46);
+    [_mapRefreshButton addTarget:self action:@selector(findNearbySites) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * refresh = [[UIBarButtonItem alloc] initWithCustomView: _mapRefreshButton];
+    [self.navigationItem setUnpaddedRightBarButtonItem:refresh animated: NO];
 }
 
-- (void)searchNearbySites
-{
-    [[ARManager shared] findNearbySites:1.0 withCompletionBlock:^(NSArray* sites, CLLocation * location){
-        self.nearbySites = sites;
-        bLoadedOnce = NO;
-        [self refetchAnnotations];
-        [_tableView reloadData];
-    }];
+- (void)viewDidAppear:(BOOL)animated{
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -110,7 +111,7 @@
         UITableViewCell *c = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"emptyCell"];
         if (!c){
             c = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"emptyCell"];
-            [c.contentView setBackgroundColor: [UIColor colorWithWhite:0.88 alpha:1]];
+            [c.contentView setBackgroundColor: [UIColor whiteColor]];
             [c setSelectionStyle: UITableViewCellSelectionStyleNone];
             
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 10.0, c.contentView.frame.size.width, 24.0)];
@@ -158,8 +159,9 @@
 - (void)windowButtonPressed:(BOOL)isExpanded
 {
     if(isExpanded){
+        [self setupMapRefreshButton];
         [UIView transitionWithView:self.view duration:0.3 options:UIViewAnimationOptionTransitionNone animations:^{
-            [_nearbyMapSearchButton setAlpha:0.0];
+            [_mapRecenterButton setAlpha:0.0];
             [_mapCollapseButton setAlpha: 0.0];
         } completion:nil];
     }
@@ -171,29 +173,32 @@
         [_mapCollapseButton addTarget:self action:@selector(closeMap) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem * collapse = [[UIBarButtonItem alloc] initWithCustomView: _mapCollapseButton];
         [self.navigationItem setUnpaddedRightBarButtonItem:collapse animated: NO];
+        
+        [_mapRecenterButton setFrame:CGRectMake(_mapRecenterButton.frame.origin.x, _mapView.frame.size.height - _mapRecenterButton.frame.size.height - 10.0, _mapRecenterButton.frame.size.width, _mapRecenterButton.frame.size.height)];
+        
         [UIView transitionWithView:self.view duration:0.3 options:UIViewAnimationOptionTransitionNone animations:^{
-            [_nearbyMapSearchButton setAlpha:1.0];
+            [_mapRecenterButton setAlpha:1.0];
         } completion:nil];
     }
     [_mapView setRegion:region animated:YES];
 }
 
-- (void)refetchAnnotations
+- (void)refetchAnnotations:(BOOL)needsCentering
 {
     NSMutableArray *toRemove = [NSMutableArray array];
     for (id annotation in _mapView.annotations){
         if (annotation != _mapView.userLocation)
             [toRemove addObject:annotation];
     }
-    [_mapView removeAnnotations:toRemove];   
+    [_mapView removeAnnotations:toRemove];
     
-    [self loadAnnotationsFromStorage];
+    [self loadAnnotationsFromStorage:needsCentering];
 }
 
-- (void)loadAnnotationsFromStorage
+- (void)loadAnnotationsFromStorage:(BOOL)needsCentering
 {
 	// add a map annotation for each item's location
-                
+    
     if([_nearbySites count] > 0){
         [self.annotations removeAllObjects];
         
@@ -206,12 +211,12 @@
         bottomRightCoordinate.latitude = 90;
         bottomRightCoordinate.longitude = -180;
         
-        double prevLat = 0.0;
-        double prevLon = 0.0;
+        double prevLat = _mapView.userLocation.location.coordinate.latitude;
+        double prevLon = _mapView.userLocation.location.coordinate.longitude;
         
-        for (int i=0; i < [_nearbySites count]; i++) {            
+        for (int i=0; i < [_nearbySites count]; i++) {
             ARSite *site = [_nearbySites objectAtIndex:i];
-                                 
+            
             if (site.location.latitude != 0.000000 &&  site.location.longitude != 0.000000){
                 
                 double latDiff = 0.0;
@@ -239,7 +244,7 @@
                 }
                 
                 MapAnnotation *annotation = [[MapAnnotation alloc] initWithCoordinate:site.location andTitle:site.identifier andSubtitle:site.address];
-                [_mapView addAnnotation:annotation];                                              
+                [_mapView addAnnotation:annotation];
                 [self.annotations addObject:annotation];
             }
             
@@ -261,7 +266,8 @@
             
             region.span.latitudeDelta = latDelta;
             region.span.longitudeDelta = lonDelta;
-            [_mapView setRegion:region animated:YES];
+            if(needsCentering)
+                [_mapView setRegion:region animated:YES];
         }
         
         
@@ -269,7 +275,7 @@
             [_mapView addAnnotations:self.annotations];
         }
         bLoadedOnce = YES;
-    }  
+    }
 }
 
 #pragma mark -
@@ -280,18 +286,58 @@
         return nil;
     else{
         static NSString *AnnotationReuseIdentifier = @"AnnotationReuseIdentifier";
-                
+        
         MKAnnotationView *annotationView = (MKAnnotationView *)[_mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationReuseIdentifier];
         if(annotationView == nil)
         {
             annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationReuseIdentifier];
             annotationView.image = [UIImage imageNamed:@"map_marker.png"];
             annotationView.centerOffset = CGPointMake(1.0, -14.0);
-        }      
+        }
         
         return annotationView;
     }
 }
+
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
+    if(_panTimer){
+        [_panTimer invalidate];
+        _panTimer = nil;
+    }
+    
+    _panTimer = [NSTimer scheduledTimerWithTimeInterval:1
+                                                 target:self
+                                               selector:@selector(findSites:)
+                                               userInfo:nil
+                                                repeats:NO];
+}
+
+- (void)findNearbySites
+{
+    [[ARManager shared] findNearbySites:1600.0 withCompletionBlock:^(NSArray* sites, CLLocation * location){
+        self.nearbySites = sites;
+        bLoadedOnce = NO;
+        [self refetchAnnotations:YES];
+        [_tableView reloadData];
+    }];
+}
+
+- (void)findSites:(NSTimer*)theTimer{
+    if([_parallaxView isExpanded]){
+        CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:_mapView.region.center.latitude longitude:_mapView.region.center.longitude];
+        __weak MKMapView *__mapView = _mapView;
+        [[ARManager shared] findSites:1600.0 nearLocation:currentLocation withCompletionBlock:^(NSArray* sites, CLLocation * location){
+            if(location.coordinate.latitude == __mapView.region.center.latitude && location.coordinate.longitude == __mapView.region.center.longitude){
+                NSLog(@"Setting Nearby Sites...");
+                self.nearbySites = sites;
+                bLoadedOnce = NO;
+                [self refetchAnnotations:NO];
+                [_tableView reloadData];
+            }
+        }];
+    }
+}
+
 
 #pragma mark - Rotation
 
