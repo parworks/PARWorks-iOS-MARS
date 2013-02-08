@@ -45,7 +45,9 @@
     _addCommentContainerView.layer.shadowRadius = 4;
     _addCommentContainerView.layer.shadowOpacity = 0.7;
     _addCommentContainerView.layer.shadowPath = [EPUtil newPathForRoundedRect:_addCommentView.layer.bounds radius: 5];
-    
+    _addCommentContainerView.layer.shouldRasterize = YES;
+    _addCommentContainerView.layer.rasterizationScale = [UIScreen mainScreen].scale;
+
     [[self.navigationBar topItem] setUnpaddedLeftBarButtonItem:[self.navigationBar topItem].leftBarButtonItem animated:NO];
     [[self.navigationBar topItem] setUnpaddedRightBarButtonItem:[self.navigationBar topItem].rightBarButtonItem animated:NO];
     [self.navigationBar addShadowEffect];
