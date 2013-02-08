@@ -10,11 +10,11 @@
 #import "PVParallaxTableView.h"
 #import "PVAddCommentViewController.h"
 #import "GPUImageView.h"
-#import "PVDetailsMapView.h"
-#import "PVDetailsPhotoScrollView.h"
 #import "ARAugmentedView.h"
+#import <MapKit/MapKit.h>
+#import "PSTCollectionView.h"
 
-@interface PVSiteDetailViewController : UIViewController<PVDetailsPhotoScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, PVAddCommentViewControllerDelegate, PVDetailsMapViewDelegate>
+@interface PVSiteDetailViewController : UIViewController<PSUICollectionViewDataSource, PSUICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, PVAddCommentViewControllerDelegate, MKMapViewDelegate>
 {
     PVAddCommentViewController *_addCommentViewController;
     GPUImageView    * _bgCopyImageView;
@@ -22,14 +22,30 @@
 
 @property (nonatomic, strong) ARSite * site;
 
-@property (nonatomic, strong) ARAugmentedView *headerImageView;
-@property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) UIButton * takePhotoButton;
+@property (nonatomic, weak) IBOutlet ARAugmentedView *headerImageView;
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UIView *tableHeaderView;
+@property (nonatomic, weak) IBOutlet UIButton *addCommentButton;
+
 @property (nonatomic, strong) PVParallaxTableView *parallaxView;
-@property (nonatomic, strong) UIView *tableHeaderView;
-@property (nonatomic, strong) PVDetailsMapView *detailsMapView;
-@property (nonatomic, strong) PVDetailsPhotoScrollView *detailsPhotoScrollView;
+@property (nonatomic, strong) UIButton * takePhotoButton;
+
+//Map Container Outlets
+@property (nonatomic, weak) IBOutlet UIView *detailsMapView;
+@property (nonatomic, weak) IBOutlet MKMapView *mapView;
+@property (nonatomic, weak) IBOutlet UIButton *mapShadowButton;
+@property (nonatomic, weak) IBOutlet UILabel *identifierLabel;
+@property (nonatomic, weak) IBOutlet UILabel *addressLabel;
+@property (nonatomic, weak) IBOutlet UILabel *descriptionLabel;
+
+//PhotoScrollView Container Outlets
+@property (nonatomic, weak) IBOutlet UIView *detailsPhotoScrollView;
+@property (nonatomic, weak) IBOutlet UILabel *photoCountLabel;
+@property (nonatomic, weak) IBOutlet PSUICollectionView *collectionView;
 
 - (id)initWithSite:(ARSite *)site;
+- (IBAction)addCommentButtonPressed:(id)sender;
+
+- (IBAction)mapViewPressed:(id)sender;
 
 @end

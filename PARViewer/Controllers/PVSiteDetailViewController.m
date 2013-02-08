@@ -20,9 +20,13 @@
 #import "UIFont+ThemeAdditions.h"
 #import "PVMapViewController.h"
 #import "UINavigationBar+Additions.h"
+#import "MapAnnotation.h"
+#import "PVBorderedImageCell.h"
 
 #define PARALLAX_WINDOW_HEIGHT 165.0
 #define PARALLAX_IMAGE_HEIGHT 300.0
+
+static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 
 @implementation PVSiteDetailViewController
 
@@ -71,16 +75,13 @@
 
 - (void)setupParallaxView
 {
-    self.headerImageView = [[ARAugmentedView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, PARALLAX_IMAGE_HEIGHT)];
-    _headerImageView.backgroundColor = [UIColor colorWithRed:222.0/255.0 green:222.0/255.0 blue:222.0/255.0 alpha:1.0];
+    [_headerImageView setFrame:CGRectMake(0, 0, self.view.frame.size.width, PARALLAX_IMAGE_HEIGHT)];
     [_headerImageView setOverlayImageViewContentMode: UIViewContentModeScaleAspectFill];
     [_headerImageView setShowOutlineViewsOnly:YES];
     [_headerImageView setAnimateOutlineViewDrawing: NO];
     [self updateHeaderImageView: nil];
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     _tableView.backgroundColor = [UIColor clearColor];
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.dataSource = self;
     _tableView.delegate = self;
     
@@ -99,51 +100,30 @@
 }
 
 - (void)setupTableFooterView {
-    UIView *tableFooterView = [[UIView alloc]initWithFrame:CGRectMake(0.0, 10.0, 320.0, 51.0)];
-    [tableFooterView setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0]];
-    
-    UIButton *addCommentButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0, 10.0, 300.0, 31.0)];
-    [addCommentButton addTarget:self action:@selector(addCommentButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    [addCommentButton setBackgroundColor:[UIColor colorWithRed:240.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1.0]];
-    [addCommentButton setTitle:@"Leave a Comment" forState:UIControlStateNormal];
-    [addCommentButton setTitleColor:[UIColor colorWithRed:50.0/255.0 green:98.0/255.0 blue:162.0/255.0 alpha:1.0] forState:UIControlStateNormal];
-    [addCommentButton.titleLabel setFont:[UIFont boldParworksFontWithSize:14.0]];
-    [addCommentButton.layer setBorderWidth:1.0];
-    [addCommentButton.layer setBorderColor:[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1.0].CGColor];
-    [addCommentButton setTitleEdgeInsets:UIEdgeInsetsMake(10.0, 0.0, 0.0, 0.0)];
-    [addCommentButton setImage:[UIImage imageNamed:@"leave_comment.png"] forState:UIControlStateNormal];
-    [addCommentButton setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 15.0)];
-    [addCommentButton setAdjustsImageWhenHighlighted:NO];
-    [addCommentButton setShowsTouchWhenHighlighted:YES];
-    [tableFooterView addSubview:addCommentButton];
-    _tableView.tableFooterView = tableFooterView;
+    [_addCommentButton.layer setBorderWidth:1.0];
+    [_addCommentButton.layer setBorderColor:[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1.0].CGColor];
 }
 
 - (void)setupTableHeaderView
 {
-    self.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 0.0)];
-    [_tableHeaderView setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0]];
-        
     CGFloat headerHeight = 0.0;
-    
-    self.detailsMapView = [[PVDetailsMapView alloc] initWithSite:_site];
-    _detailsMapView.delegate = self;
+
     if(_site.location.latitude == 0.0 && _site.location.latitude == 0.0)
-        headerHeight = 55.0;
+        headerHeight = 73.0;
     else
-        headerHeight = 165.0;
+        headerHeight = 183.0;
     [_detailsMapView setFrame:CGRectMake(0.0, 0.0, _tableHeaderView.frame.size.width, headerHeight)];
-    [_tableHeaderView addSubview:_detailsMapView];
+
     
     if(_site.totalAugmentedImages > 0){
-        self.detailsPhotoScrollView = [[PVDetailsPhotoScrollView alloc] initWithSite:_site];
         [_detailsPhotoScrollView setFrame:CGRectMake(0.0, _detailsMapView.frame.origin.y + _detailsMapView.frame.size.height, _tableHeaderView.frame.size.width, 132.0)];
-        [_detailsPhotoScrollView setDelegate: self];
-        [_tableHeaderView addSubview:_detailsPhotoScrollView];
         headerHeight = _detailsPhotoScrollView.frame.origin.y + _detailsPhotoScrollView.frame.size.height;
     }
     
     [_tableHeaderView setFrame:CGRectMake(_tableHeaderView.frame.origin.x, _tableHeaderView.frame.origin.y, _tableHeaderView.frame.size.width, headerHeight)];
+    
+    [self setupMapView];
+    [self setupPhotoScrollView];
 }
 
 - (void)setupNavigationItem
@@ -175,6 +155,39 @@
     [self.navigationItem setUnpaddedRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView: takePhotoContainer] animated:NO];
 }
 
+- (void)setupMapView{
+    _identifierLabel.text = ([_site.identifier length] > 0) ? _site.identifier :  @"No identifier available";
+    _addressLabel.text = ([_site.address length] > 0) ? _site.address : @"No address available";
+    _descriptionLabel.text = ([_site.description length] > 0) ? _site.description : @"No description available";
+    
+    if(_site.location.latitude == 0.0 && _site.location.latitude == 0.0){
+        [_mapView setHidden:YES];
+        [_mapShadowButton setHidden:YES];
+    } else {
+        [_mapView setHidden:NO];
+        [_mapShadowButton setHidden:NO];
+        MKCoordinateRegion region;
+        region.center = _site.location;
+        region.span.latitudeDelta = 0.005;
+        region.span.longitudeDelta = 0.005;
+        [_mapView setRegion:region];
+        
+        MapAnnotation *annotation = [[MapAnnotation alloc] initWithCoordinate:_site.location andTitle:_identifierLabel.text andSubtitle:_addressLabel.text];
+        [_mapView addAnnotation:annotation];
+    }
+
+}
+
+- (void)setupPhotoScrollView{
+    [_collectionView registerClass:[PVBorderedImageCell class] forCellWithReuseIdentifier:cellIdentifier];
+    [_collectionView.layer setBorderColor:[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1.0].CGColor];
+    [_collectionView.layer setBorderWidth:1.0];
+    
+    _photoCountLabel.text = [NSString stringWithFormat:@"%ld Augmented Photo%@", _site.totalAugmentedImages, _site.totalAugmentedImages == 1 ? @"" : @"s"];
+    
+    [_collectionView reloadData];
+}
+
 - (void)takePhoto:(id)sender
 {
     PVAugmentedPhotoViewController * p = [[PVAugmentedPhotoViewController alloc] init];
@@ -202,7 +215,7 @@
     [_tableView reloadData];
 }
 
-- (void)addCommentButtonPressed
+- (IBAction)addCommentButtonPressed:(id)sender
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if([defaults objectForKey:@"FBId"])
@@ -356,6 +369,51 @@
     return MAX(newHeight, 74.0);
 }
 
+
+
+#pragma mark -
+#pragma mark PSUICollectionView methods
+
+- (NSInteger)numberOfSectionsInCollectionView:(PSUICollectionView *)collectionView
+{
+    return 1;
+}
+
+
+- (NSInteger)collectionView:(PSUICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return [_site recentlyAugmentedImageCount];
+}
+
+- (PSUICollectionViewCell *)collectionView:(PSUICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    PVBorderedImageCell *cell = (PVBorderedImageCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    [cell setUrl: [_site URLForRecentlyAugmentedImageAtIndex: [indexPath row]]];
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    
+    [self photoAtIndexTapped: [indexPath row]];
+}
+
+- (void)photoAtIndexTapped:(int)index
+{
+    NSURL * url = [_site URLForRecentlyAugmentedImageAtIndex: index];
+    UIImage * img = [[PVImageCacheManager shared] imageForURL: url];
+    NSDictionary * json = [_site overlayJSONForRecentlyAugmentedImageAtIndex: index];
+    
+    float scale = img.size.width / _site.originalImageWidth;
+    ARAugmentedPhoto * photo = [[ARAugmentedPhoto alloc] initWithScaledImage:img atScale: scale andOverlayJSON: json];
+    PVAugmentedPhotoViewController * c = [[PVAugmentedPhotoViewController alloc] init];
+    [c setAugmentedPhoto: photo];
+    [c setModalTransitionStyle: UIModalTransitionStyleCoverVertical];
+    [self presentViewController:c animated:YES completion:NULL];
+}
+
+
 #pragma mark
 #pragma mark PVAddCommentViewControllerDelegate methods
 
@@ -385,10 +443,7 @@
     }
 }
 
-#pragma mark
-#pragma mark PVDetailsMapViewDelegate methods
-
-- (void)mapViewPressed{
+- (IBAction)mapViewPressed:(id)sender{
     [self.navigationController pushViewController:[[PVMapViewController alloc] initWithSite:_site] animated:YES];
 }
 
@@ -401,21 +456,26 @@
     }
 }
 
-#pragma mark - PVDetailsPhotoScrollViewDelegate methods
 
-- (void)photoAtIndexTapped:(int)index
-{
-    NSURL * url = [_site URLForRecentlyAugmentedImageAtIndex: index];
-    UIImage * img = [[PVImageCacheManager shared] imageForURL: url];
-    NSDictionary * json = [_site overlayJSONForRecentlyAugmentedImageAtIndex: index];
-    
-    float scale = img.size.width / _site.originalImageWidth;
-    ARAugmentedPhoto * photo = [[ARAugmentedPhoto alloc] initWithScaledImage:img atScale: scale andOverlayJSON: json];
-    PVAugmentedPhotoViewController * c = [[PVAugmentedPhotoViewController alloc] init];
-    [c setAugmentedPhoto: photo];
-    [c setModalTransitionStyle: UIModalTransitionStyleCoverVertical];
-    [self presentViewController:c animated:YES completion:NULL];
+#pragma mark -
+#pragma mark MKMapViewDelegate
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+    if (annotation == mapView.userLocation)
+        return nil;
+    else{
+        static NSString *AnnotationReuseIdentifier = @"AnnotationReuseIdentifier";
+        
+        MKAnnotationView *annotationView = (MKAnnotationView *)[_mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationReuseIdentifier];
+        if(annotationView == nil)
+        {
+            annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationReuseIdentifier];
+            annotationView.image = [UIImage imageNamed:@"map_marker.png"];
+            annotationView.centerOffset = CGPointMake(1.0, -14.0);
+        }
+        
+        return annotationView;
+    }
 }
-
 
 @end
