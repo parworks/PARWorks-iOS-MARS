@@ -39,7 +39,6 @@
     [_borderLayer setFrame: frame];
     
     CGRect textFrame = [self bounds];
-    textFrame.origin.y += 5;
     textFrame.origin.x = 15;
     [[self textLabel] setFrame: textFrame];
 }
