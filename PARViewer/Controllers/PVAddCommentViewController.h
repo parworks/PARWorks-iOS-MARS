@@ -11,14 +11,16 @@
 
 @protocol PVAddCommentViewControllerDelegate;
 
-@interface PVAddCommentViewController : UIViewController{
+@interface PVAddCommentViewController : UIViewController <UITextViewDelegate> {
     CGFloat _addCommentYOrigin;
 }
 
 @property (nonatomic, weak) id <PVAddCommentViewControllerDelegate> delegate;
 @property (nonatomic, strong) ARSite * site;
 @property (nonatomic, weak) IBOutlet UIView *addCommentView;
+@property (weak, nonatomic) IBOutlet UIView *addCommentContainerView;
 @property (nonatomic, weak) IBOutlet UITextView *commentTextView;
+@property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
 
 - (IBAction)postButtonPressed:(id)sender;
 - (IBAction)cancelButtonPressed:(id)sender;
