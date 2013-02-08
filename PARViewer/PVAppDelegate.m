@@ -25,18 +25,9 @@ NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Log
     [[ARManager shared] setLocationEnabled:YES];
     
     // setup appearance
-    NSMutableDictionary * navigationTextAttributes = [NSMutableDictionary dictionary];
-    UINavigationBar * navigationBarAppearance = [UINavigationBar appearanceWhenContainedIn: [UINavigationController class], nil];
-    [navigationTextAttributes setObject:[UIColor colorWithWhite:0.2 alpha:1] forKey: UITextAttributeTextColor];
-    [navigationTextAttributes setObject:[UIFont parworksFontWithSize: 18] forKey: UITextAttributeFont];
-    [navigationTextAttributes setObject:[UIColor whiteColor] forKey: UITextAttributeTextShadowColor];
-    [navigationTextAttributes setObject:[NSValue valueWithCGPoint: CGPointMake(0,1)] forKey: UITextAttributeTextShadowOffset];
-    [navigationBarAppearance setTitleTextAttributes: navigationTextAttributes];
+    [self applyAppearanceSettingsWithin: [UINavigationController class]];
+    [self applyAppearanceSettingsWithin: [PVAddCommentViewController class]];
 
-    UIImage * navBarImage = [[UIImage imageNamed:@"navigation_bar_background.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7.0, 0, 7.0)];
-    [navigationBarAppearance setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsDefault];
-    [navigationBarAppearance setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsLandscapePhone];
-    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackOpaque animated: YES];
     
@@ -64,6 +55,21 @@ NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Log
     [self.window makeKeyAndVisible];
     
     return YES;
+}
+
+- (void)applyAppearanceSettingsWithin:(Class)class
+{
+    NSMutableDictionary * navigationTextAttributes = [NSMutableDictionary dictionary];
+    UINavigationBar * navigationBarAppearance = [UINavigationBar appearanceWhenContainedIn: class, nil];
+    [navigationTextAttributes setObject:[UIColor colorWithWhite:0.2 alpha:1] forKey: UITextAttributeTextColor];
+    [navigationTextAttributes setObject:[UIFont parworksFontWithSize: 18] forKey: UITextAttributeFont];
+    [navigationTextAttributes setObject:[UIColor whiteColor] forKey: UITextAttributeTextShadowColor];
+    [navigationTextAttributes setObject:[NSValue valueWithCGPoint: CGPointMake(0,1)] forKey: UITextAttributeTextShadowOffset];
+    [navigationBarAppearance setTitleTextAttributes: navigationTextAttributes];
+    
+    UIImage * navBarImage = [[UIImage imageNamed:@"navigation_bar_background.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7.0, 0, 7.0)];
+    [navigationBarAppearance setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsDefault];
+    [navigationBarAppearance setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsLandscapePhone];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

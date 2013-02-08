@@ -10,5 +10,6 @@
 #import "PVBaseViewController.h"
 
 @interface PVTechnologyViewController : PVBaseViewController
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end

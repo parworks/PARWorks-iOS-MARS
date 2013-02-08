@@ -10,7 +10,8 @@
 
 @implementation UINavigationBar (Additions)
 
-- (void)addShadowEffect{
+- (void)addShadowEffect
+{
     [[self layer] setShadowRadius: 3];
     [[self layer] setShadowOffset: CGSizeMake(0, 1)];
     [[self layer] setShadowOpacity: 0.3];

@@ -193,8 +193,8 @@ typedef enum {
         case FilteredTagsTableState_Popular:
             _noResultsLabel.alpha = 0.0;
             _popularSearchesLabel.alpha = 1.0;
-            _filteredTagsTableView.contentInset = UIEdgeInsetsMake(_popularSearchesLabel.frame.size.height+5, 0, 0, 0);
-            [_filteredTagsTableView setContentOffset:CGPointMake(0, -_popularSearchesLabel.frame.size.height-5) animated:NO];
+            _filteredTagsTableView.contentInset = UIEdgeInsetsMake(_popularSearchesLabel.frame.size.height+15, 0, 0, 0);
+            [_filteredTagsTableView setContentOffset:CGPointMake(0, -_popularSearchesLabel.frame.size.height-15) animated:NO];
             break;
             
         default:

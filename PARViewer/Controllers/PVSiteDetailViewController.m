@@ -20,6 +20,7 @@
 #import "UIFont+ThemeAdditions.h"
 #import "PVMapViewController.h"
 #import "UINavigationBar+Additions.h"
+#import "GPUImageBrightnessFilter.h"
 #import "MapAnnotation.h"
 #import "PVBorderedImageCell.h"
 
@@ -231,40 +232,47 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     
     if(_bgCopyImageView == nil){
         
-        UIGraphicsBeginImageContext(self.view.frame.size);
+        CGSize halfSize = CGSizeMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+        UIGraphicsBeginImageContext(halfSize);
+        CGContextScaleCTM(UIGraphicsGetCurrentContext(), 0.5,0.5);
         [delegate.window.layer renderInContext:UIGraphicsGetCurrentContext()];
         UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
-        _bgCopyImageView = [[GPUImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
+        _bgCopyImageView = [[GPUImageView alloc] initWithFrame: self.view.bounds];
         _bgCopyImageView.alpha = 0.0;
         [_bgCopyImageView setFillMode: kGPUImageFillModePreserveAspectRatioAndFill];
         
-        CGSize size = CGSizeMake(image.size.width / 2.5, image.size.height / 2.5);
-        
-        GPUImagePicture *_bgCopyPicture = [[GPUImagePicture alloc] initWithImage:image smoothlyScaleOutput:YES];
+        GPUImagePicture *_bgCopyPicture = [[GPUImagePicture alloc] initWithImage:image smoothlyScaleOutput: NO];
         GPUImageGaussianBlurFilter * blurFilter = [[GPUImageGaussianBlurFilter alloc] init];
-        [blurFilter setBlurSize: 1.06];
-        [blurFilter forceProcessingAtSize: size];
+        [blurFilter setBlurSize: 1.1];
         [_bgCopyPicture addTarget: blurFilter];
         [blurFilter addTarget: _bgCopyImageView];
+
+        GPUImageBrightnessFilter * brightnessFilter = [[GPUImageBrightnessFilter alloc] init];
+        [brightnessFilter setBrightness: -0.4];
+        [_bgCopyPicture addTarget: brightnessFilter];
+        [brightnessFilter addTarget: _bgCopyImageView];
+        
         [_bgCopyPicture processImage];
+        [_bgCopyPicture removeAllTargets];
         
         [delegate.window addSubview:_bgCopyImageView];
     }
     
-    [UIView transitionWithView:self.view duration:0.3 options:UIViewAnimationOptionTransitionNone animations:^{
+    [UIView transitionWithView:self.view duration:1 options:UIViewAnimationOptionTransitionNone animations:^{
         _bgCopyImageView.alpha = 1.0;
     } completion:^(BOOL finished){
-        if(!_addCommentViewController){
-            _addCommentViewController = [[PVAddCommentViewController alloc] initWithNibName:@"PVAddCommentViewController" bundle:nil];
-            _addCommentViewController.delegate = self;
-            _addCommentViewController.site = _site;
-        }
-        
-        [delegate.window addSubview:_addCommentViewController.view];
-        [_addCommentViewController viewWillAppear:NO];
     }];
+
+    if(!_addCommentViewController){
+        _addCommentViewController = [[PVAddCommentViewController alloc] initWithNibName:@"PVAddCommentViewController" bundle:nil];
+        _addCommentViewController.delegate = self;
+        _addCommentViewController.site = _site;
+    }
+    
+    [delegate.window addSubview:_addCommentViewController.view];
+    [_addCommentViewController viewWillAppear:NO];
 }
 
 - (void)backButtonPressed

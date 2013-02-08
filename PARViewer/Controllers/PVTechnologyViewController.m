@@ -27,7 +27,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+ 
+    NSString * htmlPath = [[NSBundle mainBundle] pathForResource:@"technology" ofType:@"html" inDirectory:@"HTML"];
+    NSString * htmlFolder = [htmlPath stringByDeletingLastPathComponent];
+    [_webView loadHTMLString:[NSString stringWithContentsOfFile:htmlPath encoding:NSASCIIStringEncoding error:nil] baseURL: [NSURL fileURLWithPath: htmlFolder]];
 }
 
 - (void)didReceiveMemoryWarning
