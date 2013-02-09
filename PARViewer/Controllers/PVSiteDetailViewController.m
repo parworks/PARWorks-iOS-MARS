@@ -252,13 +252,13 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
         
         GPUImagePicture *_bgCopyPicture = [[GPUImagePicture alloc] initWithImage:image smoothlyScaleOutput: NO];
         GPUImageGaussianBlurFilter * blurFilter = [[GPUImageGaussianBlurFilter alloc] init];
-        [blurFilter setBlurSize: 1.1];
-        [_bgCopyPicture addTarget: blurFilter];
-        [blurFilter addTarget: _bgCopyImageView];
-
         GPUImageBrightnessFilter * brightnessFilter = [[GPUImageBrightnessFilter alloc] init];
-        [brightnessFilter setBrightness: -0.4];
-        [_bgCopyPicture addTarget: brightnessFilter];
+
+        [blurFilter setBlurSize: 0.5];
+        [_bgCopyPicture addTarget: blurFilter];
+        [blurFilter addTarget: brightnessFilter];
+
+        [brightnessFilter setBrightness: -0.35];
         [brightnessFilter addTarget: _bgCopyImageView];
         
         [_bgCopyPicture processImage];

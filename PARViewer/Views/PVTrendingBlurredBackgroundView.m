@@ -9,6 +9,7 @@
 #import "PVTrendingBlurredBackgroundView.h"
 #import "PVImageCacheManager.h"
 #import "GPUImageGaussianBlurFilter.h"
+#import "GPUImageBrightnessFilter.h"
 
 @implementation PVTrendingBlurredBackgroundView
 
@@ -39,30 +40,29 @@
     _nextImageView = [[GPUImageView alloc] initWithFrame: _imageViewRect];
     [_nextImageView setFillMode: kGPUImageFillModePreserveAspectRatioAndFill];
     [self addSubview: _nextImageView];
-    
-    UIView * darkView = [[UIView alloc] initWithFrame: self.bounds];
-    [darkView setBackgroundColor: [UIColor colorWithWhite:0 alpha:0.45]];
-    [self addSubview: darkView];
 }
 
 - (void)setFloatingPointIndex:(float)index
 {
     _floatingPointIndex = index;
-    
     // which three views should we be showing?
     float newBaseIndex = MAX(0, floorf(index));
-    float newNextIndex = _baseIndex + 1;
-
-    if (newNextIndex == _baseIndex) {
-        _nextPicture = _basePicture;
-        _basePicture = nil;
-    } else if (newNextIndex != _nextIndex)
-        _nextPicture = nil;
-
+    float newNextIndex = newBaseIndex + 1;
+    
     if (newBaseIndex == _nextIndex) {
         _basePicture = _nextPicture;
+        _baseIndex = newBaseIndex;
+        [self swapImageViews];
+    }
+    if (newNextIndex == _baseIndex) {
+        _nextPicture = _basePicture;
+        _nextIndex = newNextIndex;
+        [self swapImageViews];
+    }
+    if (newNextIndex != _nextIndex)
         _nextPicture = nil;
-    } else if (newBaseIndex != _baseIndex)
+
+    if (newBaseIndex != _baseIndex)
         _basePicture = nil;
     
     
@@ -70,13 +70,20 @@
     _nextIndex = newNextIndex;
     
     float fraction = sinf((index - _baseIndex) * M_PI / 2);
-    
     [self refreshGPUImages];
     
     [_baseImageView setAlpha: 1];
     [_baseImageView setTransform: CGAffineTransformMakeTranslation(-fraction * 40, 0)];
     [_nextImageView setAlpha: fraction];
-    [_nextImageView setTransform: CGAffineTransformMakeTranslation(-fraction * 40, 0)];
+    [_nextImageView setTransform: CGAffineTransformMakeTranslation((1-fraction) * 40, 0)];
+}
+
+- (void)swapImageViews
+{
+    GPUImageView * v = _baseImageView;
+    _baseImageView = _nextImageView;
+    _nextImageView = v;
+    [self bringSubviewToFront:_nextImageView];
 }
 
 - (void)refreshGPUImages
@@ -96,26 +103,36 @@
     if (!nextImage)
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshGPUImages) name:NOTIF_IMAGE_READY object: nextURL];
     
-    CGSize size = CGSizeMake(_imageViewRect.size.width / 2.5, _imageViewRect.size.height / 2.5);
+    CGSize size = CGSizeMake(_imageViewRect.size.width / 5, _imageViewRect.size.height / 5);
 
     if ((_basePicture == nil) && (baseImage)) {
-        _basePicture = [[GPUImagePicture alloc] initWithImage:baseImage smoothlyScaleOutput:YES];
-        GPUImageGaussianBlurFilter * blurFilter = [[GPUImageGaussianBlurFilter alloc] init];
-        [blurFilter setBlurSize: 1.06];
-        [blurFilter forceProcessingAtSize: size];
-        [_basePicture addTarget: blurFilter];
-        [blurFilter addTarget: _baseImageView];
+        _basePicture = [[GPUImagePicture alloc] initWithImage:baseImage smoothlyScaleOutput: NO];
+        [self configureFiltersOnPicture:_basePicture ofSize:size forTarget:_baseImageView];
         [_basePicture processImage];
     }
     
     if ((_nextPicture == nil) && (nextImage)) {
-        _nextPicture = [[GPUImagePicture alloc] initWithImage:nextImage smoothlyScaleOutput:YES];
-        GPUImageGaussianBlurFilter * blurFilter = [[GPUImageGaussianBlurFilter alloc] init];
-        [blurFilter setBlurSize: 1.06];
-        [blurFilter forceProcessingAtSize: size];
-        [_nextPicture addTarget: blurFilter];
-        [blurFilter addTarget: _nextImageView];
+        _nextPicture = [[GPUImagePicture alloc] initWithImage:nextImage smoothlyScaleOutput: NO];
+        [self configureFiltersOnPicture:_nextPicture ofSize:size forTarget:_nextImageView];
         [_nextPicture processImage];
     }
 }
+
+- (void)configureFiltersOnPicture:(GPUImagePicture*)picture ofSize:(CGSize)size forTarget:(GPUImageView*)target
+{
+    [picture removeAllTargets];
+    
+    GPUImageGaussianBlurFilter * blurFilter = [[GPUImageGaussianBlurFilter alloc] init];
+    GPUImageBrightnessFilter * brightnessFilter = [[GPUImageBrightnessFilter alloc] init];
+
+    [blurFilter setBlurSize: 0.7];
+    [blurFilter forceProcessingAtSize: size];
+    [picture addTarget: blurFilter];
+    [blurFilter addTarget: brightnessFilter];
+    
+    [brightnessFilter setBrightness: -0.3];
+    [brightnessFilter forceProcessingAtSize: size];
+    [brightnessFilter addTarget: target];
+}
+
 @end

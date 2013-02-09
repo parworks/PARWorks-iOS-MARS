@@ -37,6 +37,7 @@
 		431BD56216C4CD140000C312 /* bar_item_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 431BD56016C4CD140000C312 /* bar_item_left.png */; };
 		431BD56316C4CD140000C312 /* bar_item_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 431BD56116C4CD140000C312 /* bar_item_right.png */; };
 		431BD56616C4D3ED0000C312 /* PVLinedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 431BD56516C4D3ED0000C312 /* PVLinedTextView.m */; };
+		431BD56C16C5F9930000C312 /* PVFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 431BD56B16C5F9930000C312 /* PVFlowLayout.m */; };
 		4345241116C0951E005D0636 /* PVAugmentedPhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4345241016C0951E005D0636 /* PVAugmentedPhotoViewController.xib */; };
 		4345241916C0965E005D0636 /* mesh_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4345241816C0965E005D0636 /* mesh_background@2x.png */; };
 		4345241B16C09663005D0636 /* mesh_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 4345241A16C09663005D0636 /* mesh_background.png */; };
@@ -333,6 +334,8 @@
 		431BD56116C4CD140000C312 /* bar_item_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bar_item_right.png; path = Resources/bar_item_right.png; sourceTree = SOURCE_ROOT; };
 		431BD56416C4D3ED0000C312 /* PVLinedTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PVLinedTextView.h; path = PARViewer/Views/PVLinedTextView.h; sourceTree = SOURCE_ROOT; };
 		431BD56516C4D3ED0000C312 /* PVLinedTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PVLinedTextView.m; path = PARViewer/Views/PVLinedTextView.m; sourceTree = SOURCE_ROOT; };
+		431BD56A16C5F9930000C312 /* PVFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PVFlowLayout.h; path = PARViewer/Views/PVFlowLayout.h; sourceTree = SOURCE_ROOT; };
+		431BD56B16C5F9930000C312 /* PVFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PVFlowLayout.m; path = PARViewer/Views/PVFlowLayout.m; sourceTree = SOURCE_ROOT; };
 		4345241016C0951E005D0636 /* PVAugmentedPhotoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PVAugmentedPhotoViewController.xib; sourceTree = "<group>"; };
 		4345241816C0965E005D0636 /* mesh_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mesh_background@2x.png"; sourceTree = "<group>"; };
 		4345241A16C09663005D0636 /* mesh_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mesh_background.png; sourceTree = "<group>"; };
@@ -1306,6 +1309,8 @@
 		43E9F71B16BFA41800AC2672 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				431BD56A16C5F9930000C312 /* PVFlowLayout.h */,
+				431BD56B16C5F9930000C312 /* PVFlowLayout.m */,
 				43E9F72016BFA41900AC2672 /* PVDetailsMapView.h */,
 				43E9F72116BFA41900AC2672 /* PVDetailsMapView.m */,
 				431BD56416C4D3ED0000C312 /* PVLinedTextView.h */,
@@ -1690,6 +1695,7 @@
 				42028A1216C24A3D002FE1C2 /* PVMapViewController.m in Sources */,
 				427EFE9416C351F1000B49C6 /* UINavigationBar+Additions.m in Sources */,
 				431BD56616C4D3ED0000C312 /* PVLinedTextView.m in Sources */,
+				431BD56C16C5F9930000C312 /* PVFlowLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
