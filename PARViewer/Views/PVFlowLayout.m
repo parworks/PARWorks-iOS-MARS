@@ -18,9 +18,12 @@
 
 - (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset withScrollingVelocity:(CGPoint)velocity
 {
+    if (fabs(velocity.x) < 0.2)
+        velocity.x = 0;
+    
     float pageWidth = ([self itemSize].width + [self minimumLineSpacing]);
-    float endPageIndex = ([[self collectionView] contentOffset].x) / pageWidth;
-    proposedContentOffset.x = (floorf(endPageIndex) + ((velocity.x > 0) ? 1 : 0)) * pageWidth;
+    float endPageIndex = ([[self collectionView] contentOffset].x - pageWidth / 2) / pageWidth;
+    proposedContentOffset.x = (roundf(endPageIndex) + ((velocity.x > 0) ? 1 : 0)) * pageWidth;
     return proposedContentOffset;
 }
 @end
