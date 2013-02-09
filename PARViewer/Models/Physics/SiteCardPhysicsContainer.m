@@ -8,7 +8,7 @@
 
 #import "SiteCardPhysicsContainer.h"
 
-#define SHINGLE_STOP_THRESHOLD 0.25
+#define SHINGLE_STOP_THRESHOLD 0.34
 
 @implementation SiteCardPhysicsContainer
 
@@ -33,7 +33,7 @@
     [_space add:[ChipmunkGrooveJoint grooveJointWithBodyA:_space.staticBody bodyB:_cardBody groove_a:cpv(20, 200) groove_b:cpv(10000, 200) anchr2:cpvzero]];
     
     _shingleBody = [[ChipmunkBody alloc] initWithMass:300 andMoment:cpMomentForBox(mass, width, height)];
-    _shingleBody.pos = cpv(_cardBody.pos.x, 120);
+    [self resetSign];
     [_space add:_shingleBody];
     
     ChipmunkShape *shape2 = [[ChipmunkPolyShape alloc] initBoxWithBody:_shingleBody width:width height:height];
@@ -74,6 +74,12 @@
     if (shouldStopShingle) {
         _shingleBody.vel = CGPointMake(0, 0);
     }
+}
+
+- (void)resetSign
+{
+    _shingleBody.pos = cpv(_cardBody.pos.x, 113);
+    _shingleBody.vel = cpv(0,0);
 }
 
 - (CGPoint)signOffset

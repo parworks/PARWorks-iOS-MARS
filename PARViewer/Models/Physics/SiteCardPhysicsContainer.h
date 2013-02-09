@@ -26,6 +26,7 @@
 - (void)step:(float)dt;
 
 - (void)setCardX:(float)cardX;
+- (void)resetSign;
 - (CGPoint)signOffset;
 - (float)signRotation;
 
