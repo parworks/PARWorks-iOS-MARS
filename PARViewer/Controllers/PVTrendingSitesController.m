@@ -13,6 +13,7 @@
 #import "ARManager+MARS_Extensions.h"
 #import "ARSite.h"
 #import "JSSlidingViewController.h"
+#import "PVFlowLayout.h"
 
 static NSString * cellIdentifier = @"TestCell";
 
@@ -50,7 +51,6 @@ static NSString * cellIdentifier = @"TestCell";
 	[_backgroundView setFloatingPointIndex:0];
 	[_collectionView registerClass:[PVSiteCardView class] forCellWithReuseIdentifier:cellIdentifier];
 	[_collectionView setShowsHorizontalScrollIndicator:NO];
-	[_collectionView setPagingEnabled:YES];
 	[_backgroundView setDelegate:self];
 }
 
@@ -92,7 +92,9 @@ static NSString * cellIdentifier = @"TestCell";
 {
 	// trigger update of our views
 	[_collectionView reloadData];
-    [_backgroundView setFloatingPointIndex: _collectionView.contentOffset.x / _collectionView.frame.size.width];
+    PVFlowLayout * layout = (PVFlowLayout*)_collectionView.collectionViewLayout;
+	CGFloat centerX = _collectionView.contentOffset.x / ([layout itemSize].width + [layout minimumLineSpacing]);
+    [_backgroundView setFloatingPointIndex: centerX];
 	[_pageControl setNumberOfPages:[[[ARManager shared] trendingSites] count]];
 }
 
@@ -159,7 +161,8 @@ static NSString * cellIdentifier = @"TestCell";
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-	CGFloat centerX = scrollView.contentOffset.x / scrollView.frame.size.width;
+    PVFlowLayout * layout = (PVFlowLayout*)_collectionView.collectionViewLayout;
+	CGFloat centerX = scrollView.contentOffset.x / ([layout itemSize].width + [layout minimumLineSpacing]);
 
 	// determine visible index based on scroll offset
 	int page = [[_collectionView indexPathForItemAtPoint:CGPointMake(scrollView.contentOffset.x + self.view.center.x, self.view.center.y)] row];
