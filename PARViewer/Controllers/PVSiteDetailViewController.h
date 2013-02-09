@@ -36,7 +36,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *mapShadowButton;
 @property (nonatomic, weak) IBOutlet UILabel *identifierLabel;
 @property (nonatomic, weak) IBOutlet UILabel *addressLabel;
-@property (nonatomic, weak) IBOutlet UILabel *descriptionLabel;
+@property (nonatomic, weak) IBOutlet UITextView *descriptionTextView;
 
 //PhotoScrollView Container Outlets
 @property (nonatomic, weak) IBOutlet UIView *detailsPhotoScrollView;

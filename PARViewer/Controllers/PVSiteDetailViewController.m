@@ -108,11 +108,18 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 - (void)setupTableHeaderView
 {
     CGFloat headerHeight = 0.0;
-
+    
     if(_site.location.latitude == 0.0 && _site.location.latitude == 0.0)
-        headerHeight = 73.0;
+        headerHeight = 55.0;
     else
-        headerHeight = 183.0;
+        headerHeight = 165.0;
+    
+    CGSize siteDescriptionSize = [_site.siteDescription sizeWithFont:_descriptionTextView.font
+                                                   constrainedToSize:CGSizeMake(_descriptionTextView.frame.size.width - 16.0, MAXFLOAT)
+                                                       lineBreakMode:NSLineBreakByWordWrapping];
+    [_descriptionTextView setFrame:CGRectMake(_descriptionTextView.frame.origin.x, _descriptionTextView.frame.origin.y, _descriptionTextView.frame.size.width,  MAX(siteDescriptionSize.height + 8.0, 29.0))];
+    headerHeight = headerHeight + _descriptionTextView.frame.size.height;
+    
     [_detailsMapView setFrame:CGRectMake(0.0, 0.0, _tableHeaderView.frame.size.width, headerHeight)];
 
     
@@ -158,8 +165,8 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 
 - (void)setupMapView{
     _identifierLabel.text = ([_site.identifier length] > 0) ? _site.identifier :  @"No identifier available";
-    _addressLabel.text = ([_site.address length] > 0) ? _site.address : @"No address available";
-    _descriptionLabel.text = ([_site.description length] > 0) ? _site.description : @"No description available";
+    _addressLabel.text = ([_site.address length] > 0) ? _site.address : @"No address available";   
+    _descriptionTextView.text = ([_site.siteDescription length] > 0) ? _site.siteDescription : @"No description available";
     
     if(_site.location.latitude == 0.0 && _site.location.latitude == 0.0){
         [_mapView setHidden:YES];
