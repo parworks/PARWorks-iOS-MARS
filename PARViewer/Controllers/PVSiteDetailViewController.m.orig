@@ -16,12 +16,16 @@
 #import "GPUImageGaussianBlurFilter.h"
 #import "UINavigationItem+PVAdditions.h"
 #import "UIColor+ThemeAdditions.h"
+#import "PVCommentTableViewCell.h"
 #import "UIFont+ThemeAdditions.h"
 #import "PVMapViewController.h"
 #import "UINavigationBar+Additions.h"
-#import "GPUImageBrightnessFilter.h"
+<<<<<<< HEAD
 #import "MapAnnotation.h"
 #import "PVBorderedImageCell.h"
+=======
+#import "GPUImageBrightnessFilter.h"
+>>>>>>> bb8f22bec1af9f0f91eb2882190a2aa346415d2b
 
 #define PARALLAX_WINDOW_HEIGHT 165.0
 #define PARALLAX_IMAGE_HEIGHT 300.0
@@ -107,18 +111,11 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 - (void)setupTableHeaderView
 {
     CGFloat headerHeight = 0.0;
-    
+
     if(_site.location.latitude == 0.0 && _site.location.latitude == 0.0)
-        headerHeight = 55.0;
+        headerHeight = 73.0;
     else
-        headerHeight = 165.0;
-    
-    CGSize siteDescriptionSize = [_site.siteDescription sizeWithFont:_descriptionTextView.font
-                                                   constrainedToSize:CGSizeMake(_descriptionTextView.frame.size.width - 16.0, MAXFLOAT)
-                                                       lineBreakMode:NSLineBreakByWordWrapping];
-    [_descriptionTextView setFrame:CGRectMake(_descriptionTextView.frame.origin.x, _descriptionTextView.frame.origin.y, _descriptionTextView.frame.size.width,  MAX(siteDescriptionSize.height + 8.0, 29.0))];
-    headerHeight = headerHeight + _descriptionTextView.frame.size.height;
-    
+        headerHeight = 183.0;
     [_detailsMapView setFrame:CGRectMake(0.0, 0.0, _tableHeaderView.frame.size.width, headerHeight)];
 
     
@@ -164,8 +161,8 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 
 - (void)setupMapView{
     _identifierLabel.text = ([_site.identifier length] > 0) ? _site.identifier :  @"No identifier available";
-    _addressLabel.text = ([_site.address length] > 0) ? _site.address : @"No address available";   
-    _descriptionTextView.text = ([_site.siteDescription length] > 0) ? _site.siteDescription : @"No description available";
+    _addressLabel.text = ([_site.address length] > 0) ? _site.address : @"No address available";
+    _descriptionLabel.text = ([_site.description length] > 0) ? _site.description : @"No description available";
     
     if(_site.location.latitude == 0.0 && _site.location.latitude == 0.0){
         [_mapView setHidden:YES];
@@ -251,13 +248,13 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
         
         GPUImagePicture *_bgCopyPicture = [[GPUImagePicture alloc] initWithImage:image smoothlyScaleOutput: NO];
         GPUImageGaussianBlurFilter * blurFilter = [[GPUImageGaussianBlurFilter alloc] init];
-        GPUImageBrightnessFilter * brightnessFilter = [[GPUImageBrightnessFilter alloc] init];
-
-        [blurFilter setBlurSize: 0.5];
+        [blurFilter setBlurSize: 1.1];
         [_bgCopyPicture addTarget: blurFilter];
-        [blurFilter addTarget: brightnessFilter];
+        [blurFilter addTarget: _bgCopyImageView];
 
-        [brightnessFilter setBrightness: -0.35];
+        GPUImageBrightnessFilter * brightnessFilter = [[GPUImageBrightnessFilter alloc] init];
+        [brightnessFilter setBrightness: -0.4];
+        [_bgCopyPicture addTarget: brightnessFilter];
         [brightnessFilter addTarget: _bgCopyImageView];
         
         [_bgCopyPicture processImage];
@@ -359,8 +356,6 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
     
-    cell.delegate = self;
-    cell.indexPath = indexPath;
     cell.comment = comment;
     [cell setIsFirstRow: ([indexPath row] == 0)];
     
@@ -433,14 +428,8 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 #pragma mark
 #pragma mark PVAddCommentViewControllerDelegate methods
 
-- (void)postedComment:(ARSiteComment*)comment successfully:(PVAddCommentViewController *)vc{
+- (void)postedCommentSuccessfully:(PVAddCommentViewController *)vc{
     [self hideAddComment:vc];
-    CGRect rect = [_tableView rectForHeaderInSection:0];
-    [_tableView setContentOffset:CGPointMake(0.0, rect.origin.y) animated:YES];
-    [_site.comments insertObject:comment atIndex:0];
-    [_tableView beginUpdates];
-    [_tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-    [_tableView endUpdates];
     [_tableView reloadData];
 }
 
@@ -498,22 +487,6 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
         
         return annotationView;
     }
-}
-
-#pragma mark -
-#pragma mark PVCommentTableViewCellDelegate methods
-
-- (void)removeComment:(ARSiteComment*)comment atIndexPath:(NSIndexPath*)indexPath{
-    __weak UITableView *__tableView = _tableView;
-    __weak NSIndexPath *__indexPath = indexPath;
-    __weak NSMutableArray *__comments = _site.comments;
-    [_site removeComment:comment withCallback:^(NSString *err){
-        [__comments removeObjectAtIndex:__indexPath.row];
-        [__tableView beginUpdates];
-        [__tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:__indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        [__tableView endUpdates];
-        [__tableView reloadData];
-    }];
 }
 
 @end

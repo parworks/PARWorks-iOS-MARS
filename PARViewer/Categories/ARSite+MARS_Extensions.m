@@ -37,7 +37,7 @@ static char COMMENTS_KEY;
     [req startAsynchronous];
 }
 
-- (void)addComment:(ARSiteComment*)comment withCallback:(void(^)(NSString * err))callback
+- (void)addComment:(ARSiteComment*)comment withCallback:(void(^)(NSString * err, ARSiteComment *comment))callback
 {
     NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithObject:self.identifier forKey:@"site"];
     [dict setObject: [comment userName] forKey:@"userName"];
@@ -49,9 +49,9 @@ static char COMMENTS_KEY;
     [req setCompletionBlock: ^(void) {
         NSDictionary * response = [__req responseJSON];
         if ([[response objectForKey: @"success"] intValue] == 1)
-            callback(NULL);
+            callback(NULL, comment);
         else
-            callback(@"Sorry, your comment could not be saved.");
+            callback(@"Sorry, your comment could not be saved.", nil);
     }];
     [req startAsynchronous];
 }
@@ -60,15 +60,17 @@ static char COMMENTS_KEY;
 {
     
     NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithObject:self.identifier forKey:@"site"];
+    [dict setObject:[NSString stringWithFormat:@"%.0f", [comment.timestamp timeIntervalSince1970] * 1000] forKey:@"timeStamp"];
     ASIHTTPRequest * req = [[ARManager shared] createRequest:@"/ar/site/comment/remove" withMethod:@"GET" withArguments: dict];
     ASIHTTPRequest * __weak __req = req;
     [req setCompletionBlock: ^(void) {
         NSDictionary * response = [__req responseJSON];
-        if ([[response objectForKey: @"success"] isEqualToString: @"true"])
+        if ([[response objectForKey: @"success"] intValue] == 1)
             callback(NULL);
         else
             callback(@"Sorry, your comment could not be deleted.");
     }];
+    [req startAsynchronous];
 }
 
 #pragma mark Associated Objects

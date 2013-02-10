@@ -8,6 +8,7 @@
 
 #import "PVBaseViewController.h"
 #import "ARSite.h"
+#import "ARSiteComment.h"
 
 @protocol PVAddCommentViewControllerDelegate;
 
@@ -30,6 +31,6 @@
 @protocol PVAddCommentViewControllerDelegate <NSObject>
 
 @required
-- (void)postedCommentSuccessfully:(PVAddCommentViewController *)vc;
+- (void)postedComment:(ARSiteComment*)comment successfully:(PVAddCommentViewController *)vc;
 - (void)cancelButtonPressed:(PVAddCommentViewController *)vc;
 @end

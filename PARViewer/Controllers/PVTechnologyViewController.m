@@ -7,6 +7,7 @@
 //
 
 #import "PVTechnologyViewController.h"
+#import "UIWebView+ScrollView.h"
 
 @interface PVTechnologyViewController ()
 
@@ -31,6 +32,8 @@
     NSString * htmlPath = [[NSBundle mainBundle] pathForResource:@"technology" ofType:@"html" inDirectory:@"HTML"];
     NSString * htmlFolder = [htmlPath stringByDeletingLastPathComponent];
     [_webView loadHTMLString:[NSString stringWithContentsOfFile:htmlPath encoding:NSASCIIStringEncoding error:nil] baseURL: [NSURL fileURLWithPath: htmlFolder]];
+    [_webView.scrollView setDecelerationRate:1.0];
+    [_webView removeShadows];
 }
 
 - (void)didReceiveMemoryWarning
