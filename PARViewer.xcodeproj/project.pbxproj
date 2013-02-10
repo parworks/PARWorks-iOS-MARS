@@ -226,6 +226,8 @@
 		43E9F76316BFA49800AC2672 /* PVBorderedImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E9F76016BFA49800AC2672 /* PVBorderedImageCell.m */; };
 		43E9F76416BFA49800AC2672 /* PVSiteCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E9F76216BFA49800AC2672 /* PVSiteCardView.m */; };
 		43EB601316BCEE7A00A3EE29 /* frontViewControllerDropShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 43EB601116BCEE7A00A3EE29 /* frontViewControllerDropShadow.png */; };
+		43F2FA7216C820E2001D2C07 /* tiny_camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 43F2FA7116C820E2001D2C07 /* tiny_camera.png */; };
+		43F2FA7A16C820E5001D2C07 /* tiny_camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43F2FA7916C820E5001D2C07 /* tiny_camera@2x.png */; };
 		A00F91A416C7F47A00F1B826 /* UIWebView+ScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = A00F91A316C7F47A00F1B826 /* UIWebView+ScrollView.m */; };
 		A0A44D9016BE2E12003809D3 /* libChipmunk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A44D8F16BE2DF7003809D3 /* libChipmunk.a */; };
 		A0A44D9116BE2E12003809D3 /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A44D7716BE2D8D003809D3 /* libcocos2d.a */; };
@@ -655,6 +657,8 @@
 		43E9F76116BFA49800AC2672 /* PVSiteCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVSiteCardView.h; sourceTree = "<group>"; };
 		43E9F76216BFA49800AC2672 /* PVSiteCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVSiteCardView.m; sourceTree = "<group>"; };
 		43EB601116BCEE7A00A3EE29 /* frontViewControllerDropShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frontViewControllerDropShadow.png; sourceTree = "<group>"; };
+		43F2FA7116C820E2001D2C07 /* tiny_camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiny_camera.png; sourceTree = "<group>"; };
+		43F2FA7916C820E5001D2C07 /* tiny_camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tiny_camera@2x.png"; sourceTree = "<group>"; };
 		A00F91A216C7F47A00F1B826 /* UIWebView+ScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+ScrollView.h"; sourceTree = "<group>"; };
 		A00F91A316C7F47A00F1B826 /* UIWebView+ScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+ScrollView.m"; sourceTree = "<group>"; };
 		A0A44D6F16BE2D8C003809D3 /* ChipmunkTemplate.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ChipmunkTemplate.xcodeproj; path = Subprojects/ChipmunkTemplate/ChipmunkTemplate.xcodeproj; sourceTree = "<group>"; };
@@ -826,6 +830,7 @@
 				439C504C16BE3C700035783E /* missing_image_300x150.png */,
 				43EB601116BCEE7A00A3EE29 /* frontViewControllerDropShadow.png */,
 				4351D0EA16B4C6CA0039FE88 /* Default.png */,
+				43F2FA7116C820E2001D2C07 /* tiny_camera.png */,
 				427EFE9B16C37CFB000B49C6 /* map_icon_recenter.png */,
 				427EFE9C16C37CFB000B49C6 /* map_icon_reload.png */,
 				43998B9316BDD164008B34C2 /* icon_nearby.png */,
@@ -1185,6 +1190,7 @@
 				430CEF3716C3A0F10044A0A0 /* bar_item_reload@2x.png */,
 				430CEF3216C3666C0044A0A0 /* map_inner_shadow_highlighted@2x.png */,
 				430CEF3016C35F980044A0A0 /* bar_item_up@2x.png */,
+				43F2FA7916C820E5001D2C07 /* tiny_camera@2x.png */,
 				431BD56016C4CD140000C312 /* bar_item_left.png */,
 				431BD56116C4CD140000C312 /* bar_item_right.png */,
 				43988B2C16BE5CA0005DB5E8 /* bar_item_back@2x.png */,
@@ -1573,6 +1579,8 @@
 				431BD55F16C4CC820000C312 /* bar_item_right@2x.png in Resources */,
 				431BD56216C4CD140000C312 /* bar_item_left.png in Resources */,
 				431BD56316C4CD140000C312 /* bar_item_right.png in Resources */,
+				43F2FA7216C820E2001D2C07 /* tiny_camera.png in Resources */,
+				43F2FA7A16C820E5001D2C07 /* tiny_camera@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
