@@ -124,8 +124,14 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     
     if(_site.totalAugmentedImages > 0){
         [_detailsPhotoScrollView setFrame:CGRectMake(0.0, _detailsMapView.frame.origin.y + _detailsMapView.frame.size.height, _tableHeaderView.frame.size.width, 132.0)];
-        headerHeight = _detailsPhotoScrollView.frame.origin.y + _detailsPhotoScrollView.frame.size.height;
+        [_detailsPhotoScrollView setHidden:NO];
     }
+    else{
+        [_detailsPhotoScrollView setFrame:CGRectMake(0.0, _detailsMapView.frame.origin.y + _detailsMapView.frame.size.height, _tableHeaderView.frame.size.width, 0.0)];
+        [_detailsPhotoScrollView setHidden:YES];
+    }
+    
+    headerHeight = _detailsPhotoScrollView.frame.origin.y + _detailsPhotoScrollView.frame.size.height;
     
     [_tableHeaderView setFrame:CGRectMake(_tableHeaderView.frame.origin.x, _tableHeaderView.frame.origin.y, _tableHeaderView.frame.size.width, headerHeight)];
     
