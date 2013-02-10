@@ -44,16 +44,7 @@
         [_timestampLabel setTextColor:[UIColor colorWithRed:115.0/255.0 green:115.0/255.0 blue:115.0/255.0 alpha:1.0]];
         [_timestampLabel setFont:[UIFont parworksFontWithSize:15.0]];
         [self.contentView addSubview:_timestampLabel];
-        
-//        self.contentLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-//        [_contentLabel setBackgroundColor:[UIColor clearColor]];
-//        [_contentLabel setUserInteractionEnabled:NO];
-//        [_contentLabel setTextColor:[UIColor colorWithRed:115.0/255.0 green:115.0/255.0 blue:115.0/255.0 alpha:1.0]];
-//        [_contentLabel setFont:[UIFont systemFontOfSize:15.0]];
-//        [_contentLabel setNumberOfLines:0];
-//        [_contentLabel setLineBreakMode:NSLineBreakByWordWrapping];
-//        [self.contentView addSubview:_contentLabel];
-        
+                
         self.contentTextView = [[UITextView alloc] initWithFrame:CGRectZero];
 		[_contentTextView setBackgroundColor:[UIColor clearColor]];
         [_contentTextView setTextColor:[UIColor colorWithRed:115.0/255.0 green:115.0/255.0 blue:115.0/255.0 alpha:1.0]];
@@ -75,8 +66,6 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 - (void)layoutSubviews {
@@ -89,7 +78,6 @@
     CGSize size = [_contentTextView.text sizeWithFont:_contentTextView.font
                               constrainedToSize:CGSizeMake(247.0, MAXFLOAT)
                                   lineBreakMode:NSLineBreakByWordWrapping];
-//    [_contentLabel setFrame:CGRectMake(_nameLabel.frame.origin.x, _timestampLabel.frame.origin.y + _timestampLabel.frame.size.height, _nameLabel.frame.size.width, size.height)];
     [_contentTextView setFrame:CGRectMake(_nameLabel.frame.origin.x - 8.0, _timestampLabel.frame.origin.y + _timestampLabel.frame.size.height - 8.0, _nameLabel.frame.size.width + 16.0, size.height + 16.0)];
     
     CGRect frame = [_bgImageView frame];
@@ -104,7 +92,11 @@
     [self setNeedsLayout];
 }
 
-- (void)setComment:(ARSiteComment *)comment{
+- (void)setComment:(ARSiteComment *)comment
+{
+    if (comment == _comment)
+        return;
+    
     _comment = comment;
     _nameLabel.text = _comment.userName;
     _timestampLabel.text = [NSString stringWithDate:_comment.timestamp format:@"MMM d',' h':'mm aaa"];
@@ -112,7 +104,8 @@
     
     NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=52&height=52", _comment.userID]];
     UIImage * img = [[PVImageCacheManager shared] imageForURL:imageURL];
-    if (!img) {        
+    if (!img) {
+        [[NSNotificationCenter defaultCenter] removeObserver: self];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteImageReady:) name:NOTIF_IMAGE_READY object:imageURL];
     }
     [_avatarImageView setImage: img];
@@ -123,6 +116,17 @@
 {
     UIImage * img = [[PVImageCacheManager shared] imageForURL:notif.object];
     [_avatarImageView setImage: img];
+}
+
+- (void)prepareForReuse
+{
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
+    [super prepareForReuse];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
 }
 
 @end

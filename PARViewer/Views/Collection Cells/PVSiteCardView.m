@@ -219,8 +219,15 @@
         CGContextFillEllipseInRect(context, CGRectMake(convertedPosterLeft.x - 2, convertedPosterLeft.y - 4, 4, 4));
         CGContextFillEllipseInRect(context, CGRectMake(convertedPosterRight.x - 2, convertedPosterRight.y - 4, 4, 4));
         
-        draw1PxStroke(context, convertedPosterLeft, convertedShingleLeft, [UIColor colorWithWhite:1 alpha:0.5]);
-        draw1PxStroke(context, convertedPosterRight, convertedShingleRight, [UIColor colorWithWhite:1 alpha:0.5]);
+        CGContextSetLineCap(context, kCGLineCapRound);
+        CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:1 alpha:0.5].CGColor);
+        CGContextSetLineWidth(context, 1);
+        CGContextMoveToPoint(context, convertedPosterLeft.x - 0.5, convertedPosterLeft.y - 0.5);
+        CGContextAddLineToPoint(context, convertedShingleLeft.x - 0.5, convertedShingleLeft.y - 0.5);
+        CGContextStrokePath(context);
+        CGContextMoveToPoint(context, convertedPosterRight.x - 0.5, convertedPosterRight.y - 0.5);
+        CGContextAddLineToPoint(context, convertedShingleRight.x - 0.5, convertedShingleRight.y - 0.5);
+        CGContextStrokePath(context);
     }
 }
 

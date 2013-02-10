@@ -109,17 +109,5 @@ static NSMutableDictionary * smallImages;
 }
 
 
-void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, UIColor *color)
-{
-    CGContextSaveGState(context);
-    CGContextSetLineCap(context, kCGLineCapRound);
-    CGContextSetStrokeColorWithColor(context, color.CGColor);
-    CGContextSetLineWidth(context, 1);
-    CGContextMoveToPoint(context, startPoint.x - 0.5, startPoint.y - 0.5);
-    CGContextAddLineToPoint(context, endPoint.x - 0.5, endPoint.y - 0.5);
-    CGContextStrokePath(context);
-    CGContextRestoreGState(context);
-}
-
 
 @end

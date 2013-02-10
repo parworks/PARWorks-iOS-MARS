@@ -167,11 +167,13 @@
 												<string key="IBUITitle">Comment</string>
 												<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="392734996">
 													<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+													<int key="IBUIStyle">1</int>
 													<reference key="IBUICustomView" ref="265135283"/>
 													<reference key="IBUINavigationItem" ref="1056638940"/>
 												</object>
 												<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="368449114">
 													<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+													<int key="IBUIStyle">1</int>
 													<reference key="IBUICustomView" ref="631624162"/>
 													<reference key="IBUINavigationItem" ref="1056638940"/>
 												</object>

@@ -103,16 +103,18 @@
     if (!nextImage)
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshGPUImages) name:NOTIF_IMAGE_READY object: nextURL];
     
-    CGSize size = CGSizeMake(_imageViewRect.size.width / 5, _imageViewRect.size.height / 5);
+    CGSize size = CGSizeMake(_imageViewRect.size.width / 15, _imageViewRect.size.height / 15);
 
     if ((_basePicture == nil) && (baseImage)) {
         _basePicture = [[GPUImagePicture alloc] initWithImage:baseImage smoothlyScaleOutput: NO];
+        [_basePicture forceProcessingAtSize: size];
         [self configureFiltersOnPicture:_basePicture ofSize:size forTarget:_baseImageView];
         [_basePicture processImage];
     }
     
     if ((_nextPicture == nil) && (nextImage)) {
         _nextPicture = [[GPUImagePicture alloc] initWithImage:nextImage smoothlyScaleOutput: NO];
+        [_nextPicture forceProcessingAtSize: size];
         [self configureFiltersOnPicture:_nextPicture ofSize:size forTarget:_nextImageView];
         [_nextPicture processImage];
     }

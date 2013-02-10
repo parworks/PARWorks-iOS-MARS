@@ -25,7 +25,6 @@
 #import "CATextLayer+Loading.h"
 #import "PARWorks.h"
 #import "EPUtil.h"
-#import "AdOverlayView.h"
 
 
 #define CAMERA_TRANSFORM_SCALE 1.25
@@ -198,19 +197,6 @@
 
     } else {
         // just wait...
-    }
-}
-
-
-
-- (AROverlayView *)overlayViewForOverlay:(AROverlay *)overlay
-{
-    if ([overlay.name isEqualToString: @"Ad"]) {
-        AdOverlayView * v = [[AdOverlayView alloc] initWithFrame:CGRectMake(0, 0, 560*0.6, 320*0.6) points:overlay.points andMedia:@"ad" ofType:@"png" withWebTarget:nil];
-        return v;
-    } else {
-        AdOverlayView * v = [[AdOverlayView alloc] initWithFrame:CGRectMake(0, 0, _augmentedView.frame.size.width / CAMERA_TRANSFORM_SCALE - 40, _augmentedView.frame.size.height / CAMERA_TRANSFORM_SCALE - 40) points:overlay.points andMedia:overlay.name ofType:@"png" withWebTarget: [NSURL URLWithString: overlay.content]];
-        return v;
     }
 }
 
