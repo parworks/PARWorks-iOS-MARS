@@ -68,4 +68,15 @@
 	[_imageView setImage:img];
 }
 
+- (void)prepareForReuse
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    [super prepareForReuse];
+}
+
+- (void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 @end

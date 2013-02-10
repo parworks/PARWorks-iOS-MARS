@@ -26,4 +26,6 @@
 - (NSData*)diskCacheContentsFor:(NSURL*)url;
 - (void)writeToDiskCache:(NSData*)data fromURL:(NSURL*)url;
 
+- (UIImage*)blurredImageForURL:(NSURL*)url;
+
 @end

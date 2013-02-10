@@ -10,6 +10,7 @@
 #import "PSTCollectionView.h"
 #import "ARSite.h"
 #import "ObjectiveChipmunk.h"
+#import "ARAugmentedView.h"
 
 @class PVCardShingleView;
 @class PVCardRopeView;
@@ -27,7 +28,7 @@
 }
 
 @property (nonatomic, strong) UIView *posterContainer;
-@property (nonatomic, strong) UIImageView * posterImageView;
+@property (nonatomic, strong) ARAugmentedView * posterImageView;
 @property (nonatomic, strong) PVCardShingleView *shingleView;
 @property (nonatomic, strong) PVCardRopeView *ropeView;
 

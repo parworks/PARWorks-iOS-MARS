@@ -32,8 +32,6 @@ static NSString * cellIdentifier = @"TestCell";
         
         _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(update)];
         _displayLink.frameInterval = 1;
-        
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openingSidebar) name:JSSlidingViewControllerWillOpenNotification object:nil];
     }
 	return self;
 }
@@ -62,12 +60,21 @@ static NSString * cellIdentifier = @"TestCell";
     
     // trigger update of our views
     [self trendingSitesUpdated: nil];
+    [self resumeDisplayLink];
+}
 
-	[_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:UITrackingRunLoopMode];
+- (void)resumeDisplayLink
+{
+    [_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:UITrackingRunLoopMode];
 	[_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
+{
+    [self pauseDisplayLink];
+}
+
+- (void)pauseDisplayLink
 {
     [_displayLink removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:UITrackingRunLoopMode];
     [_displayLink removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];

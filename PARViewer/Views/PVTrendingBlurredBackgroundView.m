@@ -6,10 +6,8 @@
 //  Copyright (c) 2013 Ben Gotow. All rights reserved.
 //
 
-#import "PVTrendingBlurredBackgroundView.h"
 #import "PVImageCacheManager.h"
-#import "GPUImageGaussianBlurFilter.h"
-#import "GPUImageBrightnessFilter.h"
+#import "PVTrendingBlurredBackgroundView.h"
 
 @implementation PVTrendingBlurredBackgroundView
 
@@ -18,6 +16,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self populateImageViews];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshGPUImages) name:NOTIF_IMAGE_READY object: nil];
     }
     return self;
 }
@@ -33,12 +32,12 @@
     _imageViewRect.origin.x -= 50;
     _imageViewRect.size.width += 100;
     
-    _baseImageView = [[GPUImageView alloc] initWithFrame: _imageViewRect];
-    [_baseImageView setFillMode: kGPUImageFillModePreserveAspectRatioAndFill];
+    _baseImageView = [[UIImageView alloc] initWithFrame: _imageViewRect];
+    [_baseImageView setContentMode: UIViewContentModeScaleAspectFill];
     [self addSubview: _baseImageView];
     
-    _nextImageView = [[GPUImageView alloc] initWithFrame: _imageViewRect];
-    [_nextImageView setFillMode: kGPUImageFillModePreserveAspectRatioAndFill];
+    _nextImageView = [[UIImageView alloc] initWithFrame: _imageViewRect];
+    [_nextImageView setContentMode: UIViewContentModeScaleAspectFill];
     [self addSubview: _nextImageView];
 }
 
@@ -48,23 +47,12 @@
     // which three views should we be showing?
     float newBaseIndex = MAX(0, floorf(index));
     float newNextIndex = newBaseIndex + 1;
-    
-    if (newBaseIndex == _nextIndex) {
-        _basePicture = _nextPicture;
-        _baseIndex = newBaseIndex;
-        [self swapImageViews];
-    }
-    if (newNextIndex == _baseIndex) {
-        _nextPicture = _basePicture;
-        _nextIndex = newNextIndex;
-        [self swapImageViews];
-    }
+
     if (newNextIndex != _nextIndex)
-        _nextPicture = nil;
+        _nextImageView.image = nil;
 
     if (newBaseIndex != _baseIndex)
-        _basePicture = nil;
-    
+        _baseImageView.image = nil;
     
     _baseIndex = newBaseIndex;
     _nextIndex = newNextIndex;
@@ -78,63 +66,29 @@
     [_nextImageView setTransform: CGAffineTransformMakeTranslation((1-fraction) * 40, 0)];
 }
 
-- (void)swapImageViews
-{
-    GPUImageView * v = _baseImageView;
-    _baseImageView = _nextImageView;
-    _nextImageView = v;
-    [self bringSubviewToFront:_nextImageView];
-}
-
 - (void)refreshGPUImages
 {
-    // unregister from notifications
-    [[NSNotificationCenter defaultCenter] removeObserver: self];
-    
+    if ((_baseImageView.image != nil) && (_nextImageView.image != nil))
+        return;
+
     // get images
     NSURL * baseURL = [_delegate urlForSiteAtIndex: _baseIndex];
     UIImage * baseImage = [[PVImageCacheManager shared] imageForURL: baseURL];
     NSURL * nextURL = [_delegate urlForSiteAtIndex: _nextIndex];
     UIImage * nextImage = [[PVImageCacheManager shared] imageForURL: nextURL];
     
-    // register for image updates if one is missing
-    if (!baseImage)
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshGPUImages) name:NOTIF_IMAGE_READY object: baseURL];
-    if (!nextImage)
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshGPUImages) name:NOTIF_IMAGE_READY object: nextURL];
+    if ((_baseImageView.image == nil) && (baseImage))
+        [_baseImageView setImage: [[PVImageCacheManager shared] blurredImageForURL: baseURL]];
     
-    CGSize size = CGSizeMake(_imageViewRect.size.width / 15, _imageViewRect.size.height / 15);
-
-    if ((_basePicture == nil) && (baseImage)) {
-        _basePicture = [[GPUImagePicture alloc] initWithImage:baseImage smoothlyScaleOutput: NO];
-        [_basePicture forceProcessingAtSize: size];
-        [self configureFiltersOnPicture:_basePicture ofSize:size forTarget:_baseImageView];
-        [_basePicture processImage];
-    }
-    
-    if ((_nextPicture == nil) && (nextImage)) {
-        _nextPicture = [[GPUImagePicture alloc] initWithImage:nextImage smoothlyScaleOutput: NO];
-        [_nextPicture forceProcessingAtSize: size];
-        [self configureFiltersOnPicture:_nextPicture ofSize:size forTarget:_nextImageView];
-        [_nextPicture processImage];
+    if ((_nextImageView.image == nil) && (nextImage)) {
+        [_nextImageView setImage: [[PVImageCacheManager shared] blurredImageForURL: nextURL]];
     }
 }
 
-- (void)configureFiltersOnPicture:(GPUImagePicture*)picture ofSize:(CGSize)size forTarget:(GPUImageView*)target
+- (void)dealloc
 {
-    [picture removeAllTargets];
-    
-    GPUImageGaussianBlurFilter * blurFilter = [[GPUImageGaussianBlurFilter alloc] init];
-    GPUImageBrightnessFilter * brightnessFilter = [[GPUImageBrightnessFilter alloc] init];
-
-    [blurFilter setBlurSize: 0.7];
-    [blurFilter forceProcessingAtSize: size];
-    [picture addTarget: blurFilter];
-    [blurFilter addTarget: brightnessFilter];
-    
-    [brightnessFilter setBrightness: -0.3];
-    [brightnessFilter forceProcessingAtSize: size];
-    [brightnessFilter addTarget: target];
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
 }
+
 
 @end
