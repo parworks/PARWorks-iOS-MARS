@@ -54,7 +54,6 @@ static NSMutableDictionary * smallImages;
                 CGContextDrawImage(c, CGRectMake(-x * width, y * height - (image.size.height - height), image.size.width, image.size.height), image.CGImage);
                 UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
                 [smallImages setObject:img forKey:[NSNumber numberWithInt: count-i]];
-                NSLog(@"Finished %d", i);
                 
                 imgCallback(i, img);
             }
