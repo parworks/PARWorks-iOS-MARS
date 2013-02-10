@@ -226,6 +226,7 @@
 		43E9F76316BFA49800AC2672 /* PVBorderedImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E9F76016BFA49800AC2672 /* PVBorderedImageCell.m */; };
 		43E9F76416BFA49800AC2672 /* PVSiteCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E9F76216BFA49800AC2672 /* PVSiteCardView.m */; };
 		43EB601316BCEE7A00A3EE29 /* frontViewControllerDropShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 43EB601116BCEE7A00A3EE29 /* frontViewControllerDropShadow.png */; };
+		A00F91A416C7F47A00F1B826 /* UIWebView+ScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = A00F91A316C7F47A00F1B826 /* UIWebView+ScrollView.m */; };
 		A0A44D9016BE2E12003809D3 /* libChipmunk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A44D8F16BE2DF7003809D3 /* libChipmunk.a */; };
 		A0A44D9116BE2E12003809D3 /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A44D7716BE2D8D003809D3 /* libcocos2d.a */; };
 		A0AF6F5C16C0E2E7003457A2 /* overlay_spec_example_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A0AF6F5A16C0E2E7003457A2 /* overlay_spec_example_1.jpg */; };
@@ -654,6 +655,8 @@
 		43E9F76116BFA49800AC2672 /* PVSiteCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVSiteCardView.h; sourceTree = "<group>"; };
 		43E9F76216BFA49800AC2672 /* PVSiteCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVSiteCardView.m; sourceTree = "<group>"; };
 		43EB601116BCEE7A00A3EE29 /* frontViewControllerDropShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frontViewControllerDropShadow.png; sourceTree = "<group>"; };
+		A00F91A216C7F47A00F1B826 /* UIWebView+ScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+ScrollView.h"; sourceTree = "<group>"; };
+		A00F91A316C7F47A00F1B826 /* UIWebView+ScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+ScrollView.m"; sourceTree = "<group>"; };
 		A0A44D6F16BE2D8C003809D3 /* ChipmunkTemplate.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ChipmunkTemplate.xcodeproj; path = Subprojects/ChipmunkTemplate/ChipmunkTemplate.xcodeproj; sourceTree = "<group>"; };
 		A0AF6F5A16C0E2E7003457A2 /* overlay_spec_example_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = overlay_spec_example_1.jpg; sourceTree = "<group>"; };
 		A0AF6F5B16C0E2E7003457A2 /* overlay_spec_example_1.pm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.perl; path = overlay_spec_example_1.pm; sourceTree = "<group>"; };
@@ -1241,6 +1244,8 @@
 				43E9F6F616BFA41800AC2672 /* UINavigationItem+PVAdditions.m */,
 				427EFE9216C351F1000B49C6 /* UINavigationBar+Additions.h */,
 				427EFE9316C351F1000B49C6 /* UINavigationBar+Additions.m */,
+				A00F91A216C7F47A00F1B826 /* UIWebView+ScrollView.h */,
+				A00F91A316C7F47A00F1B826 /* UIWebView+ScrollView.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1311,12 +1316,8 @@
 			children = (
 				431BD56A16C5F9930000C312 /* PVFlowLayout.h */,
 				431BD56B16C5F9930000C312 /* PVFlowLayout.m */,
-				43E9F72016BFA41900AC2672 /* PVDetailsMapView.h */,
-				43E9F72116BFA41900AC2672 /* PVDetailsMapView.m */,
 				431BD56416C4D3ED0000C312 /* PVLinedTextView.h */,
 				431BD56516C4D3ED0000C312 /* PVLinedTextView.m */,
-				43E9F72216BFA41900AC2672 /* PVDetailsPhotoScrollView.h */,
-				43E9F72316BFA41900AC2672 /* PVDetailsPhotoScrollView.m */,
 				43E9F72416BFA41900AC2672 /* PVImageTransferAnimationView.h */,
 				43E9F72516BFA41900AC2672 /* PVImageTransferAnimationView.m */,
 				43E9F72616BFA41900AC2672 /* PVParallaxTableView.h */,
@@ -1696,6 +1697,7 @@
 				427EFE9416C351F1000B49C6 /* UINavigationBar+Additions.m in Sources */,
 				431BD56616C4D3ED0000C312 /* PVLinedTextView.m in Sources */,
 				431BD56C16C5F9930000C312 /* PVFlowLayout.m in Sources */,
+				A00F91A416C7F47A00F1B826 /* UIWebView+ScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
