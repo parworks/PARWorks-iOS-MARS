@@ -14,6 +14,7 @@
 @interface PVSiteTableViewCell : UITableViewCell
 {
     ARSite * _site;
+    UIButton * _distanceButton;
 }
 
 @property (nonatomic, strong) CALayer * whiteLayer;
