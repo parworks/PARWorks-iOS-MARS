@@ -15,7 +15,7 @@
 @property (nonatomic, strong) NSMutableArray * comments;
 
 - (void)fetchComments;
-- (void)addComment:(ARSiteComment*)comment withCallback:(void(^)(NSString * err))callback;
+- (void)addComment:(ARSiteComment*)comment withCallback:(void(^)(NSString * err, ARSiteComment *comment))callback;
 - (void)removeComment:(ARSiteComment*)comment withCallback:(void(^)(NSString * err))callback;
 
 @end

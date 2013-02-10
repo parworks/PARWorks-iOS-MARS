@@ -96,12 +96,14 @@
         NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithObject:[defaults objectForKey:@"FBName"]forKey:@"userName"];
         [dict setObject:[defaults objectForKey:@"FBId"] forKey:@"userId"];
         [dict setObject:_commentTextView.text forKey:@"comment"];
+        [dict setObject:[NSString stringWithFormat:@"%.0f", [[NSDate date] timeIntervalSince1970] * 1000] forKey:@"timeStamp"];
         
-        ARSiteComment *comment = [[ARSiteComment alloc] initWithDictionary:dict];
+        ARSiteComment *newComment = [[ARSiteComment alloc] initWithDictionary:dict];
         __weak PVAddCommentViewController *__self = self;
-        [_site addComment:comment withCallback:^(NSString *err){
+
+        [_site addComment:newComment withCallback:^(NSString *err, ARSiteComment *comment){
             [__self slideOut];
-            [__self.delegate postedCommentSuccessfully:__self];
+            [__self.delegate postedComment:comment successfully:__self];
         }];
 
     } else {

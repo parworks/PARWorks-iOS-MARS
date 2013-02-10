@@ -13,8 +13,9 @@
 #import "ARAugmentedView.h"
 #import <MapKit/MapKit.h>
 #import "PSTCollectionView.h"
+#import "PVCommentTableViewCell.h"
 
-@interface PVSiteDetailViewController : UIViewController<PSUICollectionViewDataSource, PSUICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, PVAddCommentViewControllerDelegate, MKMapViewDelegate>
+@interface PVSiteDetailViewController : UIViewController<PSUICollectionViewDataSource, PSUICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, PVAddCommentViewControllerDelegate, PVCommentTableViewCellDelegate, MKMapViewDelegate>
 {
     PVAddCommentViewController *_addCommentViewController;
     GPUImageView    * _bgCopyImageView;
