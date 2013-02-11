@@ -35,9 +35,14 @@
 
 #pragma mark - Lifecycle
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentNavController:) name:NOTIF_PRESENT_NAVCONTROLLER_FULLSCREEN object:nil];
     if (_augmentedPhoto) {
         [self setAugmentedPhoto: _augmentedPhoto];
         [_augmentedView setAlpha: 1];
@@ -133,7 +138,7 @@
 
 - (void)setAugmentedPhoto:(ARAugmentedPhoto *)augmentedPhoto
 {
-    [[NSNotificationCenter defaultCenter] removeObserver: self];
+    [[NSNotificationCenter defaultCenter] removeObserver: self name:NOTIF_AUGMENTED_PHOTO_UPDATED object:nil];
 
     _augmentedPhoto = augmentedPhoto;
     if (_augmentedPhoto.response == BackendResponseFinished) {
@@ -206,6 +211,12 @@
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://parworks.com/"]];
+}
+
+- (void)presentNavController:(NSNotification*)notification{
+    UINavigationController *controller = [notification object];
+    [controller setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    [self presentViewController:controller animated:YES completion:nil];
 }
 
 @end

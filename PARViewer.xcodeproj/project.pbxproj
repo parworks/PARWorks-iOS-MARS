@@ -21,6 +21,8 @@
 		427EFE9D16C37CFB000B49C6 /* map_icon_recenter.png in Resources */ = {isa = PBXBuildFile; fileRef = 427EFE9B16C37CFB000B49C6 /* map_icon_recenter.png */; };
 		427EFE9E16C37CFB000B49C6 /* map_icon_reload.png in Resources */ = {isa = PBXBuildFile; fileRef = 427EFE9C16C37CFB000B49C6 /* map_icon_reload.png */; };
 		42809EF416BE28E3007B60F5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42809EF316BE28E2007B60F5 /* MapKit.framework */; };
+		428383FD16C8E65000D49F95 /* ARWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 428383FB16C8E65000D49F95 /* ARWebViewController.xib */; };
+		428383FE16C8E66F00D49F95 /* ARWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 428383FA16C8E65000D49F95 /* ARWebViewController.m */; };
 		42AEFEAC16BFB12A00BFE97C /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42AEFEA616BFB11A00BFE97C /* libfacebook_ios_sdk.a */; };
 		42AEFEAE16BFB16700BFE97C /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42AEFEAD16BFB16700BFE97C /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		42AEFEB016BFB17100BFE97C /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42AEFEAF16BFB17100BFE97C /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -327,6 +329,9 @@
 		427EFE9B16C37CFB000B49C6 /* map_icon_recenter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_icon_recenter.png; sourceTree = "<group>"; };
 		427EFE9C16C37CFB000B49C6 /* map_icon_reload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_icon_reload.png; sourceTree = "<group>"; };
 		42809EF316BE28E2007B60F5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		428383F916C8E65000D49F95 /* ARWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARWebViewController.h; sourceTree = "<group>"; };
+		428383FA16C8E65000D49F95 /* ARWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARWebViewController.m; sourceTree = "<group>"; };
+		428383FB16C8E65000D49F95 /* ARWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ARWebViewController.xib; sourceTree = "<group>"; };
 		42AEFE9F16BFB11A00BFE97C /* facebook-ios-sdk.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "facebook-ios-sdk.xcodeproj"; path = "Submodules/Facebook/src/facebook-ios-sdk.xcodeproj"; sourceTree = "<group>"; };
 		42AEFEAD16BFB16700BFE97C /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		42AEFEAF16BFB17100BFE97C /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -992,6 +997,9 @@
 				437C3F1D16BE249800822EDD /* ARSiteImagesViewController.h */,
 				437C3F1E16BE249800822EDD /* ARSiteImagesViewController.m */,
 				437C3F1F16BE249800822EDD /* ARSiteImagesViewController.xib */,
+				428383F916C8E65000D49F95 /* ARWebViewController.h */,
+				428383FA16C8E65000D49F95 /* ARWebViewController.m */,
+				428383FB16C8E65000D49F95 /* ARWebViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1610,6 +1618,7 @@
 				437EE22C16C8561C00F6D9B3 /* tooltip_background_up@2x.png in Resources */,
 				437EE22F16C8562300F6D9B3 /* tooltip_arrow_background.png in Resources */,
 				437EE23016C8562300F6D9B3 /* tooltip_background_up.png in Resources */,
+				428383FD16C8E65000D49F95 /* ARWebViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1736,6 +1745,7 @@
 				43D526B416C72AE700A89053 /* UIImageAdditions.m in Sources */,
 				A00F91A416C7F47A00F1B826 /* UIWebView+ScrollView.m in Sources */,
 				437EE22216C8559200F6D9B3 /* AROverlayTitleView.m in Sources */,
+				428383FE16C8E66F00D49F95 /* ARWebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

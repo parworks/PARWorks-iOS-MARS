@@ -13,6 +13,7 @@
 #import "UINavigationBar+Additions.h"
 #import "PVSiteDetailViewController.h"
 
+
 NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Login:FBSessionStateChangedNotification";
 
 @implementation PVAppDelegate
@@ -23,10 +24,11 @@ NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Log
     [[ARManager shared] setApiKey:@"0d889de1-e1f9-4f5f-84fc-6c6f566b1866" andSecret:@"79cf5c70-ad89-4624-951f-2e2a2acfe413"];
     [[ARManager shared] restoreMARSState];
     [[ARManager shared] setLocationEnabled:YES];
-    
+        
     // setup appearance
     [self applyAppearanceSettingsWithin: [UINavigationController class]];
-    [self applyAppearanceSettingsWithin: [PVAddCommentViewController class]];
+    [self applyAppearanceSettingsWithin: [UIToolbar class]];
+    [self applyAppearanceSettingsWithin: [PVAddCommentViewController class]];        
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleBlackOpaque animated: YES];
@@ -67,8 +69,15 @@ NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Log
     [navigationBarAppearance setTitleTextAttributes: navigationTextAttributes];
     
     UIImage * navBarImage = [[UIImage imageNamed:@"navigation_bar_background.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7.0, 0, 7.0)];
-    [navigationBarAppearance setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsDefault];
-    [navigationBarAppearance setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsLandscapePhone];
+
+    if(class == [UIToolbar class]){
+        [[UIToolbar appearance] setBackgroundImage:navBarImage forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
+        [[UIToolbar appearance] setBackgroundImage:navBarImage forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsLandscapePhone];
+    }
+    else{
+        [navigationBarAppearance setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsDefault];
+        [navigationBarAppearance setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsLandscapePhone];    
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
