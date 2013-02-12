@@ -29,6 +29,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *addCommentButton;
 
 @property (nonatomic, strong) PVParallaxTableView *parallaxView;
+@property (nonatomic, strong) UIView * takePhotoContainer;
 @property (nonatomic, strong) UIButton * takePhotoButton;
 
 //Map Container Outlets
