@@ -58,9 +58,8 @@ static NSString * cellIdentifier = @"TestCell";
 {
     // reset so that things don't start swining where they left off when you left the view
     [_physicsContainer resetSign];
-    
+
     // trigger update of our views
-    [self trendingSitesUpdated: nil];
     [self resumeDisplayLink];
 }
 
