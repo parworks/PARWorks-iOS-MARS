@@ -184,7 +184,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 }
 
 - (void)setupMapView{
-    _identifierLabel.text = ([_site.identifier length] > 0) ? _site.identifier :  @"No identifier available";
+    _identifierLabel.text = ([_site.name length] > 0) ? _site.name :  @"No site name available";
     _addressLabel.text = ([_site.address length] > 0) ? _site.address : @"No address available";   
     _descriptionTextView.text = ([_site.siteDescription length] > 0) ? _site.siteDescription : @"No description available";
     
