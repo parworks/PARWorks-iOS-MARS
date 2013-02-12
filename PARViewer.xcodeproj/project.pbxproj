@@ -252,6 +252,9 @@
 		43F2FA7C16C827C1001D2C07 /* nearby_site_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43F2FA7B16C827C1001D2C07 /* nearby_site_icon@2x.png */; };
 		43F2FA7E16C827EE001D2C07 /* nearby_site_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 43F2FA7D16C827EE001D2C07 /* nearby_site_icon.png */; };
 		A00F91A416C7F47A00F1B826 /* UIWebView+ScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = A00F91A316C7F47A00F1B826 /* UIWebView+ScrollView.m */; };
+		A00F91B016C82DDB00F1B826 /* UIViewController+Transitions.m in Sources */ = {isa = PBXBuildFile; fileRef = A00F91AF16C82DDB00F1B826 /* UIViewController+Transitions.m */; };
+		A00F91B316C82E2F00F1B826 /* UIView+ImageCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = A00F91B216C82E2F00F1B826 /* UIView+ImageCapture.m */; };
+		A00F91B516C82E6800F1B826 /* unfold_depth_image.png in Resources */ = {isa = PBXBuildFile; fileRef = A00F91B416C82E6800F1B826 /* unfold_depth_image.png */; };
 		A0A44D9016BE2E12003809D3 /* libChipmunk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A44D8F16BE2DF7003809D3 /* libChipmunk.a */; };
 		A0A44D9116BE2E12003809D3 /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A44D7716BE2D8D003809D3 /* libcocos2d.a */; };
 		A0AF6F5C16C0E2E7003457A2 /* overlay_spec_example_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A0AF6F5A16C0E2E7003457A2 /* overlay_spec_example_1.jpg */; };
@@ -711,6 +714,11 @@
 		43F2FA7D16C827EE001D2C07 /* nearby_site_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nearby_site_icon.png; sourceTree = "<group>"; };
 		A00F91A216C7F47A00F1B826 /* UIWebView+ScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+ScrollView.h"; sourceTree = "<group>"; };
 		A00F91A316C7F47A00F1B826 /* UIWebView+ScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+ScrollView.m"; sourceTree = "<group>"; };
+		A00F91AE16C82DDB00F1B826 /* UIViewController+Transitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Transitions.h"; sourceTree = "<group>"; };
+		A00F91AF16C82DDB00F1B826 /* UIViewController+Transitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Transitions.m"; sourceTree = "<group>"; };
+		A00F91B116C82E2F00F1B826 /* UIView+ImageCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ImageCapture.h"; sourceTree = "<group>"; };
+		A00F91B216C82E2F00F1B826 /* UIView+ImageCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ImageCapture.m"; sourceTree = "<group>"; };
+		A00F91B416C82E6800F1B826 /* unfold_depth_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unfold_depth_image.png; sourceTree = "<group>"; };
 		A0A44D6F16BE2D8C003809D3 /* ChipmunkTemplate.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ChipmunkTemplate.xcodeproj; path = Subprojects/ChipmunkTemplate/ChipmunkTemplate.xcodeproj; sourceTree = "<group>"; };
 		A0AF6F5A16C0E2E7003457A2 /* overlay_spec_example_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = overlay_spec_example_1.jpg; sourceTree = "<group>"; };
 		A0AF6F5B16C0E2E7003457A2 /* overlay_spec_example_1.pm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.perl; path = overlay_spec_example_1.pm; sourceTree = "<group>"; };
@@ -872,6 +880,7 @@
 		4351D0E816B4C6CA0039FE88 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A00F91B416C82E6800F1B826 /* unfold_depth_image.png */,
 				42028A0A16C22988002FE1C2 /* map_inner_shadow.png */,
 				42028A0B16C22988002FE1C2 /* map_marker.png */,
 				A0AF6F5A16C0E2E7003457A2 /* overlay_spec_example_1.jpg */,
@@ -1330,6 +1339,10 @@
 				43E9F6F616BFA41800AC2672 /* UINavigationItem+PVAdditions.m */,
 				427EFE9216C351F1000B49C6 /* UINavigationBar+Additions.h */,
 				427EFE9316C351F1000B49C6 /* UINavigationBar+Additions.m */,
+				A00F91B116C82E2F00F1B826 /* UIView+ImageCapture.h */,
+				A00F91B216C82E2F00F1B826 /* UIView+ImageCapture.m */,
+				A00F91AE16C82DDB00F1B826 /* UIViewController+Transitions.h */,
+				A00F91AF16C82DDB00F1B826 /* UIViewController+Transitions.m */,
 				43D526B216C72AE700A89053 /* UIImageAdditions.h */,
 				43D526B316C72AE700A89053 /* UIImageAdditions.m */,
 				A00F91A216C7F47A00F1B826 /* UIWebView+ScrollView.h */,
@@ -1685,6 +1698,7 @@
 				4345703616CA0267006E04FD /* bar_item_sidebar.png in Resources */,
 				4345703716CA0267006E04FD /* bar_item_reload.png in Resources */,
 				4345703816CA0267006E04FD /* bar_item_back.png in Resources */,
+				A00F91B516C82E6800F1B826 /* unfold_depth_image.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1814,6 +1828,8 @@
 				428383FE16C8E66F00D49F95 /* ARWebViewController.m in Sources */,
 				43156DF816C9C4D40028E84F /* PVScavengerHuntViewController.m in Sources */,
 				4345702616C9CE93006E04FD /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
+				A00F91B016C82DDB00F1B826 /* UIViewController+Transitions.m in Sources */,
+				A00F91B316C82E2F00F1B826 /* UIView+ImageCapture.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

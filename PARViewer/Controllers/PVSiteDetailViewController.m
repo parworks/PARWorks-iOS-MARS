@@ -22,6 +22,8 @@
 #import "GPUImageBrightnessFilter.h"
 #import "MapAnnotation.h"
 #import "PVBorderedImageCell.h"
+#import "UIViewController+Transitions.h"
+#import "UIView+ImageCapture.h"
 
 #define PARALLAX_WINDOW_HEIGHT 165.0
 #define PARALLAX_IMAGE_HEIGHT 300.0
@@ -53,6 +55,11 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 - (void)viewWillAppear:(BOOL)animated
 {
     [self update];
+    
+    // Reset the right navigation item if we return from the camera view controller.
+    if (_takePhotoContainer) {
+        [self setupRightNavigationItem];
+    }
     
     // register to receive updates about the site in the future
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:NOTIF_SITE_UPDATED object: self.site];
@@ -152,6 +159,14 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     
     [self.navigationItem setUnpaddedLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:customButton] animated:NO];
     [self.navigationItem setLeftJustifiedTitle: _site.name];
+    [self setupRightNavigationItem];
+}
+
+- (void)setupRightNavigationItem
+{
+    if (_takePhotoContainer) {
+        [_takePhotoContainer removeFromSuperview];
+    }
     
     // Attach the "Augment Photo" icon to the upper right
     self.takePhotoButton = [UIButton buttonWithType: UIButtonTypeCustom];
@@ -160,12 +175,12 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     [_takePhotoButton.layer setAnchorPoint: CGPointMake(1, 0)];
     [_takePhotoButton setFrame: CGRectMake(0, 0, 100, 40)];
     
-    UIView * takePhotoContainer = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 100, 46)];
-    CATransform3D t = takePhotoContainer.layer.transform;
+    self.takePhotoContainer = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 100, 46)];
+    CATransform3D t = _takePhotoContainer.layer.transform;
     t.m34 = -0.0025;
-    takePhotoContainer.layer.sublayerTransform = t;
-    [takePhotoContainer addSubview: _takePhotoButton];
-    [self.navigationItem setUnpaddedRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView: takePhotoContainer] animated:NO];
+    _takePhotoContainer.layer.sublayerTransform = t;
+    [_takePhotoContainer addSubview: _takePhotoButton];
+    [self.navigationItem setUnpaddedRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView: _takePhotoContainer] animated:NO];
 }
 
 - (void)setupMapView{
@@ -188,7 +203,6 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
         MapAnnotation *annotation = [[MapAnnotation alloc] initWithCoordinate:_site.location andTitle:_identifierLabel.text andSubtitle:_addressLabel.text];
         [_mapView addAnnotation:annotation];
     }
-
 }
 
 - (void)setupPhotoScrollView{
@@ -203,9 +217,45 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 
 - (void)takePhoto:(id)sender
 {
+    [self takePhotoWithFlipAnimation];
+}
+
+- (void)takePhotoWithFlipAnimation
+{
+    _takePhotoButton.layer.anchorPoint = CGPointMake(1, 0.5);
+    _takePhotoButton.layer.position = CGPointMake(self.view.frame.size.width, _takePhotoButton.bounds.size.height/2);
+    
+    UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
+    CGRect frame = [_takePhotoButton convertRect:_takePhotoButton.bounds toView:window];
+    frame.origin.x = 220;
+    _takePhotoButton.frame = frame;
+    [window addSubview:_takePhotoButton];
+    
+    CATransform3D t = _takePhotoButton.layer.transform;
+    t.m34 = -1.0/300.0;
+    t = CATransform3DRotate(t, M_PI_2, 0, 1, 0);
+    
+    [UIView animateWithDuration:2.0 delay:0.1 options:UIViewAnimationOptionAllowAnimatedContent animations:^{
+        _takePhotoButton.layer.transform = t;
+    } completion:^(BOOL finished) {
+        _takePhotoButton.hidden = YES;
+        [self takePhotoStage2FlipAnimation];
+    }];
+}
+
+- (void)takePhotoStage2FlipAnimation
+{
+    UIImage *screenCap = [self.navigationController.view imageRepresentationAtScale:1.0];
+    UIImage *depthImage = [UIImage imageNamed:@"unfold_depth_image.png"];
+    
+    self.navigationController.navigationBar.hidden = YES;
+    self.view.hidden = YES;
+    
     PVAugmentedPhotoViewController * p = [[PVAugmentedPhotoViewController alloc] init];
     [p setSite: _site];
-    [self presentViewController:p animated:YES completion:nil];
+    
+    [self peelPresentViewController:p withContentImage:screenCap depthImage:depthImage];
+    //    [self presentViewController:p animated:YES completion:nil];
 }
 
 - (void)updateHeaderImageView:(NSNotification*)notif
