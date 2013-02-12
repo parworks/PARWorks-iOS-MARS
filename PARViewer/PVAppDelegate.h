@@ -13,6 +13,7 @@
 #import "PVNearbySitesViewController.h"
 #import "PVSearchViewController.h"
 #import "PVTechnologyViewController.h"
+#import "PVScavengerHuntViewController.h"
 #import "PVSidebarViewController.h"
 #import "FacebookSDK.h"
 

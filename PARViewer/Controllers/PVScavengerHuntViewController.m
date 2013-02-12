@@ -1,32 +1,32 @@
 //
-//  PVSecondViewController.m
+//  PVScavengerHuntViewController.m
 //  PARViewer
 //
-//  Created by Ben Gotow on 1/26/13.
+//  Created by Ben Gotow on 2/11/13.
 //  Copyright (c) 2013 Ben Gotow. All rights reserved.
 //
 
-#import "PVTechnologyViewController.h"
+#import "PVScavengerHuntViewController.h"
 #import "UIWebView+ScrollView.h"
 
+@implementation PVScavengerHuntViewController
 
-@implementation PVTechnologyViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Technology", @"Technology");
-        self.tabBarItem.image = [UIImage imageNamed:@"icon_technology"];
+        self.title = NSLocalizedString(@"Scavenger Hunt", @"Scavenger Hunt");
+        self.tabBarItem.image = [UIImage imageNamed:@"icon_scavenger_hunt"];
     }
     return self;
 }
-							
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
- 
-    NSString * htmlPath = [[NSBundle mainBundle] pathForResource:@"technology" ofType:@"html" inDirectory:@"HTML"];
+    
+    NSString * htmlPath = [[NSBundle mainBundle] pathForResource:@"scavenger_hunt" ofType:@"html" inDirectory:@"HTML"];
     NSString * htmlFolder = [htmlPath stringByDeletingLastPathComponent];
     [_webView loadHTMLString:[NSString stringWithContentsOfFile:htmlPath encoding:NSASCIIStringEncoding error:nil] baseURL: [NSURL fileURLWithPath: htmlFolder]];
     [_webView.scrollView setDecelerationRate:1.0];
@@ -36,21 +36,16 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-
-#pragma mark - Rotation
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
+    if ([[[request URL] scheme] isEqualToString:@"parworks-fb"]) {
+        // login with facebook
+        NSLog(@"Here");
+        return NO;
+    }
+    return YES;
 }
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-    return UIInterfaceOrientationMaskPortrait;
-}
-
 
 @end

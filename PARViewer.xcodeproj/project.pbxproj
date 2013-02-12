@@ -33,7 +33,10 @@
 		430CEF3116C35F980044A0A0 /* bar_item_up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 430CEF3016C35F980044A0A0 /* bar_item_up@2x.png */; };
 		430CEF3316C3666C0044A0A0 /* map_inner_shadow_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 430CEF3216C3666C0044A0A0 /* map_inner_shadow_highlighted@2x.png */; };
 		430CEF3816C3A0F10044A0A0 /* bar_item_reload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 430CEF3716C3A0F10044A0A0 /* bar_item_reload@2x.png */; };
-		431BD55516C4C0530000C312 /* HTML in Resources */ = {isa = PBXBuildFile; fileRef = 431BD55416C4C0530000C312 /* HTML */; };
+		43156DF816C9C4D40028E84F /* PVScavengerHuntViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43156DF616C9C4D40028E84F /* PVScavengerHuntViewController.m */; };
+		43156DF916C9C4D40028E84F /* PVScavengerHuntViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43156DF716C9C4D40028E84F /* PVScavengerHuntViewController.xib */; };
+		43156DFB16C9C6490028E84F /* icon_scavenger_hunt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43156DFA16C9C6490028E84F /* icon_scavenger_hunt@2x.png */; };
+		43156DFD16C9C6800028E84F /* HTML in Resources */ = {isa = PBXBuildFile; fileRef = 43156DFC16C9C6800028E84F /* HTML */; };
 		431BD55E16C4CC820000C312 /* bar_item_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 431BD55C16C4CC820000C312 /* bar_item_left@2x.png */; };
 		431BD55F16C4CC820000C312 /* bar_item_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 431BD55D16C4CC820000C312 /* bar_item_right@2x.png */; };
 		431BD56216C4CD140000C312 /* bar_item_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 431BD56016C4CD140000C312 /* bar_item_left.png */; };
@@ -342,7 +345,11 @@
 		430CEF3016C35F980044A0A0 /* bar_item_up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar_item_up@2x.png"; sourceTree = "<group>"; };
 		430CEF3216C3666C0044A0A0 /* map_inner_shadow_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map_inner_shadow_highlighted@2x.png"; sourceTree = "<group>"; };
 		430CEF3716C3A0F10044A0A0 /* bar_item_reload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar_item_reload@2x.png"; sourceTree = "<group>"; };
-		431BD55416C4C0530000C312 /* HTML */ = {isa = PBXFileReference; lastKnownFileType = folder; path = HTML; sourceTree = "<group>"; };
+		43156DF516C9C4D40028E84F /* PVScavengerHuntViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVScavengerHuntViewController.h; sourceTree = "<group>"; };
+		43156DF616C9C4D40028E84F /* PVScavengerHuntViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVScavengerHuntViewController.m; sourceTree = "<group>"; };
+		43156DF716C9C4D40028E84F /* PVScavengerHuntViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PVScavengerHuntViewController.xib; sourceTree = "<group>"; };
+		43156DFA16C9C6490028E84F /* icon_scavenger_hunt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_scavenger_hunt@2x.png"; sourceTree = "<group>"; };
+		43156DFC16C9C6800028E84F /* HTML */ = {isa = PBXFileReference; lastKnownFileType = folder; path = HTML; sourceTree = "<group>"; };
 		431BD55C16C4CC820000C312 /* bar_item_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar_item_left@2x.png"; sourceTree = "<group>"; };
 		431BD55D16C4CC820000C312 /* bar_item_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar_item_right@2x.png"; sourceTree = "<group>"; };
 		431BD56016C4CD140000C312 /* bar_item_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bar_item_left.png; path = Resources/bar_item_left.png; sourceTree = SOURCE_ROOT; };
@@ -739,7 +746,7 @@
 				43E9F6DF16BFA16D00AC2672 /* GPUImage.xcodeproj */,
 				A0A44D6F16BE2D8C003809D3 /* ChipmunkTemplate.xcodeproj */,
 				4351D0BD16B4C5DB0039FE88 /* PARViewer */,
-				431BD55416C4C0530000C312 /* HTML */,
+				43156DFC16C9C6800028E84F /* HTML */,
 				4351D0E816B4C6CA0039FE88 /* Resources */,
 				43998B9B16BDD24A008B34C2 /* Resources@2x */,
 				4351D0B616B4C5DB0039FE88 /* Frameworks */,
@@ -1221,6 +1228,7 @@
 				43F2FA7916C820E5001D2C07 /* tiny_camera@2x.png */,
 				431BD56016C4CD140000C312 /* bar_item_left.png */,
 				431BD56116C4CD140000C312 /* bar_item_right.png */,
+				43156DFA16C9C6490028E84F /* icon_scavenger_hunt@2x.png */,
 				437EE22916C8561C00F6D9B3 /* tooltip_arrow_background@2x.png */,
 				437EE22A16C8561C00F6D9B3 /* tooltip_background_up@2x.png */,
 				43988B2C16BE5CA0005DB5E8 /* bar_item_back@2x.png */,
@@ -1303,6 +1311,9 @@
 				43E9F70116BFA41800AC2672 /* PVNearbySitesViewController.h */,
 				43E9F70216BFA41800AC2672 /* PVNearbySitesViewController.m */,
 				43E9F70316BFA41800AC2672 /* PVNearbySitesViewController.xib */,
+				43156DF516C9C4D40028E84F /* PVScavengerHuntViewController.h */,
+				43156DF616C9C4D40028E84F /* PVScavengerHuntViewController.m */,
+				43156DF716C9C4D40028E84F /* PVScavengerHuntViewController.xib */,
 				43E9F70416BFA41800AC2672 /* PVSearchViewController.h */,
 				43E9F70516BFA41800AC2672 /* PVSearchViewController.m */,
 				43E9F70616BFA41800AC2672 /* PVSearchViewController.xib */,
@@ -1605,7 +1616,6 @@
 				427EFE9D16C37CFB000B49C6 /* map_icon_recenter.png in Resources */,
 				427EFE9E16C37CFB000B49C6 /* map_icon_reload.png in Resources */,
 				430CEF3816C3A0F10044A0A0 /* bar_item_reload@2x.png in Resources */,
-				431BD55516C4C0530000C312 /* HTML in Resources */,
 				431BD55E16C4CC820000C312 /* bar_item_left@2x.png in Resources */,
 				431BD55F16C4CC820000C312 /* bar_item_right@2x.png in Resources */,
 				431BD56216C4CD140000C312 /* bar_item_left.png in Resources */,
@@ -1619,6 +1629,9 @@
 				437EE22F16C8562300F6D9B3 /* tooltip_arrow_background.png in Resources */,
 				437EE23016C8562300F6D9B3 /* tooltip_background_up.png in Resources */,
 				428383FD16C8E65000D49F95 /* ARWebViewController.xib in Resources */,
+				43156DF916C9C4D40028E84F /* PVScavengerHuntViewController.xib in Resources */,
+				43156DFB16C9C6490028E84F /* icon_scavenger_hunt@2x.png in Resources */,
+				43156DFD16C9C6800028E84F /* HTML in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1746,6 +1759,7 @@
 				A00F91A416C7F47A00F1B826 /* UIWebView+ScrollView.m in Sources */,
 				437EE22216C8559200F6D9B3 /* AROverlayTitleView.m in Sources */,
 				428383FE16C8E66F00D49F95 /* ARWebViewController.m in Sources */,
+				43156DF816C9C4D40028E84F /* PVScavengerHuntViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

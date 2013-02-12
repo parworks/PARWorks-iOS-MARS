@@ -378,8 +378,8 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    ARSiteComment *comment = (ARSiteComment*)[_site.comments objectAtIndex:indexPath.row];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
