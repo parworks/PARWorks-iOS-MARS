@@ -43,8 +43,8 @@
         [_timestampLabel setUserInteractionEnabled:NO];
         [_timestampLabel setTextColor:[UIColor colorWithRed:115.0/255.0 green:115.0/255.0 blue:115.0/255.0 alpha:1.0]];
         [_timestampLabel setFont:[UIFont parworksFontWithSize:15.0]];
-        [self.contentView addSubview:_timestampLabel];        
-        
+        [self.contentView addSubview:_timestampLabel];
+
         self.contentTextView = [[UITextView alloc] initWithFrame:CGRectZero];
 		[_contentTextView setBackgroundColor:[UIColor clearColor]];
         [_contentTextView setTextColor:[UIColor colorWithRed:115.0/255.0 green:115.0/255.0 blue:115.0/255.0 alpha:1.0]];
@@ -72,8 +72,6 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 - (void)layoutSubviews {
@@ -111,7 +109,11 @@
     [alert show];
 }
 
-- (void)setComment:(ARSiteComment *)comment{
+- (void)setComment:(ARSiteComment *)comment
+{
+    if (comment == _comment)
+        return;
+    
     _comment = comment;
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -127,7 +129,8 @@
     
     NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=52&height=52", _comment.userID]];
     UIImage * img = [[PVImageCacheManager shared] imageForURL:imageURL];
-    if (!img) {        
+    if (!img) {
+        [[NSNotificationCenter defaultCenter] removeObserver: self];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteImageReady:) name:NOTIF_IMAGE_READY object:imageURL];
     }
     [_avatarImageView setImage: img];
@@ -138,6 +141,17 @@
 {
     UIImage * img = [[PVImageCacheManager shared] imageForURL:notif.object];
     [_avatarImageView setImage: img];
+}
+
+- (void)prepareForReuse
+{
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
+    [super prepareForReuse];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{

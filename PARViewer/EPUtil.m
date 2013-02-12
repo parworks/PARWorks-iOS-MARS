@@ -54,7 +54,6 @@ static NSMutableDictionary * smallImages;
                 CGContextDrawImage(c, CGRectMake(-x * width, y * height - (image.size.height - height), image.size.width, image.size.height), image.CGImage);
                 UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
                 [smallImages setObject:img forKey:[NSNumber numberWithInt: count-i]];
-                NSLog(@"Finished %d", i);
                 
                 imgCallback(i, img);
             }
@@ -108,18 +107,6 @@ static NSMutableDictionary * smallImages;
 	return retPath;
 }
 
-
-void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, UIColor *color)
-{
-    CGContextSaveGState(context);
-    CGContextSetLineCap(context, kCGLineCapRound);
-    CGContextSetStrokeColorWithColor(context, color.CGColor);
-    CGContextSetLineWidth(context, 1);
-    CGContextMoveToPoint(context, startPoint.x - 0.5, startPoint.y - 0.5);
-    CGContextAddLineToPoint(context, endPoint.x - 0.5, endPoint.y - 0.5);
-    CGContextStrokePath(context);
-    CGContextRestoreGState(context);
-}
 
 
 @end

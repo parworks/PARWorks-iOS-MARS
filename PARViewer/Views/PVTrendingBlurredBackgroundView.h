@@ -19,12 +19,10 @@
     CGRect            _imageViewRect;
     
     int               _baseIndex;
-    GPUImageView    * _baseImageView;
-    GPUImagePicture * _basePicture;
+    UIImageView     * _baseImageView;
     
     int               _nextIndex;
-    GPUImageView    * _nextImageView;
-    GPUImagePicture * _nextPicture;
+    UIImageView     * _nextImageView;
 }
 
 @property (nonatomic, assign) float floatingPointIndex;

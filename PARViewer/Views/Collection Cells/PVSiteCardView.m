@@ -41,10 +41,12 @@
         _posterContainer.layer.shadowPath = [EPUtil newPathForRoundedRect: posterFrame radius: 5];
         [self addSubview:_posterContainer];
         
-        self.posterImageView = [[UIImageView alloc] initWithFrame: _posterContainer.bounds];
-        self.posterImageView.contentMode = UIViewContentModeScaleAspectFill;
-        self.posterImageView.clipsToBounds = YES;
+        self.posterImageView = [[ARAugmentedView alloc] initWithFrame: posterFrame];
+        self.posterImageView.animateOutlineViewDrawing = NO;
+        self.posterImageView.overlayImageViewContentMode = UIViewContentModeScaleAspectFill;
+        self.posterImageView.userInteractionEnabled = NO;
         self.posterImageView.layer.cornerRadius = 5;
+        self.posterImageView.clipsToBounds = YES;
         [_posterContainer addSubview: _posterImageView];
     
         CAShapeLayer * l = [CAShapeLayer layer];
@@ -73,7 +75,11 @@
         self.leftRopePoint = CGPointMake(_posterContainer.center.x - kRopeDistanceFromCenter, _posterContainer.frame.size.height - 5);
         self.rightRopePoint = CGPointMake(_posterContainer.center.x + kRopeDistanceFromCenter, _posterContainer.frame.size.height - 5);
 
-        self.ropeView = [[PVCardRopeView alloc] initWithFrame:CGRectInset(self.bounds, -50, 0)];
+        CGRect ropesRect = self.bounds;
+        ropesRect.origin.y = _posterContainer.frame.size.height - 10;
+        ropesRect.size.height = _shingleView.center.y - ropesRect.origin.y;
+
+        self.ropeView = [[PVCardRopeView alloc] initWithFrame: ropesRect];
         _ropeView.posterView = self;
         _ropeView.shingleView = _shingleView;
         [self addSubview:_ropeView];
@@ -95,26 +101,51 @@
     [self.shingleView setSite: site];
     
     // set the poster image
-    UIImage * img = [[PVImageCacheManager shared] imageForURL: [_site posterImageURL]];
-    if (!img) {
+    NSURL * url = [_site posterImageURL];
+    UIImage * img = [[PVImageCacheManager shared] imageForURL: url];
+    if (img) {
+        float scale = img.size.width / _site.originalImageWidth;
+        [self.posterImageView setAugmentedPhoto: [[ARAugmentedPhoto alloc] initWithScaledImage:img atScale:scale andOverlayJSON:[_site posterImageOverlayJSON]]];
+     } else {
         img = [UIImage imageNamed: @"empty.png"];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteImageReady:) name:NOTIF_IMAGE_READY object: [_site posterImageURL]];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteImageReady:) name:NOTIF_IMAGE_READY object: url];
     }
-    [self.posterImageView setImage: img];
 }
 
 - (void)siteImageReady:(NSNotification*)notif
 {
     UIImage * img = [[PVImageCacheManager shared] imageForURL: [_site posterImageURL]];
-    [self.posterImageView setImage: img];
+    float scale = img.size.width / _site.originalImageWidth;
+    [self.posterImageView setAugmentedPhoto: [[ARAugmentedPhoto alloc] initWithScaledImage:img atScale:scale andOverlayJSON:[_site posterImageOverlayJSON]]];
 }
 
 - (void)setShingleOffset:(CGPoint)offset andRotation:(float)rotation
 {
+    // if the physics simulation gives us an offset of more than 75px to the left or right,
+    // the user will see onscreen shingles disappearing because of cell reuse. We're allowing the
+    // shingles to be out of frame by 65px... 
+    offset.x = fmaxf(-75, fminf(75, offset.x));
+
     CGPoint shingleCenter = CGPointMake(self.posterContainer.center.x - offset.x, self.posterContainer.center.y - offset.y + 100);
-    [self.shingleView setCenter: shingleCenter];
-    [self.shingleView setTransform: CGAffineTransformMakeRotation(rotation)];
-    [_ropeView setNeedsDisplay];
+    CGAffineTransform shingleTransform = CGAffineTransformMakeRotation(roundf(rotation * 1000.0) / 1000.0);
+    
+    if (!CGPointEqualToPoint(shingleCenter, self.shingleView.center) || !CGAffineTransformEqualToTransform(self.shingleView.transform, shingleTransform)) {
+        [self.shingleView setCenter: shingleCenter];
+        [self.shingleView setTransform: shingleTransform];
+        [_ropeView setNeedsDisplay];
+    }
+}
+
+- (void)prepareForReuse
+{
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
+    [self.posterImageView setAugmentedPhoto: nil];
+    [super prepareForReuse];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
 }
 
 @end
@@ -215,12 +246,19 @@
         CGPoint convertedPosterRight = [self convertPoint:_posterView.rightRopePoint fromView:_posterView];
         CGPoint convertedShingleLeft = [self convertPoint:_shingleView.leftRopePoint fromView:_shingleView];
         CGPoint convertedShingleRight = [self convertPoint:_shingleView.rightRopePoint fromView:_shingleView];
-        
+
         CGContextFillEllipseInRect(context, CGRectMake(convertedPosterLeft.x - 2, convertedPosterLeft.y - 4, 4, 4));
         CGContextFillEllipseInRect(context, CGRectMake(convertedPosterRight.x - 2, convertedPosterRight.y - 4, 4, 4));
         
-        draw1PxStroke(context, convertedPosterLeft, convertedShingleLeft, [UIColor colorWithWhite:1 alpha:0.5]);
-        draw1PxStroke(context, convertedPosterRight, convertedShingleRight, [UIColor colorWithWhite:1 alpha:0.5]);
+        CGContextSetLineCap(context, kCGLineCapRound);
+        CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:1 alpha:0.5].CGColor);
+        CGContextSetLineWidth(context, 1);
+        CGContextMoveToPoint(context, roundf(convertedPosterLeft.x) - 0.5, roundf(convertedPosterLeft.y) - 0.5);
+        CGContextAddLineToPoint(context, roundf(convertedShingleLeft.x) - 0.5, roundf(convertedShingleLeft.y) - 0.5);
+        CGContextStrokePath(context);
+        CGContextMoveToPoint(context, roundf(convertedPosterRight.x) - 0.5, roundf(convertedPosterRight.y) - 0.5);
+        CGContextAddLineToPoint(context, roundf(convertedShingleRight.x) - 0.5, roundf(convertedShingleRight.y) - 0.5);
+        CGContextStrokePath(context);
     }
 }
 

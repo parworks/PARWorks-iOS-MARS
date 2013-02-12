@@ -6,7 +6,7 @@
 	url = git@github.com:parworks/PARWorks-iOS.git
 [submodule "Submodules/PSTCollectionView"]
 	path = Submodules/PSTCollectionView
-	url = git://github.com/steipete/PSTCollectionView.git
+	url = git://github.com/bengotow/PSTCollectionView.git
 [submodule "Submodules/GPUImage"]
 	path = Submodules/GPUImage
 	url = git://github.com/BradLarson/GPUImage.git

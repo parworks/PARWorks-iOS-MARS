@@ -14,6 +14,7 @@
 #import "ARSite.h"
 #import "JSSlidingViewController.h"
 #import "PVFlowLayout.h"
+#import "UIViewAdditions.h"
 
 static NSString * cellIdentifier = @"TestCell";
 
@@ -32,8 +33,6 @@ static NSString * cellIdentifier = @"TestCell";
         
         _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(update)];
         _displayLink.frameInterval = 1;
-        
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openingSidebar) name:JSSlidingViewControllerWillOpenNotification object:nil];
     }
 	return self;
 }
@@ -59,15 +58,23 @@ static NSString * cellIdentifier = @"TestCell";
 {
     // reset so that things don't start swining where they left off when you left the view
     [_physicsContainer resetSign];
-    
-    // trigger update of our views
-    [self trendingSitesUpdated: nil];
 
-	[_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:UITrackingRunLoopMode];
+    // trigger update of our views
+    [self resumeDisplayLink];
+}
+
+- (void)resumeDisplayLink
+{
+    [_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:UITrackingRunLoopMode];
 	[_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
+{
+    [self pauseDisplayLink];
+}
+
+- (void)pauseDisplayLink
 {
     [_displayLink removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:UITrackingRunLoopMode];
     [_displayLink removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];

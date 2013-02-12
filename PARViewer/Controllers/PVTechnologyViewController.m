@@ -9,9 +9,6 @@
 #import "PVTechnologyViewController.h"
 #import "UIWebView+ScrollView.h"
 
-@interface PVTechnologyViewController ()
-
-@end
 
 @implementation PVTechnologyViewController
 

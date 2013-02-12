@@ -93,7 +93,7 @@
     [_delegate windowButtonPressed:_isExpanded];
 }
 
-#pragma mark - NSObject Overrides
+#pragma mark - Delegate forwarding
 
 - (void)setLocalDelegate:(id <UITableViewDelegate>)delegate
 {

@@ -13,7 +13,6 @@
 #import "CATextLayer+Loading.h"
 #import "PARWorks.h"
 #import "EPUtil.h"
-#import "AdOverlayView.h"
 
 #define WIDTH 20
 #define HEIGHT 20

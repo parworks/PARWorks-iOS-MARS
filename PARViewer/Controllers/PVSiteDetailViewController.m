@@ -131,8 +131,14 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     
     if(_site.totalAugmentedImages > 0){
         [_detailsPhotoScrollView setFrame:CGRectMake(0.0, _detailsMapView.frame.origin.y + _detailsMapView.frame.size.height, _tableHeaderView.frame.size.width, 132.0)];
-        headerHeight = _detailsPhotoScrollView.frame.origin.y + _detailsPhotoScrollView.frame.size.height;
+        [_detailsPhotoScrollView setHidden:NO];
     }
+    else{
+        [_detailsPhotoScrollView setFrame:CGRectMake(0.0, _detailsMapView.frame.origin.y + _detailsMapView.frame.size.height, _tableHeaderView.frame.size.width, 0.0)];
+        [_detailsPhotoScrollView setHidden:YES];
+    }
+    
+    headerHeight = _detailsPhotoScrollView.frame.origin.y + _detailsPhotoScrollView.frame.size.height;
     
     [_tableHeaderView setFrame:CGRectMake(_tableHeaderView.frame.origin.x, _tableHeaderView.frame.origin.y, _tableHeaderView.frame.size.width, headerHeight)];
     
@@ -375,7 +381,12 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     }
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 35.0)];
-    [view setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0]];
+    view.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
+    view.clipsToBounds = NO;
+    view.layer.shadowOffset = CGSizeMake(0, 3);
+    view.layer.shadowColor = view.backgroundColor.CGColor;
+    view.layer.shadowOpacity = 1;
+    view.layer.shadowRadius = 8;
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 0.0, 300.0, 35.0)];
     [label setBackgroundColor:[UIColor clearColor]];
@@ -417,9 +428,8 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    ARSiteComment *comment = (ARSiteComment*)[_site.comments objectAtIndex:indexPath.row];
-    NSLog(@"%@", [comment description]);
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

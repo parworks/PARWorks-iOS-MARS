@@ -8,6 +8,10 @@
 
 #import "PVImageCacheManager.h"
 #import "AFImageRequestOperation.h"
+#import "PVTrendingBlurredBackgroundView.h"
+#import "GPUImageGaussianBlurFilter.h"
+#import "GPUImageBrightnessFilter.h"
+#import "UIImageAdditions.h"
 
 static PVImageCacheManager * sharedImageCacheManager;
 
@@ -127,6 +131,51 @@ static PVImageCacheManager * sharedImageCacheManager;
 - (void)clearDiskCacheContentsFor:(NSURL*)url
 {
     [[NSFileManager defaultManager] removeItemAtPath:[self diskCachePathFor: url] error:nil];
+}
+
+- (UIImage*)blurredImageForURL:(NSURL*)url
+{
+    NSURL * blurredURL = [url URLByAppendingPathExtension:@"blurred"];
+
+    if (!url) {
+        return nil;
+
+    } else if ([_imageCache objectForKey: blurredURL]) {
+        return [_imageCache objectForKey: blurredURL];
+        
+    } else {
+        
+        // check the disk cache
+        NSData * data = [self diskCacheContentsFor: blurredURL];
+        if (data) {
+            UIImage * img = [UIImage imageWithData: data];
+            if (img) {
+                [_imageCache setObject: img forKey: blurredURL];
+                return img;
+            } else
+                [self clearDiskCacheContentsFor: blurredURL];
+        }
+        
+        UIImage * img = [self imageForURL: url];
+        if (!img)
+            return nil;
+        
+        GPUImagePicture * picture = [[GPUImagePicture alloc] initWithImage:[img scaledImage: 0.15] smoothlyScaleOutput: NO];
+        GPUImageGaussianBlurFilter * blurFilter = [[GPUImageGaussianBlurFilter alloc] init];
+        GPUImageBrightnessFilter * brightnessFilter = [[GPUImageBrightnessFilter alloc] init];
+        
+        [blurFilter setBlurSize: 0.7];
+        [picture addTarget: blurFilter];
+        [blurFilter addTarget: brightnessFilter];
+        [brightnessFilter setBrightness: -0.3];
+        
+        [picture processImage];
+
+        UIImage * result = [brightnessFilter imageFromCurrentlyProcessedOutput];
+        [self writeToDiskCache: UIImagePNGRepresentation(result) fromURL: blurredURL];
+        [_imageCache setObject: result forKey: blurredURL];
+        return result;
+    }
 }
 
 @end

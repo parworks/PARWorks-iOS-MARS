@@ -25,7 +25,6 @@
 #import "CATextLayer+Loading.h"
 #import "PARWorks.h"
 #import "EPUtil.h"
-#import "AdOverlayView.h"
 
 
 #define CAMERA_TRANSFORM_SCALE 1.25
@@ -36,9 +35,14 @@
 
 #pragma mark - Lifecycle
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentNavController:) name:NOTIF_PRESENT_NAVCONTROLLER_FULLSCREEN object:nil];
     if (_augmentedPhoto) {
         [self setAugmentedPhoto: _augmentedPhoto];
         [_augmentedView setAlpha: 1];
@@ -134,7 +138,7 @@
 
 - (void)setAugmentedPhoto:(ARAugmentedPhoto *)augmentedPhoto
 {
-    [[NSNotificationCenter defaultCenter] removeObserver: self];
+    [[NSNotificationCenter defaultCenter] removeObserver: self name:NOTIF_AUGMENTED_PHOTO_UPDATED object:nil];
 
     _augmentedPhoto = augmentedPhoto;
     if (_augmentedPhoto.response == BackendResponseFinished) {
@@ -202,24 +206,17 @@
 }
 
 
-
-- (AROverlayView *)overlayViewForOverlay:(AROverlay *)overlay
-{
-    if ([overlay.name isEqualToString: @"Ad"]) {
-        AdOverlayView * v = [[AdOverlayView alloc] initWithFrame:CGRectMake(0, 0, 560*0.6, 320*0.6) points:overlay.points andMedia:@"ad" ofType:@"png" withWebTarget:nil];
-        return v;
-    } else {
-        AdOverlayView * v = [[AdOverlayView alloc] initWithFrame:CGRectMake(0, 0, _augmentedView.frame.size.width / CAMERA_TRANSFORM_SCALE - 40, _augmentedView.frame.size.height / CAMERA_TRANSFORM_SCALE - 40) points:overlay.points andMedia:overlay.name ofType:@"png" withWebTarget: [NSURL URLWithString: overlay.content]];
-        return v;
-    }
-}
-
-
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://parworks.com/"]];
+}
+
+- (void)presentNavController:(NSNotification*)notification{
+    UINavigationController *controller = [notification object];
+    [controller setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    [self presentViewController:controller animated:YES completion:nil];
 }
 
 @end

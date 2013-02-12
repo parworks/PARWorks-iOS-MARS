@@ -72,7 +72,6 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info;
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker;
 - (void)imageAugmented:(NSNotification*)notif;
-- (AROverlayView *)overlayViewForOverlay:(AROverlay *)overlay;
 
 #pragma mark - UIAlertViewDelegate
 
