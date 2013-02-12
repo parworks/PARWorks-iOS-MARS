@@ -52,6 +52,7 @@ NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Log
     
     _sidebarController = [[PVSidebarViewController alloc] init];
     _slidingViewController = [[JSSlidingViewController alloc] initWithFrontViewController: [_contentControllers objectAtIndex: 0] backViewController: _sidebarController];
+    _slidingViewController.useBouncyAnimations = NO;
     _slidingViewController.delegate = self;
     self.window.rootViewController = _slidingViewController;
     [self.window makeKeyAndVisible];
