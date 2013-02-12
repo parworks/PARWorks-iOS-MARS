@@ -224,7 +224,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 {
     _takePhotoButton.layer.anchorPoint = CGPointMake(1, 0.5);
     _takePhotoButton.layer.position = CGPointMake(self.view.frame.size.width, _takePhotoButton.bounds.size.height/2);
-    
+
     UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
     CGRect frame = [_takePhotoButton convertRect:_takePhotoButton.bounds toView:window];
     frame.origin.x = 220;
@@ -245,7 +245,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 
 - (void)takePhotoStage2FlipAnimation
 {
-    UIImage *screenCap = [self.navigationController.view imageRepresentationAtScale:1.0];
+    UIImage *screenCap = [self.navigationController.view imageRepresentationAtScale: [[UIScreen mainScreen] scale]];
     UIImage *depthImage = [UIImage imageNamed:@"unfold_depth_image.png"];
     
     self.navigationController.navigationBar.hidden = YES;
