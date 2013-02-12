@@ -26,9 +26,16 @@
 {
     [super viewDidLoad];
     
-    NSString * htmlPath = [[NSBundle mainBundle] pathForResource:@"scavenger_hunt" ofType:@"html" inDirectory:@"HTML"];
-    NSString * htmlFolder = [htmlPath stringByDeletingLastPathComponent];
-    [_webView loadHTMLString:[NSString stringWithContentsOfFile:htmlPath encoding:NSASCIIStringEncoding error:nil] baseURL: [NSURL fileURLWithPath: htmlFolder]];
+    BOOL signedIntoFacebook = NO;
+    
+    if (!signedIntoFacebook) {
+        NSString * htmlPath = [[NSBundle mainBundle] pathForResource:@"scavenger_hunt" ofType:@"html" inDirectory:@"HTML"];
+        NSString * htmlFolder = [htmlPath stringByDeletingLastPathComponent];
+        [_webView loadHTMLString:[NSString stringWithContentsOfFile:htmlPath encoding:NSASCIIStringEncoding error:nil] baseURL: [NSURL fileURLWithPath: htmlFolder]];
+    } else {
+//        [_webView ]
+    }
+    
     [_webView.scrollView setDecelerationRate:1.0];
     [_webView removeShadows];
 }

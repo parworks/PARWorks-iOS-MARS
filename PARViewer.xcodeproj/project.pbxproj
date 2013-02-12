@@ -57,6 +57,8 @@
 		4345242D16C09F14005D0636 /* camera_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4345242C16C09F14005D0636 /* camera_button@2x.png */; };
 		434524A016C0E90C005D0636 /* UINavigationController+BetterRotationBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 4345249F16C0E90C005D0636 /* UINavigationController+BetterRotationBehavior.m */; };
 		434524A216C0EC2F005D0636 /* shingle_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 434524A116C0EC2F005D0636 /* shingle_background@2x.png */; };
+		4345702316C9CBA6006E04FD /* Avenir.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 4345702216C9CBA6006E04FD /* Avenir.ttc */; };
+		4345702616C9CE93006E04FD /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4345702516C9CE93006E04FD /* NSIndexPath+PSTCollectionViewAdditions.m */; };
 		4351D0B816B4C5DB0039FE88 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4351D0B716B4C5DB0039FE88 /* UIKit.framework */; };
 		4351D0BA16B4C5DB0039FE88 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4351D0B916B4C5DB0039FE88 /* Foundation.framework */; };
 		4351D0BC16B4C5DB0039FE88 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4351D0BB16B4C5DB0039FE88 /* CoreGraphics.framework */; };
@@ -375,6 +377,9 @@
 		434524A116C0EC2F005D0636 /* shingle_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shingle_background@2x.png"; sourceTree = "<group>"; };
 		434524A616C0F7B3005D0636 /* UIFont+ThemeAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+ThemeAdditions.h"; sourceTree = "<group>"; };
 		434524A716C0F7B3005D0636 /* UIFont+ThemeAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+ThemeAdditions.m"; sourceTree = "<group>"; };
+		4345702216C9CBA6006E04FD /* Avenir.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Avenir.ttc; sourceTree = "<group>"; };
+		4345702416C9CE93006E04FD /* NSIndexPath+PSTCollectionViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSIndexPath+PSTCollectionViewAdditions.h"; sourceTree = "<group>"; };
+		4345702516C9CE93006E04FD /* NSIndexPath+PSTCollectionViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSIndexPath+PSTCollectionViewAdditions.m"; sourceTree = "<group>"; };
 		4351D0B316B4C5DB0039FE88 /* PARViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PARViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4351D0B716B4C5DB0039FE88 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4351D0B916B4C5DB0039FE88 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -739,6 +744,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		4345701D16C9CA35006E04FD /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				4345702216C9CBA6006E04FD /* Avenir.ttc */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		4351D0A816B4C5DB0039FE88 = {
 			isa = PBXGroup;
 			children = (
@@ -747,6 +760,7 @@
 				A0A44D6F16BE2D8C003809D3 /* ChipmunkTemplate.xcodeproj */,
 				4351D0BD16B4C5DB0039FE88 /* PARViewer */,
 				43156DFC16C9C6800028E84F /* HTML */,
+				4345701D16C9CA35006E04FD /* Fonts */,
 				4351D0E816B4C6CA0039FE88 /* Resources */,
 				43998B9B16BDD24A008B34C2 /* Resources@2x */,
 				4351D0B616B4C5DB0039FE88 /* Frameworks */,
@@ -904,6 +918,8 @@
 		43591B3116BB721600860F11 /* PSTCollectionView */ = {
 			isa = PBXGroup;
 			children = (
+				4345702416C9CE93006E04FD /* NSIndexPath+PSTCollectionViewAdditions.h */,
+				4345702516C9CE93006E04FD /* NSIndexPath+PSTCollectionViewAdditions.m */,
 				43591B3216BB721700860F11 /* PSTCollectionView.h */,
 				43591B3316BB721700860F11 /* PSTCollectionView.m */,
 				43591B3416BB721700860F11 /* PSTCollectionViewCell.h */,
@@ -1632,6 +1648,7 @@
 				43156DF916C9C4D40028E84F /* PVScavengerHuntViewController.xib in Resources */,
 				43156DFB16C9C6490028E84F /* icon_scavenger_hunt@2x.png in Resources */,
 				43156DFD16C9C6800028E84F /* HTML in Resources */,
+				4345702316C9CBA6006E04FD /* Avenir.ttc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1760,6 +1777,7 @@
 				437EE22216C8559200F6D9B3 /* AROverlayTitleView.m in Sources */,
 				428383FE16C8E66F00D49F95 /* ARWebViewController.m in Sources */,
 				43156DF816C9C4D40028E84F /* PVScavengerHuntViewController.m in Sources */,
+				4345702616C9CE93006E04FD /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1855,11 +1873,11 @@
 					Submodules/Facebook/src,
 				);
 				INFOPLIST_FILE = "PARViewer/PARViewer-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Subprojects/ChipmunkTemplate/ChipmunkTemplate/libs/ChipmunkPro-iPhone\"",
 				);
-				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1880,11 +1898,11 @@
 					Submodules/Facebook/src,
 				);
 				INFOPLIST_FILE = "PARViewer/PARViewer-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Subprojects/ChipmunkTemplate/ChipmunkTemplate/libs/ChipmunkPro-iPhone\"",
 				);
-				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
