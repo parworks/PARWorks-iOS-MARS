@@ -65,6 +65,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     // register to receive updates about the site in the future
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:NOTIF_SITE_UPDATED object: self.site];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:NOTIF_SITE_COMMENTS_UPDATED object: self.site];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedFacebookNotification:) name:NOTIF_FACEBOOK_INFO_REQUEST object: nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedFacebookNotification:) name:NOTIF_FACEBOOK_LOGGED_IN object: nil];
 }
 
@@ -264,7 +265,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     UIImage * img = [[PVImageCacheManager shared] imageForURL: [_site posterImageURL]];
     NSDictionary * overlays = _site.posterImageOverlayJSON;
     if (!img) {
-        img = [UIImage imageNamed: @"missing_image_300x150"];
+        img = [UIImage imageNamed: @"missing_image_300x150.png"];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateHeaderImageView) name:NOTIF_IMAGE_READY object:[_site posterImageURL]];
         overlays = nil;
     }
@@ -281,8 +282,8 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 
 - (IBAction)addCommentButtonPressed:(id)sender
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if([defaults objectForKey:@"FBId"])
+    PVAppDelegate * delegate = (PVAppDelegate*)[[UIApplication sharedApplication] delegate];
+    if([delegate isSignedIntoFacebook])
         [self showAddCommentViewController];
     else{
         PVAppDelegate * delegate = (PVAppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -549,10 +550,12 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 }
 
 - (void)receivedFacebookNotification:(NSNotification *)notification {
+    PVAppDelegate * delegate = (PVAppDelegate*)[[UIApplication sharedApplication] delegate];
     if([[notification name] isEqualToString:NOTIF_FACEBOOK_INFO_REQUEST]){
-        
+        [delegate showHUD:@"Gathering Info..."];
     }
     if([[notification name] isEqualToString:NOTIF_FACEBOOK_LOGGED_IN] && [[notification object] isEqualToString:@"YES"]){
+        [delegate hideHUD];
         [self showAddCommentViewController];
     }
 }

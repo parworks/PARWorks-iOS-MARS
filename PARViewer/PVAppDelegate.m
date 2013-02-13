@@ -205,7 +205,7 @@ NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Log
     [defaults setObject:[FBSession.activeSession expirationDate] forKey:@"FBExpirationDateKey"];
     [defaults synchronize];
     
-    if (FBSession.activeSession.isOpen && [defaults objectForKey:@"FBId"]){
+    if (FBSession.activeSession.isOpen && [self isSignedIntoFacebook]){
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIF_FACEBOOK_LOGGED_IN object:@"YES"];
     }    
     else if (FBSession.activeSession.isOpen) {
@@ -227,6 +227,7 @@ NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Log
              }
              else{
                  NSLog(@"Error code: %d", error.code);
+                 [self hideHUD];
                  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                                  message:@"Facebook cannot be accessed until you give permission. Go to Settings > Privacy > Facebook to reset."
                                                                 delegate:nil
@@ -254,6 +255,60 @@ NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Log
     }
 }
 
+- (BOOL)isSignedIntoFacebook{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL isSignedIn = [defaults objectForKey:@"FBId"] && [[defaults objectForKey:@"FBId"] length] > 0;
+    return isSignedIn;
+}
+
+- (void)showHUD:(NSString*)msg{
+    [self setHUDMessage:msg];
+}
+
+- (void)hideHUD{
+    [self setHUDMessage:nil];
+}
+
+- (void)HUDWasHidden:(MBProgressHUD *)HUD {
+	// Remove HUD from screen when the HUD was hidden
+	[_HUD removeFromSuperview];
+	_HUD = nil;
+}
+
+- (void)setHUDMessage:(NSString*)message
+{
+    if (_HUD == nil && message != nil) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        _HUD = [MBProgressHUD showHUDAddedTo:_window animated:YES];
+        _HUD.delegate = self;
+        _HUD.labelText = message;
+    }
+    else if (_HUD && message != nil) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        _HUD.labelText = message;
+    }
+    else {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        [_HUD hide:YES];
+    }
+}
+
+- (NSString*)HUDText{
+    if(_HUD)
+        return _HUD.labelText;
+    else
+        return nil;
+}
+
+- (void)showMessage:(NSString*)message whileExecutingBlock:(dispatch_block_t)block completionBlock:(void (^)())completion{
+    if(_HUD && message){
+        _HUD.labelText = message;
+        [_HUD showAnimated:YES whileExecutingBlock:block completionBlock:completion];
+    }
+    else{
+        [self hideHUD];
+    }
+}
 
 
 @end

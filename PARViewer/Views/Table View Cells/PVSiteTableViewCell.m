@@ -111,7 +111,7 @@
     UIImage * img = [[PVImageCacheManager shared] imageForURL: _site.posterImageURL];
     NSDictionary * overlays = _site.posterImageOverlayJSON;
     if (!img) {
-        img = [UIImage imageNamed: @"missing_image_300x150"];
+        img = [UIImage imageNamed: @"missing_image_300x150.png"];
         overlays = nil;
     }
     
