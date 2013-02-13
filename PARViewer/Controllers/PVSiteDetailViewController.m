@@ -505,6 +505,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     ARAugmentedPhoto * photo = [[ARAugmentedPhoto alloc] initWithScaledImage:img atScale: scale andOverlayJSON: json];
     PVAugmentedPhotoViewController * c = [[PVAugmentedPhotoViewController alloc] init];
     [c setAugmentedPhoto: photo];
+    [c setSite: _site];
     [c setModalTransitionStyle: UIModalTransitionStyleCoverVertical];
     [self presentViewController:c animated:YES completion:NULL];
 }
