@@ -37,7 +37,6 @@ NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Log
     [_contentControllers addObject: [[UINavigationController alloc] initWithRootViewController: [[PVTrendingSitesController alloc] init]]];
     [_contentControllers addObject: [[UINavigationController alloc] initWithRootViewController: [[PVNearbySitesViewController alloc] init]]];
     [_contentControllers addObject: [[UINavigationController alloc] initWithRootViewController: [[PVSearchViewController alloc] init]]];
-    [_contentControllers addObject: [[UINavigationController alloc] initWithRootViewController: [[PVScavengerHuntViewController alloc] init]]];
     [_contentControllers addObject: [[UINavigationController alloc] initWithRootViewController: [[PVTechnologyViewController alloc] init]]];
     
     for (UINavigationController * c in _contentControllers) {

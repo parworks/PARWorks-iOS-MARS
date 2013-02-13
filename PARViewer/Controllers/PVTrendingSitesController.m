@@ -90,7 +90,7 @@ static NSString * cellIdentifier = @"TestCell";
 	// Update the position of the card and then advance our simulation
     [_physicsContainer setCardX: fmaxf(0, (_collectionView.contentOffset.x) / 2)];
     [_physicsContainer step: dt * 1.75];
-
+    
 	// Update any cards onscreen.
 	NSArray * cards = [self.collectionView visibleCells];
 	for (PVSiteCardView * view in cards)
@@ -102,6 +102,8 @@ static NSString * cellIdentifier = @"TestCell";
 {
 	// trigger update of our views
 	[_collectionView reloadData];
+    [_backgroundView preloadBlurredImages];
+    
     PVFlowLayout * layout = (PVFlowLayout*)_collectionView.collectionViewLayout;
 	CGFloat centerX = _collectionView.contentOffset.x / ([layout itemSize].width + [layout minimumLineSpacing]);
     [_backgroundView setFloatingPointIndex: centerX];
