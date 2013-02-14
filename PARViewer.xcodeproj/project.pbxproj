@@ -13,7 +13,6 @@
 		42028A0D16C22988002FE1C2 /* map_marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 42028A0B16C22988002FE1C2 /* map_marker.png */; };
 		42028A1216C24A3D002FE1C2 /* PVMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42028A1016C24A3C002FE1C2 /* PVMapViewController.m */; };
 		42028A1316C24A3D002FE1C2 /* PVMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42028A1116C24A3C002FE1C2 /* PVMapViewController.xib */; };
-		4234B4BF16CB1322000805FA /* libMBProgressHUD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4234B4BE16CB1307000805FA /* libMBProgressHUD.a */; };
 		4234B4C216CB1833000805FA /* missing_image_300x150@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4234B4C116CB1833000805FA /* missing_image_300x150@2x.png */; };
 		425345A616BE768E00D5A00A /* leave_comment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 425345A416BE768D00D5A00A /* leave_comment@2x.png */; };
 		425345A716BE768E00D5A00A /* missing_image_78x78@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 425345A516BE768D00D5A00A /* missing_image_78x78@2x.png */; };
@@ -317,13 +316,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4234B4BD16CB1307000805FA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4234B4B316CB1307000805FA /* MBProgressHUD.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D286A7491518C70F00E13FB8;
-			remoteInfo = MBProgressHUD;
-		};
 		42AEFEA516BFB11A00BFE97C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 42AEFE9F16BFB11A00BFE97C /* facebook-ios-sdk.xcodeproj */;
@@ -397,7 +389,6 @@
 		42028A0F16C24A3C002FE1C2 /* PVMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVMapViewController.h; sourceTree = "<group>"; };
 		42028A1016C24A3C002FE1C2 /* PVMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVMapViewController.m; sourceTree = "<group>"; };
 		42028A1116C24A3C002FE1C2 /* PVMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PVMapViewController.xib; sourceTree = "<group>"; };
-		4234B4B316CB1307000805FA /* MBProgressHUD.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MBProgressHUD.xcodeproj; path = Submodules/MBProgressHUD/MBProgressHUD.xcodeproj; sourceTree = "<group>"; };
 		4234B4C116CB1833000805FA /* missing_image_300x150@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "missing_image_300x150@2x.png"; sourceTree = "<group>"; };
 		425345A416BE768D00D5A00A /* leave_comment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "leave_comment@2x.png"; sourceTree = "<group>"; };
 		425345A516BE768D00D5A00A /* missing_image_78x78@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "missing_image_78x78@2x.png"; sourceTree = "<group>"; };
@@ -847,7 +838,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4234B4BF16CB1322000805FA /* libMBProgressHUD.a in Frameworks */,
 				435E158F16B780E600CC8DA3 /* MobileCoreServices.framework in Frameworks */,
 				42AEFEB416BFB18400BFE97C /* libsqlite3.0.dylib in Frameworks */,
 				42AEFEB216BFB17A00BFE97C /* AdSupport.framework in Frameworks */,
@@ -878,14 +868,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4234B4B416CB1307000805FA /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4234B4BE16CB1307000805FA /* libMBProgressHUD.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		42AEFEA016BFB11A00BFE97C /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -908,7 +890,6 @@
 			children = (
 				438682B916CC05E7003DEEDB /* Icon@2x.png */,
 				438682B016CC05E0003DEEDB /* Icon.png */,
-				4234B4B316CB1307000805FA /* MBProgressHUD.xcodeproj */,
 				42AEFE9F16BFB11A00BFE97C /* facebook-ios-sdk.xcodeproj */,
 				43E9F6DF16BFA16D00AC2672 /* GPUImage.xcodeproj */,
 				A0A44D6F16BE2D8C003809D3 /* ChipmunkTemplate.xcodeproj */,
@@ -1722,10 +1703,6 @@
 					ProductGroup = 43E9F6E016BFA16D00AC2672 /* Products */;
 					ProjectRef = 43E9F6DF16BFA16D00AC2672 /* GPUImage.xcodeproj */;
 				},
-				{
-					ProductGroup = 4234B4B416CB1307000805FA /* Products */;
-					ProjectRef = 4234B4B316CB1307000805FA /* MBProgressHUD.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1735,13 +1712,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		4234B4BE16CB1307000805FA /* libMBProgressHUD.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libMBProgressHUD.a;
-			remoteRef = 4234B4BD16CB1307000805FA /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		42AEFEA616BFB11A00BFE97C /* libfacebook_ios_sdk.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -2175,9 +2145,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Demetri Miller (J8ERALU9C7)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Demetri Miller (36WPJ8C3NF)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"/Users/graysonsharpe/Library/Containers/com.foundry376.sparkinspector/Data/Library/Application Support/Spark Inspector\"",
-				);
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PARViewer/PARViewer-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -2185,7 +2153,6 @@
 					"Subprojects/ChipmunkTemplate/ChipmunkTemplate/libs/**",
 					Subprojects/ChipmunkTemplate/ChipmunkTemplate/libs/kazmath/include,
 					Submodules/Facebook/src,
-					Submodules/MBProgressHUD,
 				);
 				INFOPLIST_FILE = "PARViewer/PARViewer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -2204,9 +2171,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Demetri Miller (J8ERALU9C7)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"/Users/graysonsharpe/Library/Containers/com.foundry376.sparkinspector/Data/Library/Application Support/Spark Inspector\"",
-				);
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PARViewer/PARViewer-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -2214,7 +2179,6 @@
 					"Subprojects/ChipmunkTemplate/ChipmunkTemplate/libs/**",
 					Subprojects/ChipmunkTemplate/ChipmunkTemplate/libs/kazmath/include,
 					Submodules/Facebook/src,
-					Submodules/MBProgressHUD,
 				);
 				INFOPLIST_FILE = "PARViewer/PARViewer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;

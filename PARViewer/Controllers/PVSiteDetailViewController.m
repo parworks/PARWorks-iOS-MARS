@@ -228,43 +228,6 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 }
 
 
-- (void)takePhotoWithFlipAnimation
-{
-    _takePhotoButton.layer.anchorPoint = CGPointMake(1, 0.5);
-    _takePhotoButton.layer.position = CGPointMake(self.view.frame.size.width, _takePhotoButton.bounds.size.height/2);
-
-    UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
-    CGRect frame = [_takePhotoButton convertRect:_takePhotoButton.bounds toView:window];
-    frame.origin.x = window.frame.size.width - frame.size.width;
-    _takePhotoButton.frame = frame;
-    [window addSubview:_takePhotoButton];
-    
-    CATransform3D t = _takePhotoButton.layer.transform;
-    t.m34 = -1.0/300.0;
-    t = CATransform3DRotate(t, M_PI_2, 0, 1, 0);
-    
-    [UIView animateWithDuration:2.0 delay:0.1 options:UIViewAnimationOptionAllowAnimatedContent animations:^{
-        _takePhotoButton.layer.transform = t;
-    } completion:^(BOOL finished) {
-        _takePhotoButton.hidden = YES;
-        [self takePhotoStage2FlipAnimation];
-    }];
-}
-
-- (void)takePhotoStage2FlipAnimation
-{
-    UIImage *screenCap = [self.navigationController.view imageRepresentationAtScale: [[UIScreen mainScreen] scale]];
-    UIImage *depthImage = [UIImage imageNamed:@"unfold_depth_image.png"];
-    
-    self.navigationController.navigationBar.hidden = YES;
-    self.view.hidden = YES;
-    
-    PVAugmentedPhotoViewController * p = [[PVAugmentedPhotoViewController alloc] init];
-    [p setSite: _site];
-    
-    [self peelPresentViewController:p withContentImage:screenCap depthImage:depthImage];
-    //    [self presentViewController:p animated:YES completion:nil];
-}
 
 - (void)updateHeaderImageView:(NSNotification*)notif
 {
