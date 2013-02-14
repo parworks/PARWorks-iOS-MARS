@@ -43,6 +43,7 @@
         
         self.posterImageView = [[ARAugmentedView alloc] initWithFrame: posterFrame];
         self.posterImageView.animateOutlineViewDrawing = NO;
+        self.posterImageView.showOutlineViewsOnly = YES;
         self.posterImageView.overlayImageViewContentMode = UIViewContentModeScaleAspectFill;
         self.posterImageView.userInteractionEnabled = NO;
         self.posterImageView.layer.cornerRadius = 5;

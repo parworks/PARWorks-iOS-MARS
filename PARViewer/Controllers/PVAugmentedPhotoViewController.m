@@ -25,6 +25,7 @@
 #import "CATextLayer+Loading.h"
 #import "PARWorks.h"
 #import "EPUtil.h"
+#import "PVAppDelegate.h"
 
 
 #define CAMERA_TRANSFORM_SCALE 1.25
@@ -43,6 +44,8 @@
 {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentNavController:) name:NOTIF_PRESENT_NAVCONTROLLER_FULLSCREEN object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifyServerOverlayFocused:) name:NOTIF_OVERLAY_VIEW_FOCUSED object:nil];
+    
     if (_augmentedPhoto) {
         [self setAugmentedPhoto: _augmentedPhoto];
         [_augmentedView setAlpha: 1];
@@ -224,6 +227,16 @@
     UINavigationController *controller = [notification object];
     [controller setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     [self presentViewController:controller animated:YES completion:nil];
+}
+
+- (void)notifyServerOverlayFocused:(NSNotification*)notification{
+    PVAppDelegate * delegate = (PVAppDelegate*)[[UIApplication sharedApplication] delegate];
+    if([delegate isSignedIntoFacebook]){
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *userId = [defaults objectForKey:@"FBId"];
+        AROverlayView *overlayView = (AROverlayView*)[notification object];
+        [[ARManager shared] notifyUser:userId clickedOverlay:overlayView.overlay site:_site withCompletionBlock:nil];
+    }
 }
 
 @end

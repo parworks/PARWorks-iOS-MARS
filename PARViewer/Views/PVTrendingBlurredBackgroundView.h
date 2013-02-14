@@ -28,4 +28,6 @@
 @property (nonatomic, assign) float floatingPointIndex;
 @property (nonatomic, weak) NSObject<PVTrendingBlurredBackgroundViewDelegate>* delegate;
 
+- (void)preloadBlurredImages;
+
 @end

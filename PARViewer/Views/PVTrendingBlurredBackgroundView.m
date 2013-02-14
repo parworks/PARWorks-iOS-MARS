@@ -85,6 +85,18 @@
     }
 }
 
+- (void)preloadBlurredImages
+{
+    NSURL * url = nil;
+    int i = 0;
+    
+    while ((url = [_delegate urlForSiteAtIndex: i])) {
+        [[PVImageCacheManager shared] imageForURL: url];
+        [[PVImageCacheManager shared] blurredImageForURL: url];
+        i ++;
+    }
+}
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver: self];

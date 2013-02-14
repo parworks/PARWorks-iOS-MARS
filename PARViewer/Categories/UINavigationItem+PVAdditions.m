@@ -34,7 +34,7 @@
 
     UILabel * titleLabel = [[UILabel alloc] initWithFrame: frame];
     [titleLabel setTextColor: [UIColor colorWithWhite:0.2 alpha:1]];
-    [titleLabel setFont: [UIFont parworksFontWithSize:20]];
+    [titleLabel setFont: [UIFont boldParworksFontWithSize:20]];
     [titleLabel setBackgroundColor: [UIColor clearColor]];
     [titleLabel setShadowColor: [UIColor whiteColor]];
     [titleLabel setShadowOffset: CGSizeMake(0,1)];

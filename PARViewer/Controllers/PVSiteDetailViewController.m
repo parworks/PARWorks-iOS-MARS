@@ -24,6 +24,7 @@
 #import "PVBorderedImageCell.h"
 #import "UIViewController+Transitions.h"
 #import "UIView+ImageCapture.h"
+#import "UIViewAdditions.h"
 
 #define PARALLAX_WINDOW_HEIGHT 165.0
 #define PARALLAX_IMAGE_HEIGHT 300.0
@@ -73,6 +74,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     // register to receive updates about the site in the future
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:NOTIF_SITE_UPDATED object: self.site];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:NOTIF_SITE_COMMENTS_UPDATED object: self.site];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedFacebookNotification:) name:NOTIF_FACEBOOK_INFO_REQUEST object: nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedFacebookNotification:) name:NOTIF_FACEBOOK_LOGGED_IN object: nil];
 }
 
@@ -168,6 +170,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     
     [self.navigationItem setUnpaddedLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:customButton] animated:NO];
     [self.navigationItem setLeftJustifiedTitle: _site.name];
+    [self.navigationItem.titleView setAlpha: 0];
     [self setupRightNavigationItem];
 }
 
@@ -180,21 +183,19 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     
     // Attach the "Augment Photo" icon to the upper right
     self.takePhotoButton = [UIButton buttonWithType: UIButtonTypeCustom];
-    [_takePhotoButton setBackgroundColor: [UIColor parworksSelectionBlue]];
+    [_takePhotoButton setImage:[UIImage imageNamed:@"try_it_now.png"] forState:UIControlStateNormal];
     [_takePhotoButton addTarget:self action:@selector(takePhoto:) forControlEvents:UIControlEventTouchUpInside];
     [_takePhotoButton.layer setAnchorPoint: CGPointMake(1, 0)];
-    [_takePhotoButton setFrame: CGRectMake(0, 0, 100, 40)];
+    [_takePhotoButton setFrame: CGRectMake(0, 0, 160, 45)];
     
-    self.takePhotoContainer = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 100, 46)];
-    CATransform3D t = _takePhotoContainer.layer.transform;
-    t.m34 = -0.0025;
-    _takePhotoContainer.layer.sublayerTransform = t;
+    self.takePhotoContainer = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 160, 45)];
     [_takePhotoContainer addSubview: _takePhotoButton];
     [self.navigationItem setUnpaddedRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView: _takePhotoContainer] animated:NO];
 }
 
-- (void)setupMapView{
-    _identifierLabel.text = ([_site.identifier length] > 0) ? _site.identifier :  @"No identifier available";
+- (void)setupMapView
+{
+    _identifierLabel.text = ([_site.name length] > 0) ? _site.name :  @"No site name available";
     _addressLabel.text = ([_site.address length] > 0) ? _site.address : @"No address available";   
     _descriptionTextView.text = ([_site.siteDescription length] > 0) ? _site.siteDescription : @"No description available";
     
@@ -215,7 +216,8 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     }
 }
 
-- (void)setupPhotoScrollView{
+- (void)setupPhotoScrollView
+{
     [_collectionView registerClass:[PVBorderedImageCell class] forCellWithReuseIdentifier:cellIdentifier];
     [_collectionView.layer setBorderColor:[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1.0].CGColor];
     [_collectionView.layer setBorderWidth:1.0];
@@ -226,12 +228,50 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 }
 
 
+- (void)takePhotoWithFlipAnimation
+{
+    _takePhotoButton.layer.anchorPoint = CGPointMake(1, 0.5);
+    _takePhotoButton.layer.position = CGPointMake(self.view.frame.size.width, _takePhotoButton.bounds.size.height/2);
+
+    UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
+    CGRect frame = [_takePhotoButton convertRect:_takePhotoButton.bounds toView:window];
+    frame.origin.x = window.frame.size.width - frame.size.width;
+    _takePhotoButton.frame = frame;
+    [window addSubview:_takePhotoButton];
+    
+    CATransform3D t = _takePhotoButton.layer.transform;
+    t.m34 = -1.0/300.0;
+    t = CATransform3DRotate(t, M_PI_2, 0, 1, 0);
+    
+    [UIView animateWithDuration:2.0 delay:0.1 options:UIViewAnimationOptionAllowAnimatedContent animations:^{
+        _takePhotoButton.layer.transform = t;
+    } completion:^(BOOL finished) {
+        _takePhotoButton.hidden = YES;
+        [self takePhotoStage2FlipAnimation];
+    }];
+}
+
+- (void)takePhotoStage2FlipAnimation
+{
+    UIImage *screenCap = [self.navigationController.view imageRepresentationAtScale: [[UIScreen mainScreen] scale]];
+    UIImage *depthImage = [UIImage imageNamed:@"unfold_depth_image.png"];
+    
+    self.navigationController.navigationBar.hidden = YES;
+    self.view.hidden = YES;
+    
+    PVAugmentedPhotoViewController * p = [[PVAugmentedPhotoViewController alloc] init];
+    [p setSite: _site];
+    
+    [self peelPresentViewController:p withContentImage:screenCap depthImage:depthImage];
+    //    [self presentViewController:p animated:YES completion:nil];
+}
+
 - (void)updateHeaderImageView:(NSNotification*)notif
 {
     UIImage * img = [[PVImageCacheManager shared] imageForURL: [_site posterImageURL]];
     NSDictionary * overlays = _site.posterImageOverlayJSON;
     if (!img) {
-        img = [UIImage imageNamed: @"missing_image_300x150"];
+        img = [UIImage imageNamed: @"missing_image_300x150.png"];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateHeaderImageView) name:NOTIF_IMAGE_READY object:[_site posterImageURL]];
         overlays = nil;
     }
@@ -248,8 +288,8 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 
 - (IBAction)addCommentButtonPressed:(id)sender
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if([defaults objectForKey:@"FBId"])
+    PVAppDelegate * delegate = (PVAppDelegate*)[[UIApplication sharedApplication] delegate];
+    if([delegate isSignedIntoFacebook])
         [self showAddCommentViewController];
     else{
         PVAppDelegate * delegate = (PVAppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -485,6 +525,24 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     return MAX(newHeight, 74.0);
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    float titleAlpha = fmaxf(0, fminf(1, ([scrollView contentOffset].y - 195) / 20.0));
+    [[self.navigationItem titleView] setAlpha: titleAlpha];
+
+    if ((titleAlpha > 0) && ([_takePhotoButton frame].origin.x == 0)) {
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration: 0.4];
+        [_takePhotoButton setFrameX: 95];
+        [UIView commitAnimations];
+    } else if ((titleAlpha == 0) && ([_takePhotoButton frame].origin.x != 0)) {
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration: 0.4];
+        [_takePhotoButton setFrameX: 0];
+        [UIView commitAnimations];
+    }
+}
+
 
 
 #pragma mark -
@@ -525,6 +583,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     ARAugmentedPhoto * photo = [[ARAugmentedPhoto alloc] initWithScaledImage:img atScale: scale andOverlayJSON: json];
     PVAugmentedPhotoViewController * c = [[PVAugmentedPhotoViewController alloc] init];
     [c setAugmentedPhoto: photo];
+    [c setSite: _site];
     [c setModalTransitionStyle: UIModalTransitionStyleCoverVertical];
     [self presentViewController:c animated:YES completion:NULL];
 }
@@ -570,10 +629,12 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 }
 
 - (void)receivedFacebookNotification:(NSNotification *)notification {
+    PVAppDelegate * delegate = (PVAppDelegate*)[[UIApplication sharedApplication] delegate];
     if([[notification name] isEqualToString:NOTIF_FACEBOOK_INFO_REQUEST]){
-        
+        [delegate showHUD:@"Gathering Info..."];
     }
     if([[notification name] isEqualToString:NOTIF_FACEBOOK_LOGGED_IN] && [[notification object] isEqualToString:@"YES"]){
+        [delegate hideHUD];
         [self showAddCommentViewController];
     }
 }

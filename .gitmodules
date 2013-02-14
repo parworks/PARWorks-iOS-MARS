@@ -13,3 +13,7 @@
 [submodule "Submodules/Facebook"]
 	path = Submodules/Facebook
 	url = git@github.com:facebook/facebook-ios-sdk.git
+
+[submodule "Submodules/MBProgressHUD"]
+	path = Submodules/MBProgressHUD
+	url = git@github.com:jdg/MBProgressHUD.git

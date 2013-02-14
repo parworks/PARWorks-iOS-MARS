@@ -16,10 +16,13 @@
 #import "PVScavengerHuntViewController.h"
 #import "PVSidebarViewController.h"
 #import "FacebookSDK.h"
+#import "MBProgressHUD.h"
 
 extern NSString *const FBSessionStateChangedNotification;
 
-@interface PVAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate, JSSlidingViewControllerDelegate>
+@interface PVAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate, JSSlidingViewControllerDelegate, MBProgressHUDDelegate>{
+    MBProgressHUD *_HUD;
+}
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) JSSlidingViewController * slidingViewController;
@@ -29,6 +32,12 @@ extern NSString *const FBSessionStateChangedNotification;
 - (void)switchToController:(int)index;
 - (BOOL)authorizeFacebook:(BOOL)allowLoginUI;
 - (void)logoutFacebook;
+- (BOOL)isSignedIntoFacebook;
+
+- (void)showHUD:(NSString*)msg;
+- (void)hideHUD;
+- (void)showMessage:(NSString*)message whileExecutingBlock:(dispatch_block_t)block completionBlock:(void (^)())completion;
+
 
 @end
 
