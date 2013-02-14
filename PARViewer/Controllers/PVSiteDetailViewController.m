@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Ben Gotow. All rights reserved.
 //
 
-#import "PVSiteDetailViewController.h"
 #import "PVAugmentedPhotoViewController.h"
+#import "PVSiteDetailViewController.h"
 #import "ARSite+MARS_Extensions.h"
 #import "UIImageView+AFNetworking.h"
 #import "PVImageCacheManager.h"
@@ -27,6 +27,7 @@
 
 #define PARALLAX_WINDOW_HEIGHT 165.0
 #define PARALLAX_IMAGE_HEIGHT 300.0
+
 
 static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 
@@ -56,8 +57,16 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 {
     [self update];
     
-    // Reset the right navigation item if we return from the camera view controller.
-    if (_takePhotoContainer) {
+    if ([self.presentedViewController isKindOfClass:[UIImagePickerController class]]) {
+        [UIView animateWithDuration:1.0 delay:0.1 options:UIViewAnimationOptionAllowAnimatedContent animations:^{
+            self.navigationController.navigationBar.hidden = NO;
+            self.view.hidden = NO;
+            _takePhotoButton.hidden = NO;
+            _takePhotoButton.layer.transform = CATransform3DIdentity;
+        } completion:^(BOOL finished) {
+            [self setupRightNavigationItem];
+        }];
+    } else if (_takePhotoContainer) {
         [self setupRightNavigationItem];
     }
     
@@ -166,6 +175,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 {
     if (_takePhotoContainer) {
         [_takePhotoContainer removeFromSuperview];
+        [_takePhotoButton removeFromSuperview];
     }
     
     // Attach the "Augment Photo" icon to the upper right
@@ -215,48 +225,6 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     [_collectionView reloadData];
 }
 
-- (void)takePhoto:(id)sender
-{
-    [self takePhotoWithFlipAnimation];
-}
-
-- (void)takePhotoWithFlipAnimation
-{
-    _takePhotoButton.layer.anchorPoint = CGPointMake(1, 0.5);
-    _takePhotoButton.layer.position = CGPointMake(self.view.frame.size.width, _takePhotoButton.bounds.size.height/2);
-    
-    UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
-    CGRect frame = [_takePhotoButton convertRect:_takePhotoButton.bounds toView:window];
-    frame.origin.x = 220;
-    _takePhotoButton.frame = frame;
-    [window addSubview:_takePhotoButton];
-    
-    CATransform3D t = _takePhotoButton.layer.transform;
-    t.m34 = -1.0/300.0;
-    t = CATransform3DRotate(t, M_PI_2, 0, 1, 0);
-    
-    [UIView animateWithDuration:2.0 delay:0.1 options:UIViewAnimationOptionAllowAnimatedContent animations:^{
-        _takePhotoButton.layer.transform = t;
-    } completion:^(BOOL finished) {
-        _takePhotoButton.hidden = YES;
-        [self takePhotoStage2FlipAnimation];
-    }];
-}
-
-- (void)takePhotoStage2FlipAnimation
-{
-    UIImage *screenCap = [self.navigationController.view imageRepresentationAtScale:1.0];
-    UIImage *depthImage = [UIImage imageNamed:@"unfold_depth_image.png"];
-    
-    self.navigationController.navigationBar.hidden = YES;
-    self.view.hidden = YES;
-    
-    PVAugmentedPhotoViewController * p = [[PVAugmentedPhotoViewController alloc] init];
-    [p setSite: _site];
-    
-    [self peelPresentViewController:p withContentImage:screenCap depthImage:depthImage];
-    //    [self presentViewController:p animated:YES completion:nil];
-}
 
 - (void)updateHeaderImageView:(NSNotification*)notif
 {
@@ -341,6 +309,78 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+
+#pragma mark - Camera 
+- (void)takePhoto:(id)sender
+{
+    [self takePhotoWithFlipAnimation];
+}
+
+- (void)takePhotoWithFlipAnimation
+{
+    _takePhotoButton.layer.anchorPoint = CGPointMake(1, 0.5);
+    _takePhotoButton.layer.position = CGPointMake(self.view.frame.size.width, _takePhotoButton.bounds.size.height/2);
+    
+    UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
+    CGRect frame = [_takePhotoButton convertRect:_takePhotoButton.bounds toView:window];
+    frame.origin.x = 220;
+    _takePhotoButton.frame = frame;
+    [window addSubview:_takePhotoButton];
+    
+    CATransform3D t = _takePhotoButton.layer.transform;
+    t.m34 = -1.0/300.0;
+    t = CATransform3DRotate(t, M_PI_2, 0, 1, 0);
+    
+    [UIView animateWithDuration:1.0 delay:0.1 options:UIViewAnimationOptionAllowAnimatedContent animations:^{
+        _takePhotoButton.layer.transform = t;
+    } completion:^(BOOL finished) {
+        _takePhotoButton.hidden = YES;
+        [self takePhotoStage2FlipAnimation];
+    }];
+}
+
+- (void)takePhotoStage2FlipAnimation
+{
+    UIImage *screenCap = [self.navigationController.view imageRepresentationAtScale:1.0];
+    UIImage *depthImage = [UIImage imageNamed:@"unfold_depth_image.png"];
+    
+    self.navigationController.navigationBar.hidden = YES;
+    self.view.hidden = YES;
+    
+    _cameraOverlayView = [[GRCameraOverlayView alloc] initWithFrame:self.view.bounds];
+    _cameraOverlayView.site = _site;
+    
+    UIImagePickerController *picker = [self imagePicker];
+    picker.delegate = _cameraOverlayView;
+    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+        picker.cameraOverlayView = _cameraOverlayView;
+        _cameraOverlayView.imagePicker = picker;
+    }
+    
+    
+    [self peelPresentViewController:picker withContentImage:screenCap depthImage:depthImage];
+    //    [self presentViewController:p animated:YES completion:nil];
+}
+
+- (UIImagePickerController *)imagePicker
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+
+    // Certain properties aren't set until we present the picker since they are dependent on
+    // the camera overlay view.
+    if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        picker.mediaTypes = @[(NSString *) kUTTypeImage];
+        picker.showsCameraControls = NO;
+    } else {
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    
+    return picker;
+}
+
+
 
 #pragma mark - Rotation
 
