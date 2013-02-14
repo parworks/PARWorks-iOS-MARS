@@ -7,9 +7,12 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
+#import <objc/runtime.h>
 #import "UIViewController+Transitions.h"
 
-
+#define kUIViewController_Transitions_MainLayerKey @"kUIViewController_Transitions_MainLayerKey"
+#define kUIViewController_Transitions_ContentsShadowKey @"kUIViewController_Transitions_ContentsShadowKey"
+#define kUIViewController_Transitions_DepthLayerKey @"kUIViewController_Transitions_DepthLayerKey"
 
 @implementation UIViewController (Transitions)
 
@@ -32,6 +35,7 @@
     mainLayer.anchorPoint = CGPointMake(0, 0.5);
     mainLayer.position = CGPointMake(0, (bounds.size.height/2) + windowOffset);
     [mainWindow.layer addSublayer:mainLayer];
+    objc_setAssociatedObject(mainWindow, kUIViewController_Transitions_MainLayerKey, mainLayer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
     CATransformLayer *transformLayer = [CATransformLayer layer];
     [mainLayer addSublayer:transformLayer];
@@ -49,6 +53,7 @@
     contentsShadowLayer.endPoint = CGPointMake(1, 0);
     contentsShadowLayer.opacity = 0.0;
     [contentsLayer addSublayer:contentsShadowLayer];
+    objc_setAssociatedObject(mainWindow, kUIViewController_Transitions_ContentsShadowKey, contentsShadowLayer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
     CATransform3D depthTransform = CATransform3DMakeRotation(M_PI_2, 0, 1, 0);
     depthTransform.m34 = -1.0/500.0;
@@ -59,8 +64,8 @@
     depthLayer.transform = depthTransform;
     depthLayer.zPosition = 0;
     depthLayer.contents = (id)depthImage.CGImage;
-    //    _depthLayer.contentsGravity = kCAGravityResize;
     [transformLayer addSublayer:depthLayer];
+    objc_setAssociatedObject(mainWindow, kUIViewController_Transitions_DepthLayerKey, depthLayer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
     double delayInSeconds = 0.01;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
@@ -87,6 +92,40 @@
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [self presentViewController:vc animated:NO completion:nil];
+    });
+}
+
+
+- (void)unpeelViewController
+{
+    UIWindow *mainWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
+    CALayer *mainLayer = (CALayer *)objc_getAssociatedObject(mainWindow, kUIViewController_Transitions_MainLayerKey);
+    CALayer *contentsShadowLayer = (CALayer *)objc_getAssociatedObject(mainWindow, kUIViewController_Transitions_ContentsShadowKey);
+    CALayer *depthLayer = (CALayer *)objc_getAssociatedObject(mainWindow, kUIViewController_Transitions_DepthLayerKey);
+    depthLayer.position = CGPointMake(depthLayer.position.x, depthLayer.position.y + 20);
+    
+    [CATransaction begin];
+    [CATransaction setAnimationDuration:kUIViewController_PeelTransitionsAnimationDuration];
+    mainLayer.sublayerTransform = CATransform3DIdentity;
+    contentsShadowLayer.opacity = 0.0;
+    [CATransaction commit];
+    
+    // Remove the depth layer right before the animation has finished so we don't get the weird off-pixel flickering
+    double depthDelay = kUIViewController_PeelTransitionsAnimationDuration - 0.4;
+    dispatch_time_t delayPopTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(depthDelay * NSEC_PER_SEC));
+    dispatch_after(delayPopTime, dispatch_get_main_queue(), ^(void){
+        [depthLayer removeFromSuperlayer];
+        objc_setAssociatedObject(mainWindow, kUIViewController_Transitions_DepthLayerKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    });
+    
+    // Cleanup
+    double delayInSeconds = kUIViewController_PeelTransitionsAnimationDuration;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self dismissViewControllerAnimated:NO completion:nil];
+        [mainLayer removeFromSuperlayer];
+        objc_setAssociatedObject(mainWindow, kUIViewController_Transitions_MainLayerKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(mainWindow, kUIViewController_Transitions_ContentsShadowKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     });
 }
 

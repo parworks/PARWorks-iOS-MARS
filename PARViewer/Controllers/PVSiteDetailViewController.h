@@ -10,6 +10,7 @@
 #import "PVParallaxTableView.h"
 #import "PVAddCommentViewController.h"
 #import "GPUImageView.h"
+#import "GRCameraOverlayView.h"
 #import "ARAugmentedView.h"
 #import <MapKit/MapKit.h>
 #import "PSTCollectionView.h"
@@ -19,6 +20,7 @@
 {
     PVAddCommentViewController *_addCommentViewController;
     GPUImageView    * _bgCopyImageView;
+    GRCameraOverlayView *_cameraOverlayView;
 }
 
 @property (nonatomic, strong) ARSite * site;

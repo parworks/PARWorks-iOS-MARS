@@ -69,7 +69,8 @@
 
     if ((_firstLoad) && (self.augmentedPhoto == nil)) {
         _cameraOverlayView = [[GRCameraOverlayView alloc] initWithFrame:self.view.bounds];
-        [_cameraOverlayView.augmentButton addTarget:self action:@selector(takePicture:) forControlEvents:UIControlEventTouchUpInside];
+//        [_cameraOverlayView.toolbar.cameraButton addTarget:self action:@selector(takePicture:) forControlEvents:UIControlEventTouchUpInside];
+//        [_cameraOverlayView.toolbar.cancelButton addTarget:self action:@selector(exit:) forControlEvents:UIControlEventTouchUpInside];
 
         _imageTransferAnimation = [[PVImageTransferAnimationView alloc] initWithFrame: self.view.bounds];
         [self.view addSubview: _imageTransferAnimation];
@@ -102,6 +103,11 @@
 - (IBAction)exit:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self dismissViewControllerAnimated:YES completion:nil];
+    });
 }
 
 - (IBAction)showCameraPicker:(id)sender
@@ -121,6 +127,7 @@
     
     if (source == UIImagePickerControllerSourceTypeCamera &&
         [UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
+        _cameraOverlayView.imagePicker = _picker;
         _picker.sourceType = UIImagePickerControllerSourceTypeCamera;
         _picker.mediaTypes = @[(NSString *) kUTTypeImage];
         _picker.cameraOverlayView = _cameraOverlayView;
