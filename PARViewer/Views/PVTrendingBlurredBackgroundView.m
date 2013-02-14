@@ -15,15 +15,20 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self populateImageViews];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshGPUImages) name:NOTIF_IMAGE_READY object: nil];
+        [self setup];
     }
     return self;
 }
 
 - (void)awakeFromNib
 {
+    [self setup];
+}
+
+- (void)setup
+{
     [self populateImageViews];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(imageReady:) name:NOTIF_IMAGE_READY object: nil];
 }
 
 - (void)populateImageViews
@@ -64,6 +69,18 @@
     [_baseImageView setTransform: CGAffineTransformMakeTranslation(-fraction * 40, 0)];
     [_nextImageView setAlpha: fraction];
     [_nextImageView setTransform: CGAffineTransformMakeTranslation((1-fraction) * 40, 0)];
+}
+
+- (void)imageReady:(NSNotification*)notif
+{
+    if ((_baseImageView.image != nil) && (_nextImageView.image != nil))
+        return;
+
+    NSURL * url = [notif object];
+    NSURL * baseURL = [_delegate urlForSiteAtIndex: _baseIndex];
+    NSURL * nextURL = [_delegate urlForSiteAtIndex: _nextIndex];
+    if ([url isEqual: baseURL] || [url isEqual: nextURL])
+        [self refreshGPUImages];
 }
 
 - (void)refreshGPUImages

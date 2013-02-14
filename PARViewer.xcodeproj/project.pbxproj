@@ -187,6 +187,15 @@
 		437EE23016C8562300F6D9B3 /* tooltip_background_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 437EE22E16C8562300F6D9B3 /* tooltip_background_up.png */; };
 		438682B116CC05E0003DEEDB /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 438682B016CC05E0003DEEDB /* Icon.png */; };
 		438682BA16CC05E7003DEEDB /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 438682B916CC05E7003DEEDB /* Icon@2x.png */; };
+		438682C016CC8133003DEEDB /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 438682BF16CC8133003DEEDB /* AirshipConfig.plist */; };
+		438682C916CC819C003DEEDB /* libUAirship-1.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 438682C816CC819C003DEEDB /* libUAirship-1.4.0.a */; };
+		438682CB16CC81B3003DEEDB /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 438682CA16CC81B3003DEEDB /* CoreTelephony.framework */; };
+		438682CD16CC81BD003DEEDB /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 438682CC16CC81BD003DEEDB /* StoreKit.framework */; };
+		438682CE16CC82CC003DEEDB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435E158016B7808B00CC8DA3 /* Security.framework */; };
+		438682D016CC8337003DEEDB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 438682CF16CC8337003DEEDB /* Default-568h@2x.png */; };
+		438682D216CC8351003DEEDB /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 438682D116CC8351003DEEDB /* Default@2x.png */; };
+		438682D416CC835D003DEEDB /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 438682D316CC835D003DEEDB /* Default.png */; };
+		4386830F16CCA107003DEEDB /* PVLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4386830E16CCA107003DEEDB /* PVLoadingView.m */; };
 		43988B2D16BE5CA0005DB5E8 /* bar_item_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43988B2C16BE5CA0005DB5E8 /* bar_item_back@2x.png */; };
 		43998B9716BDD164008B34C2 /* icon_nearby.png in Resources */ = {isa = PBXBuildFile; fileRef = 43998B9316BDD164008B34C2 /* icon_nearby.png */; };
 		43998B9816BDD164008B34C2 /* icon_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 43998B9416BDD164008B34C2 /* icon_search.png */; };
@@ -626,6 +635,15 @@
 		437EE22E16C8562300F6D9B3 /* tooltip_background_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tooltip_background_up.png; sourceTree = "<group>"; };
 		438682B016CC05E0003DEEDB /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		438682B916CC05E7003DEEDB /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		438682BF16CC8133003DEEDB /* AirshipConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AirshipConfig.plist; sourceTree = "<group>"; };
+		438682C816CC819C003DEEDB /* libUAirship-1.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libUAirship-1.4.0.a"; path = "Airship/libUAirship-1.4.0.a"; sourceTree = "<group>"; };
+		438682CA16CC81B3003DEEDB /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		438682CC16CC81BD003DEEDB /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		438682CF16CC8337003DEEDB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		438682D116CC8351003DEEDB /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		438682D316CC835D003DEEDB /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		4386830D16CCA107003DEEDB /* PVLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVLoadingView.h; sourceTree = "<group>"; };
+		4386830E16CCA107003DEEDB /* PVLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVLoadingView.m; sourceTree = "<group>"; };
 		43988B2C16BE5CA0005DB5E8 /* bar_item_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar_item_back@2x.png"; sourceTree = "<group>"; };
 		43998B9316BDD164008B34C2 /* icon_nearby.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_nearby.png; sourceTree = "<group>"; };
 		43998B9416BDD164008B34C2 /* icon_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_search.png; sourceTree = "<group>"; };
@@ -749,6 +767,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				438682CE16CC82CC003DEEDB /* Security.framework in Frameworks */,
+				438682CD16CC81BD003DEEDB /* StoreKit.framework in Frameworks */,
+				438682CB16CC81B3003DEEDB /* CoreTelephony.framework in Frameworks */,
+				438682C916CC819C003DEEDB /* libUAirship-1.4.0.a in Frameworks */,
 				4234B4BF16CB1322000805FA /* libMBProgressHUD.a in Frameworks */,
 				435E158F16B780E600CC8DA3 /* MobileCoreServices.framework in Frameworks */,
 				42AEFEB416BFB18400BFE97C /* libsqlite3.0.dylib in Frameworks */,
@@ -808,6 +830,12 @@
 		4351D0A816B4C5DB0039FE88 = {
 			isa = PBXGroup;
 			children = (
+				438682D316CC835D003DEEDB /* Default.png */,
+				438682D116CC8351003DEEDB /* Default@2x.png */,
+				438682CF16CC8337003DEEDB /* Default-568h@2x.png */,
+				438682CC16CC81BD003DEEDB /* StoreKit.framework */,
+				438682CA16CC81B3003DEEDB /* CoreTelephony.framework */,
+				438682C816CC819C003DEEDB /* libUAirship-1.4.0.a */,
 				438682B916CC05E7003DEEDB /* Icon@2x.png */,
 				438682B016CC05E0003DEEDB /* Icon.png */,
 				4234B4B316CB1307000805FA /* MBProgressHUD.xcodeproj */,
@@ -885,6 +913,7 @@
 				43591B3116BB721600860F11 /* PSTCollectionView */,
 				4351D0C616B4C5DB0039FE88 /* PVAppDelegate.h */,
 				4351D0C716B4C5DB0039FE88 /* PVAppDelegate.m */,
+				438682BF16CC8133003DEEDB /* AirshipConfig.plist */,
 				43E6733B16BB8A3A007E7708 /* PVImageCacheManager.h */,
 				43E6733C16BB8A3A007E7708 /* PVImageCacheManager.m */,
 				43E9F6EA16BFA41800AC2672 /* Categories */,
@@ -1451,6 +1480,8 @@
 		43E9F71B16BFA41800AC2672 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4386830D16CCA107003DEEDB /* PVLoadingView.h */,
+				4386830E16CCA107003DEEDB /* PVLoadingView.m */,
 				431BD56A16C5F9930000C312 /* PVFlowLayout.h */,
 				431BD56B16C5F9930000C312 /* PVFlowLayout.m */,
 				431BD56416C4D3ED0000C312 /* PVLinedTextView.h */,
@@ -1747,6 +1778,10 @@
 				4234B4C216CB1833000805FA /* missing_image_300x150@2x.png in Resources */,
 				438682B116CC05E0003DEEDB /* Icon.png in Resources */,
 				438682BA16CC05E7003DEEDB /* Icon@2x.png in Resources */,
+				438682C016CC8133003DEEDB /* AirshipConfig.plist in Resources */,
+				438682D016CC8337003DEEDB /* Default-568h@2x.png in Resources */,
+				438682D216CC8351003DEEDB /* Default@2x.png in Resources */,
+				438682D416CC835D003DEEDB /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1878,6 +1913,7 @@
 				4345702616C9CE93006E04FD /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
 				A00F91B016C82DDB00F1B826 /* UIViewController+Transitions.m in Sources */,
 				A00F91B316C82E2F00F1B826 /* UIView+ImageCapture.m in Sources */,
+				4386830F16CCA107003DEEDB /* PVLoadingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1972,12 +2008,14 @@
 					Subprojects/ChipmunkTemplate/ChipmunkTemplate/libs/kazmath/include,
 					Submodules/Facebook/src,
 					Submodules/MBProgressHUD,
+					"Airship/**",
 				);
 				INFOPLIST_FILE = "PARViewer/PARViewer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Subprojects/ChipmunkTemplate/ChipmunkTemplate/libs/ChipmunkPro-iPhone\"",
+					"\"$(SRCROOT)/Airship\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1998,12 +2036,14 @@
 					Subprojects/ChipmunkTemplate/ChipmunkTemplate/libs/kazmath/include,
 					Submodules/Facebook/src,
 					Submodules/MBProgressHUD,
+					"Airship/**",
 				);
 				INFOPLIST_FILE = "PARViewer/PARViewer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Subprojects/ChipmunkTemplate/ChipmunkTemplate/libs/ChipmunkPro-iPhone\"",
+					"\"$(SRCROOT)/Airship\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

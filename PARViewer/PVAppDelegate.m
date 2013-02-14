@@ -12,7 +12,8 @@
 #import "UIFont+ThemeAdditions.h"
 #import "UINavigationBar+Additions.h"
 #import "PVSiteDetailViewController.h"
-
+#import "UAirship.h"
+#import "UAPush.h"
 
 NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Login:FBSessionStateChangedNotification";
 
@@ -55,6 +56,36 @@ NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Log
     _slidingViewController.delegate = self;
     self.window.rootViewController = _slidingViewController;
     [self.window makeKeyAndVisible];
+    
+
+    // Call takeOff, passing in the launch options so the library can properly record when
+    // the app is launched from a push notification
+    NSMutableDictionary *takeOffOptions = [[NSMutableDictionary alloc] init];
+    [takeOffOptions setValue:launchOptions forKey:UAirshipTakeOffOptionsLaunchOptionsKey];
+    
+    // This prevents the UA Library from registering with UIApplcation by default when
+    // registerForRemoteNotifications is called. This will allow you to prompt your
+    // users at a later time. This gives your app the opportunity to explain the benefits
+    // of push or allows users to turn it on explicitly in a settings screen.
+    // If you just want everyone to immediately be prompted for push, you can
+    // leave this line out.
+    [UAPush setDefaultPushEnabledValue:NO];
+    
+    // Create Airship singleton that's used to talk to Urban Airhship servers.
+    // Please populate AirshipConfig.plist with your info from http://go.urbanairship.com
+    [UAirship takeOff:takeOffOptions];
+    
+    [[UAPush shared] resetBadge];//zero badge on startup
+    
+    // Register for remote notfications. With the default value of push set to no,
+    // UAPush will record the desired remote notifcation types, but not register for
+    // push notfications as mentioned above.
+    // When push is enabled at a later time, the registration will occur as normal.
+    [[UAPush shared] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    
+    // Somewhere in the app, this will enable push, setting it to NO will disable push
+    // This will trigger the proper registration or de-registration code in the library.
+    [[UAPush shared] setPushEnabled:YES];
     
     return YES;
 }
@@ -307,6 +338,30 @@ NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Log
     else{
         [self hideHUD];
     }
+}
+
+// Implement the iOS device token registration callback
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    UALOG(@"APN device token: %@", deviceToken);
+    
+    // Updates the device token and registers the token with UA. This won't occur until
+    // push is enabled if the outlined process is followed.
+    [[UAPush shared] registerDeviceToken:deviceToken];
+}
+
+// Implement the iOS callback for incoming notifications
+//
+// Incoming Push notifications can be handled by the UAPush default alert handler,
+// which displays a simple UIAlertView, or you can provide you own delegate which
+// conforms to the UAPushNotificationDelegate protocol.
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
+    // Send the alert to UA
+    [[UAPush shared] handleNotification:userInfo
+                       applicationState:application.applicationState];
+    
+    // Reset the badge if you are using that functionality
+    [[UAPush shared] resetBadge]; // zero badge after push received
 }
 
 

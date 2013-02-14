@@ -449,6 +449,9 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    if ([scrollView contentSize].height < scrollView.frame.size.height + 195)
+        return;
+    
     float titleAlpha = fmaxf(0, fminf(1, ([scrollView contentOffset].y - 195) / 20.0));
     [[self.navigationItem titleView] setAlpha: titleAlpha];
 
