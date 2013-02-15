@@ -260,6 +260,9 @@
 		A00F91B316C82E2F00F1B826 /* UIView+ImageCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = A00F91B216C82E2F00F1B826 /* UIView+ImageCapture.m */; };
 		A00F91B516C82E6800F1B826 /* unfold_depth_image.png in Resources */ = {isa = PBXBuildFile; fileRef = A00F91B416C82E6800F1B826 /* unfold_depth_image.png */; };
 		A015D6C716CB6701004F7158 /* GRCameraOverlayToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = A015D6C616CB6701004F7158 /* GRCameraOverlayToolbar.m */; };
+		A07578AA16CE6D88009B8654 /* PVIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A07578A816CE6D88009B8654 /* PVIntroViewController.m */; };
+		A07578AB16CE6D88009B8654 /* PVIntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A07578A916CE6D88009B8654 /* PVIntroViewController.xib */; };
+		A07578B416CE709D009B8654 /* PVIntroCard.m in Sources */ = {isa = PBXBuildFile; fileRef = A07578B316CE709D009B8654 /* PVIntroCard.m */; };
 		A07BBBD116CA005D00C0C286 /* GRCameraOverlayToolbar_3_5.xib in Resources */ = {isa = PBXBuildFile; fileRef = A07BBBD016CA005D00C0C286 /* GRCameraOverlayToolbar_3_5.xib */; };
 		A07BBBF816CA076F00C0C286 /* camera_bottom_bar_3.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A07BBBE216CA076F00C0C286 /* camera_bottom_bar_3.5@2x.png */; };
 		A07BBBF916CA076F00C0C286 /* camera_bottom_bar_4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A07BBBE316CA076F00C0C286 /* camera_bottom_bar_4@2x.png */; };
@@ -778,6 +781,11 @@
 		A00F91B416C82E6800F1B826 /* unfold_depth_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unfold_depth_image.png; sourceTree = "<group>"; };
 		A015D6C516CB6701004F7158 /* GRCameraOverlayToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRCameraOverlayToolbar.h; sourceTree = "<group>"; };
 		A015D6C616CB6701004F7158 /* GRCameraOverlayToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRCameraOverlayToolbar.m; sourceTree = "<group>"; };
+		A07578A716CE6D88009B8654 /* PVIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVIntroViewController.h; sourceTree = "<group>"; };
+		A07578A816CE6D88009B8654 /* PVIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVIntroViewController.m; sourceTree = "<group>"; };
+		A07578A916CE6D88009B8654 /* PVIntroViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PVIntroViewController.xib; sourceTree = "<group>"; };
+		A07578B216CE709D009B8654 /* PVIntroCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVIntroCard.h; sourceTree = "<group>"; };
+		A07578B316CE709D009B8654 /* PVIntroCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVIntroCard.m; sourceTree = "<group>"; };
 		A07BBBD016CA005D00C0C286 /* GRCameraOverlayToolbar_3_5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRCameraOverlayToolbar_3_5.xib; sourceTree = "<group>"; };
 		A07BBBE216CA076F00C0C286 /* camera_bottom_bar_3.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_bottom_bar_3.5@2x.png"; sourceTree = "<group>"; };
 		A07BBBE316CA076F00C0C286 /* camera_bottom_bar_4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_bottom_bar_4@2x.png"; sourceTree = "<group>"; };
@@ -1508,6 +1516,9 @@
 				42028A1116C24A3C002FE1C2 /* PVMapViewController.xib */,
 				4345249E16C0E90B005D0636 /* UINavigationController+BetterRotationBehavior.h */,
 				4345249F16C0E90C005D0636 /* UINavigationController+BetterRotationBehavior.m */,
+				A07578A716CE6D88009B8654 /* PVIntroViewController.h */,
+				A07578A816CE6D88009B8654 /* PVIntroViewController.m */,
+				A07578A916CE6D88009B8654 /* PVIntroViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1576,6 +1587,8 @@
 				43E9F76016BFA49800AC2672 /* PVBorderedImageCell.m */,
 				43E9F76116BFA49800AC2672 /* PVSiteCardView.h */,
 				43E9F76216BFA49800AC2672 /* PVSiteCardView.m */,
+				A07578B216CE709D009B8654 /* PVIntroCard.h */,
+				A07578B316CE709D009B8654 /* PVIntroCard.m */,
 			);
 			path = "Collection Cells";
 			sourceTree = "<group>";
@@ -1927,6 +1940,7 @@
 				4234B4C216CB1833000805FA /* missing_image_300x150@2x.png in Resources */,
 				438682B116CC05E0003DEEDB /* Icon.png in Resources */,
 				438682BA16CC05E7003DEEDB /* Icon@2x.png in Resources */,
+				A07578AB16CE6D88009B8654 /* PVIntroViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2060,6 +2074,8 @@
 				A00F91B316C82E2F00F1B826 /* UIView+ImageCapture.m in Sources */,
 				A015D6C716CB6701004F7158 /* GRCameraOverlayToolbar.m in Sources */,
 				A097AFA516CC89990016ACF8 /* MBProgressHUD.m in Sources */,
+				A07578AA16CE6D88009B8654 /* PVIntroViewController.m in Sources */,
+				A07578B416CE709D009B8654 /* PVIntroCard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
