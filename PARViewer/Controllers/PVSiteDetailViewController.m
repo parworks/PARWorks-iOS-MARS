@@ -322,12 +322,12 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 
 - (void)takePhotoWithFlipAnimation
 {
+    CGRect existingFrame = _takePhotoButton.frame;
     _takePhotoButton.layer.anchorPoint = CGPointMake(1, 0.5);
-    _takePhotoButton.layer.position = CGPointMake(self.view.frame.size.width, _takePhotoButton.bounds.size.height/2);
+    _takePhotoButton.frame = existingFrame;
     
     UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
     CGRect frame = [_takePhotoButton convertRect:_takePhotoButton.bounds toView:window];
-    frame.origin.x = 220;
     _takePhotoButton.frame = frame;
     [window addSubview:_takePhotoButton];
     
