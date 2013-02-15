@@ -46,7 +46,8 @@ static NSString * cellIdentifier = @"TestCell";
 
 	// make sure our cached data is up-to-date
 	[[ARManager shared] fetchTrendingSites];
-
+    [_loadingView startAnimating];
+    
 	[_backgroundView setFloatingPointIndex:0];
 	[_collectionView registerClass:[PVSiteCardView class] forCellWithReuseIdentifier:cellIdentifier];
 	[_collectionView setShowsHorizontalScrollIndicator:NO];
@@ -103,6 +104,7 @@ static NSString * cellIdentifier = @"TestCell";
 	// trigger update of our views
 	[_collectionView reloadData];
     [_backgroundView preloadBlurredImages];
+    [_loadingView stopAnimating];
     
     PVFlowLayout * layout = (PVFlowLayout*)_collectionView.collectionViewLayout;
 	CGFloat centerX = _collectionView.contentOffset.x / ([layout itemSize].width + [layout minimumLineSpacing]);
@@ -184,4 +186,8 @@ static NSString * cellIdentifier = @"TestCell";
 	[_backgroundView setFloatingPointIndex:centerX];
 }
 
+- (void)viewDidUnload {
+    [self setLoadingView:nil];
+    [super viewDidUnload];
+}
 @end

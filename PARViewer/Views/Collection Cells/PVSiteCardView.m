@@ -102,19 +102,20 @@
     [self.shingleView setSite: site];
     
     // set the poster image
-    NSURL * url = [_site posterImageURL];
-    UIImage * img = [[PVImageCacheManager shared] imageForURL: url];
+    UIImage * img = [[PVImageCacheManager shared] imageForURL: [_site posterImageURL]];
     if (img) {
         float scale = img.size.width / _site.originalImageWidth;
         [self.posterImageView setAugmentedPhoto: [[ARAugmentedPhoto alloc] initWithScaledImage:img atScale:scale andOverlayJSON:[_site posterImageOverlayJSON]]];
      } else {
-        img = [UIImage imageNamed: @"empty.png"];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteImageReady:) name:NOTIF_IMAGE_READY object: url];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteImageReady:) name:NOTIF_IMAGE_READY object: nil];
     }
 }
 
 - (void)siteImageReady:(NSNotification*)notif
 {
+    if (![[notif object] isEqual: [_site posterImageURL]])
+        return;
+    
     UIImage * img = [[PVImageCacheManager shared] imageForURL: [_site posterImageURL]];
     float scale = img.size.width / _site.originalImageWidth;
     [self.posterImageView setAugmentedPhoto: [[ARAugmentedPhoto alloc] initWithScaledImage:img atScale:scale andOverlayJSON:[_site posterImageOverlayJSON]]];
