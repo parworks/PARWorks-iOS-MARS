@@ -11,11 +11,16 @@
 #import "ARManager+MARS_Extensions.h"
 #import "UIFont+ThemeAdditions.h"
 #import "UINavigationBar+Additions.h"
+#import "PVIntroViewController.h"
 #import "PVSiteDetailViewController.h"
 #import "UAirship.h"
 #import "UAPush.h"
 
+#define kDefaultsHasPerformedFirstLaunchKey @"kDefaultsHasPerformedFirstLaunchKey"
+
 NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Login:FBSessionStateChangedNotification";
+
+
 
 @implementation PVAppDelegate
 
@@ -49,11 +54,11 @@ NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Log
     
     // the sidebar controller automatically displays the items in the contentControllers array,
     // pulling images and titles from the tabBarItem and title of each controller.
-    
     _sidebarController = [[PVSidebarViewController alloc] init];
-    _slidingViewController = [[JSSlidingViewController alloc] initWithFrontViewController: [_contentControllers objectAtIndex: 0] backViewController: _sidebarController];
+    _slidingViewController = [[JSSlidingViewController alloc] initWithFrontViewController: _contentControllers[0] backViewController: _sidebarController];
     _slidingViewController.useBouncyAnimations = NO;
     _slidingViewController.delegate = self;
+    
     self.window.rootViewController = _slidingViewController;
     [self.window makeKeyAndVisible];
     

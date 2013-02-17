@@ -12,5 +12,6 @@
 @interface PVIntroViewController : UIViewController <PSUICollectionViewDataSource, PSUICollectionViewDelegate>
 
 @property(nonatomic, weak) IBOutlet PSUICollectionView *collectionView;
+@property(nonatomic, weak) IBOutlet UIPageControl *pageControl;
 
 @end

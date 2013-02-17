@@ -9,8 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "PSTCollectionView.h"
 
-@interface PVIntroCard : UICollectionViewCell
+typedef enum {
+    PVIntroCardStyle_1,
+    PVIntroCardStyle_2,
+    PVIntroCardStyle_3
+} PVIntroCardStyle;
 
-@property(nonatomic, weak) IBOutlet UIView *containerView;
+@interface PVIntroCard : PSUICollectionViewCell
+
+@property(nonatomic, strong) UIView *outerCard;
+@property(nonatomic, strong) UIView *innerCard;
+@property(nonatomic, strong) UIImageView *imageView;
+@property(nonatomic, strong) UIButton *skipButton;
+@property(nonatomic, assign) PVIntroCardStyle cardStyle;
 
 @end
