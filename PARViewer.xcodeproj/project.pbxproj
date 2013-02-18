@@ -269,6 +269,8 @@
 		A00F91B316C82E2F00F1B826 /* UIView+ImageCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = A00F91B216C82E2F00F1B826 /* UIView+ImageCapture.m */; };
 		A00F91B516C82E6800F1B826 /* unfold_depth_image.png in Resources */ = {isa = PBXBuildFile; fileRef = A00F91B416C82E6800F1B826 /* unfold_depth_image.png */; };
 		A015D6C716CB6701004F7158 /* GRCameraOverlayToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = A015D6C616CB6701004F7158 /* GRCameraOverlayToolbar.m */; };
+		A01B44BE16D1ABA700FE8BD5 /* PVIntroExampleView.m in Sources */ = {isa = PBXBuildFile; fileRef = A01B44BD16D1ABA700FE8BD5 /* PVIntroExampleView.m */; };
+		A01B44C016D1ABBE00FE8BD5 /* PVIntroExampleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A01B44BF16D1ABBE00FE8BD5 /* PVIntroExampleView.xib */; };
 		A07578AA16CE6D88009B8654 /* PVIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A07578A816CE6D88009B8654 /* PVIntroViewController.m */; };
 		A07578AB16CE6D88009B8654 /* PVIntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A07578A916CE6D88009B8654 /* PVIntroViewController.xib */; };
 		A07578B416CE709D009B8654 /* PVIntroCard.m in Sources */ = {isa = PBXBuildFile; fileRef = A07578B316CE709D009B8654 /* PVIntroCard.m */; };
@@ -799,6 +801,9 @@
 		A00F91B416C82E6800F1B826 /* unfold_depth_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unfold_depth_image.png; sourceTree = "<group>"; };
 		A015D6C516CB6701004F7158 /* GRCameraOverlayToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRCameraOverlayToolbar.h; sourceTree = "<group>"; };
 		A015D6C616CB6701004F7158 /* GRCameraOverlayToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRCameraOverlayToolbar.m; sourceTree = "<group>"; };
+		A01B44BC16D1ABA700FE8BD5 /* PVIntroExampleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVIntroExampleView.h; sourceTree = "<group>"; };
+		A01B44BD16D1ABA700FE8BD5 /* PVIntroExampleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVIntroExampleView.m; sourceTree = "<group>"; };
+		A01B44BF16D1ABBE00FE8BD5 /* PVIntroExampleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PVIntroExampleView.xib; sourceTree = "<group>"; };
 		A07578A716CE6D88009B8654 /* PVIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVIntroViewController.h; sourceTree = "<group>"; };
 		A07578A816CE6D88009B8654 /* PVIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVIntroViewController.m; sourceTree = "<group>"; };
 		A07578A916CE6D88009B8654 /* PVIntroViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PVIntroViewController.xib; sourceTree = "<group>"; };
@@ -868,7 +873,6 @@
 				438682CD16CC81BD003DEEDB /* StoreKit.framework in Frameworks */,
 				438682CB16CC81B3003DEEDB /* CoreTelephony.framework in Frameworks */,
 				438682C916CC819C003DEEDB /* libUAirship-1.4.0.a in Frameworks */,
-				4234B4BF16CB1322000805FA /* libMBProgressHUD.a in Frameworks */,
 				435E158F16B780E600CC8DA3 /* MobileCoreServices.framework in Frameworks */,
 				42AEFEB416BFB18400BFE97C /* libsqlite3.0.dylib in Frameworks */,
 				42AEFEB216BFB17A00BFE97C /* AdSupport.framework in Frameworks */,
@@ -1583,6 +1587,9 @@
 				A097AFA416CC89990016ACF8 /* MBProgressHUD.m */,
 				431BD56A16C5F9930000C312 /* PVFlowLayout.h */,
 				431BD56B16C5F9930000C312 /* PVFlowLayout.m */,
+				A01B44BC16D1ABA700FE8BD5 /* PVIntroExampleView.h */,
+				A01B44BD16D1ABA700FE8BD5 /* PVIntroExampleView.m */,
+				A01B44BF16D1ABBE00FE8BD5 /* PVIntroExampleView.xib */,
 				431BD56416C4D3ED0000C312 /* PVLinedTextView.h */,
 				431BD56516C4D3ED0000C312 /* PVLinedTextView.m */,
 				43E9F72416BFA41900AC2672 /* PVImageTransferAnimationView.h */,
@@ -1977,6 +1984,7 @@
 				438682D216CC8351003DEEDB /* Default@2x.png in Resources */,
 				438682D416CC835D003DEEDB /* Default.png in Resources */,
 				A07578AB16CE6D88009B8654 /* PVIntroViewController.xib in Resources */,
+				A01B44C016D1ABBE00FE8BD5 /* PVIntroExampleView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2113,6 +2121,7 @@
 				A097AFA516CC89990016ACF8 /* MBProgressHUD.m in Sources */,
 				A07578AA16CE6D88009B8654 /* PVIntroViewController.m in Sources */,
 				A07578B416CE709D009B8654 /* PVIntroCard.m in Sources */,
+				A01B44BE16D1ABA700FE8BD5 /* PVIntroExampleView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

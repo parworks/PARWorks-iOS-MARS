@@ -48,7 +48,7 @@
 {
     
     
-    [UIView animateWithDuration:0.2 animations:^{
+    [UIView animateWithDuration:1.0 animations:^{
         self.view.alpha = 0.0;
     } completion:^(BOOL finished) {
         [self willMoveToParentViewController:self.parentViewController];

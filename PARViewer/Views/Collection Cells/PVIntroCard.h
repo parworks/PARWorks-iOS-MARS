@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PSTCollectionView.h"
+#import "PVIntroExampleView.h"
 
 typedef enum {
     PVIntroCardStyle_1,
@@ -21,6 +22,8 @@ typedef enum {
 @property(nonatomic, strong) UIView *innerCard;
 @property(nonatomic, strong) UIImageView *imageView;
 @property(nonatomic, strong) UIButton *skipButton;
+@property(nonatomic, strong) PVIntroExampleView *topExampleView;
+@property(nonatomic, strong) PVIntroExampleView *bottomExampleView;
 @property(nonatomic, assign) PVIntroCardStyle cardStyle;
 
 @end

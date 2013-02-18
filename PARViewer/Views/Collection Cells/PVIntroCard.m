@@ -61,14 +61,6 @@
     _innerCard.layer.borderWidth = 2.0;
     _innerCard.clipsToBounds = YES;
     [self.outerCard addSubview:_innerCard];
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(foo)];
-    [self addGestureRecognizer:tap];
-}
-
-- (void)foo
-{
-    NSLog(@"%@ - %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 }
 
 - (void)layoutSubviews
@@ -81,12 +73,39 @@
 {
     if (cardStyle == PVIntroCardStyle_1) {
         _skipButton.hidden = YES;
+        _topExampleView.hidden = YES;
+        _bottomExampleView.hidden = YES;
     } else if (cardStyle == PVIntroCardStyle_2) {
         _skipButton.hidden = YES;
+        _topExampleView.hidden = YES;
+        _bottomExampleView.hidden = YES;
     } else if (cardStyle == PVIntroCardStyle_3) {
         self.skipButton.hidden = NO;
+        self.topExampleView.hidden = NO;
+        self.bottomExampleView.hidden = NO;
     }
 }
+
+- (PVIntroExampleView *)topExampleView
+{
+    if (!_topExampleView) {
+        _topExampleView = [PVIntroExampleView viewFromNIB];
+        _topExampleView.center = CGPointMake(floorf(_innerCard.bounds.size.width/2), 82);
+        [_innerCard addSubview:_topExampleView];
+    }
+    return _topExampleView;
+}
+
+- (PVIntroExampleView *)bottomExampleView
+{
+    if (!_bottomExampleView) {
+        _bottomExampleView = [PVIntroExampleView viewFromNIB];
+        _bottomExampleView.center = CGPointMake(floorf(_innerCard.bounds.size.width/2), 237);
+        [_innerCard addSubview:_bottomExampleView];
+    }
+    return _bottomExampleView;
+}
+
 
 - (UIButton *)skipButton
 {
