@@ -17,10 +17,13 @@
 #import "PVSidebarViewController.h"
 #import "FacebookSDK.h"
 #import "MBProgressHUD.h"
+#import "UAPush.h"
+#import "UAirship.h"
+
 
 extern NSString *const FBSessionStateChangedNotification;
 
-@interface PVAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate, JSSlidingViewControllerDelegate, MBProgressHUDDelegate>{
+@interface PVAppDelegate : UIResponder <UAPushNotificationDelegate, UIApplicationDelegate, UITabBarControllerDelegate, JSSlidingViewControllerDelegate, MBProgressHUDDelegate>{
     MBProgressHUD *_HUD;
 }
 

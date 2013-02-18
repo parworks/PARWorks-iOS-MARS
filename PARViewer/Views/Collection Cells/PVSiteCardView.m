@@ -104,7 +104,7 @@
     // set the poster image
     UIImage * img = [[PVImageCacheManager shared] imageForURL: [_site posterImageURL]];
     if (img) {
-        float scale = img.size.width / _site.originalImageWidth;
+        float scale = img.size.width / _site.posterImageOriginalWidth;
         [self.posterImageView setAugmentedPhoto: [[ARAugmentedPhoto alloc] initWithScaledImage:img atScale:scale andOverlayJSON:[_site posterImageOverlayJSON]]];
      } else {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteImageReady:) name:NOTIF_IMAGE_READY object: nil];
@@ -117,7 +117,7 @@
         return;
     
     UIImage * img = [[PVImageCacheManager shared] imageForURL: [_site posterImageURL]];
-    float scale = img.size.width / _site.originalImageWidth;
+    float scale = img.size.width / _site.posterImageOriginalWidth;
     [self.posterImageView setAugmentedPhoto: [[ARAugmentedPhoto alloc] initWithScaledImage:img atScale:scale andOverlayJSON:[_site posterImageOverlayJSON]]];
 }
 

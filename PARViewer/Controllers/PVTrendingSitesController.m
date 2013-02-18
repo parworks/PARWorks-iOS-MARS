@@ -15,6 +15,7 @@
 #import "JSSlidingViewController.h"
 #import "PVFlowLayout.h"
 #import "UIViewAdditions.h"
+#import "UAPush.h"
 
 static NSString * cellIdentifier = @"TestCell";
 

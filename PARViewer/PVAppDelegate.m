@@ -13,8 +13,6 @@
 #import "UINavigationBar+Additions.h"
 #import "PVIntroViewController.h"
 #import "PVSiteDetailViewController.h"
-#import "UAirship.h"
-#import "UAPush.h"
 
 #define kDefaultsHasPerformedFirstLaunchKey @"kDefaultsHasPerformedFirstLaunchKey"
 
@@ -81,17 +79,16 @@ NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Log
     [UAirship takeOff:takeOffOptions];
     
     [[UAPush shared] resetBadge];//zero badge on startup
+    [[UAPush shared] setDelegate: self];
     
     // Register for remote notfications. With the default value of push set to no,
     // UAPush will record the desired remote notifcation types, but not register for
     // push notfications as mentioned above.
+    
     // When push is enabled at a later time, the registration will occur as normal.
     [[UAPush shared] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
-    
-    // Somewhere in the app, this will enable push, setting it to NO will disable push
-    // This will trigger the proper registration or de-registration code in the library.
-    [[UAPush shared] setPushEnabled:YES];
-    
+    [[UAPush shared] handleNotification:[launchOptions valueForKey:UIApplicationLaunchOptionsRemoteNotificationKey] applicationState:application.applicationState];
+
     return YES;
 }
 
@@ -256,8 +253,11 @@ NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Log
                      [defaults setObject:[user objectForKey:@"email"] forKey:@"FBEmail"];
                      [defaults setObject:[user objectForKey:@"id"] forKey:@"FBId"];
                      [defaults synchronize];
+                     
+                     [UAPush shared].alias =[user objectForKey:@"id"];
+                     [[UAPush shared] updateRegistration];
                  }
-                 
+
                  [[NSNotificationCenter defaultCenter] postNotificationName:NOTIF_FACEBOOK_LOGGED_IN object:@"YES"];
              }
              else{
@@ -352,6 +352,10 @@ NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Log
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     UALOG(@"APN device token: %@", deviceToken);
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBId"])
+        [UAPush shared].alias = [defaults objectForKey:@"FBId"];
+
     // Updates the device token and registers the token with UA. This won't occur until
     // push is enabled if the outlined process is followed.
     [[UAPush shared] registerDeviceToken:deviceToken];
@@ -365,12 +369,16 @@ NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Log
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
     // Send the alert to UA
-    [[UAPush shared] handleNotification:userInfo
-                       applicationState:application.applicationState];
+    [[UAPush shared] handleNotification:userInfo applicationState:application.applicationState];
     
     // Reset the badge if you are using that functionality
-    [[UAPush shared] resetBadge]; // zero badge after push received
+    [[UAPush shared] resetBadge];
 }
 
+- (void)displayNotificationAlert:(NSString *)alertMessage
+{
+    UIAlertView * v = [[UIAlertView alloc] initWithTitle:@"MARS Update" message:alertMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [v show];
+}
 
 @end

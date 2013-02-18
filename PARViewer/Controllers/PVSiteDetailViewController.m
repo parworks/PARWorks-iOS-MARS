@@ -239,7 +239,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
         overlays = nil;
     }
     
-    float scale = img.size.width / _site.originalImageWidth;
+    float scale = img.size.width / _site.posterImageOriginalWidth;
     ARAugmentedPhoto *photo = [[ARAugmentedPhoto alloc] initWithScaledImage: img atScale: scale andOverlayJSON: overlays];
     [_headerImageView setAugmentedPhoto: photo];
 }
@@ -335,7 +335,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     t.m34 = -1.0/300.0;
     t = CATransform3DRotate(t, M_PI_2, 0, 1, 0);
     
-    [UIView animateWithDuration:1.0 delay:0.1 options:UIViewAnimationOptionAllowAnimatedContent animations:^{
+    [UIView animateWithDuration:0.7 delay:0.1 options:UIViewAnimationOptionAllowAnimatedContent animations:^{
         _takePhotoButton.layer.transform = t;
     } completion:^(BOOL finished) {
         _takePhotoButton.hidden = YES;
@@ -545,7 +545,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     UIImage * img = [[PVImageCacheManager shared] imageForURL: url];
     NSDictionary * json = [_site overlayJSONForRecentlyAugmentedImageAtIndex: index];
     
-    float scale = img.size.width / _site.originalImageWidth;
+    float scale = img.size.width / [_site originalWidthForRecentlyAugmentedImageAtIndex: index];
     ARAugmentedPhoto * photo = [[ARAugmentedPhoto alloc] initWithScaledImage:img atScale: scale andOverlayJSON: json];
     PVAugmentedPhotoViewController * c = [[PVAugmentedPhotoViewController alloc] init];
     [c setAugmentedPhoto: photo];
