@@ -7,6 +7,9 @@
 //
 
 #import "JSSlidingViewController.h"
+#import "PVIntroViewController.h"
+
+#define kDefaultsHasPerformedFirstLaunchKey @"kDefaultsHasPerformedFirstLaunchKey"
 
 NSString * const JSSlidingViewControllerWillOpenNotification = @"JSSlidingViewControllerWillOpenNotification";
 NSString * const JSSlidingViewControllerWillCloseNotification = @"JSSlidingViewControllerWillCloseNotification";
@@ -115,6 +118,19 @@ NSString * const JSSlidingViewControllerWillBeginDraggingNotification = @"JSSlid
 	[self addChildViewController:self.frontViewController];
 	[_slidingScrollView addSubview:self.frontViewController.view];
 	[self.frontViewController didMoveToParentViewController:self];
+    
+    BOOL hasPerformedFirstLaunch = [[NSUserDefaults standardUserDefaults] boolForKey:kDefaultsHasPerformedFirstLaunchKey];
+    if (YES) {
+        PVIntroViewController *iv = [[PVIntroViewController alloc] initWithNibName:@"PVIntroViewController" bundle:nil];
+        [self addChildViewController:iv];
+        [self.view addSubview:iv.view];
+        [iv didMoveToParentViewController:self];
+
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kDefaultsHasPerformedFirstLaunchKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
