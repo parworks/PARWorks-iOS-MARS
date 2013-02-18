@@ -276,7 +276,8 @@ NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Log
 }
 
 
-- (void) fbDidLogout {
+- (void) fbDidLogout
+{
     // Remove saved authorization information if it exists
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([defaults objectForKey:@"FBAccessTokenKey"]) {
@@ -290,13 +291,15 @@ NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Log
     }
 }
 
-- (BOOL)isSignedIntoFacebook{
+- (BOOL)isSignedIntoFacebook
+{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL isSignedIn = [defaults objectForKey:@"FBId"] && [[defaults objectForKey:@"FBId"] length] > 0;
     return isSignedIn;
 }
 
-- (void)showHUD:(NSString*)msg{
+- (void)showHUD:(NSString*)msg
+{
     [self setHUDMessage:msg];
 }
 
