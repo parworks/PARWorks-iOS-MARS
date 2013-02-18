@@ -1,7 +1,7 @@
 {
 	"APP_STORE_OR_AD_HOC_BUILD" = NO;
-	"DEVELOPMENT_APP_KEY" = "Your development app key";
-	"DEVELOPMENT_APP_SECRET" = "Your development app secret";
-	"PRODUCTION_APP_KEY" = "Your production app key";
-	"PRODUCTION_APP_SECRET" = "Your production app secret";
+	"DEVELOPMENT_APP_KEY" = "je6TvtTsRo6S-WMpx6Wqmg";
+	"DEVELOPMENT_APP_SECRET" = "MbLiBYhvTlyx-lSAWe1kkQ";
+	"PRODUCTION_APP_KEY" = "uVP6yvo3TvCLGZyZKMCPyA";
+	"PRODUCTION_APP_SECRET" = "MP92NlglQ1O6EX1L8bvlSg";
 }

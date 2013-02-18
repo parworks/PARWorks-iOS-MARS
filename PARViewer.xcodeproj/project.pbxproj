@@ -704,7 +704,6 @@
 		43998BB716BDDD42008B34C2 /* navigation_bar_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation_bar_background@2x.png"; sourceTree = "<group>"; };
 		43998BB916BDE1A8008B34C2 /* bar_item_sidebar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar_item_sidebar@2x.png"; sourceTree = "<group>"; };
 		43998BBE16BDE647008B34C2 /* search_bar_cover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search_bar_cover@2x.png"; sourceTree = "<group>"; };
-		439C504C16BE3C700035783E /* missing_image_300x150.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = missing_image_300x150.png; path = "Resources@2x/missing_image_300x150.png"; sourceTree = SOURCE_ROOT; };
 		43D526B216C72AE700A89053 /* UIImageAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageAdditions.h; sourceTree = "<group>"; };
 		43D526B316C72AE700A89053 /* UIImageAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageAdditions.m; sourceTree = "<group>"; };
 		43E6733B16BB8A3A007E7708 /* PVImageCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVImageCacheManager.h; sourceTree = "<group>"; };
@@ -868,7 +867,6 @@
 				438682CD16CC81BD003DEEDB /* StoreKit.framework in Frameworks */,
 				438682CB16CC81B3003DEEDB /* CoreTelephony.framework in Frameworks */,
 				438682C916CC819C003DEEDB /* libUAirship-1.4.0.a in Frameworks */,
-				4234B4BF16CB1322000805FA /* libMBProgressHUD.a in Frameworks */,
 				435E158F16B780E600CC8DA3 /* MobileCoreServices.framework in Frameworks */,
 				42AEFEB416BFB18400BFE97C /* libsqlite3.0.dylib in Frameworks */,
 				42AEFEB216BFB17A00BFE97C /* AdSupport.framework in Frameworks */,
@@ -1054,7 +1052,6 @@
 				4345242116C09EDF005D0636 /* toolbar.png */,
 				4345242816C09EE5005D0636 /* toolbar@2x.png */,
 				43998BB516BDDD3E008B34C2 /* navigation_bar_background.png */,
-				439C504C16BE3C700035783E /* missing_image_300x150.png */,
 				43EB601116BCEE7A00A3EE29 /* frontViewControllerDropShadow.png */,
 				4351D0EA16B4C6CA0039FE88 /* Default.png */,
 				43F2FA7116C820E2001D2C07 /* tiny_camera.png */,
@@ -2196,8 +2193,7 @@
 		4351D0E616B4C5DB0039FE88 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Demetri Miller (J8ERALU9C7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Demetri Miller (36WPJ8C3NF)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PARViewer/PARViewer-Prefix.pch";
@@ -2217,8 +2213,7 @@
 					"\"$(SRCROOT)/Airship\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7BE79BEB-89EE-4CB6-ABEB-5759F8600440";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "08408A8B-A927-4D21-9573-097EB9B06F50";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2226,7 +2221,6 @@
 		4351D0E716B4C5DB0039FE88 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Demetri Miller (J8ERALU9C7)";
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PARViewer/PARViewer-Prefix.pch";
@@ -2246,7 +2240,6 @@
 					"\"$(SRCROOT)/Airship\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7BE79BEB-89EE-4CB6-ABEB-5759F8600440";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
