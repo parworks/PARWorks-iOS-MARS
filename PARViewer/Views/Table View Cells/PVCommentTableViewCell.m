@@ -42,7 +42,7 @@
         [_timestampLabel setBackgroundColor:[UIColor clearColor]];
         [_timestampLabel setUserInteractionEnabled:NO];
         [_timestampLabel setTextColor:[UIColor colorWithRed:115.0/255.0 green:115.0/255.0 blue:115.0/255.0 alpha:1.0]];
-        [_timestampLabel setFont:[UIFont parworksFontWithSize:15.0]];
+        [_timestampLabel setFont:[UIFont parworksFontWithSize:13.0]];
         [self.contentView addSubview:_timestampLabel];
 
         self.contentTextView = [[UITextView alloc] initWithFrame:CGRectZero];
@@ -78,13 +78,13 @@
     [super layoutSubviews];    
     [_bgImageView setFrame:CGRectMake(10.0, 0.0, self.frame.size.width - 20.0, self.frame.size.height - 1.0)];
     [_avatarImageView setFrame:CGRectMake(_bgImageView.frame.origin.x + 10.0, 10.0, 26.0, 26.0)];
-    [_nameLabel setFrame:CGRectMake(_avatarImageView.frame.origin.x + _avatarImageView.frame.size.width + 10.0, _avatarImageView.frame.origin.y - 2.0, 247.0, 22.0)];
+    [_nameLabel setFrame:CGRectMake(_avatarImageView.frame.origin.x + _avatarImageView.frame.size.width + 10.0, _avatarImageView.frame.origin.y - 2.0, 247.0, 20.0)];
     [_timestampLabel setFrame:CGRectMake(_nameLabel.frame.origin.x, _nameLabel.frame.origin.y + _nameLabel.frame.size.height, _nameLabel.frame.size.width, _nameLabel.frame.size.height)];
     
     CGSize size = [_contentTextView.text sizeWithFont:_contentTextView.font
                               constrainedToSize:CGSizeMake(247.0, MAXFLOAT)
                                   lineBreakMode:NSLineBreakByWordWrapping];
-    [_contentTextView setFrame:CGRectMake(_nameLabel.frame.origin.x - 8.0, _timestampLabel.frame.origin.y + _timestampLabel.frame.size.height - 8.0, _nameLabel.frame.size.width + 16.0, size.height + 16.0)];
+    [_contentTextView setFrame:CGRectMake(_nameLabel.frame.origin.x - 8.0, _timestampLabel.frame.origin.y + _timestampLabel.frame.size.height - 10, _nameLabel.frame.size.width + 16.0, size.height + 16.0)];
     
     [_removeButton setFrame:CGRectMake(_bgImageView.frame.origin.x + _bgImageView.frame.size.width - 25.0, _bgImageView.frame.origin.y + 5.0, 20.0, 20.0)];
     

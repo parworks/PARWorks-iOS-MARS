@@ -77,7 +77,6 @@
 		4351D0C216B4C5DB0039FE88 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4351D0C016B4C5DB0039FE88 /* InfoPlist.strings */; };
 		4351D0C416B4C5DB0039FE88 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4351D0C316B4C5DB0039FE88 /* main.m */; };
 		4351D0C816B4C5DB0039FE88 /* PVAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4351D0C716B4C5DB0039FE88 /* PVAppDelegate.m */; };
-		4351D0F116B4C6CA0039FE88 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4351D0EA16B4C6CA0039FE88 /* Default.png */; };
 		4351D13316B4CDDA0039FE88 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4351D12116B4CDDA0039FE88 /* AFHTTPClient.m */; };
 		4351D13416B4CDDA0039FE88 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4351D12316B4CDDA0039FE88 /* AFHTTPRequestOperation.m */; };
 		4351D13516B4CDDA0039FE88 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4351D12516B4CDDA0039FE88 /* AFImageRequestOperation.m */; };
@@ -199,8 +198,6 @@
 		43998B9816BDD164008B34C2 /* icon_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 43998B9416BDD164008B34C2 /* icon_search.png */; };
 		43998B9916BDD164008B34C2 /* icon_technology.png in Resources */ = {isa = PBXBuildFile; fileRef = 43998B9516BDD164008B34C2 /* icon_technology.png */; };
 		43998B9A16BDD164008B34C2 /* icon_trending.png in Resources */ = {isa = PBXBuildFile; fileRef = 43998B9616BDD164008B34C2 /* icon_trending.png */; };
-		43998BA316BDD24A008B34C2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43998B9C16BDD24A008B34C2 /* Default-568h@2x.png */; };
-		43998BA416BDD24A008B34C2 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43998B9D16BDD24A008B34C2 /* Default@2x.png */; };
 		43998BA516BDD24A008B34C2 /* frontViewControllerDropShadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43998B9E16BDD24A008B34C2 /* frontViewControllerDropShadow@2x.png */; };
 		43998BA616BDD24A008B34C2 /* icon_nearby@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43998B9F16BDD24A008B34C2 /* icon_nearby@2x.png */; };
 		43998BA716BDD24A008B34C2 /* icon_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43998BA016BDD24A008B34C2 /* icon_search@2x.png */; };
@@ -490,7 +487,6 @@
 		4351D0C516B4C5DB0039FE88 /* PARViewer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PARViewer-Prefix.pch"; sourceTree = "<group>"; };
 		4351D0C616B4C5DB0039FE88 /* PVAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PVAppDelegate.h; sourceTree = "<group>"; };
 		4351D0C716B4C5DB0039FE88 /* PVAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PVAppDelegate.m; sourceTree = "<group>"; };
-		4351D0EA16B4C6CA0039FE88 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		4351D12016B4CDDA0039FE88 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		4351D12116B4CDDA0039FE88 /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		4351D12216B4CDDA0039FE88 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -701,8 +697,6 @@
 		43998B9416BDD164008B34C2 /* icon_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_search.png; sourceTree = "<group>"; };
 		43998B9516BDD164008B34C2 /* icon_technology.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_technology.png; sourceTree = "<group>"; };
 		43998B9616BDD164008B34C2 /* icon_trending.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_trending.png; sourceTree = "<group>"; };
-		43998B9C16BDD24A008B34C2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		43998B9D16BDD24A008B34C2 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		43998B9E16BDD24A008B34C2 /* frontViewControllerDropShadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "frontViewControllerDropShadow@2x.png"; sourceTree = "<group>"; };
 		43998B9F16BDD24A008B34C2 /* icon_nearby@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_nearby@2x.png"; sourceTree = "<group>"; };
 		43998BA016BDD24A008B34C2 /* icon_search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_search@2x.png"; sourceTree = "<group>"; };
@@ -1082,7 +1076,6 @@
 				43EB601116BCEE7A00A3EE29 /* frontViewControllerDropShadow.png */,
 				43D3E22B16D33C8F00D0ABEA /* camera_iris.png */,
 				43D3E22D16D33E2900D0ABEA /* camera_iris_568h.png */,
-				4351D0EA16B4C6CA0039FE88 /* Default.png */,
 				43F2FA7116C820E2001D2C07 /* tiny_camera.png */,
 				427EFE9B16C37CFB000B49C6 /* map_icon_recenter.png */,
 				427EFE9C16C37CFB000B49C6 /* map_icon_reload.png */,
@@ -1473,8 +1466,6 @@
 				43998BBE16BDE647008B34C2 /* search_bar_cover@2x.png */,
 				43998BB916BDE1A8008B34C2 /* bar_item_sidebar@2x.png */,
 				43998BB716BDDD42008B34C2 /* navigation_bar_background@2x.png */,
-				43998B9C16BDD24A008B34C2 /* Default-568h@2x.png */,
-				43998B9D16BDD24A008B34C2 /* Default@2x.png */,
 				43998B9E16BDD24A008B34C2 /* frontViewControllerDropShadow@2x.png */,
 				43998B9F16BDD24A008B34C2 /* icon_nearby@2x.png */,
 				43998BA016BDD24A008B34C2 /* icon_search@2x.png */,
@@ -1860,14 +1851,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4351D0C216B4C5DB0039FE88 /* InfoPlist.strings in Resources */,
-				4351D0F116B4C6CA0039FE88 /* Default.png in Resources */,
 				43EB601316BCEE7A00A3EE29 /* frontViewControllerDropShadow.png in Resources */,
 				43998B9716BDD164008B34C2 /* icon_nearby.png in Resources */,
 				43998B9816BDD164008B34C2 /* icon_search.png in Resources */,
 				43998B9916BDD164008B34C2 /* icon_technology.png in Resources */,
 				43998B9A16BDD164008B34C2 /* icon_trending.png in Resources */,
-				43998BA316BDD24A008B34C2 /* Default-568h@2x.png in Resources */,
-				43998BA416BDD24A008B34C2 /* Default@2x.png in Resources */,
 				43998BA516BDD24A008B34C2 /* frontViewControllerDropShadow@2x.png in Resources */,
 				43998BA616BDD24A008B34C2 /* icon_nearby@2x.png in Resources */,
 				43998BA716BDD24A008B34C2 /* icon_search@2x.png in Resources */,
