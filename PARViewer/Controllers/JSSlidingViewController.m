@@ -124,6 +124,7 @@ NSString * const JSSlidingViewControllerWillBeginDraggingNotification = @"JSSlid
         PVIntroViewController *iv = [[PVIntroViewController alloc] initWithNibName:@"PVIntroViewController" bundle:nil];
         [self addChildViewController:iv];
         [self.view addSubview:iv.view];
+        [iv.view setFrame: self.view.bounds];
         [iv didMoveToParentViewController:self];
 
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kDefaultsHasPerformedFirstLaunchKey];

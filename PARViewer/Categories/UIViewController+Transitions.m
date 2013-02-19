@@ -16,7 +16,7 @@
 
 @implementation UIViewController (Transitions)
 
-- (void)peelPresentViewController:(UIViewController *)viewControllerToPresent withContentImage:(UIImage *)contentImage depthImage:(UIImage *)depthImage
+- (void)peelPresentViewController:(UIViewController *)viewControllerToPresent withBackgroundImage:(UIImage*)backgroundImage andContentImage:(UIImage *)contentImage depthImage:(UIImage *)depthImage
 {
     UIWindow *mainWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
     
@@ -31,7 +31,8 @@
     }
     CALayer *mainLayer = [CALayer layer];
     mainLayer.frame = bounds;
-    mainLayer.backgroundColor = [UIColor clearColor].CGColor;
+    mainLayer.backgroundColor = [[UIColor clearColor] CGColor];
+    mainLayer.contents = (__bridge id)([backgroundImage CGImage]);
     mainLayer.anchorPoint = CGPointMake(0, 0.5);
     mainLayer.position = CGPointMake(0, (bounds.size.height/2) + windowOffset);
     [mainWindow.layer addSublayer:mainLayer];
@@ -92,6 +93,7 @@
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [self presentViewController:vc animated:NO completion:nil];
+        mainLayer.contents = nil;
     });
 }
 

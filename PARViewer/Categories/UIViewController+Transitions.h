@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#define kUIViewController_PeelTransitionsAnimationDuration 1.0
+#define kUIViewController_PeelTransitionsAnimationDuration 0.8
 
 @interface UIViewController (Transitions)
 
-- (void)peelPresentViewController:(UIViewController *)viewControllerToPresent withContentImage:(UIImage *)contentImage depthImage:(UIImage *)depthImage;
+- (void)peelPresentViewController:(UIViewController *)viewControllerToPresent withBackgroundImage:(UIImage*)backgroundImage andContentImage:(UIImage *)contentImage depthImage:(UIImage *)depthImage;
 - (void)unpeelViewController;
 
 

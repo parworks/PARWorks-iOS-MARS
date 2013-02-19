@@ -8,6 +8,7 @@
 
 #import "PVIntroCard.h"
 #import "PVIntroViewController.h"
+#import "UAPush.h"
 
 @interface PVIntroViewController ()
 
@@ -34,26 +35,26 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//    _pageControl.frame = CGRectMake(_pageControl.frame.origin.x, self.view.bounds.size.height - 30, _pageControl.frame.size.width, _pageControl.frame.size.height);
-
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)doneButtonTapped
 {
-    
-    
-    [UIView animateWithDuration:1.0 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         self.view.alpha = 0.0;
+        self.view.transform = CGAffineTransformMakeScale(2, 2);
     } completion:^(BOOL finished) {
         [self willMoveToParentViewController:self.parentViewController];
         [self removeFromParentViewController];
         [self.view removeFromSuperview];
+        
+        // Somewhere in the app, this will enable push, setting it to NO will disable push
+        // This will trigger the proper registration or de-registration code in the library.
+        [[UAPush shared] setPushEnabled:YES];
     }];
 }
 

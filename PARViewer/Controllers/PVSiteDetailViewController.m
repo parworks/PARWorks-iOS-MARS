@@ -233,15 +233,14 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 {
     UIImage * img = [[PVImageCacheManager shared] imageForURL: [_site posterImageURL]];
     NSDictionary * overlays = _site.posterImageOverlayJSON;
-    if (!img) {
-        img = [UIImage imageNamed: @"missing_image_300x150.png"];
+    if (img) {
+        float scale = img.size.width / _site.posterImageOriginalWidth;
+        ARAugmentedPhoto *photo = [[ARAugmentedPhoto alloc] initWithScaledImage: img atScale: scale andOverlayJSON: overlays];
+        [_headerImageView setAugmentedPhoto: photo];
+    } else {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateHeaderImageView) name:NOTIF_IMAGE_READY object:[_site posterImageURL]];
         overlays = nil;
     }
-    
-    float scale = img.size.width / _site.originalImageWidth;
-    ARAugmentedPhoto *photo = [[ARAugmentedPhoto alloc] initWithScaledImage: img atScale: scale andOverlayJSON: overlays];
-    [_headerImageView setAugmentedPhoto: photo];
 }
 
 - (void)update
@@ -335,7 +334,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     t.m34 = -1.0/300.0;
     t = CATransform3DRotate(t, M_PI_2, 0, 1, 0);
     
-    [UIView animateWithDuration:1.0 delay:0.1 options:UIViewAnimationOptionAllowAnimatedContent animations:^{
+    [UIView animateWithDuration:0.40 delay:0.01 options:UIViewAnimationOptionAllowAnimatedContent animations:^{
         _takePhotoButton.layer.transform = t;
     } completion:^(BOOL finished) {
         _takePhotoButton.hidden = YES;
@@ -345,7 +344,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 
 - (void)takePhotoStage2FlipAnimation
 {
-    UIImage *screenCap = [self.navigationController.view imageRepresentationAtScale:1.0];
+    UIImage *screenCap = [self.navigationController.view imageRepresentationAtScale: 1.0];
     UIImage *depthImage = [UIImage imageNamed:@"unfold_depth_image.png"];
     
     self.navigationController.navigationBar.hidden = YES;
@@ -361,9 +360,13 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
         _cameraOverlayView.imagePicker = picker;
     }
     
+    UIImage * background = nil;
+    if (self.view.frame.size.height < 500)
+        background = [UIImage imageNamed:@"camera_iris.png"];
+    else
+        background = [UIImage imageNamed:@"camera_iris_568h.png"];
     
-    [self peelPresentViewController:picker withContentImage:screenCap depthImage:depthImage];
-    //    [self presentViewController:p animated:YES completion:nil];
+    [self peelPresentViewController:picker withBackgroundImage:background andContentImage:screenCap depthImage:depthImage];
 }
 
 - (UIImagePickerController *)imagePicker
@@ -545,7 +548,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     UIImage * img = [[PVImageCacheManager shared] imageForURL: url];
     NSDictionary * json = [_site overlayJSONForRecentlyAugmentedImageAtIndex: index];
     
-    float scale = img.size.width / _site.originalImageWidth;
+    float scale = img.size.width / [_site originalWidthForRecentlyAugmentedImageAtIndex: index];
     ARAugmentedPhoto * photo = [[ARAugmentedPhoto alloc] initWithScaledImage:img atScale: scale andOverlayJSON: json];
     PVAugmentedPhotoViewController * c = [[PVAugmentedPhotoViewController alloc] init];
     [c setAugmentedPhoto: photo];

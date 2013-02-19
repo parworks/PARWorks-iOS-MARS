@@ -115,7 +115,7 @@
         overlays = nil;
     }
     
-    float scale = img.size.width / _site.originalImageWidth;
+    float scale = img.size.width / _site.posterImageOriginalWidth;
     ARAugmentedPhoto *photo = [[ARAugmentedPhoto alloc] initWithScaledImage: img atScale: scale andOverlayJSON: overlays];
     [self.posterImageView setAugmentedPhoto: photo];
     [self.posterImageView.totalAugmentedImagesView setCount:_site.totalAugmentedImages];
