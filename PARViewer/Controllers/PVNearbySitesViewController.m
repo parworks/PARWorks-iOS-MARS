@@ -43,7 +43,8 @@
     _mapView.showsUserLocation = YES;
     _mapView.delegate = self;
     
-    self.mapRecenterButton = [[PVButton alloc] initWithFrame:CGRectMake(10.0, 10.0, 46, 42)];
+    self.mapRecenterButton = [[PVButton alloc] init];
+    [_mapRecenterButton setFrame:CGRectMake(10.0, 10.0, 46, 42)];
     [_mapRecenterButton setAlpha:0.0];
     [_mapRecenterButton addTarget:self action:@selector(findNearbySites) forControlEvents:UIControlEventTouchUpInside];
     [_mapRecenterButton setImage:[UIImage imageNamed:@"map_icon_recenter.png"] forState:UIControlStateNormal];
