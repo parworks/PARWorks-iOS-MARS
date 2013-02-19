@@ -13,15 +13,19 @@
 typedef enum {
     PVIntroCardStyle_1,
     PVIntroCardStyle_2,
-    PVIntroCardStyle_3
+    PVIntroCardStyle_3,
+    PVIntroCardStyle_4
 } PVIntroCardStyle;
 
 @interface PVIntroCard : PSUICollectionViewCell
-
+{
+    BOOL _isiPhone5;
+}
 @property(nonatomic, strong) UIView *outerCard;
 @property(nonatomic, strong) UIView *innerCard;
 @property(nonatomic, strong) UIImageView *imageView;
 @property(nonatomic, strong) UIButton *skipButton;
+@property(nonatomic, strong) UIImageView *swipeImageView;
 @property(nonatomic, strong) PVIntroExampleView *topExampleView;
 @property(nonatomic, strong) PVIntroExampleView *bottomExampleView;
 @property(nonatomic, assign) PVIntroCardStyle cardStyle;

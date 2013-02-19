@@ -6,12 +6,17 @@
 //  Copyright (c) 2013 Ben Gotow. All rights reserved.
 //
 
+#import "PVAppDelegate.h"
 #import "PVIntroCard.h"
 #import "UIColor+Utils.h"
+#import "UIFont+ThemeAdditions.h"
 #import "UIViewAdditions.h"
+
 
 @implementation PVIntroCard
 
+
+#pragma mark - Lifecycle
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -37,11 +42,15 @@
 
 - (void)setup
 {
+    UIWindow *w = [[UIApplication sharedApplication] windows][0];
+    _isiPhone5 = w.bounds.size.height > 480;
+    
     CGFloat corner = 4.0;
     self.backgroundColor = [UIColor clearColor];
     self.userInteractionEnabled = YES;
-    
-    self.outerCard = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 290, 390)];
+        
+    CGFloat height = _isiPhone5 ? 490 : 400;
+    self.outerCard = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 290, height)];
     _outerCard.userInteractionEnabled = YES;
     _outerCard.backgroundColor = [UIColor whiteColor];
     _outerCard.layer.cornerRadius = corner;
@@ -61,28 +70,59 @@
     _innerCard.layer.borderWidth = 2.0;
     _innerCard.clipsToBounds = YES;
     [self.outerCard addSubview:_innerCard];
+    
+    self.imageView = [[UIImageView alloc] initWithFrame:_innerCard.bounds];
+    _imageView.contentMode = UIViewContentModeTop;
+    [_innerCard addSubview:_imageView];
 }
 
+
+#pragma mark - Layout
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     _outerCard.frame = CGRectMake((self.bounds.size.width/2) - (_outerCard.frame.size.width/2), 15, _outerCard.frame.size.width, _outerCard.frame.size.height);
 }
 
+
+#pragma mark - Convenience
+- (NSString *)sizedAssetNameWithName:(NSString *)name
+{
+    if (_isiPhone5) {
+        return [name stringByAppendingString:@"_4.png"];
+    } else {
+        return [name stringByAppendingString:@"_3.5.png"];
+    }
+}
+
+#pragma mark - Getters/Setters
 - (void)setCardStyle:(PVIntroCardStyle)cardStyle
 {
+    BOOL showCustom = NO;
     if (cardStyle == PVIntroCardStyle_1) {
-        _skipButton.hidden = YES;
-        _topExampleView.hidden = YES;
-        _bottomExampleView.hidden = YES;
+        _imageView.image = [UIImage imageNamed:[self sizedAssetNameWithName:@"intro1"]];
+        _swipeImageView.hidden = NO;
     } else if (cardStyle == PVIntroCardStyle_2) {
-        _skipButton.hidden = YES;
-        _topExampleView.hidden = YES;
-        _bottomExampleView.hidden = YES;
+        _imageView.image = [UIImage imageNamed:[self sizedAssetNameWithName:@"intro2"]];
+        _swipeImageView.hidden = YES;
     } else if (cardStyle == PVIntroCardStyle_3) {
+        _imageView.image = [UIImage imageNamed:[self sizedAssetNameWithName:@"intro3"]];
+        _swipeImageView.hidden = YES;
+    } else if (cardStyle == PVIntroCardStyle_4) {
+        _imageView.image = [UIImage imageNamed:[self sizedAssetNameWithName:@"intro4"]];
+        _swipeImageView.hidden = YES;
+        showCustom = YES;
+    }
+    
+    if (showCustom) {
         self.skipButton.hidden = NO;
         self.topExampleView.hidden = NO;
         self.bottomExampleView.hidden = NO;
+    } else {
+        _swipeImageView.hidden = YES;
+        _skipButton.hidden = YES;
+        _topExampleView.hidden = YES;
+        _bottomExampleView.hidden = YES;
     }
 }
 
@@ -90,7 +130,10 @@
 {
     if (!_topExampleView) {
         _topExampleView = [PVIntroExampleView viewFromNIB];
-        _topExampleView.center = CGPointMake(floorf(_innerCard.bounds.size.width/2), 82);
+        _topExampleView.imageView.image = [UIImage imageNamed:[self sizedAssetNameWithName:@"coke"]];
+        CGFloat offsetY = [PVAppDelegate isiPhone5] ? 62 : 55;
+        _topExampleView.frame = CGRectMake(24, offsetY, _topExampleView.frame.size.width, _topExampleView.frame.size.height);
+        _topExampleView.label.text = @"Coca-Cola Can";
         [_innerCard addSubview:_topExampleView];
     }
     return _topExampleView;
@@ -100,7 +143,11 @@
 {
     if (!_bottomExampleView) {
         _bottomExampleView = [PVIntroExampleView viewFromNIB];
-        _bottomExampleView.center = CGPointMake(floorf(_innerCard.bounds.size.width/2), 237);
+        _bottomExampleView.imageView.image = [UIImage imageNamed:[self sizedAssetNameWithName:@"dollar"]];
+
+        CGFloat offsetY = [PVAppDelegate isiPhone5] ? 240 : 190;
+        _bottomExampleView.frame = CGRectMake(24, offsetY, _bottomExampleView.frame.size.width, _bottomExampleView.frame.size.height);
+        _bottomExampleView.label.text = @"Dollar Bill";
         [_innerCard addSubview:_bottomExampleView];
     }
     return _bottomExampleView;
@@ -110,13 +157,47 @@
 - (UIButton *)skipButton
 {
     if (!_skipButton) {
-        _skipButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        _skipButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _skipButton.backgroundColor = [UIColor whiteColor];
         _skipButton.frame = CGRectMake(10, _innerCard.bounds.size.height - 10 - 48, _innerCard.bounds.size.width - 20, 48);
+        _skipButton.titleLabel.font = [UIFont boldParworksFontWithSize:20];
+        _skipButton.titleLabel.shadowOffset = CGSizeMake(0, -1);
+        _skipButton.layer.borderColor = [UIColor colorWithHexRGBValue:0xdbdbdb].CGColor;
+        _skipButton.layer.borderWidth = 1.0;
+        _skipButton.layer.cornerRadius = 6.0;
         [_skipButton setTitle:@"Skip" forState:UIControlStateNormal];
-        [_skipButton setUserInteractionEnabled:YES];
+        [_skipButton setTitleColor:[UIColor colorWithHexRGBValue:0x31649D] forState:UIControlStateNormal];
+        [_skipButton setTitleShadowColor:[UIColor clearColor] forState:UIControlStateNormal];
+        [_skipButton addTarget:self action:@selector(skipButtonTouchDown) forControlEvents:UIControlEventTouchDown|UIControlEventTouchDragInside|UIControlEventTouchDragEnter];
+        [_skipButton addTarget:self action:@selector(skipButtonTouchUp) forControlEvents:UIControlEventTouchUpInside|UIControlEventTouchDragOutside|UIControlEventTouchDragExit|UIControlEventTouchCancel];
         [_innerCard addSubview:_skipButton];
     }
     return _skipButton;
+}
+
+- (UIImageView *)swipeImageView
+{
+    if (!_swipeImageView) {
+        _swipeImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"swipe_gesture"]];
+        _swipeImageView.center = CGPointMake(_innerCard.frame.size.width/2, _innerCard.frame.size.height - 40);
+        [_innerCard addSubview:_swipeImageView];
+    }
+    return _swipeImageView;
+}
+
+- (void)skipButtonTouchDown
+{
+    _skipButton.backgroundColor = [UIColor colorWithHexRGBValue:0x31649d];
+    [_skipButton setTitleShadowColor:[UIColor colorWithWhite:0.0 alpha:0.5] forState:UIControlStateNormal];
+    [_skipButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+}
+
+
+- (void)skipButtonTouchUp
+{
+    _skipButton.backgroundColor = [UIColor whiteColor];
+    [_skipButton setTitleShadowColor:[UIColor clearColor] forState:UIControlStateNormal];
+    [_skipButton setTitleColor:[UIColor colorWithHexRGBValue:0x31649D] forState:UIControlStateNormal];
 }
 
 @end

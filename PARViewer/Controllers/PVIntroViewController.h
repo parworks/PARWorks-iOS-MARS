@@ -10,7 +10,9 @@
 #import "PSTCollectionView.h"
 
 @interface PVIntroViewController : UIViewController <PSUICollectionViewDataSource, PSUICollectionViewDelegate>
-
+{
+    NSTimer *_hintTimer;
+}
 @property(nonatomic, weak) IBOutlet PSUICollectionView *collectionView;
 @property(nonatomic, weak) IBOutlet UIPageControl *pageControl;
 
