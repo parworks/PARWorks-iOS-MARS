@@ -43,7 +43,7 @@
     _mapView.showsUserLocation = YES;
     _mapView.delegate = self;
     
-    self.mapRecenterButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0, 10.0, 46, 42)];
+    self.mapRecenterButton = [[PVButton alloc] initWithFrame:CGRectMake(10.0, 10.0, 46, 42)];
     [_mapRecenterButton setAlpha:0.0];
     [_mapRecenterButton addTarget:self action:@selector(findNearbySites) forControlEvents:UIControlEventTouchUpInside];
     [_mapRecenterButton setImage:[UIImage imageNamed:@"map_icon_recenter.png"] forState:UIControlStateNormal];
@@ -315,25 +315,30 @@
 
 - (void)findNearbySites
 {
+    [_mapRecenterButton setIsAnimating:YES];
+    __weak PVNearbySitesViewController *__self = self;
     [[ARManager shared] findNearbySites:NEARBY_SEARCH_RADIUS withCompletionBlock:^(NSArray* sites, CLLocation * location){
-        self.nearbySites = sites;
+        __self.nearbySites = sites;
         bLoadedOnce = NO;
-        [self refetchAnnotations:YES];
-        [_tableView reloadData];
+        [__self refetchAnnotations:YES];
+        [__self.tableView reloadData];
+        [__self.mapRecenterButton setIsAnimating:NO];
     }];
 }
 
 - (void)findSites:(NSTimer*)theTimer{
     if([_parallaxView isExpanded]){
         CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:_mapView.region.center.latitude longitude:_mapView.region.center.longitude];
-        __weak MKMapView *__mapView = _mapView;
+        [_mapRecenterButton setIsAnimating:YES];
+        __weak PVNearbySitesViewController *__self = self;
         [[ARManager shared] findSites:NEARBY_SEARCH_RADIUS nearLocation:currentLocation withCompletionBlock:^(NSArray* sites, CLLocation * location){
-            if(location.coordinate.latitude == __mapView.region.center.latitude && location.coordinate.longitude == __mapView.region.center.longitude){
+            if(location.coordinate.latitude == __self.mapView.region.center.latitude && location.coordinate.longitude == __self.mapView.region.center.longitude){
                 NSLog(@"Setting Nearby Sites...");
-                self.nearbySites = sites;
+                __self.nearbySites = sites;
                 bLoadedOnce = NO;
-                [self refetchAnnotations:NO];
-                [_tableView reloadData];
+                [__self refetchAnnotations:NO];
+                [__self.tableView reloadData];
+                [__self.mapRecenterButton setIsAnimating:NO];
             }
         }];
     }

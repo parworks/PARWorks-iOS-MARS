@@ -14,6 +14,7 @@
 		42028A1216C24A3D002FE1C2 /* PVMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42028A1016C24A3C002FE1C2 /* PVMapViewController.m */; };
 		42028A1316C24A3D002FE1C2 /* PVMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42028A1116C24A3C002FE1C2 /* PVMapViewController.xib */; };
 		4234B4C216CB1833000805FA /* missing_image_300x150@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4234B4C116CB1833000805FA /* missing_image_300x150@2x.png */; };
+		4252DD4E16D3628E0029D635 /* PVButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4252DD4D16D3628E0029D635 /* PVButton.m */; };
 		425345A616BE768E00D5A00A /* leave_comment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 425345A416BE768D00D5A00A /* leave_comment@2x.png */; };
 		425345A716BE768E00D5A00A /* missing_image_78x78@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 425345A516BE768D00D5A00A /* missing_image_78x78@2x.png */; };
 		425345AA16BE769900D5A00A /* leave_comment.png in Resources */ = {isa = PBXBuildFile; fileRef = 425345A816BE769900D5A00A /* leave_comment.png */; };
@@ -438,6 +439,8 @@
 		42028A1016C24A3C002FE1C2 /* PVMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVMapViewController.m; sourceTree = "<group>"; };
 		42028A1116C24A3C002FE1C2 /* PVMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PVMapViewController.xib; sourceTree = "<group>"; };
 		4234B4C116CB1833000805FA /* missing_image_300x150@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "missing_image_300x150@2x.png"; sourceTree = "<group>"; };
+		4252DD4C16D3628E0029D635 /* PVButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVButton.h; sourceTree = "<group>"; };
+		4252DD4D16D3628E0029D635 /* PVButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVButton.m; sourceTree = "<group>"; };
 		425345A416BE768D00D5A00A /* leave_comment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "leave_comment@2x.png"; sourceTree = "<group>"; };
 		425345A516BE768D00D5A00A /* missing_image_78x78@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "missing_image_78x78@2x.png"; sourceTree = "<group>"; };
 		425345A816BE769900D5A00A /* leave_comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leave_comment.png; sourceTree = "<group>"; };
@@ -1659,6 +1662,8 @@
 				A04999B916D373A1004DB21E /* PVIntroExampleView_4.xib */,
 				431BD56416C4D3ED0000C312 /* PVLinedTextView.h */,
 				431BD56516C4D3ED0000C312 /* PVLinedTextView.m */,
+				4252DD4C16D3628E0029D635 /* PVButton.h */,
+				4252DD4D16D3628E0029D635 /* PVButton.m */,
 				43E9F72416BFA41900AC2672 /* PVImageTransferAnimationView.h */,
 				43E9F72516BFA41900AC2672 /* PVImageTransferAnimationView.m */,
 				43E9F72616BFA41900AC2672 /* PVParallaxTableView.h */,
@@ -2283,6 +2288,7 @@
 				A01B462416D3418E00FE8BD5 /* GRCameraOverlayToolbar.m in Sources */,
 				A01B462716D3418E00FE8BD5 /* GRCameraOverlayView.m in Sources */,
 				A01B463016D341B300FE8BD5 /* ARCameraOverlayTooltip.m in Sources */,
+				4252DD4E16D3628E0029D635 /* PVButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
