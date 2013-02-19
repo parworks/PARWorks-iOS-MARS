@@ -334,7 +334,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     t.m34 = -1.0/300.0;
     t = CATransform3DRotate(t, M_PI_2, 0, 1, 0);
     
-    [UIView animateWithDuration:0.45 delay:0.01 options:UIViewAnimationOptionAllowAnimatedContent animations:^{
+    [UIView animateWithDuration:0.40 delay:0.01 options:UIViewAnimationOptionAllowAnimatedContent animations:^{
         _takePhotoButton.layer.transform = t;
     } completion:^(BOOL finished) {
         _takePhotoButton.hidden = YES;
@@ -344,7 +344,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 
 - (void)takePhotoStage2FlipAnimation
 {
-    UIImage *screenCap = [self.navigationController.view imageRepresentationAtScale:1.0];
+    UIImage *screenCap = [self.navigationController.view imageRepresentationAtScale: 1.0];
     UIImage *depthImage = [UIImage imageNamed:@"unfold_depth_image.png"];
     
     self.navigationController.navigationBar.hidden = YES;
@@ -360,9 +360,13 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
         _cameraOverlayView.imagePicker = picker;
     }
     
+    UIImage * background = nil;
+    if (self.view.frame.size.height < 500)
+        background = [UIImage imageNamed:@"camera_iris.png"];
+    else
+        background = [UIImage imageNamed:@"camera_iris_568h.png"];
     
-    [self peelPresentViewController:picker withContentImage:screenCap depthImage:depthImage];
-    //    [self presentViewController:p animated:YES completion:nil];
+    [self peelPresentViewController:picker withBackgroundImage:background andContentImage:screenCap depthImage:depthImage];
 }
 
 - (UIImagePickerController *)imagePicker
