@@ -138,7 +138,6 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     headerHeight = headerHeight + _descriptionTextView.frame.size.height;
     
     [_detailsMapView setFrame:CGRectMake(0.0, 0.0, _tableHeaderView.frame.size.width, headerHeight)];
-
     
     if(_site.totalAugmentedImages > 0){
         [_detailsPhotoScrollView setFrame:CGRectMake(0.0, _detailsMapView.frame.origin.y + _detailsMapView.frame.size.height, _tableHeaderView.frame.size.width, 132.0)];
