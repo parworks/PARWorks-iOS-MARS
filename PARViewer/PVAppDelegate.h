@@ -32,6 +32,8 @@ extern NSString *const FBSessionStateChangedNotification;
 @property (strong, nonatomic) NSMutableArray * contentControllers;
 @property (strong, nonatomic) PVSidebarViewController * sidebarController;
 
++ (BOOL)isiPhone5;
+
 - (void)switchToController:(int)index;
 - (BOOL)authorizeFacebook:(BOOL)allowLoginUI;
 - (void)logoutFacebook;

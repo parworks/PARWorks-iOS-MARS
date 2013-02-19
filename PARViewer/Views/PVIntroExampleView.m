@@ -6,13 +6,19 @@
 //  Copyright (c) 2013 Ben Gotow. All rights reserved.
 //
 
+#import "PVAppDelegate.h"
 #import "PVIntroExampleView.h"
 
 @implementation PVIntroExampleView
 
 + (id)viewFromNIB
 {
-    PVIntroExampleView *ev = [[[NSBundle mainBundle] loadNibNamed:@"PVIntroExampleView" owner:nil options:nil] objectAtIndex:0];
+    NSString *nibName = @"PVIntroExampleView";
+    if ([PVAppDelegate isiPhone5]) {
+        nibName = [nibName stringByAppendingString:@"_4"];
+    }
+    
+    PVIntroExampleView *ev = [[[NSBundle mainBundle] loadNibNamed:nibName owner:nil options:nil] objectAtIndex:0];
     return ev;
 }
 
