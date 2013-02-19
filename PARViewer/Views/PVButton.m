@@ -28,7 +28,8 @@
 
 - (void)setFrame:(CGRect)frame{
     [super setFrame:frame];
-    [_activityIndicator setFrame:CGRectMake(self.bounds.size.width/2.0 - _activityIndicator.frame.size.width/2.0, self.bounds.size.height/2.0 - _activityIndicator.frame.size.height/2.0, _activityIndicator.frame.size.width, _activityIndicator.frame.size.height)];
+    [_activityIndicator setFrame:CGRectMake(0, 0, _activityIndicator.frame.size.width, _activityIndicator.frame.size.height)];
+    _activityIndicator.center = self.center;
 }
 
 - (void)setIsAnimating:(BOOL)isAnimating{
