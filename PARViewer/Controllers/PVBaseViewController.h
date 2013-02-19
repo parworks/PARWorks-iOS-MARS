@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PVSlidingViewController.h"
 
 @interface PVBaseViewController : UIViewController
+
+- (void)attachRightIntroButton;
+- (PVSlidingViewController*)parentSlidingViewController;
 
 @end

@@ -218,6 +218,9 @@
 		43D3E25A16D3DE9100D0ABEA /* camera_button_3.5_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D3E25816D3DE9100D0ABEA /* camera_button_3.5_pressed@2x.png */; };
 		43D3E25B16D3DE9100D0ABEA /* camera_button_3.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D3E25916D3DE9100D0ABEA /* camera_button_3.5@2x.png */; };
 		43D3E25D16D3DEF900D0ABEA /* camera_icon_3.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D3E25C16D3DEF900D0ABEA /* camera_icon_3.5@2x.png */; };
+		43D3E26816D42E2600D0ABEA /* bar_item_intro.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D3E26716D42E2600D0ABEA /* bar_item_intro.png */; };
+		43D3E26A16D42E3000D0ABEA /* bar_item_intro@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D3E26916D42E3000D0ABEA /* bar_item_intro@2x.png */; };
+		43D3E26D16D42EF000D0ABEA /* PVSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D3E26C16D42EF000D0ABEA /* PVSlidingViewController.m */; };
 		43D526B416C72AE700A89053 /* UIImageAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D526B316C72AE700A89053 /* UIImageAdditions.m */; };
 		43E6733D16BB8A3B007E7708 /* PVImageCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E6733C16BB8A3A007E7708 /* PVImageCacheManager.m */; };
 		43E6734216BB94DF007E7708 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E6734116BB94DF007E7708 /* CoreMedia.framework */; };
@@ -744,6 +747,10 @@
 		43D3E25816D3DE9100D0ABEA /* camera_button_3.5_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_button_3.5_pressed@2x.png"; sourceTree = "<group>"; };
 		43D3E25916D3DE9100D0ABEA /* camera_button_3.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_button_3.5@2x.png"; sourceTree = "<group>"; };
 		43D3E25C16D3DEF900D0ABEA /* camera_icon_3.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_icon_3.5@2x.png"; sourceTree = "<group>"; };
+		43D3E26716D42E2600D0ABEA /* bar_item_intro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bar_item_intro.png; sourceTree = "<group>"; };
+		43D3E26916D42E3000D0ABEA /* bar_item_intro@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar_item_intro@2x.png"; sourceTree = "<group>"; };
+		43D3E26B16D42EEF00D0ABEA /* PVSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVSlidingViewController.h; sourceTree = "<group>"; };
+		43D3E26C16D42EF000D0ABEA /* PVSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVSlidingViewController.m; sourceTree = "<group>"; };
 		43D526B216C72AE700A89053 /* UIImageAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageAdditions.h; sourceTree = "<group>"; };
 		43D526B316C72AE700A89053 /* UIImageAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageAdditions.m; sourceTree = "<group>"; };
 		43E6733B16BB8A3A007E7708 /* PVImageCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVImageCacheManager.h; sourceTree = "<group>"; };
@@ -1129,6 +1136,7 @@
 				43D3E23116D3434500D0ABEA /* floating_item_back.png */,
 				43EB601116BCEE7A00A3EE29 /* frontViewControllerDropShadow.png */,
 				43D3E22B16D33C8F00D0ABEA /* camera_iris.png */,
+				43D3E26716D42E2600D0ABEA /* bar_item_intro.png */,
 				43D3E22D16D33E2900D0ABEA /* camera_iris_568h.png */,
 				43F2FA7116C820E2001D2C07 /* tiny_camera.png */,
 				427EFE9B16C37CFB000B49C6 /* map_icon_recenter.png */,
@@ -1581,6 +1589,8 @@
 			children = (
 				43E9F6F816BFA41800AC2672 /* JSSlidingViewController.h */,
 				43E9F6F916BFA41800AC2672 /* JSSlidingViewController.m */,
+				43D3E26B16D42EEF00D0ABEA /* PVSlidingViewController.h */,
+				43D3E26C16D42EF000D0ABEA /* PVSlidingViewController.m */,
 				43E9F6FA16BFA41800AC2672 /* PVAddCommentViewController.h */,
 				43E9F6FB16BFA41800AC2672 /* PVAddCommentViewController.m */,
 				43E9F6FC16BFA41800AC2672 /* PVAddCommentViewController.xib */,
@@ -1761,6 +1771,7 @@
 			children = (
 				A07BBBE216CA076F00C0C286 /* camera_bottom_bar_3.5@2x.png */,
 				A07BBBE316CA076F00C0C286 /* camera_bottom_bar_4@2x.png */,
+				43D3E26916D42E3000D0ABEA /* bar_item_intro@2x.png */,
 				A07BBBE616CA076F00C0C286 /* camera_button_4@2x.png */,
 				A07BBBE716CA076F00C0C286 /* camera_button_4_pressed@2x.png */,
 				43D3E25816D3DE9100D0ABEA /* camera_button_3.5_pressed@2x.png */,
@@ -2142,6 +2153,8 @@
 				43D3E25A16D3DE9100D0ABEA /* camera_button_3.5_pressed@2x.png in Resources */,
 				43D3E25B16D3DE9100D0ABEA /* camera_button_3.5@2x.png in Resources */,
 				43D3E25D16D3DEF900D0ABEA /* camera_icon_3.5@2x.png in Resources */,
+				43D3E26816D42E2600D0ABEA /* bar_item_intro.png in Resources */,
+				43D3E26A16D42E3000D0ABEA /* bar_item_intro@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2281,6 +2294,7 @@
 				A01B462716D3418E00FE8BD5 /* GRCameraOverlayView.m in Sources */,
 				A01B463016D341B300FE8BD5 /* ARCameraOverlayTooltip.m in Sources */,
 				4252DD4E16D3628E0029D635 /* PVButton.m in Sources */,
+				43D3E26D16D42EF000D0ABEA /* PVSlidingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2365,6 +2379,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PARViewer/PARViewer-Prefix.pch";
@@ -2385,6 +2400,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

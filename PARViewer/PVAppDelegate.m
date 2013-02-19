@@ -53,7 +53,7 @@ NSString *const FBSessionStateChangedNotification = @"com.parworks.parviewer.Log
     // the sidebar controller automatically displays the items in the contentControllers array,
     // pulling images and titles from the tabBarItem and title of each controller.
     _sidebarController = [[PVSidebarViewController alloc] init];
-    _slidingViewController = [[JSSlidingViewController alloc] initWithFrontViewController: _contentControllers[0] backViewController: _sidebarController];
+    _slidingViewController = [[PVSlidingViewController alloc] initWithFrontViewController: _contentControllers[0] backViewController: _sidebarController];
     _slidingViewController.useBouncyAnimations = NO;
     _slidingViewController.delegate = self;
     

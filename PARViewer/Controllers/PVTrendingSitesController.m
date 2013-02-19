@@ -16,6 +16,7 @@
 #import "PVFlowLayout.h"
 #import "UIViewAdditions.h"
 #import "UAPush.h"
+#import "PVIntroViewController.h"
 
 static NSString * cellIdentifier = @"TestCell";
 
@@ -44,6 +45,8 @@ static NSString * cellIdentifier = @"TestCell";
 
 	// subscribe to receive updates about the trending sites list
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(trendingSitesUpdated:) name:NOTIF_TRENDING_SITES_UPDATED object:nil];
+    
+    [self attachRightIntroButton];
 
 	// make sure our cached data is up-to-date
 	[[ARManager shared] fetchTrendingSites];
@@ -189,8 +192,11 @@ static NSString * cellIdentifier = @"TestCell";
 	[_backgroundView setFloatingPointIndex:centerX];
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload
+{
     [self setLoadingView:nil];
     [super viewDidUnload];
 }
+
+
 @end

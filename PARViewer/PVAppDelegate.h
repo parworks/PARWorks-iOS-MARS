@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "JSSlidingViewController.h"
+#import "PVSlidingViewController.h"
 #import "UINavigationController+BetterRotationBehavior.h"
 #import "PVTrendingSitesController.h"
 #import "PVNearbySitesViewController.h"
@@ -28,7 +28,7 @@ extern NSString *const FBSessionStateChangedNotification;
 }
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) JSSlidingViewController * slidingViewController;
+@property (strong, nonatomic) PVSlidingViewController * slidingViewController;
 @property (strong, nonatomic) NSMutableArray * contentControllers;
 @property (strong, nonatomic) PVSidebarViewController * sidebarController;
 
