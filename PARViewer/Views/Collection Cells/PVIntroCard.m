@@ -9,6 +9,7 @@
 #import "PVAppDelegate.h"
 #import "PVIntroCard.h"
 #import "UIColor+Utils.h"
+#import "UIFont+ThemeAdditions.h"
 #import "UIViewAdditions.h"
 
 
@@ -156,10 +157,19 @@
 - (UIButton *)skipButton
 {
     if (!_skipButton) {
-        _skipButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        _skipButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _skipButton.backgroundColor = [UIColor whiteColor];
         _skipButton.frame = CGRectMake(10, _innerCard.bounds.size.height - 10 - 48, _innerCard.bounds.size.width - 20, 48);
+        _skipButton.titleLabel.font = [UIFont boldParworksFontWithSize:20];
+        _skipButton.titleLabel.shadowOffset = CGSizeMake(0, -1);
+        _skipButton.layer.borderColor = [UIColor colorWithHexRGBValue:0xdbdbdb].CGColor;
+        _skipButton.layer.borderWidth = 1.0;
+        _skipButton.layer.cornerRadius = 6.0;
         [_skipButton setTitle:@"Skip" forState:UIControlStateNormal];
-        [_skipButton setUserInteractionEnabled:YES];
+        [_skipButton setTitleColor:[UIColor colorWithHexRGBValue:0x31649D] forState:UIControlStateNormal];
+        [_skipButton setTitleShadowColor:[UIColor clearColor] forState:UIControlStateNormal];
+        [_skipButton addTarget:self action:@selector(skipButtonTouchDown) forControlEvents:UIControlEventTouchDown|UIControlEventTouchDragInside|UIControlEventTouchDragEnter];
+        [_skipButton addTarget:self action:@selector(skipButtonTouchUp) forControlEvents:UIControlEventTouchUpInside|UIControlEventTouchDragOutside|UIControlEventTouchDragExit|UIControlEventTouchCancel];
         [_innerCard addSubview:_skipButton];
     }
     return _skipButton;
@@ -173,6 +183,21 @@
         [_innerCard addSubview:_swipeImageView];
     }
     return _swipeImageView;
+}
+
+- (void)skipButtonTouchDown
+{
+    _skipButton.backgroundColor = [UIColor colorWithHexRGBValue:0x31649d];
+    [_skipButton setTitleShadowColor:[UIColor colorWithWhite:0.0 alpha:0.5] forState:UIControlStateNormal];
+    [_skipButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+}
+
+
+- (void)skipButtonTouchUp
+{
+    _skipButton.backgroundColor = [UIColor whiteColor];
+    [_skipButton setTitleShadowColor:[UIColor clearColor] forState:UIControlStateNormal];
+    [_skipButton setTitleColor:[UIColor colorWithHexRGBValue:0x31649D] forState:UIControlStateNormal];
 }
 
 @end

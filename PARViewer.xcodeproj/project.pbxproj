@@ -308,7 +308,7 @@
 		A01B467F16D3684200FE8BD5 /* intro4_3.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A01B467316D3684100FE8BD5 /* intro4_3.5@2x.png */; };
 		A01B468016D3684200FE8BD5 /* intro4_4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A01B467416D3684100FE8BD5 /* intro4_4@2x.png */; };
 		A04999B016D36DDF004DB21E /* swipe_gesture.png in Resources */ = {isa = PBXBuildFile; fileRef = A04999AF16D36DDF004DB21E /* swipe_gesture.png */; };
-		A04999B816D36DEB004DB21E /* swipe_gesture_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A04999B716D36DEB004DB21E /* swipe_gesture_@2x.png */; };
+		A04999B816D36DEB004DB21E /* swipe_gesture@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A04999B716D36DEB004DB21E /* swipe_gesture@2x.png */; };
 		A04999BA16D373A1004DB21E /* PVIntroExampleView_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = A04999B916D373A1004DB21E /* PVIntroExampleView_4.xib */; };
 		A07578AA16CE6D88009B8654 /* PVIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A07578A816CE6D88009B8654 /* PVIntroViewController.m */; };
 		A07578AB16CE6D88009B8654 /* PVIntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A07578A916CE6D88009B8654 /* PVIntroViewController.xib */; };
@@ -877,7 +877,7 @@
 		A01B467316D3684100FE8BD5 /* intro4_3.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro4_3.5@2x.png"; sourceTree = "<group>"; };
 		A01B467416D3684100FE8BD5 /* intro4_4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro4_4@2x.png"; sourceTree = "<group>"; };
 		A04999AF16D36DDF004DB21E /* swipe_gesture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swipe_gesture.png; sourceTree = "<group>"; };
-		A04999B716D36DEB004DB21E /* swipe_gesture_@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "swipe_gesture_@2x.png"; sourceTree = "<group>"; };
+		A04999B716D36DEB004DB21E /* swipe_gesture@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "swipe_gesture@2x.png"; sourceTree = "<group>"; };
 		A04999B916D373A1004DB21E /* PVIntroExampleView_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PVIntroExampleView_4.xib; sourceTree = "<group>"; };
 		A07578A716CE6D88009B8654 /* PVIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVIntroViewController.h; sourceTree = "<group>"; };
 		A07578A816CE6D88009B8654 /* PVIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVIntroViewController.m; sourceTree = "<group>"; };
@@ -1755,7 +1755,7 @@
 				A01B467216D3684100FE8BD5 /* intro3_4@2x.png */,
 				A01B467316D3684100FE8BD5 /* intro4_3.5@2x.png */,
 				A01B467416D3684100FE8BD5 /* intro4_4@2x.png */,
-				A04999B716D36DEB004DB21E /* swipe_gesture_@2x.png */,
+				A04999B716D36DEB004DB21E /* swipe_gesture@2x.png */,
 			);
 			path = Intro;
 			sourceTree = "<group>";
@@ -2148,7 +2148,7 @@
 				A01B467F16D3684200FE8BD5 /* intro4_3.5@2x.png in Resources */,
 				A01B468016D3684200FE8BD5 /* intro4_4@2x.png in Resources */,
 				A04999B016D36DDF004DB21E /* swipe_gesture.png in Resources */,
-				A04999B816D36DEB004DB21E /* swipe_gesture_@2x.png in Resources */,
+				A04999B816D36DEB004DB21E /* swipe_gesture@2x.png in Resources */,
 				A04999BA16D373A1004DB21E /* PVIntroExampleView_4.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
