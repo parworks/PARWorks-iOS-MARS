@@ -183,8 +183,6 @@ static NSString * cellIdentifier = @"TestCell";
     // at scroll offsets 403.5, 676.5, 950.5, indexPathForItemAtPoint incorrectly returns 0.
     // I have no idea why and don't care enough to find out.
 	int page = [[_collectionView indexPathForItemAtPoint:CGPointMake(scrollView.contentOffset.x + self.view.center.x, self.view.center.y)] row];
-    if (page == 0)
-        return;
 	[_pageControl setCurrentPage:page];
 
 	// adjust the background parallax view
