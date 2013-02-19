@@ -167,7 +167,6 @@
 		437C3FD716BE249800822EDD /* AROverlayBuilderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 437C3F7B16BE249800822EDD /* AROverlayBuilderView.m */; };
 		437C3FD816BE249800822EDD /* ARSiteImagesInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 437C3F7D16BE249800822EDD /* ARSiteImagesInfoView.m */; };
 		437C3FD916BE249800822EDD /* CachedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 437C3F7F16BE249800822EDD /* CachedImageView.m */; };
-		437C3FDA16BE249800822EDD /* GRCameraOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 437C3F8116BE249800822EDD /* GRCameraOverlayView.m */; };
 		437C3FDB16BE249800822EDD /* GridCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 437C3F8316BE249800822EDD /* GridCellView.m */; };
 		437C3FDC16BE249800822EDD /* GridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 437C3F8516BE249800822EDD /* GridView.m */; };
 		437C3FDD16BE249800822EDD /* AROverlayAudioView.m in Sources */ = {isa = PBXBuildFile; fileRef = 437C3F8816BE249800822EDD /* AROverlayAudioView.m */; };
@@ -268,13 +267,16 @@
 		A00F91B016C82DDB00F1B826 /* UIViewController+Transitions.m in Sources */ = {isa = PBXBuildFile; fileRef = A00F91AF16C82DDB00F1B826 /* UIViewController+Transitions.m */; };
 		A00F91B316C82E2F00F1B826 /* UIView+ImageCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = A00F91B216C82E2F00F1B826 /* UIView+ImageCapture.m */; };
 		A00F91B516C82E6800F1B826 /* unfold_depth_image.png in Resources */ = {isa = PBXBuildFile; fileRef = A00F91B416C82E6800F1B826 /* unfold_depth_image.png */; };
-		A015D6C716CB6701004F7158 /* GRCameraOverlayToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = A015D6C616CB6701004F7158 /* GRCameraOverlayToolbar.m */; };
 		A01B44BE16D1ABA700FE8BD5 /* PVIntroExampleView.m in Sources */ = {isa = PBXBuildFile; fileRef = A01B44BD16D1ABA700FE8BD5 /* PVIntroExampleView.m */; };
 		A01B44C016D1ABBE00FE8BD5 /* PVIntroExampleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A01B44BF16D1ABBE00FE8BD5 /* PVIntroExampleView.xib */; };
+		A01B462416D3418E00FE8BD5 /* GRCameraOverlayToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = A01B461F16D3418E00FE8BD5 /* GRCameraOverlayToolbar.m */; };
+		A01B462516D3418E00FE8BD5 /* GRCameraOverlayToolbar_3_5.xib in Resources */ = {isa = PBXBuildFile; fileRef = A01B462016D3418E00FE8BD5 /* GRCameraOverlayToolbar_3_5.xib */; };
+		A01B462616D3418E00FE8BD5 /* GRCameraOverlayToolbar_4_0.xib in Resources */ = {isa = PBXBuildFile; fileRef = A01B462116D3418E00FE8BD5 /* GRCameraOverlayToolbar_4_0.xib */; };
+		A01B462716D3418E00FE8BD5 /* GRCameraOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = A01B462316D3418E00FE8BD5 /* GRCameraOverlayView.m */; };
+		A01B463016D341B300FE8BD5 /* ARCameraOverlayTooltip.m in Sources */ = {isa = PBXBuildFile; fileRef = A01B462F16D341B300FE8BD5 /* ARCameraOverlayTooltip.m */; };
 		A07578AA16CE6D88009B8654 /* PVIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A07578A816CE6D88009B8654 /* PVIntroViewController.m */; };
 		A07578AB16CE6D88009B8654 /* PVIntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A07578A916CE6D88009B8654 /* PVIntroViewController.xib */; };
 		A07578B416CE709D009B8654 /* PVIntroCard.m in Sources */ = {isa = PBXBuildFile; fileRef = A07578B316CE709D009B8654 /* PVIntroCard.m */; };
-		A07BBBD116CA005D00C0C286 /* GRCameraOverlayToolbar_3_5.xib in Resources */ = {isa = PBXBuildFile; fileRef = A07BBBD016CA005D00C0C286 /* GRCameraOverlayToolbar_3_5.xib */; };
 		A07BBBF816CA076F00C0C286 /* camera_bottom_bar_3.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A07BBBE216CA076F00C0C286 /* camera_bottom_bar_3.5@2x.png */; };
 		A07BBBF916CA076F00C0C286 /* camera_bottom_bar_4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A07BBBE316CA076F00C0C286 /* camera_bottom_bar_4@2x.png */; };
 		A07BBBFA16CA076F00C0C286 /* camera_button_3.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A07BBBE416CA076F00C0C286 /* camera_button_3.5@2x.png */; };
@@ -319,7 +321,6 @@
 		A07BBC3816CA078900C0C286 /* camera_x_3.5_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = A07BBC2216CA078800C0C286 /* camera_x_3.5_pressed.png */; };
 		A07BBC3916CA078900C0C286 /* camera_x_4.png in Resources */ = {isa = PBXBuildFile; fileRef = A07BBC2316CA078800C0C286 /* camera_x_4.png */; };
 		A07BBC3A16CA078900C0C286 /* camera_x_4_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = A07BBC2416CA078800C0C286 /* camera_x_4_pressed.png */; };
-		A07BBC3C16CA0F1B00C0C286 /* GRCameraOverlayToolbar_4_0.xib in Resources */ = {isa = PBXBuildFile; fileRef = A07BBC3B16CA0F1B00C0C286 /* GRCameraOverlayToolbar_4_0.xib */; };
 		A097AFA516CC89990016ACF8 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A097AFA416CC89990016ACF8 /* MBProgressHUD.m */; };
 		A0A44D9016BE2E12003809D3 /* libChipmunk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A44D8F16BE2DF7003809D3 /* libChipmunk.a */; };
 		A0A44D9116BE2E12003809D3 /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A44D7716BE2D8D003809D3 /* libcocos2d.a */; };
@@ -647,8 +648,6 @@
 		437C3F7D16BE249800822EDD /* ARSiteImagesInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARSiteImagesInfoView.m; sourceTree = "<group>"; };
 		437C3F7E16BE249800822EDD /* CachedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CachedImageView.h; sourceTree = "<group>"; };
 		437C3F7F16BE249800822EDD /* CachedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CachedImageView.m; sourceTree = "<group>"; };
-		437C3F8016BE249800822EDD /* GRCameraOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRCameraOverlayView.h; sourceTree = "<group>"; };
-		437C3F8116BE249800822EDD /* GRCameraOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRCameraOverlayView.m; sourceTree = "<group>"; };
 		437C3F8216BE249800822EDD /* GridCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridCellView.h; sourceTree = "<group>"; };
 		437C3F8316BE249800822EDD /* GridCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridCellView.m; sourceTree = "<group>"; };
 		437C3F8416BE249800822EDD /* GridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridView.h; sourceTree = "<group>"; };
@@ -798,17 +797,22 @@
 		A00F91B116C82E2F00F1B826 /* UIView+ImageCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ImageCapture.h"; sourceTree = "<group>"; };
 		A00F91B216C82E2F00F1B826 /* UIView+ImageCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ImageCapture.m"; sourceTree = "<group>"; };
 		A00F91B416C82E6800F1B826 /* unfold_depth_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unfold_depth_image.png; sourceTree = "<group>"; };
-		A015D6C516CB6701004F7158 /* GRCameraOverlayToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRCameraOverlayToolbar.h; sourceTree = "<group>"; };
-		A015D6C616CB6701004F7158 /* GRCameraOverlayToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRCameraOverlayToolbar.m; sourceTree = "<group>"; };
 		A01B44BC16D1ABA700FE8BD5 /* PVIntroExampleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVIntroExampleView.h; sourceTree = "<group>"; };
 		A01B44BD16D1ABA700FE8BD5 /* PVIntroExampleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVIntroExampleView.m; sourceTree = "<group>"; };
 		A01B44BF16D1ABBE00FE8BD5 /* PVIntroExampleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PVIntroExampleView.xib; sourceTree = "<group>"; };
+		A01B461E16D3418E00FE8BD5 /* GRCameraOverlayToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRCameraOverlayToolbar.h; sourceTree = "<group>"; };
+		A01B461F16D3418E00FE8BD5 /* GRCameraOverlayToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRCameraOverlayToolbar.m; sourceTree = "<group>"; };
+		A01B462016D3418E00FE8BD5 /* GRCameraOverlayToolbar_3_5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRCameraOverlayToolbar_3_5.xib; sourceTree = "<group>"; };
+		A01B462116D3418E00FE8BD5 /* GRCameraOverlayToolbar_4_0.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRCameraOverlayToolbar_4_0.xib; sourceTree = "<group>"; };
+		A01B462216D3418E00FE8BD5 /* GRCameraOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRCameraOverlayView.h; sourceTree = "<group>"; };
+		A01B462316D3418E00FE8BD5 /* GRCameraOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRCameraOverlayView.m; sourceTree = "<group>"; };
+		A01B462E16D341B300FE8BD5 /* ARCameraOverlayTooltip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCameraOverlayTooltip.h; sourceTree = "<group>"; };
+		A01B462F16D341B300FE8BD5 /* ARCameraOverlayTooltip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCameraOverlayTooltip.m; sourceTree = "<group>"; };
 		A07578A716CE6D88009B8654 /* PVIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVIntroViewController.h; sourceTree = "<group>"; };
 		A07578A816CE6D88009B8654 /* PVIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVIntroViewController.m; sourceTree = "<group>"; };
 		A07578A916CE6D88009B8654 /* PVIntroViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PVIntroViewController.xib; sourceTree = "<group>"; };
 		A07578B216CE709D009B8654 /* PVIntroCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVIntroCard.h; sourceTree = "<group>"; };
 		A07578B316CE709D009B8654 /* PVIntroCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVIntroCard.m; sourceTree = "<group>"; };
-		A07BBBD016CA005D00C0C286 /* GRCameraOverlayToolbar_3_5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRCameraOverlayToolbar_3_5.xib; sourceTree = "<group>"; };
 		A07BBBE216CA076F00C0C286 /* camera_bottom_bar_3.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_bottom_bar_3.5@2x.png"; sourceTree = "<group>"; };
 		A07BBBE316CA076F00C0C286 /* camera_bottom_bar_4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_bottom_bar_4@2x.png"; sourceTree = "<group>"; };
 		A07BBBE416CA076F00C0C286 /* camera_button_3.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_button_3.5@2x.png"; sourceTree = "<group>"; };
@@ -853,7 +857,6 @@
 		A07BBC2216CA078800C0C286 /* camera_x_3.5_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_x_3.5_pressed.png; sourceTree = "<group>"; };
 		A07BBC2316CA078800C0C286 /* camera_x_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_x_4.png; sourceTree = "<group>"; };
 		A07BBC2416CA078800C0C286 /* camera_x_4_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_x_4_pressed.png; sourceTree = "<group>"; };
-		A07BBC3B16CA0F1B00C0C286 /* GRCameraOverlayToolbar_4_0.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRCameraOverlayToolbar_4_0.xib; sourceTree = "<group>"; };
 		A097AFA316CC89990016ACF8 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		A097AFA416CC89990016ACF8 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		A0A44D6F16BE2D8C003809D3 /* ChipmunkTemplate.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ChipmunkTemplate.xcodeproj; path = Subprojects/ChipmunkTemplate/ChipmunkTemplate.xcodeproj; sourceTree = "<group>"; };
@@ -1371,6 +1374,7 @@
 		437C3F7316BE249800822EDD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A01B461D16D3418E00FE8BD5 /* Camera */,
 				437C3F7616BE249800822EDD /* ARAugmentedView.h */,
 				437C3F7716BE249800822EDD /* ARAugmentedView.m */,
 				437EE22016C8559100F6D9B3 /* AROverlayTitleView.h */,
@@ -1385,12 +1389,6 @@
 				A0AF6F6516C0EE17003457A2 /* ARTotalAugmentedImagesView.m */,
 				437C3F7E16BE249800822EDD /* CachedImageView.h */,
 				437C3F7F16BE249800822EDD /* CachedImageView.m */,
-				437C3F8016BE249800822EDD /* GRCameraOverlayView.h */,
-				437C3F8116BE249800822EDD /* GRCameraOverlayView.m */,
-				A015D6C516CB6701004F7158 /* GRCameraOverlayToolbar.h */,
-				A015D6C616CB6701004F7158 /* GRCameraOverlayToolbar.m */,
-				A07BBC3B16CA0F1B00C0C286 /* GRCameraOverlayToolbar_4_0.xib */,
-				A07BBBD016CA005D00C0C286 /* GRCameraOverlayToolbar_3_5.xib */,
 				437C3F8216BE249800822EDD /* GridCellView.h */,
 				437C3F8316BE249800822EDD /* GridCellView.m */,
 				437C3F8416BE249800822EDD /* GridView.h */,
@@ -1629,6 +1627,22 @@
 			);
 			path = "Collection Cells";
 			sourceTree = "<group>";
+		};
+		A01B461D16D3418E00FE8BD5 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				A01B461E16D3418E00FE8BD5 /* GRCameraOverlayToolbar.h */,
+				A01B461F16D3418E00FE8BD5 /* GRCameraOverlayToolbar.m */,
+				A01B462016D3418E00FE8BD5 /* GRCameraOverlayToolbar_3_5.xib */,
+				A01B462116D3418E00FE8BD5 /* GRCameraOverlayToolbar_4_0.xib */,
+				A01B462216D3418E00FE8BD5 /* GRCameraOverlayView.h */,
+				A01B462316D3418E00FE8BD5 /* GRCameraOverlayView.m */,
+				A01B462E16D341B300FE8BD5 /* ARCameraOverlayTooltip.h */,
+				A01B462F16D341B300FE8BD5 /* ARCameraOverlayTooltip.m */,
+			);
+			name = Camera;
+			path = "Submodules/PARWorks-iOS/SDK/AR Core/Views/Camera";
+			sourceTree = SOURCE_ROOT;
 		};
 		A07BBBE116CA076F00C0C286 /* Camera */ = {
 			isa = PBXGroup;
@@ -1926,7 +1940,6 @@
 				4345703716CA0267006E04FD /* bar_item_reload.png in Resources */,
 				4345703816CA0267006E04FD /* bar_item_back.png in Resources */,
 				A00F91B516C82E6800F1B826 /* unfold_depth_image.png in Resources */,
-				A07BBBD116CA005D00C0C286 /* GRCameraOverlayToolbar_3_5.xib in Resources */,
 				A07BBBF816CA076F00C0C286 /* camera_bottom_bar_3.5@2x.png in Resources */,
 				A07BBBF916CA076F00C0C286 /* camera_bottom_bar_4@2x.png in Resources */,
 				A07BBBFA16CA076F00C0C286 /* camera_button_3.5@2x.png in Resources */,
@@ -1971,7 +1984,6 @@
 				A07BBC3816CA078900C0C286 /* camera_x_3.5_pressed.png in Resources */,
 				A07BBC3916CA078900C0C286 /* camera_x_4.png in Resources */,
 				A07BBC3A16CA078900C0C286 /* camera_x_4_pressed.png in Resources */,
-				A07BBC3C16CA0F1B00C0C286 /* GRCameraOverlayToolbar_4_0.xib in Resources */,
 				4345704016CA2814006E04FD /* try_it_now.png in Resources */,
 				4345704816CA2827006E04FD /* try_it_now@2x.png in Resources */,
 				4234B4C216CB1833000805FA /* missing_image_300x150@2x.png in Resources */,
@@ -1983,6 +1995,8 @@
 				438682D416CC835D003DEEDB /* Default.png in Resources */,
 				A07578AB16CE6D88009B8654 /* PVIntroViewController.xib in Resources */,
 				A01B44C016D1ABBE00FE8BD5 /* PVIntroExampleView.xib in Resources */,
+				A01B462516D3418E00FE8BD5 /* GRCameraOverlayToolbar_3_5.xib in Resources */,
+				A01B462616D3418E00FE8BD5 /* GRCameraOverlayToolbar_4_0.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2056,7 +2070,6 @@
 				437C3FD716BE249800822EDD /* AROverlayBuilderView.m in Sources */,
 				437C3FD816BE249800822EDD /* ARSiteImagesInfoView.m in Sources */,
 				437C3FD916BE249800822EDD /* CachedImageView.m in Sources */,
-				437C3FDA16BE249800822EDD /* GRCameraOverlayView.m in Sources */,
 				437C3FDB16BE249800822EDD /* GridCellView.m in Sources */,
 				437C3FDC16BE249800822EDD /* GridView.m in Sources */,
 				437C3FDD16BE249800822EDD /* AROverlayAudioView.m in Sources */,
@@ -2115,11 +2128,13 @@
 				A00F91B016C82DDB00F1B826 /* UIViewController+Transitions.m in Sources */,
 				A00F91B316C82E2F00F1B826 /* UIView+ImageCapture.m in Sources */,
 				4386830F16CCA107003DEEDB /* PVLoadingView.m in Sources */,
-				A015D6C716CB6701004F7158 /* GRCameraOverlayToolbar.m in Sources */,
 				A097AFA516CC89990016ACF8 /* MBProgressHUD.m in Sources */,
 				A07578AA16CE6D88009B8654 /* PVIntroViewController.m in Sources */,
 				A07578B416CE709D009B8654 /* PVIntroCard.m in Sources */,
 				A01B44BE16D1ABA700FE8BD5 /* PVIntroExampleView.m in Sources */,
+				A01B462416D3418E00FE8BD5 /* GRCameraOverlayToolbar.m in Sources */,
+				A01B462716D3418E00FE8BD5 /* GRCameraOverlayView.m in Sources */,
+				A01B463016D341B300FE8BD5 /* ARCameraOverlayTooltip.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
