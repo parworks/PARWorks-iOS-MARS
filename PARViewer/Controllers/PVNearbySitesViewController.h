@@ -9,6 +9,7 @@
 #import "PVBaseViewController.h"
 #import "PVParallaxTableView.h"
 #import <MapKit/MapKit.h>
+#import "PVButton.h"
 
 @interface PVNearbySitesViewController : PVBaseViewController<UITableViewDataSource, UITableViewDelegate, PVParallaxTableViewDelegate, MKMapViewDelegate>{
     CLLocationCoordinate2D centerCoordinate;
@@ -26,6 +27,6 @@
 @property (nonatomic, strong) NSMutableArray *annotations;
 
 @property (nonatomic, strong) UIButton *mapRefreshButton;
-@property (nonatomic, strong) UIButton *mapRecenterButton;
+@property (nonatomic, strong) PVButton *mapRecenterButton;
 
 @end
