@@ -313,6 +313,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 
 
 #pragma mark - Camera 
+
 - (void)takePhoto:(id)sender
 {
     [self takePhotoWithFlipAnimation];

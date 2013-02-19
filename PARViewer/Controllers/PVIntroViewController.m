@@ -10,26 +10,23 @@
 #import "PVIntroCard.h"
 #import "PVIntroViewController.h"
 #import "UAPush.h"
+#import "UIViewController+Transitions.h"
+#import "UIView+ImageCapture.h"
 
-@interface PVIntroViewController ()
-
-@end
 
 @implementation PVIntroViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     _pageControl.numberOfPages = 4;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(augmentTestSite:) name:@"augmentButtonTapped" object:nil];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -40,12 +37,11 @@
     if (isiPhone5) {
         [((PSUICollectionViewFlowLayout *)_collectionView.collectionViewLayout) setItemSize:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height)];
     }
-
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    _hintTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(showHint) userInfo:nil repeats:NO];
+    _hintTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(showHint) userInfo:nil repeats:NO];
 }
 
 - (void)showHint
@@ -124,6 +120,56 @@
     [_hintTimer invalidate];
 	int page = [[_collectionView indexPathForItemAtPoint:CGPointMake(scrollView.contentOffset.x + self.view.center.x, self.view.center.y)] row];
 	[_pageControl setCurrentPage:page];    
+}
+
+#pragma mark Showing the Camera
+
+- (void)augmentTestSite:(NSNotification*)notif
+{
+    NSString * siteIdentifier = (NSString*)[notif object];
+    _currentExampleSite = [[ARSite alloc] initWithIdentifier: siteIdentifier];
+    
+    UIImage * screenCap = [self.view imageRepresentationAtScale: 1.0];
+    UIImage * depthImage = [UIImage imageNamed:@"unfold_depth_image.png"];
+    self.view.hidden = YES;
+    
+    _cameraOverlayView = [[GRCameraOverlayView alloc] initWithFrame:self.view.bounds];
+    _cameraOverlayView.site = _currentExampleSite;
+    
+    UIImagePickerController *picker = [self imagePicker];
+    picker.delegate = _cameraOverlayView;
+    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+        picker.cameraOverlayView = _cameraOverlayView;
+        _cameraOverlayView.imagePicker = picker;
+    }
+    
+    UIImage * background = nil;
+    if (self.view.frame.size.height < 500)
+        background = [UIImage imageNamed:@"camera_iris.png"];
+    else
+        background = [UIImage imageNamed:@"camera_iris_568h.png"];
+    
+    [self peelPresentViewController:picker withBackgroundImage:background andContentImage:screenCap depthImage:depthImage];
+    
+    // update the skip button to say "Done!"
+    PVIntroCard * lastCard = (PVIntroCard*)[_collectionView cellForItemAtIndexPath: [NSIndexPath indexPathForItem:3 inSection:0]];
+    [[lastCard skipButton] setTitle:@"Done!" forState:UIControlStateNormal];
+}
+
+
+- (UIImagePickerController *)imagePicker
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    
+    if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        picker.mediaTypes = @[(NSString *) kUTTypeImage];
+        picker.showsCameraControls = NO;
+    } else {
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    
+    return picker;
 }
 
 

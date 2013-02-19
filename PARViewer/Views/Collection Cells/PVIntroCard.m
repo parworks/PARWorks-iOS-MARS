@@ -134,6 +134,7 @@
         CGFloat offsetY = [PVAppDelegate isiPhone5] ? 62 : 55;
         _topExampleView.frame = CGRectMake(24, offsetY, _topExampleView.frame.size.width, _topExampleView.frame.size.height);
         _topExampleView.label.text = @"Coca-Cola Can";
+        _topExampleView.siteName = @"coke";
         [_innerCard addSubview:_topExampleView];
     }
     return _topExampleView;
@@ -148,6 +149,7 @@
         CGFloat offsetY = [PVAppDelegate isiPhone5] ? 240 : 190;
         _bottomExampleView.frame = CGRectMake(24, offsetY, _bottomExampleView.frame.size.width, _bottomExampleView.frame.size.height);
         _bottomExampleView.label.text = @"Dollar Bill";
+        _bottomExampleView.siteName = @"Dollar1";
         [_innerCard addSubview:_bottomExampleView];
     }
     return _bottomExampleView;

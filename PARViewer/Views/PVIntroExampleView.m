@@ -65,6 +65,8 @@
     [UIView animateWithDuration:0.2 animations:^{
         _dimView.alpha = 0.0;
     }];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"augmentButtonTapped" object:_siteName];
 }
 
 

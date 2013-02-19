@@ -8,10 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "PSTCollectionView.h"
+#import "GPUImageView.h"
+#import "GRCameraOverlayView.h"
 
 @interface PVIntroViewController : UIViewController <PSUICollectionViewDataSource, PSUICollectionViewDelegate>
 {
-    NSTimer *_hintTimer;
+    NSTimer             * _hintTimer;
+    GPUImageView        * _bgCopyImageView;
+    GRCameraOverlayView * _cameraOverlayView;
+    
+    ARSite              * _currentExampleSite;
+
 }
 @property(nonatomic, weak) IBOutlet PSUICollectionView *collectionView;
 @property(nonatomic, weak) IBOutlet UIPageControl *pageControl;

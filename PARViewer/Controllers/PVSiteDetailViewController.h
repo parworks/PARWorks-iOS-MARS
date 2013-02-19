@@ -18,9 +18,9 @@
 
 @interface PVSiteDetailViewController : UIViewController<PSUICollectionViewDataSource, PSUICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, PVAddCommentViewControllerDelegate, PVCommentTableViewCellDelegate, MKMapViewDelegate>
 {
-    PVAddCommentViewController *_addCommentViewController;
-    GPUImageView    * _bgCopyImageView;
-    GRCameraOverlayView *_cameraOverlayView;
+    PVAddCommentViewController  *_addCommentViewController;
+    GPUImageView                * _bgCopyImageView;
+    GRCameraOverlayView         * _cameraOverlayView;
 }
 
 @property (nonatomic, strong) ARSite * site;
