@@ -16,6 +16,7 @@
 
 #define PARALLAX_WINDOW_HEIGHT 165.0
 #define PARALLAX_IMAGE_HEIGHT 300.0
+#define NEARBY_SEARCH_RADIUS 1600.0
 
 @interface PVNearbySitesViewController ()
 
@@ -314,7 +315,7 @@
 
 - (void)findNearbySites
 {
-    [[ARManager shared] findNearbySites:1600.0 withCompletionBlock:^(NSArray* sites, CLLocation * location){
+    [[ARManager shared] findNearbySites:NEARBY_SEARCH_RADIUS withCompletionBlock:^(NSArray* sites, CLLocation * location){
         self.nearbySites = sites;
         bLoadedOnce = NO;
         [self refetchAnnotations:YES];
@@ -326,7 +327,7 @@
     if([_parallaxView isExpanded]){
         CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:_mapView.region.center.latitude longitude:_mapView.region.center.longitude];
         __weak MKMapView *__mapView = _mapView;
-        [[ARManager shared] findSites:1600.0 nearLocation:currentLocation withCompletionBlock:^(NSArray* sites, CLLocation * location){
+        [[ARManager shared] findSites:NEARBY_SEARCH_RADIUS nearLocation:currentLocation withCompletionBlock:^(NSArray* sites, CLLocation * location){
             if(location.coordinate.latitude == __mapView.region.center.latitude && location.coordinate.longitude == __mapView.region.center.longitude){
                 NSLog(@"Setting Nearby Sites...");
                 self.nearbySites = sites;
