@@ -29,13 +29,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _pageControl.numberOfPages = 4;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     [_collectionView registerClass:[PVIntroCard class] forCellWithReuseIdentifier:@"IntroCard"];
     BOOL isiPhone5 = [PVAppDelegate isiPhone5];
     if (isiPhone5) {
         [((PSUICollectionViewFlowLayout *)_collectionView.collectionViewLayout) setItemSize:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height)];
     }
 
-    _pageControl.numberOfPages = 4;
 }
 
 - (void)viewDidAppear:(BOOL)animated

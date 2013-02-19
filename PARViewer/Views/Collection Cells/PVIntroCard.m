@@ -71,6 +71,7 @@
     [self.outerCard addSubview:_innerCard];
     
     self.imageView = [[UIImageView alloc] initWithFrame:_innerCard.bounds];
+    _imageView.contentMode = UIViewContentModeTop;
     [_innerCard addSubview:_imageView];
 }
 
