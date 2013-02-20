@@ -194,7 +194,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 
 - (void)setupMapView
 {
-    _identifierLabel.text = ([_site.name length] > 0) ? _site.name :  @"No site name available";
+    _identifierLabel.text = ([_site.name length] > 0) ? _site.name :  @"No name available";
     _addressLabel.text = ([_site.address length] > 0) ? _site.address : @"No address available";   
     _descriptionTextView.text = ([_site.siteDescription length] > 0) ? _site.siteDescription : @"No description available";
     
@@ -210,7 +210,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
         region.span.longitudeDelta = 0.005;
         [_mapView setRegion:region];
         
-        MapAnnotation *annotation = [[MapAnnotation alloc] initWithCoordinate:_site.location andTitle:_identifierLabel.text andSubtitle:_addressLabel.text];
+        MapAnnotation *annotation = [[MapAnnotation alloc] initWithSite:_site];
         [_mapView addAnnotation:annotation];
     }
 }
