@@ -11,6 +11,7 @@
 @interface UIFont (ThemeAdditions)
 
 + (UIFont*)boldParworksFontWithSize:(float)size;
++ (UIFont*)heavyParworksFontWithSize:(float)size;
 + (UIFont*)parworksFontWithSize:(float)size;
 
 @end

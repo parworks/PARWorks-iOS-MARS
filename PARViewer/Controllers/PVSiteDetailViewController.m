@@ -89,6 +89,22 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     
     [self setupNavigationItem];
     [self setupParallaxView];
+    
+    [_addCommentButton addTarget:self action:@selector(addCommentButtonTouchDown) forControlEvents:UIControlEventTouchDown|UIControlEventTouchDragInside|UIControlEventTouchDragEnter];
+    [_addCommentButton addTarget:self action:@selector(addCommentButtonTouchUp) forControlEvents:UIControlEventTouchUpInside|UIControlEventTouchDragOutside|UIControlEventTouchDragExit|UIControlEventTouchCancel];
+}
+
+- (void)addCommentButtonTouchDown
+{
+    _addCommentButton.backgroundColor = [UIColor colorWithRed:50.0/255.0 green:98.0/255.0 blue:162.0/255.0 alpha:1.0];
+    [_addCommentButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+}
+
+
+- (void)addCommentButtonTouchUp
+{
+    _addCommentButton.backgroundColor = [UIColor colorWithRed:240.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1.0];
+    [_addCommentButton setTitleColor:[UIColor colorWithRed:50.0/255.0 green:98.0/255.0 blue:162.0/255.0 alpha:1.0] forState:UIControlStateNormal];
 }
 
 - (void)setupParallaxView

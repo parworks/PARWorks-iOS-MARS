@@ -15,6 +15,11 @@
     return [UIFont fontWithName:@"Avenir-Medium" size:size];
 }
 
++ (UIFont*)heavyParworksFontWithSize:(float)size
+{
+    return [UIFont fontWithName:@"Avenir-Heavy" size:size];
+}
+
 + (UIFont*)parworksFontWithSize:(float)size
 {
     return [UIFont fontWithName:@"Avenir-Roman" size:size];

@@ -56,7 +56,8 @@
         [self.contentView addSubview:_contentTextView];
         
         self.removeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [_removeButton setTitle:@"X" forState:UIControlStateNormal];
+        [_removeButton setBackgroundImage:[UIImage imageNamed:@"comment_options.png"] forState:UIControlStateNormal];
+        [_removeButton setBackgroundImage:[UIImage imageNamed:@"comment_options_down.png"] forState:UIControlStateHighlighted];
         [_removeButton setHidden:YES];
         [_removeButton addTarget:self action:@selector(removeButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_removeButton];
@@ -101,12 +102,13 @@
 }
 
 - (void)removeButtonPressed{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                    message:@"Are you sure you want to remove your comment?"
-                                                   delegate:self
-                                          cancelButtonTitle:@"No"
-                                          otherButtonTitles:@"Yes", nil];
-    [alert show];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                             delegate:self
+                                                    cancelButtonTitle:@"Cancel"
+                                               destructiveButtonTitle:@"Delete Comment"
+                                                    otherButtonTitles:nil];
+
+    [actionSheet showInView:self.superview];
 }
 
 - (void)setComment:(ARSiteComment *)comment
@@ -154,11 +156,11 @@
     [[NSNotificationCenter defaultCenter] removeObserver: self];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if(buttonIndex == [alertView cancelButtonIndex])
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(buttonIndex == [actionSheet cancelButtonIndex])
         return;
     
-    [_delegate removeComment:_comment atIndexPath:_indexPath];
+     [_delegate removeComment:_comment atIndexPath:_indexPath];
 }
 
 @end
