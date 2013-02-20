@@ -97,7 +97,6 @@
         _shingleBody.vel = cpv(0,0);
         _shingleBody.angVel = 0;
         _shingleBody.pos = cpv(_cardBody.pos.x, _shingleBody.pos.y);
-        NSLog(@"Froze shingle");
     }
     
     _recentY = _recentY * 0.8 + _shingleBody.pos.y * 0.2;
