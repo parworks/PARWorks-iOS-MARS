@@ -12,6 +12,7 @@
 #import "UAPush.h"
 #import "UIViewController+Transitions.h"
 #import "UIView+ImageCapture.h"
+#import "UIViewAdditions.h"
 
 
 @implementation PVIntroViewController
@@ -62,9 +63,13 @@
 - (void)showHint
 {
     PVIntroCard *card = (PVIntroCard *)[_collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+    CGRect frame = card.swipeImageView.frame;
+
     card.swipeImageView.alpha = 0.0;
+    [card.swipeImageView setFrameX:(card.swipeImageView.frame.origin.x + 20)];
     [UIView animateWithDuration:0.2 animations:^{
         card.swipeImageView.alpha = 1.0;
+        card.swipeImageView.frame = frame;
     }];
 }
 

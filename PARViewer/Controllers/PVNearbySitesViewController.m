@@ -118,11 +118,18 @@
             [c.contentView setBackgroundColor: [UIColor whiteColor]];
             [c setSelectionStyle: UITableViewCellSelectionStyleNone];
             
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 10.0, c.contentView.frame.size.width, 24.0)];
-            [label setText:@"No sites nearby."];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 10.0, c.contentView.frame.size.width-20, 48.0)];
             [label setFont:[UIFont parworksFontWithSize:18.0]];
             [label setTextAlignment:NSTextAlignmentCenter];
             [label setTextColor:[UIColor colorWithRed:115.0/255.0 green:115.0/255.0 blue:115.0/255.0 alpha:1.0]];
+            [label setNumberOfLines:0];
+            
+            if ([CLLocationManager locationServicesEnabled]) {
+                [label setText:@"Enable location services to view nearby sites."];
+            } else {
+                [label setText:@"No sites nearby."];
+            }
+
             [c.contentView addSubview:label];
         }
         
