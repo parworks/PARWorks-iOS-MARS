@@ -89,6 +89,22 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     
     [self setupNavigationItem];
     [self setupParallaxView];
+    
+    [_addCommentButton addTarget:self action:@selector(addCommentButtonTouchDown) forControlEvents:UIControlEventTouchDown|UIControlEventTouchDragInside|UIControlEventTouchDragEnter];
+    [_addCommentButton addTarget:self action:@selector(addCommentButtonTouchUp) forControlEvents:UIControlEventTouchUpInside|UIControlEventTouchDragOutside|UIControlEventTouchDragExit|UIControlEventTouchCancel];
+}
+
+- (void)addCommentButtonTouchDown
+{
+    _addCommentButton.backgroundColor = [UIColor colorWithRed:50.0/255.0 green:98.0/255.0 blue:162.0/255.0 alpha:1.0];
+    [_addCommentButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+}
+
+
+- (void)addCommentButtonTouchUp
+{
+    _addCommentButton.backgroundColor = [UIColor colorWithRed:240.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1.0];
+    [_addCommentButton setTitleColor:[UIColor colorWithRed:50.0/255.0 green:98.0/255.0 blue:162.0/255.0 alpha:1.0] forState:UIControlStateNormal];
 }
 
 - (void)setupParallaxView
@@ -194,7 +210,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 
 - (void)setupMapView
 {
-    _identifierLabel.text = ([_site.name length] > 0) ? _site.name :  @"No site name available";
+    _identifierLabel.text = ([_site.name length] > 0) ? _site.name :  @"No name available";
     _addressLabel.text = ([_site.address length] > 0) ? _site.address : @"No address available";   
     _descriptionTextView.text = ([_site.siteDescription length] > 0) ? _site.siteDescription : @"No description available";
     
@@ -210,7 +226,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
         region.span.longitudeDelta = 0.005;
         [_mapView setRegion:region];
         
-        MapAnnotation *annotation = [[MapAnnotation alloc] initWithCoordinate:_site.location andTitle:_identifierLabel.text andSubtitle:_addressLabel.text];
+        MapAnnotation *annotation = [[MapAnnotation alloc] initWithSite:_site];
         [_mapView addAnnotation:annotation];
     }
 }

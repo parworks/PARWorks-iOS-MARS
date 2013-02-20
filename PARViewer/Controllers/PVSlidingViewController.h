@@ -10,6 +10,6 @@
 
 @interface PVSlidingViewController : JSSlidingViewController
 
-- (void)showIntroController;
+- (void)showIntroControllerAnimated:(BOOL)animated;
 
 @end

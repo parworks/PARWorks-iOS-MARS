@@ -30,11 +30,11 @@
         bounds = self.view.bounds;
     }
     CALayer *mainLayer = [CALayer layer];
-    mainLayer.frame = bounds;
+    mainLayer.frame = mainWindow.bounds;
     mainLayer.backgroundColor = [[UIColor clearColor] CGColor];
     mainLayer.contents = (__bridge id)([backgroundImage CGImage]);
     mainLayer.anchorPoint = CGPointMake(0, 0.5);
-    mainLayer.position = CGPointMake(0, (bounds.size.height/2) + windowOffset);
+    mainLayer.position = CGPointMake(0, (mainWindow.bounds.size.height/2));
     [mainWindow.layer addSublayer:mainLayer];
     objc_setAssociatedObject(mainWindow, kUIViewController_Transitions_MainLayerKey, mainLayer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
@@ -42,7 +42,7 @@
     [mainLayer addSublayer:transformLayer];
     
     CALayer *contentsLayer = [CALayer layer];
-    contentsLayer.frame = CGRectMake(0, 0, bounds.size.width, bounds.size.height);
+    contentsLayer.frame = CGRectMake(0, windowOffset, bounds.size.width, bounds.size.height);
     contentsLayer.contentsGravity = kCAGravityResize;
     contentsLayer.contents = (id)contentImage.CGImage;
     [transformLayer addSublayer:contentsLayer];
