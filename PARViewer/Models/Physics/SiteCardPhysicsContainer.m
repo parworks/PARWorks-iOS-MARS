@@ -8,7 +8,7 @@
 
 #import "SiteCardPhysicsContainer.h"
 
-#define SHINGLE_STOP_THRESHOLD 0.34
+#define SHINGLE_STOP_THRESHOLD 3.54
 
 @implementation SiteCardPhysicsContainer
 
@@ -70,9 +70,11 @@
     _cardBody.vel = CGPointMake(0, 0);
     _cardBody.pos = pos;
     
-    BOOL shouldStopShingle = (powf(_shingleBody.vel.x,2) + powf(_shingleBody.vel.y, 2)) < SHINGLE_STOP_THRESHOLD;
+    float shingleStop = (powf(_shingleBody.vel.x,2) + powf(_shingleBody.vel.y, 2));
+    BOOL shouldStopShingle = shingleStop  < SHINGLE_STOP_THRESHOLD;
     if (shouldStopShingle) {
         _shingleBody.vel = CGPointMake(0, 0);
+        _shingleBody.angVel = 0;
     }
 }
 
@@ -86,9 +88,14 @@
 {
     cpVect reference = _cardBody.pos;
     
-    BOOL shouldRoundShinglePos = (powf(_shingleBody.vel.x,2) + powf(_shingleBody.vel.y, 2)) < SHINGLE_STOP_THRESHOLD;
-    if (shouldRoundShinglePos)
+    float shingleStop = (powf(_shingleBody.vel.x,2) + powf(_shingleBody.vel.y, 2));
+//    NSLog(@"shingle stop: %f");
+    BOOL shouldRoundShinglePos = shingleStop < SHINGLE_STOP_THRESHOLD;
+    if (shouldRoundShinglePos) {
+        _shingleBody.vel = cpv(0,0);
         return CGPointMake(roundf(_shingleBody.pos.x - reference.x), roundf(_shingleBody.pos.y - reference.y));
+        
+    }
     else
         return CGPointMake(_shingleBody.pos.x - reference.x, _shingleBody.pos.y - reference.y);
 
