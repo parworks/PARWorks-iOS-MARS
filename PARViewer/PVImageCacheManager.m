@@ -160,11 +160,14 @@ static PVImageCacheManager * sharedImageCacheManager;
         if (!img)
             return nil;
         
-        GPUImagePicture * picture = [[GPUImagePicture alloc] initWithImage:[img scaledImage: 0.15] smoothlyScaleOutput: NO];
+        float desiredWidth = 200;
+        float scaleFactor = desiredWidth / img.size.width;
+        
+        GPUImagePicture * picture = [[GPUImagePicture alloc] initWithImage:[img scaledImage: scaleFactor] smoothlyScaleOutput: NO];
         GPUImageGaussianBlurFilter * blurFilter = [[GPUImageGaussianBlurFilter alloc] init];
         GPUImageBrightnessFilter * brightnessFilter = [[GPUImageBrightnessFilter alloc] init];
         
-        [blurFilter setBlurSize: 0.7];
+        [blurFilter setBlurSize: 0.5];
         [picture addTarget: blurFilter];
         [blurFilter addTarget: brightnessFilter];
         [brightnessFilter setBrightness: -0.3];

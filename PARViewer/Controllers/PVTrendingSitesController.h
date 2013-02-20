@@ -22,7 +22,7 @@
 @property (weak, nonatomic) IBOutlet PVTrendingBlurredBackgroundView *backgroundView;
 @property (weak, nonatomic) IBOutlet PSUICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
-@property (weak, nonatomic) IBOutlet PVLoadingView *loadingView;
+@property (weak, nonatomic) IBOutlet ARLoadingView *loadingView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
 - (void)viewDidLoad;

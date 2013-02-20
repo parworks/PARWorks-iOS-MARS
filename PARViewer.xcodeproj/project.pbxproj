@@ -15,6 +15,7 @@
 		42028A1316C24A3D002FE1C2 /* PVMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42028A1116C24A3C002FE1C2 /* PVMapViewController.xib */; };
 		4234B4C216CB1833000805FA /* missing_image_300x150@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4234B4C116CB1833000805FA /* missing_image_300x150@2x.png */; };
 		4252DD4E16D3628E0029D635 /* PVButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4252DD4D16D3628E0029D635 /* PVButton.m */; };
+		4252DD7016D479260029D635 /* ARLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4252DD6F16D479260029D635 /* ARLoadingView.m */; };
 		425345A616BE768E00D5A00A /* leave_comment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 425345A416BE768D00D5A00A /* leave_comment@2x.png */; };
 		425345A716BE768E00D5A00A /* missing_image_78x78@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 425345A516BE768D00D5A00A /* missing_image_78x78@2x.png */; };
 		425345AA16BE769900D5A00A /* leave_comment.png in Resources */ = {isa = PBXBuildFile; fileRef = 425345A816BE769900D5A00A /* leave_comment.png */; };
@@ -193,7 +194,6 @@
 		438682D016CC8337003DEEDB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 438682CF16CC8337003DEEDB /* Default-568h@2x.png */; };
 		438682D216CC8351003DEEDB /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 438682D116CC8351003DEEDB /* Default@2x.png */; };
 		438682D416CC835D003DEEDB /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 438682D316CC835D003DEEDB /* Default.png */; };
-		4386830F16CCA107003DEEDB /* PVLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4386830E16CCA107003DEEDB /* PVLoadingView.m */; };
 		43988B2D16BE5CA0005DB5E8 /* bar_item_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43988B2C16BE5CA0005DB5E8 /* bar_item_back@2x.png */; };
 		43998B9716BDD164008B34C2 /* icon_nearby.png in Resources */ = {isa = PBXBuildFile; fileRef = 43998B9316BDD164008B34C2 /* icon_nearby.png */; };
 		43998B9816BDD164008B34C2 /* icon_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 43998B9416BDD164008B34C2 /* icon_search.png */; };
@@ -442,6 +442,8 @@
 		4234B4C116CB1833000805FA /* missing_image_300x150@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "missing_image_300x150@2x.png"; sourceTree = "<group>"; };
 		4252DD4C16D3628E0029D635 /* PVButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVButton.h; sourceTree = "<group>"; };
 		4252DD4D16D3628E0029D635 /* PVButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVButton.m; sourceTree = "<group>"; };
+		4252DD6E16D479260029D635 /* ARLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARLoadingView.h; sourceTree = "<group>"; };
+		4252DD6F16D479260029D635 /* ARLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLoadingView.m; sourceTree = "<group>"; };
 		425345A416BE768D00D5A00A /* leave_comment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "leave_comment@2x.png"; sourceTree = "<group>"; };
 		425345A516BE768D00D5A00A /* missing_image_78x78@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "missing_image_78x78@2x.png"; sourceTree = "<group>"; };
 		425345A816BE769900D5A00A /* leave_comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leave_comment.png; sourceTree = "<group>"; };
@@ -721,8 +723,6 @@
 		438682CF16CC8337003DEEDB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		438682D116CC8351003DEEDB /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		438682D316CC835D003DEEDB /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		4386830D16CCA107003DEEDB /* PVLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVLoadingView.h; sourceTree = "<group>"; };
-		4386830E16CCA107003DEEDB /* PVLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVLoadingView.m; sourceTree = "<group>"; };
 		43988B2C16BE5CA0005DB5E8 /* bar_item_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar_item_back@2x.png"; sourceTree = "<group>"; };
 		43998B9316BDD164008B34C2 /* icon_nearby.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_nearby.png; sourceTree = "<group>"; };
 		43998B9416BDD164008B34C2 /* icon_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_search.png; sourceTree = "<group>"; };
@@ -1469,6 +1469,8 @@
 				437C3F8316BE249800822EDD /* GridCellView.m */,
 				437C3F8416BE249800822EDD /* GridView.h */,
 				437C3F8516BE249800822EDD /* GridView.m */,
+				4252DD6E16D479260029D635 /* ARLoadingView.h */,
+				4252DD6F16D479260029D635 /* ARLoadingView.m */,
 				437C3F8616BE249800822EDD /* Overlay */,
 				437C3F9516BE249800822EDD /* PointCloudView.h */,
 				437C3F9616BE249800822EDD /* PointCloudView.m */,
@@ -1656,8 +1658,6 @@
 		43E9F71B16BFA41800AC2672 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4386830D16CCA107003DEEDB /* PVLoadingView.h */,
-				4386830E16CCA107003DEEDB /* PVLoadingView.m */,
 				A097AFA316CC89990016ACF8 /* MBProgressHUD.h */,
 				A097AFA416CC89990016ACF8 /* MBProgressHUD.m */,
 				431BD56A16C5F9930000C312 /* PVFlowLayout.h */,
@@ -2285,7 +2285,6 @@
 				4345702616C9CE93006E04FD /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
 				A00F91B016C82DDB00F1B826 /* UIViewController+Transitions.m in Sources */,
 				A00F91B316C82E2F00F1B826 /* UIView+ImageCapture.m in Sources */,
-				4386830F16CCA107003DEEDB /* PVLoadingView.m in Sources */,
 				A097AFA516CC89990016ACF8 /* MBProgressHUD.m in Sources */,
 				A07578AA16CE6D88009B8654 /* PVIntroViewController.m in Sources */,
 				A07578B416CE709D009B8654 /* PVIntroCard.m in Sources */,
@@ -2295,6 +2294,7 @@
 				A01B463016D341B300FE8BD5 /* ARCameraOverlayTooltip.m in Sources */,
 				4252DD4E16D3628E0029D635 /* PVButton.m in Sources */,
 				43D3E26D16D42EF000D0ABEA /* PVSlidingViewController.m in Sources */,
+				4252DD7016D479260029D635 /* ARLoadingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

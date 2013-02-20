@@ -34,8 +34,8 @@
 - (void)populateImageViews
 {
     _imageViewRect = self.bounds;
-    _imageViewRect.origin.x -= 50;
-    _imageViewRect.size.width += 100;
+    _imageViewRect.origin.x -= 70;
+    _imageViewRect.size.width += 140;
     
     _baseImageView = [[UIImageView alloc] initWithFrame: _imageViewRect];
     [_baseImageView setContentMode: UIViewContentModeScaleAspectFill];
@@ -62,13 +62,13 @@
     _baseIndex = newBaseIndex;
     _nextIndex = newNextIndex;
     
-    float fraction = sinf((index - _baseIndex) * M_PI / 2);
+    float fraction = index-_baseIndex;
     [self refreshGPUImages];
     
     [_baseImageView setAlpha: 1];
-    [_baseImageView setTransform: CGAffineTransformMakeTranslation(-fraction * 40, 0)];
+    [_baseImageView setTransform: CGAffineTransformMakeTranslation(-fraction * 70, 0)];
     [_nextImageView setAlpha: fraction];
-    [_nextImageView setTransform: CGAffineTransformMakeTranslation((1-fraction) * 40, 0)];
+    [_nextImageView setTransform: CGAffineTransformMakeTranslation((1-fraction) * 70, 0)];
 }
 
 - (void)imageReady:(NSNotification*)notif
