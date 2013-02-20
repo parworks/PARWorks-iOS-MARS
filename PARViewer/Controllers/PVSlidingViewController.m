@@ -23,18 +23,25 @@
 }
 
 - (void)showIntroControllerAnimated:(BOOL)animated
-{
+{    
     PVIntroViewController *iv = [[PVIntroViewController alloc] initWithNibName:@"PVIntroViewController" bundle:nil];
     [self addChildViewController:iv];
     [iv.view setFrame: self.view.bounds];
     [self.view addSubview:iv.view];
     
-    CGFloat duration = animated ? 0.5 : 0.0;
+    CGPoint center = iv.view.center;
+    CGFloat scaleX = 57/self.view.bounds.size.width;
+    CGFloat scaleY = 46/self.view.bounds.size.height;
+    CGAffineTransform t = CGAffineTransformMakeScale(scaleX, scaleY);
+    
+    CGFloat duration = animated ? 0.3 : 0.0;
+    iv.view.center = CGPointMake(self.view.bounds.size.width - (57/2.0), (46/2));
     iv.view.alpha = 0.0;
-    iv.view.transform = CGAffineTransformMakeScale(2, 2);
+    iv.view.transform = t;
     [UIView animateWithDuration:duration animations:^{
         iv.view.alpha = 1.0;
         iv.view.transform = CGAffineTransformMakeScale(1, 1);
+        iv.view.center = center;
     } completion:^(BOOL finished) {
         [iv didMoveToParentViewController:self];
     }];
