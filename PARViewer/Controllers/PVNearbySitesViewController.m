@@ -37,6 +37,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.annotations = [NSMutableArray array];
+    
     // Do any additional setup after loading the view from its nib.
     self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, PARALLAX_IMAGE_HEIGHT)];
     _mapView.contentMode = UIViewContentModeScaleAspectFill;
@@ -245,7 +247,7 @@
                     bottomRightCoordinate.longitude = fmax(bottomRightCoordinate.longitude, site.location.longitude);
                 }
                 
-                MapAnnotation *annotation = [[MapAnnotation alloc] initWithCoordinate:site.location andTitle:site.identifier andSubtitle:site.address];
+                MapAnnotation *annotation = [[MapAnnotation alloc] initWithSite:site];
                 [_mapView addAnnotation:annotation];
                 [self.annotations addObject:annotation];
             }
@@ -295,10 +297,25 @@
             annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationReuseIdentifier];
             annotationView.image = [UIImage imageNamed:@"map_marker.png"];
             annotationView.centerOffset = CGPointMake(1.0, -14.0);
+            annotationView.canShowCallout = YES;
         }
+        
+        UIButton *disclosureButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        disclosureButton.frame = CGRectMake(0, 0, 23, 23);
+        disclosureButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+        disclosureButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        
+        annotationView.rightCalloutAccessoryView = disclosureButton;
         
         return annotationView;
     }
+}
+
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    ARSite * site = (ARSite*)[[self.annotations objectAtIndex:[self.annotations indexOfObjectIdenticalTo:view.annotation]] valueForKey:@"_site"];    
+    PVSiteDetailViewController * siteDetailController = [[PVSiteDetailViewController alloc] initWithSite: site];
+    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:siteDetailController] animated:YES completion:NULL];
 }
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{

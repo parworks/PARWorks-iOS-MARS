@@ -13,7 +13,6 @@
 
 @property (nonatomic, strong) ARSite * site;
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
-@property (nonatomic, strong) UIButton * takePhotoButton;
 
 - (id)initWithSite:(ARSite *)site;
 

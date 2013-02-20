@@ -5,10 +5,11 @@
 @implementation MapAnnotation
 
 
-- (id)initWithCoordinate:(CLLocationCoordinate2D)c andTitle:(NSString*)sTitle andSubtitle:(NSString*)sSubtitle {
-	self.coordinate = c;
-    self.title = sTitle;
-    self.subtitle = sSubtitle;
+- (id)initWithSite:(ARSite*)site{
+    _site = site;
+	self.coordinate = _site.location;
+    self.title = ([_site.name length] > 0) ? _site.name :  @"No name available";
+    self.subtitle = ([_site.address length] > 0) ? _site.address : @"No address available";
     
 	return self;
 }
