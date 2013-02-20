@@ -524,11 +524,13 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if ([scrollView contentSize].height < scrollView.frame.size.height + 195)
+    if ([scrollView contentSize].height < scrollView.frame.size.height + 195) {
+        [[[[self.navigationItem titleView] subviews] lastObject] setAlpha: 0];
         return;
+    }
     
     float titleAlpha = fmaxf(0, fminf(1, ([scrollView contentOffset].y - 195) / 20.0));
-    [[self.navigationItem titleView] setAlpha: titleAlpha];
+    [[[[self.navigationItem titleView] subviews] lastObject] setAlpha: titleAlpha];
 
     if ((titleAlpha > 0) && ([_takePhotoButton frame].origin.x == 0)) {
         [UIView beginAnimations:nil context:nil];
