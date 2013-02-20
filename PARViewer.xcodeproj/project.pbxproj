@@ -231,6 +231,10 @@
 		43D3E27E16D49BAA00D0ABEA /* comment_options@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D3E27D16D49BA900D0ABEA /* comment_options@2x.png */; };
 		43D3E28B16D49E7C00D0ABEA /* comment_options_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D3E28A16D49E7C00D0ABEA /* comment_options_down.png */; };
 		43D3E28D16D49E8500D0ABEA /* comment_options_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D3E28C16D49E8500D0ABEA /* comment_options_down@2x.png */; };
+		43D3E29316D4B6C900D0ABEA /* macbook_3.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D3E29116D4B6C900D0ABEA /* macbook_3.5@2x.png */; };
+		43D3E29416D4B6C900D0ABEA /* macbook_4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D3E29216D4B6C900D0ABEA /* macbook_4@2x.png */; };
+		43D3E2A116D4B70800D0ABEA /* macbook_3.5.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D3E29F16D4B70800D0ABEA /* macbook_3.5.png */; };
+		43D3E2A216D4B70800D0ABEA /* macbook_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D3E2A016D4B70800D0ABEA /* macbook_4.png */; };
 		43D526B416C72AE700A89053 /* UIImageAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D526B316C72AE700A89053 /* UIImageAdditions.m */; };
 		43E6733D16BB8A3B007E7708 /* PVImageCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E6733C16BB8A3A007E7708 /* PVImageCacheManager.m */; };
 		43E6734216BB94DF007E7708 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E6734116BB94DF007E7708 /* CoreMedia.framework */; };
@@ -771,6 +775,10 @@
 		43D3E27D16D49BA900D0ABEA /* comment_options@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comment_options@2x.png"; sourceTree = "<group>"; };
 		43D3E28A16D49E7C00D0ABEA /* comment_options_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comment_options_down.png; sourceTree = "<group>"; };
 		43D3E28C16D49E8500D0ABEA /* comment_options_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comment_options_down@2x.png"; sourceTree = "<group>"; };
+		43D3E29116D4B6C900D0ABEA /* macbook_3.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "macbook_3.5@2x.png"; path = "Intro/macbook_3.5@2x.png"; sourceTree = "<group>"; };
+		43D3E29216D4B6C900D0ABEA /* macbook_4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "macbook_4@2x.png"; path = "Intro/macbook_4@2x.png"; sourceTree = "<group>"; };
+		43D3E29F16D4B70800D0ABEA /* macbook_3.5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = macbook_3.5.png; sourceTree = "<group>"; };
+		43D3E2A016D4B70800D0ABEA /* macbook_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = macbook_4.png; sourceTree = "<group>"; };
 		43D526B216C72AE700A89053 /* UIImageAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageAdditions.h; sourceTree = "<group>"; };
 		43D526B316C72AE700A89053 /* UIImageAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageAdditions.m; sourceTree = "<group>"; };
 		43E6733B16BB8A3A007E7708 /* PVImageCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVImageCacheManager.h; sourceTree = "<group>"; };
@@ -1563,6 +1571,8 @@
 				43998BA016BDD24A008B34C2 /* icon_search@2x.png */,
 				43998BA116BDD24A008B34C2 /* icon_technology@2x.png */,
 				43998BA216BDD24A008B34C2 /* icon_trending@2x.png */,
+				43D3E29116D4B6C900D0ABEA /* macbook_3.5@2x.png */,
+				43D3E29216D4B6C900D0ABEA /* macbook_4@2x.png */,
 				434524A116C0EC2F005D0636 /* shingle_background@2x.png */,
 				4234B4C116CB1833000805FA /* missing_image_300x150@2x.png */,
 				425345A516BE768D00D5A00A /* missing_image_78x78@2x.png */,
@@ -1762,6 +1772,8 @@
 				A01B464B16D3683500FE8BD5 /* coke_4.png */,
 				A01B464C16D3683500FE8BD5 /* dollar_3.5.png */,
 				A01B464D16D3683500FE8BD5 /* dollar_4.png */,
+				43D3E29F16D4B70800D0ABEA /* macbook_3.5.png */,
+				43D3E2A016D4B70800D0ABEA /* macbook_4.png */,
 				A01B464E16D3683500FE8BD5 /* intro1_3.5.png */,
 				A01B464F16D3683500FE8BD5 /* intro1_4.png */,
 				A01B465016D3683500FE8BD5 /* intro2_3.5.png */,
@@ -2195,6 +2207,10 @@
 				4252DD8916D49E390029D635 /* comment_options.png in Resources */,
 				43D3E28B16D49E7C00D0ABEA /* comment_options_down.png in Resources */,
 				43D3E28D16D49E8500D0ABEA /* comment_options_down@2x.png in Resources */,
+				43D3E29316D4B6C900D0ABEA /* macbook_3.5@2x.png in Resources */,
+				43D3E29416D4B6C900D0ABEA /* macbook_4@2x.png in Resources */,
+				43D3E2A116D4B70800D0ABEA /* macbook_3.5.png in Resources */,
+				43D3E2A216D4B70800D0ABEA /* macbook_4.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -130,11 +130,11 @@
 {
     if (!_topExampleView) {
         _topExampleView = [PVIntroExampleView viewFromNIB];
-        _topExampleView.imageView.image = [UIImage imageNamed:[self sizedAssetNameWithName:@"coke"]];
+        _topExampleView.imageView.image = [UIImage imageNamed:[self sizedAssetNameWithName:@"macbook"]];
         CGFloat offsetY = [PVAppDelegate isiPhone5] ? 62 : 55;
         _topExampleView.frame = CGRectMake(24, offsetY, _topExampleView.frame.size.width, _topExampleView.frame.size.height);
-        _topExampleView.label.text = @"Coca-Cola Can";
-        _topExampleView.siteName = @"coke";
+        _topExampleView.label.text = @"Macbook Keyboard";
+        _topExampleView.siteName = @"macbookkeyboard";
         [_innerCard addSubview:_topExampleView];
     }
     return _topExampleView;
