@@ -10,7 +10,7 @@
 
 @protocol PVCommentTableViewCellDelegate;
 
-@interface PVCommentTableViewCell : UITableViewCell{
+@interface PVCommentTableViewCell : UITableViewCell<UIActionSheetDelegate>{
     CALayer * _borderLayer;
     BOOL _first;
 }
