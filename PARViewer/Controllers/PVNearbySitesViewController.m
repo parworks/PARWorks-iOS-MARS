@@ -38,6 +38,7 @@
 {
     [super viewDidLoad];
     self.annotations = [NSMutableArray array];
+    _firstNearbySitesLoadOccurred = NO;
     
     // Do any additional setup after loading the view from its nib.
     self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, PARALLAX_IMAGE_HEIGHT)];
@@ -104,6 +105,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (!_firstNearbySitesLoadOccurred) return 0;
+    
     if([_nearbySites count] == 0)
         return 1;
     else
@@ -125,7 +128,7 @@
             [label setTextColor:[UIColor colorWithRed:115.0/255.0 green:115.0/255.0 blue:115.0/255.0 alpha:1.0]];
             [label setNumberOfLines:0];
             
-            if ([CLLocationManager locationServicesEnabled]) {
+            if (![CLLocationManager locationServicesEnabled]) {
                 [label setText:@"Enable location services to view nearby sites."];
             } else {
                 [label setText:@"No sites nearby."];
@@ -346,6 +349,7 @@
     [[ARManager shared] findNearbySites:NEARBY_SEARCH_RADIUS withCompletionBlock:^(NSArray* sites, CLLocation * location){
         __self.nearbySites = sites;
         bLoadedOnce = NO;
+        _firstNearbySitesLoadOccurred = YES;
         [__self refetchAnnotations:YES];
         [__self.tableView reloadData];
         [__self.mapRecenterButton setIsAnimating:NO];

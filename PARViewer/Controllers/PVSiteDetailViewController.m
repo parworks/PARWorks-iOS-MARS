@@ -190,7 +190,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     
     [self.navigationItem setUnpaddedLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:customButton] animated:NO];
     [self.navigationItem setLeftJustifiedTitle: _site.name];
-    [self.navigationItem.titleView setAlpha: 0];
+    [[[self.navigationItem.titleView subviews] lastObject] setAlpha: 0];
     [self setupRightNavigationItem];
 }
 

@@ -45,6 +45,7 @@
 
     [self addTarget:self action:@selector(touchDown) forControlEvents:UIControlEventTouchDown|UIControlEventTouchDragInside];
     [self addTarget:self action:@selector(touchUp) forControlEvents:UIControlEventTouchUpInside|UIControlEventTouchDragOutside];
+    [self addTarget:self action:@selector(fireAugmentation) forControlEvents:UIControlEventTouchUpInside];
     
     self.layer.shadowColor = [UIColor blackColor].CGColor;
     self.layer.shadowOffset = CGSizeZero;
@@ -53,9 +54,14 @@
     self.layer.shadowRadius = 3.0;
 }
 
+- (void)fireAugmentation
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"augmentButtonTapped" object:_siteName];
+}
+
 - (void)touchDown
 {
-    [UIView animateWithDuration:0.2 animations:^{
+    [UIView animateWithDuration:0.1 animations:^{
         _dimView.alpha = 1.0;
     }];
 }
@@ -65,8 +71,6 @@
     [UIView animateWithDuration:0.2 animations:^{
         _dimView.alpha = 0.0;
     }];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"augmentButtonTapped" object:_siteName];
 }
 
 

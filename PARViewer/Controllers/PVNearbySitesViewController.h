@@ -16,6 +16,7 @@
     MKCoordinateRegion region;
     BOOL bLoadedOnce;
     NSTimer *_panTimer;
+    BOOL _firstNearbySitesLoadOccurred;
 }
 
 @property (nonatomic, strong) MKMapView *mapView;
