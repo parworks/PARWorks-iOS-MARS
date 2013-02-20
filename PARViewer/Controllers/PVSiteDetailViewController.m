@@ -71,6 +71,9 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
         [self setupRightNavigationItem];
     }
     
+    [_parallaxView updateContentOffset];
+    [self scrollViewDidScroll:[_parallaxView scrollView]];
+    
     // register to receive updates about the site in the future
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:NOTIF_SITE_UPDATED object: self.site];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:NOTIF_SITE_COMMENTS_UPDATED object: self.site];
