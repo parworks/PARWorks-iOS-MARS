@@ -34,7 +34,7 @@
     CGFloat scaleY = 46/self.view.bounds.size.height;
     CGAffineTransform t = CGAffineTransformMakeScale(scaleX, scaleY);
     
-    CGFloat duration = animated ? 0.3 : 0.0;
+    CGFloat duration = animated ? 0.4 : 0.0;
     iv.view.center = CGPointMake(self.view.bounds.size.width - (57/2.0), (46/2));
     iv.view.alpha = 0.0;
     iv.view.transform = t;

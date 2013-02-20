@@ -116,6 +116,8 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     [_headerImageView setOverlayImageViewContentMode: UIViewContentModeScaleAspectFill];
     [_headerImageView setShowOutlineViewsOnly:YES];
     [_headerImageView setAnimateOutlineViewDrawing: NO];
+    [_headerImageView.loadingView setLoadingViewStyle:ARLoadingViewStyleBlack];
+    [_headerImageView setLoadingViewPoint:CGPointMake(_headerImageView.center.x, 155.0)];
     [self updateHeaderImageView: nil];
     
     _tableView.backgroundColor = [UIColor clearColor];

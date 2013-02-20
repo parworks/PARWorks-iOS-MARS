@@ -84,7 +84,7 @@
     CGFloat scaleX = 57/self.view.bounds.size.width;
     CGFloat scaleY = 46/self.view.bounds.size.height;
     CGAffineTransform t = CGAffineTransformMakeScale(scaleX, scaleY);
-    [UIView animateWithDuration:0.3 animations:^{
+    [UIView animateWithDuration:0.4 animations:^{
         self.view.alpha = 0.0;
         self.view.center = CGPointMake(self.view.bounds.size.width - (57/2.0), (46/2));
         self.view.transform = t;
