@@ -221,6 +221,8 @@
 		43D3E26816D42E2600D0ABEA /* bar_item_intro.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D3E26716D42E2600D0ABEA /* bar_item_intro.png */; };
 		43D3E26A16D42E3000D0ABEA /* bar_item_intro@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D3E26916D42E3000D0ABEA /* bar_item_intro@2x.png */; };
 		43D3E26D16D42EF000D0ABEA /* PVSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D3E26C16D42EF000D0ABEA /* PVSlidingViewController.m */; };
+		43D3E26F16D47CF600D0ABEA /* map_icon_recenter_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D3E26E16D47CF600D0ABEA /* map_icon_recenter_background.png */; };
+		43D3E27116D47CFF00D0ABEA /* map_icon_recenter_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D3E27016D47CFF00D0ABEA /* map_icon_recenter_background@2x.png */; };
 		43D526B416C72AE700A89053 /* UIImageAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D526B316C72AE700A89053 /* UIImageAdditions.m */; };
 		43E6733D16BB8A3B007E7708 /* PVImageCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E6733C16BB8A3A007E7708 /* PVImageCacheManager.m */; };
 		43E6734216BB94DF007E7708 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E6734116BB94DF007E7708 /* CoreMedia.framework */; };
@@ -751,6 +753,8 @@
 		43D3E26916D42E3000D0ABEA /* bar_item_intro@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar_item_intro@2x.png"; sourceTree = "<group>"; };
 		43D3E26B16D42EEF00D0ABEA /* PVSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVSlidingViewController.h; sourceTree = "<group>"; };
 		43D3E26C16D42EF000D0ABEA /* PVSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVSlidingViewController.m; sourceTree = "<group>"; };
+		43D3E26E16D47CF600D0ABEA /* map_icon_recenter_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_icon_recenter_background.png; sourceTree = "<group>"; };
+		43D3E27016D47CFF00D0ABEA /* map_icon_recenter_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map_icon_recenter_background@2x.png"; sourceTree = "<group>"; };
 		43D526B216C72AE700A89053 /* UIImageAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageAdditions.h; sourceTree = "<group>"; };
 		43D526B316C72AE700A89053 /* UIImageAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageAdditions.m; sourceTree = "<group>"; };
 		43E6733B16BB8A3A007E7708 /* PVImageCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVImageCacheManager.h; sourceTree = "<group>"; };
@@ -1119,6 +1123,7 @@
 				4345702716CA0265006E04FD /* shingle_background.png */,
 				4345702816CA0266006E04FD /* search_bar_cover.png */,
 				4345702916CA0266006E04FD /* missing_image_300x150.png */,
+				43D3E26E16D47CF600D0ABEA /* map_icon_recenter_background.png */,
 				4345702A16CA0266006E04FD /* map_inner_shadow_highlighted.png */,
 				4345702B16CA0266006E04FD /* icon_scavenger_hunt.png */,
 				4345702C16CA0267006E04FD /* bar_item_up.png */,
@@ -1777,6 +1782,7 @@
 				43D3E25816D3DE9100D0ABEA /* camera_button_3.5_pressed@2x.png */,
 				43D3E25916D3DE9100D0ABEA /* camera_button_3.5@2x.png */,
 				43D3E25C16D3DEF900D0ABEA /* camera_icon_3.5@2x.png */,
+				43D3E27016D47CFF00D0ABEA /* map_icon_recenter_background@2x.png */,
 				A07BBBE816CA076F00C0C286 /* camera_flash_auto_3.5@2x.png */,
 				A07BBBE916CA076F00C0C286 /* camera_flash_auto_3.5_pressed@2x.png */,
 				A07BBBEA16CA076F00C0C286 /* camera_flash_auto_4@2x.png */,
@@ -2155,6 +2161,8 @@
 				43D3E25D16D3DEF900D0ABEA /* camera_icon_3.5@2x.png in Resources */,
 				43D3E26816D42E2600D0ABEA /* bar_item_intro.png in Resources */,
 				43D3E26A16D42E3000D0ABEA /* bar_item_intro@2x.png in Resources */,
+				43D3E26F16D47CF600D0ABEA /* map_icon_recenter_background.png in Resources */,
+				43D3E27116D47CFF00D0ABEA /* map_icon_recenter_background@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
