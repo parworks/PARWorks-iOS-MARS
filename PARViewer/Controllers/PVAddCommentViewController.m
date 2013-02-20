@@ -37,6 +37,7 @@
         
     _commentTextView.font = [UIFont parworksFontWithSize:18.0];
     
+    CGPathRef shadowPath = [EPUtil newPathForRoundedRect:_addCommentView.layer.bounds radius: 5];
     _addCommentView.contentMode = UIViewContentModeScaleAspectFill;
     _addCommentView.layer.cornerRadius = 5;
     _addCommentView.clipsToBounds = YES;
@@ -44,9 +45,10 @@
     _addCommentContainerView.layer.shadowOffset = CGSizeMake(0, 2.5);
     _addCommentContainerView.layer.shadowRadius = 4;
     _addCommentContainerView.layer.shadowOpacity = 0.7;
-    _addCommentContainerView.layer.shadowPath = [EPUtil newPathForRoundedRect:_addCommentView.layer.bounds radius: 5];
+    _addCommentContainerView.layer.shadowPath = shadowPath;
     _addCommentContainerView.layer.shouldRasterize = YES;
     _addCommentContainerView.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    CGPathRelease(shadowPath);
 
     [[self.navigationBar topItem] setUnpaddedLeftBarButtonItem:[self.navigationBar topItem].leftBarButtonItem animated:NO];
     [[self.navigationBar topItem] setUnpaddedRightBarButtonItem:[self.navigationBar topItem].rightBarButtonItem animated:NO];

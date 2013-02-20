@@ -31,6 +31,7 @@
         [self.layer setCornerRadius: 5];
         
         CGRect posterFrame = CGRectMake(0, 0, kPVSiteCardPosterWidth, kPVSiteCardPosterHeight);
+        CGPathRef shadowPath = [EPUtil newPathForRoundedRect: posterFrame radius: 5];
         self.posterContainer = [[UIView alloc] initWithFrame: posterFrame];
         _posterContainer.backgroundColor = [UIColor clearColor];
         _posterContainer.layer.shadowOffset = CGSizeMake(0, 2.5);
@@ -38,8 +39,9 @@
         _posterContainer.layer.shadowOpacity = 0.7;
         _posterContainer.layer.shadowColor = [[UIColor blackColor] CGColor];
         _posterContainer.layer.cornerRadius = 5;
-        _posterContainer.layer.shadowPath = [EPUtil newPathForRoundedRect: posterFrame radius: 5];
+        _posterContainer.layer.shadowPath = shadowPath;
         [self addSubview:_posterContainer];
+        CGPathRelease(shadowPath);
         
         self.posterImageView = [[ARAugmentedView alloc] initWithFrame: posterFrame];
         self.posterImageView.animateOutlineViewDrawing = NO;
@@ -193,7 +195,7 @@
         self.layer.shadowOffset = CGSizeMake(0, 2.5);
         self.layer.shadowRadius = 3;
         self.layer.shadowOpacity = 0.7;
-        self.layer.shadowPath = CGPathCreateWithRect(self.bounds, NULL);
+        self.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;
         self.layer.shouldRasterize = YES;
         self.layer.rasterizationScale = [UIScreen mainScreen].scale;
 
@@ -252,7 +254,7 @@
 
         CGContextFillEllipseInRect(context, CGRectMake(convertedPosterLeft.x - 2, convertedPosterLeft.y - 4, 4, 4));
         CGContextFillEllipseInRect(context, CGRectMake(convertedPosterRight.x - 2, convertedPosterRight.y - 4, 4, 4));
-        
+
         CGContextSetLineCap(context, kCGLineCapRound);
         CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:1 alpha:0.5].CGColor);
         CGContextSetLineWidth(context, 1);
