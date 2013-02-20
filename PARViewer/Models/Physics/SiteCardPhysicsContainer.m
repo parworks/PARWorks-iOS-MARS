@@ -89,7 +89,6 @@
     cpVect reference = _cardBody.pos;
     
     float shingleStop = (powf(_shingleBody.vel.x,2) + powf(_shingleBody.vel.y, 2));
-//    NSLog(@"shingle stop: %f");
     BOOL shouldRoundShinglePos = shingleStop < SHINGLE_STOP_THRESHOLD;
     if (shouldRoundShinglePos) {
         _shingleBody.vel = cpv(0,0);

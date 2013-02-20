@@ -20,18 +20,23 @@
 {
     [super viewDidLoad];
     _pageControl.numberOfPages = 4;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(augmentTestSite:) name:@"augmentButtonTapped" object:nil];
 }
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver: self];
+    NSLog(@"%@ - %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [super viewWillAppear:animated];
+    if ([self.presentedViewController isKindOfClass:[UIImagePickerController class]]) {
+        [UIView animateWithDuration:1.0 delay:0.1 options:UIViewAnimationOptionAllowAnimatedContent animations:^{
+            self.view.hidden = NO;
+        } completion:nil];
+    }
+    
     [_collectionView registerClass:[PVIntroCard class] forCellWithReuseIdentifier:@"IntroCard"];
     BOOL isiPhone5 = [PVAppDelegate isiPhone5];
     if (isiPhone5) {
@@ -41,7 +46,17 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(augmentTestSite:) name:@"augmentButtonTapped" object:nil];
     _hintTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(showHint) userInfo:nil repeats:NO];
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
+    [super viewWillDisappear:animated];
 }
 
 - (void)showHint

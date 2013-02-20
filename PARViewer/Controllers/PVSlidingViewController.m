@@ -19,17 +19,26 @@
 
     BOOL hasPerformedFirstLaunch = [[NSUserDefaults standardUserDefaults] boolForKey:kDefaultsHasPerformedFirstLaunchKey];
     if (!hasPerformedFirstLaunch)
-        [self showIntroController];
+        [self showIntroControllerAnimated:NO];
 }
 
-- (void)showIntroController
+- (void)showIntroControllerAnimated:(BOOL)animated
 {
     PVIntroViewController *iv = [[PVIntroViewController alloc] initWithNibName:@"PVIntroViewController" bundle:nil];
     [self addChildViewController:iv];
     [iv.view setFrame: self.view.bounds];
     [self.view addSubview:iv.view];
-    [iv didMoveToParentViewController:self];
     
+    CGFloat duration = animated ? 0.5 : 0.0;
+    iv.view.alpha = 0.0;
+    iv.view.transform = CGAffineTransformMakeScale(2, 2);
+    [UIView animateWithDuration:duration animations:^{
+        iv.view.alpha = 1.0;
+        iv.view.transform = CGAffineTransformMakeScale(1, 1);
+    } completion:^(BOOL finished) {
+        [iv didMoveToParentViewController:self];
+    }];
+
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kDefaultsHasPerformedFirstLaunchKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
