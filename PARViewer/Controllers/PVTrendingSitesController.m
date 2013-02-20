@@ -111,7 +111,7 @@ static NSString * cellIdentifier = @"TestCell";
     [_loadingView stopAnimating];
     
     PVFlowLayout * layout = (PVFlowLayout*)_collectionView.collectionViewLayout;
-	CGFloat centerX = _collectionView.contentOffset.x / ([layout itemSize].width + [layout minimumLineSpacing]);
+	CGFloat centerX = (_collectionView.contentOffset.x + _collectionView.contentInset.left) / ([layout itemSize].width + [layout minimumLineSpacing]);
     [_backgroundView setFloatingPointIndex: centerX];
 	[_pageControl setNumberOfPages:[[[ARManager shared] trendingSites] count]];
 }
@@ -180,8 +180,8 @@ static NSString * cellIdentifier = @"TestCell";
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     PVFlowLayout * layout = (PVFlowLayout*)_collectionView.collectionViewLayout;
-	CGFloat centerX = scrollView.contentOffset.x / ([layout itemSize].width + [layout minimumLineSpacing]);
-
+	CGFloat centerX = (_collectionView.contentOffset.x + _collectionView.contentInset.left) / ([layout itemSize].width + [layout minimumLineSpacing]);
+    
 	// determine visible index based on scroll offset
     // at scroll offsets 403.5, 676.5, 950.5, indexPathForItemAtPoint incorrectly returns 0.
     // I have no idea why and don't care enough to find out.

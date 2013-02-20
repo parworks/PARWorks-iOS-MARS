@@ -59,7 +59,7 @@
     
     [UIView beginAnimations: nil context:nil];
     [UIView setAnimationDuration: 0.3];
-    [self setAlpha: 1];
+    [self setAlpha: 0.6];
     [UIView commitAnimations];
 }
 
@@ -75,15 +75,15 @@
     _loadingViewStyle = loadingViewStyle;
     switch (_loadingViewStyle) {
         case PVLoadingViewStyleBlack:
-            _block1.backgroundColor = [UIColor colorWithWhite:0 alpha:0.6];
-            _block2.backgroundColor = [UIColor colorWithWhite:0 alpha:0.6];
-            [self.layer setBorderColor: [[UIColor colorWithWhite:0 alpha:0.6] CGColor]];
+            _block1.backgroundColor = [UIColor colorWithWhite:0 alpha:1];
+            _block2.backgroundColor = [UIColor colorWithWhite:0 alpha:1];
+            [self.layer setBorderColor: [[UIColor colorWithWhite:0 alpha:1] CGColor]];
             break;
         case PVLoadingViewStyleWhite:
         default:
-            _block1.backgroundColor = [UIColor colorWithWhite:1 alpha:0.6];
-            _block2.backgroundColor = [UIColor colorWithWhite:1 alpha:0.6];
-            [self.layer setBorderColor: [[UIColor colorWithWhite:1 alpha:0.6] CGColor]];
+            _block1.backgroundColor = [UIColor colorWithWhite:1 alpha:1];
+            _block2.backgroundColor = [UIColor colorWithWhite:1 alpha:1];
+            [self.layer setBorderColor: [[UIColor colorWithWhite:1 alpha:1] CGColor]];
             break;
     }
 }
