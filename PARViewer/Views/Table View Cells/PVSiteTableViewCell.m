@@ -98,7 +98,7 @@
         if (miles >= 0.1)
             [_distanceButton setTitle:[NSString stringWithFormat:@"%.1f mi", miles] forState:UIControlStateNormal];
         else
-            [_distanceButton setTitle:[NSString stringWithFormat:@"%.0f m", distance] forState:UIControlStateNormal];
+            [_distanceButton setTitle:[NSString stringWithFormat:@"%.0f ft", miles * 5280.0] forState:UIControlStateNormal];
 
         [_distanceButton setHidden: NO];
     } else {
