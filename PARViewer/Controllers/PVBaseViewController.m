@@ -61,7 +61,7 @@
 
 - (void)introBarButtonPressed:(id)sender
 {
-    [[self parentSlidingViewController] showIntroController];
+    [[self parentSlidingViewController] showIntroControllerAnimated:YES];
 }
 
 
