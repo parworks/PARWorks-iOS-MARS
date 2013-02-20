@@ -12,6 +12,7 @@
 #import "UAPush.h"
 #import "UIViewController+Transitions.h"
 #import "UIView+ImageCapture.h"
+#import "UIViewAdditions.h"
 
 
 @implementation PVIntroViewController
@@ -20,6 +21,7 @@
 {
     [super viewDidLoad];
     _pageControl.numberOfPages = 4;
+    _collectionView.delaysContentTouches = NO;
 }
 
 - (void)dealloc
@@ -62,9 +64,13 @@
 - (void)showHint
 {
     PVIntroCard *card = (PVIntroCard *)[_collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+    CGRect frame = card.swipeImageView.frame;
+
     card.swipeImageView.alpha = 0.0;
+    [card.swipeImageView setFrameX:(card.swipeImageView.frame.origin.x + 20)];
     [UIView animateWithDuration:0.2 animations:^{
         card.swipeImageView.alpha = 1.0;
+        card.swipeImageView.frame = frame;
     }];
 }
 
@@ -75,9 +81,13 @@
 
 - (void)doneButtonTapped
 {
-    [UIView animateWithDuration:0.5 animations:^{
+    CGFloat scaleX = 57/self.view.bounds.size.width;
+    CGFloat scaleY = 46/self.view.bounds.size.height;
+    CGAffineTransform t = CGAffineTransformMakeScale(scaleX, scaleY);
+    [UIView animateWithDuration:0.3 animations:^{
         self.view.alpha = 0.0;
-        self.view.transform = CGAffineTransformMakeScale(2, 2);
+        self.view.center = CGPointMake(self.view.bounds.size.width - (57/2.0), (46/2));
+        self.view.transform = t;
     } completion:^(BOOL finished) {
         [self willMoveToParentViewController:self.parentViewController];
         [self removeFromParentViewController];

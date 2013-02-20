@@ -72,7 +72,7 @@
         [self.posterImageView.layer addSublayer: l];
         
         _shingleView = [[PVCardShingleView alloc] init];
-        _shingleView.frame = CGRectMake(18, _posterContainer.bounds.size.height + 22, _shingleView.frame.size.width, _shingleView.frame.size.height);
+        _shingleView.frame = CGRectMake(23, _posterContainer.bounds.size.height + 12, _shingleView.frame.size.width, _shingleView.frame.size.height);
         [self addSubview:_shingleView];
         
         self.leftRopePoint = CGPointMake(_posterContainer.center.x - kRopeDistanceFromCenter, _posterContainer.frame.size.height - 5);
