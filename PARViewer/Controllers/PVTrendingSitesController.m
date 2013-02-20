@@ -181,14 +181,8 @@ static NSString * cellIdentifier = @"TestCell";
 {
     PVFlowLayout * layout = (PVFlowLayout*)_collectionView.collectionViewLayout;
 	CGFloat centerX = (_collectionView.contentOffset.x + _collectionView.contentInset.left) / ([layout itemSize].width + [layout minimumLineSpacing]);
-    
-	// determine visible index based on scroll offset
-    // at scroll offsets 403.5, 676.5, 950.5, indexPathForItemAtPoint incorrectly returns 0.
-    // I have no idea why and don't care enough to find out.
-	int page = [[_collectionView indexPathForItemAtPoint:CGPointMake(scrollView.contentOffset.x + self.view.center.x, self.view.center.y)] row];
-	[_pageControl setCurrentPage:page];
 
-	// adjust the background parallax view
+	[_pageControl setCurrentPage: roundf(centerX)];
 	[_backgroundView setFloatingPointIndex:centerX];
 }
 
