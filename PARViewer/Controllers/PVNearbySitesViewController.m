@@ -91,8 +91,8 @@
     [self.navigationItem setUnpaddedRightBarButtonItem:refresh animated: NO];
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    
+- (void)viewWillAppear:(BOOL)animated{
+    [_parallaxView updateContentOffset];
 }
 
 - (void)didReceiveMemoryWarning
