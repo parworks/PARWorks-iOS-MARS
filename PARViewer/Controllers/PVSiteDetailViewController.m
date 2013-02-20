@@ -323,6 +323,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 {
     CGRect existingFrame = _takePhotoButton.frame;
     _takePhotoButton.layer.anchorPoint = CGPointMake(1, 0.5);
+    _takePhotoButton.layer.zPosition = 100;
     _takePhotoButton.frame = existingFrame;
     
     UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
@@ -338,13 +339,24 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
         _takePhotoButton.layer.transform = t;
     } completion:^(BOOL finished) {
         _takePhotoButton.hidden = YES;
-        [self takePhotoStage2FlipAnimation];
     }];
+    
+    double delayInSeconds = 0.01;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self takePhotoStage2FlipAnimation];
+    });
+    
+    
 }
 
 - (void)takePhotoStage2FlipAnimation
 {
+    BOOL hidden = _takePhotoButton.hidden;
+    _takePhotoButton.hidden = YES;
     UIImage *screenCap = [self.navigationController.view imageRepresentationAtScale: 1.0];
+    _takePhotoButton.hidden = hidden;
+    
     UIImage *depthImage = [UIImage imageNamed:@"unfold_depth_image.png"];
     
     self.navigationController.navigationBar.hidden = YES;

@@ -125,9 +125,10 @@
 {
     // if the physics simulation gives us an offset of more than 75px to the left or right,
     // the user will see onscreen shingles disappearing because of cell reuse. We're allowing the
-    // shingles to be out of frame by 65px... 
+    // shingles to be out of frame by 65px...
     offset.x = fmaxf(-75, fminf(75, offset.x));
-
+    
+    offset = CGPointMake(offset.x/1.5, offset.y/1.3);
     CGPoint shingleCenter = CGPointMake(self.posterContainer.center.x - offset.x, self.posterContainer.center.y - offset.y + 100);
     CGAffineTransform shingleTransform = CGAffineTransformMakeRotation(roundf(rotation * 1000.0) / 1000.0);
     
