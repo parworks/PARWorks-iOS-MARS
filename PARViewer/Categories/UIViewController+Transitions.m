@@ -19,6 +19,7 @@
 - (void)peelPresentViewController:(UIViewController *)viewControllerToPresent withBackgroundImage:(UIImage*)backgroundImage andContentImage:(UIImage *)contentImage depthImage:(UIImage *)depthImage
 {
     UIWindow *mainWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
+    [mainWindow setUserInteractionEnabled: NO];
     
     CGFloat windowOffset;
     CGRect bounds;
@@ -92,7 +93,9 @@
     double delayInSeconds = kUIViewController_PeelTransitionsAnimationDuration;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        UIWindow *mainWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
         [self presentViewController:vc animated:NO completion:nil];
+        [mainWindow setUserInteractionEnabled: YES];
         mainLayer.contents = nil;
     });
 }
@@ -101,6 +104,7 @@
 - (void)unpeelViewController
 {
     UIWindow *mainWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
+    [mainWindow setUserInteractionEnabled: NO];
     CALayer *mainLayer = (CALayer *)objc_getAssociatedObject(mainWindow, kUIViewController_Transitions_MainLayerKey);
     CALayer *contentsShadowLayer = (CALayer *)objc_getAssociatedObject(mainWindow, kUIViewController_Transitions_ContentsShadowKey);
     CALayer *depthLayer = (CALayer *)objc_getAssociatedObject(mainWindow, kUIViewController_Transitions_DepthLayerKey);
@@ -126,6 +130,7 @@
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [self dismissViewControllerAnimated:NO completion:nil];
         [mainLayer removeFromSuperlayer];
+        [mainWindow setUserInteractionEnabled: YES];
         objc_setAssociatedObject(mainWindow, kUIViewController_Transitions_MainLayerKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         objc_setAssociatedObject(mainWindow, kUIViewController_Transitions_ContentsShadowKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     });

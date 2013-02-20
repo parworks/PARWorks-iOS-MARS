@@ -142,6 +142,9 @@
 - (void)augmentTestSite:(NSNotification*)notif
 {
     NSString * siteIdentifier = (NSString*)[notif object];
+    if (siteIdentifier == nil)
+        return;
+    
     _currentExampleSite = [[ARSite alloc] initWithIdentifier: siteIdentifier];
     
     UIImage * screenCap = [self.view imageRepresentationAtScale: 1.0];
