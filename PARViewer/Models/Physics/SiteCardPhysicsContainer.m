@@ -8,7 +8,7 @@
 
 #import "SiteCardPhysicsContainer.h"
 
-#define SHINGLE_STOP_THRESHOLD 3.54
+#define SHINGLE_STOP_THRESHOLD 45
 
 @implementation SiteCardPhysicsContainer
 
@@ -65,16 +65,13 @@
 
 - (void)setCardX:(float)cardX
 {
+    _cardBody.vel = CGPointMake(0, 0);
+
     cpVect pos = _cardBody.pos;
     pos.x = 200 + cardX;
-    _cardBody.vel = CGPointMake(0, 0);
-    _cardBody.pos = pos;
-    
-    float shingleStop = (powf(_shingleBody.vel.x,2) + powf(_shingleBody.vel.y, 2));
-    BOOL shouldStopShingle = shingleStop  < SHINGLE_STOP_THRESHOLD;
-    if (shouldStopShingle) {
-        _shingleBody.vel = CGPointMake(0, 0);
-        _shingleBody.angVel = 0;
+    if (fabs(pos.x - _cardBody.pos.x) > 0.01) {
+        _recentVelocity = SHINGLE_STOP_THRESHOLD * 15;
+        _cardBody.pos = pos;
     }
 }
 
@@ -82,27 +79,36 @@
 {
     _shingleBody.pos = cpv(_cardBody.pos.x, 113);
     _shingleBody.vel = cpv(0,0);
+    _recentY = 113;
+    _recentRot = 0;
 }
 
 - (CGPoint)signOffset
 {
     cpVect reference = _cardBody.pos;
     
-    float shingleStop = (powf(_shingleBody.vel.x,2) + powf(_shingleBody.vel.y, 2));
-    BOOL shouldRoundShinglePos = shingleStop < SHINGLE_STOP_THRESHOLD;
-    if (shouldRoundShinglePos) {
+    float shingleVelocity = (powf(_shingleBody.vel.x,2) + powf(_shingleBody.vel.y, 2));
+    float shingleDistFromRest = fabs(_shingleBody.pos.x - _cardBody.pos.x);
+
+    BOOL shouldStopShingle = ((_recentVelocity < SHINGLE_STOP_THRESHOLD) && (shingleDistFromRest < 1));
+    _recentVelocity = _recentVelocity * 0.9 + shingleVelocity * 0.1;
+
+    if (shouldStopShingle) {
         _shingleBody.vel = cpv(0,0);
-        return CGPointMake(roundf(_shingleBody.pos.x - reference.x), roundf(_shingleBody.pos.y - reference.y));
-        
+        _shingleBody.angVel = 0;
+        _shingleBody.pos = cpv(_cardBody.pos.x, _shingleBody.pos.y);
+        NSLog(@"Froze shingle");
     }
-    else
-        return CGPointMake(_shingleBody.pos.x - reference.x, _shingleBody.pos.y - reference.y);
+    
+    _recentY = _recentY * 0.8 + _shingleBody.pos.y * 0.2;
+    return CGPointMake(_shingleBody.pos.x - reference.x, _recentY - reference.y);
 
 }
 
 - (float)signRotation
 {
-    return _shingleBody.angle;
+    _recentRot = _recentRot * 0.8 + _shingleBody.angle * 0.2;
+    return _recentRot;
 }
 
 @end
