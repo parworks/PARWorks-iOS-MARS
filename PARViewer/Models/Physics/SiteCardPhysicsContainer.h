@@ -16,6 +16,10 @@
     
     ChipmunkBody * _cardBody;
     ChipmunkBody * _shingleBody;
+    
+    float _recentVelocity;
+    float _recentY;
+    float _recentRot;
 }
 
 @property (nonatomic, retain) ChipmunkSpace * space;

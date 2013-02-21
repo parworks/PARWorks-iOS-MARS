@@ -59,20 +59,15 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     [self update];
     
     if ([self.presentedViewController isKindOfClass:[UIImagePickerController class]]) {
-        [UIView animateWithDuration:1.0 delay:0.1 options:UIViewAnimationOptionAllowAnimatedContent animations:^{
-            self.navigationController.navigationBar.hidden = NO;
-            self.view.hidden = NO;
-            _takePhotoButton.hidden = NO;
-            _takePhotoButton.layer.transform = CATransform3DIdentity;
-        } completion:^(BOOL finished) {
-            [self setupRightNavigationItem];
-        }];
+        [self returnFromPhotoInterface];
     } else if (_takePhotoContainer) {
         [self setupRightNavigationItem];
     }
     
+    [UIView setAnimationsEnabled: NO];
     [_parallaxView updateContentOffset];
     [self scrollViewDidScroll:[_parallaxView scrollView]];
+    [UIView setAnimationsEnabled: YES];
     
     // register to receive updates about the site in the future
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:NOTIF_SITE_UPDATED object: self.site];
@@ -138,7 +133,8 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     [self.view addSubview:_parallaxView];
 }
 
-- (void)setupTableFooterView {
+- (void)setupTableFooterView
+{
     [_addCommentButton.layer setBorderWidth:1.0];
     [_addCommentButton.layer setBorderColor:[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1.0].CGColor];
 }
@@ -202,11 +198,14 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     }
     
     // Attach the "Augment Photo" icon to the upper right
+    CGRect frame = CGRectMake([self photoButtonXForScrollState], 0, 160, 45);
     self.takePhotoButton = [UIButton buttonWithType: UIButtonTypeCustom];
     [_takePhotoButton setImage:[UIImage imageNamed:@"try_it_now.png"] forState:UIControlStateNormal];
     [_takePhotoButton addTarget:self action:@selector(takePhoto:) forControlEvents:UIControlEventTouchUpInside];
-    [_takePhotoButton.layer setAnchorPoint: CGPointMake(1, 0)];
-    [_takePhotoButton setFrame: CGRectMake(0, 0, 160, 45)];
+    [_takePhotoButton setFrame: frame];
+    _takePhotoButton.layer.anchorPoint = CGPointMake(1, 0.5);
+    _takePhotoButton.layer.zPosition = 100;
+    _takePhotoButton.frame = frame;
     
     self.takePhotoContainer = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 160, 45)];
     [_takePhotoContainer addSubview: _takePhotoButton];
@@ -248,7 +247,6 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 }
 
 
-
 - (void)updateHeaderImageView:(NSNotification*)notif
 {
     UIImage * img = [[PVImageCacheManager shared] imageForURL: [_site posterImageURL]];
@@ -279,7 +277,8 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     }
 }
 
-- (void)showAddCommentViewController{
+- (void)showAddCommentViewController
+{
     PVAppDelegate * delegate = (PVAppDelegate*)[[UIApplication sharedApplication] delegate];
     
     if(_bgCopyImageView == nil){
@@ -342,11 +341,6 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 
 - (void)takePhotoWithFlipAnimation
 {
-    CGRect existingFrame = _takePhotoButton.frame;
-    _takePhotoButton.layer.anchorPoint = CGPointMake(1, 0.5);
-    _takePhotoButton.layer.zPosition = 100;
-    _takePhotoButton.frame = existingFrame;
-    
     UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
     CGRect frame = [_takePhotoButton convertRect:_takePhotoButton.bounds toView:window];
     _takePhotoButton.frame = frame;
@@ -367,8 +361,6 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [self takePhotoStage2FlipAnimation];
     });
-    
-    
 }
 
 - (void)takePhotoStage2FlipAnimation
@@ -400,6 +392,18 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
         background = [UIImage imageNamed:@"camera_iris_568h.png"];
     
     [self peelPresentViewController:picker withBackgroundImage:background andContentImage:screenCap depthImage:depthImage];
+}
+
+- (void)returnFromPhotoInterface
+{
+    [UIView animateWithDuration:1.0 delay:0.1 options:UIViewAnimationOptionAllowAnimatedContent animations:^{
+        self.navigationController.navigationBar.hidden = NO;
+        self.view.hidden = NO;
+        _takePhotoButton.hidden = NO;
+        _takePhotoButton.layer.transform = CATransform3DIdentity;
+    } completion:^(BOOL finished) {
+        [self setupRightNavigationItem];
+    }];
 }
 
 - (UIImagePickerController *)imagePicker
@@ -526,28 +530,33 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if ([scrollView contentSize].height < scrollView.frame.size.height + 195) {
-        [[[[self.navigationItem titleView] subviews] lastObject] setAlpha: 0];
-        return;
-    }
-    
-    float titleAlpha = fmaxf(0, fminf(1, ([scrollView contentOffset].y - 195) / 20.0));
-    [[[[self.navigationItem titleView] subviews] lastObject] setAlpha: titleAlpha];
+    UIView * titleLabel = [[[self.navigationItem titleView] subviews] lastObject];
+    float titleAlpha = [self titleAlphaForScrollState];
 
-    if ((titleAlpha > 0) && ([_takePhotoButton frame].origin.x == 0)) {
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration: 0.4];
-        [_takePhotoButton setFrameX: 95];
-        [UIView commitAnimations];
-    } else if ((titleAlpha == 0) && ([_takePhotoButton frame].origin.x != 0)) {
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration: 0.4];
-        [_takePhotoButton setFrameX: 0];
-        [UIView commitAnimations];
+    [titleLabel setAlpha: titleAlpha];
+
+    if ([_takePhotoButton superview] == _takePhotoContainer) {
+        if (((titleAlpha > 0) && ([_takePhotoButton frame].origin.x == 0)) || ((titleAlpha == 0) && ([_takePhotoButton frame].origin.x != 0))) {
+            [UIView beginAnimations:nil context:nil];
+            [UIView setAnimationDuration: 0.4];
+            [_takePhotoButton setFrameX: [self photoButtonXForScrollState]];
+            [UIView commitAnimations];
+        }
     }
 }
 
+- (float)photoButtonXForScrollState
+{
+    return ([self titleAlphaForScrollState] > 0) ? 95 : 0;
+}
 
+- (float)titleAlphaForScrollState
+{
+    UIScrollView * sv = [_parallaxView scrollView];
+    if ([sv contentSize].height < sv.frame.size.height + 195)
+        return 0;
+    return fmaxf(0, fminf(1, ([sv contentOffset].y - 195) / 20.0));
+}
 
 #pragma mark -
 #pragma mark PSUICollectionView methods

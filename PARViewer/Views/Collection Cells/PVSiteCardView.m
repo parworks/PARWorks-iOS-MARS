@@ -258,11 +258,11 @@
         CGContextSetLineCap(context, kCGLineCapRound);
         CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:1 alpha:0.5].CGColor);
         CGContextSetLineWidth(context, 1);
-        CGContextMoveToPoint(context, roundf(convertedPosterLeft.x) - 0.5, roundf(convertedPosterLeft.y) - 0.5);
-        CGContextAddLineToPoint(context, roundf(convertedShingleLeft.x) - 0.5, roundf(convertedShingleLeft.y) - 0.5);
+        CGContextMoveToPoint(context, convertedPosterLeft.x - 0.5, convertedPosterLeft.y - 0.5);
+        CGContextAddLineToPoint(context, convertedShingleLeft.x - 0.5, convertedShingleLeft.y - 0.5);
         CGContextStrokePath(context);
-        CGContextMoveToPoint(context, roundf(convertedPosterRight.x) - 0.5, roundf(convertedPosterRight.y) - 0.5);
-        CGContextAddLineToPoint(context, roundf(convertedShingleRight.x) - 0.5, roundf(convertedShingleRight.y) - 0.5);
+        CGContextMoveToPoint(context, convertedPosterRight.x - 0.5, convertedPosterRight.y - 0.5);
+        CGContextAddLineToPoint(context, convertedShingleRight.x - 0.5, convertedShingleRight.y - 0.5);
         CGContextStrokePath(context);
     }
 }
