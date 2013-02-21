@@ -42,7 +42,7 @@
     [_collectionView registerClass:[PVIntroCard class] forCellWithReuseIdentifier:@"IntroCard"];
     BOOL isiPhone5 = [PVAppDelegate isiPhone5];
     if (isiPhone5) {
-        [((PSUICollectionViewFlowLayout *)_collectionView.collectionViewLayout) setItemSize:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height)];
+        [((PSUICollectionViewFlowLayout *)_collectionView.collectionViewLayout) setItemSize:CGSizeMake(self.view.bounds.size.width, 548)];
     }
 }
 
@@ -188,7 +188,6 @@
 - (UIImagePickerController *)imagePicker
 {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    
     if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
         picker.sourceType = UIImagePickerControllerSourceTypeCamera;
         picker.mediaTypes = @[(NSString *) kUTTypeImage];
