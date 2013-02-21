@@ -12,7 +12,7 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    NSLog(@"Hi %@ %f", self.collectionView, self.collectionView.frame.size.height);
+//    NSLog(@"Hi %@ %f", self.collectionView, self.collectionView.frame.size.height);
 }
 
 

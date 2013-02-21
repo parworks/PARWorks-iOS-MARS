@@ -24,11 +24,6 @@
     _collectionView.delaysContentTouches = NO;
 }
 
-- (void)dealloc
-{
-    NSLog(@"%@ - %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
