@@ -110,6 +110,8 @@
     CALayer *depthLayer = (CALayer *)objc_getAssociatedObject(mainWindow, kUIViewController_Transitions_DepthLayerKey);
     depthLayer.position = CGPointMake(depthLayer.position.x, depthLayer.position.y + 20);
     
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+    
     [CATransaction begin];
     [CATransaction setAnimationDuration:kUIViewController_PeelTransitionsAnimationDuration];
     mainLayer.sublayerTransform = CATransform3DIdentity;

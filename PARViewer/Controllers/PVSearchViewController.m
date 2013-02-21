@@ -87,7 +87,7 @@ typedef enum {
 
 - (void)refreshSuggestions
 {
-    NSString * query = [_searchTextField text];
+    NSString * query = [[_searchTextField text] stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]];
     
     FilteredTagsTableState state;
     if ([query length] == 0) {
@@ -151,9 +151,10 @@ typedef enum {
 
 - (void)performSearch
 {
-    NSString * tagName = [_searchTextField text];
+    NSString * tagName = [[_searchTextField text] stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]];
     [[ARManager shared] fetchTagResults:tagName withCallback:^(NSString *tagName, NSArray *sites) {
-        if (![tagName isEqualToString: [_searchTextField text]])
+        NSString * currentTagName = [[_searchTextField text] stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]];
+        if (![tagName isEqualToString: currentTagName])
             return;
         
         self.searchResultSites = sites;

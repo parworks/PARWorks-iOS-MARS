@@ -78,7 +78,10 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] removeObserver: self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIF_SITE_UPDATED object:self.site];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIF_SITE_COMMENTS_UPDATED object:self.site];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIF_FACEBOOK_INFO_REQUEST object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIF_FACEBOOK_LOGGED_IN object:nil];
 }
 
 - (void)viewDidLoad
@@ -391,11 +394,13 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     else
         background = [UIImage imageNamed:@"camera_iris_568h.png"];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentNavController:) name:NOTIF_PRESENT_NAVCONTROLLER_FULLSCREEN object:nil];
     [self peelPresentViewController:picker withBackgroundImage:background andContentImage:screenCap depthImage:depthImage];
 }
 
 - (void)returnFromPhotoInterface
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIF_PRESENT_NAVCONTROLLER_FULLSCREEN object:nil];
     [UIView animateWithDuration:1.0 delay:0.1 options:UIViewAnimationOptionAllowAnimatedContent animations:^{
         self.navigationController.navigationBar.hidden = NO;
         self.view.hidden = NO;
@@ -421,6 +426,13 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     }
     
     return picker;
+}
+
+- (void)presentNavController:(NSNotification*)notification
+{
+    UINavigationController *controller = [notification object];
+    [controller setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    [_cameraOverlayView.imagePicker presentViewController:controller animated:YES completion:nil];
 }
 
 
