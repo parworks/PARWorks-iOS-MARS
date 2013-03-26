@@ -69,9 +69,6 @@
 
     if ((_firstLoad) && (self.augmentedPhoto == nil)) {
         _cameraOverlayView = [[GRCameraOverlayView alloc] initWithFrame:self.view.bounds];
-//        [_cameraOverlayView.toolbar.cameraButton addTarget:self action:@selector(takePicture:) forControlEvents:UIControlEventTouchUpInside];
-//        [_cameraOverlayView.toolbar.cancelButton addTarget:self action:@selector(exit:) forControlEvents:UIControlEventTouchUpInside];
-
         _imageTransferAnimation = [[PVImageTransferAnimationView alloc] initWithFrame: self.view.bounds];
         [self.view addSubview: _imageTransferAnimation];
 

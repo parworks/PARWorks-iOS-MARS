@@ -16,7 +16,7 @@
 #import "PSTCollectionView.h"
 #import "PVCommentTableViewCell.h"
 
-@interface PVSiteDetailViewController : UIViewController<PSUICollectionViewDataSource, PSUICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, PVAddCommentViewControllerDelegate, PVCommentTableViewCellDelegate, MKMapViewDelegate>
+@interface PVSiteDetailViewController : UIViewController <GRCameraOverlayViewDelegate, PSUICollectionViewDataSource, PSUICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, PVAddCommentViewControllerDelegate, PVCommentTableViewCellDelegate, MKMapViewDelegate>
 {
     PVAddCommentViewController  *_addCommentViewController;
     GPUImageView                * _bgCopyImageView;

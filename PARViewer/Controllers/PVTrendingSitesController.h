@@ -12,6 +12,7 @@
 #import "PVBaseViewController.h"
 #import "PVSiteCardView.h"
 #import "SiteCardPhysicsContainer.h"
+#import "ARLoadingView.h"
 
 @interface PVTrendingSitesController : PVBaseViewController <PVTrendingBlurredBackgroundViewDelegate, PSUICollectionViewDataSource, PSUICollectionViewDelegate>
 {
