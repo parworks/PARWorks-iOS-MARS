@@ -212,6 +212,7 @@
 		43998BB816BDDD42008B34C2 /* navigation_bar_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43998BB716BDDD42008B34C2 /* navigation_bar_background@2x.png */; };
 		43998BBA16BDE1A8008B34C2 /* bar_item_sidebar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43998BB916BDE1A8008B34C2 /* bar_item_sidebar@2x.png */; };
 		43998BBF16BDE647008B34C2 /* search_bar_cover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43998BBE16BDE647008B34C2 /* search_bar_cover@2x.png */; };
+		43CFF7D3170BD660003E11D0 /* ARCentroidView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CFF7D2170BD660003E11D0 /* ARCentroidView.m */; };
 		43D3E22A16D33C8B00D0ABEA /* camera_iris@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D3E22916D33C8B00D0ABEA /* camera_iris@2x.png */; };
 		43D3E22C16D33C8F00D0ABEA /* camera_iris.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D3E22B16D33C8F00D0ABEA /* camera_iris.png */; };
 		43D3E23016D3434000D0ABEA /* floating_item_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43D3E22F16D3434000D0ABEA /* floating_item_back@2x.png */; };
@@ -727,6 +728,8 @@
 		43998BB716BDDD42008B34C2 /* navigation_bar_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation_bar_background@2x.png"; sourceTree = "<group>"; };
 		43998BB916BDE1A8008B34C2 /* bar_item_sidebar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar_item_sidebar@2x.png"; sourceTree = "<group>"; };
 		43998BBE16BDE647008B34C2 /* search_bar_cover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search_bar_cover@2x.png"; sourceTree = "<group>"; };
+		43CFF7D1170BD660003E11D0 /* ARCentroidView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCentroidView.h; sourceTree = "<group>"; };
+		43CFF7D2170BD660003E11D0 /* ARCentroidView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCentroidView.m; sourceTree = "<group>"; };
 		43D3E22916D33C8B00D0ABEA /* camera_iris@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_iris@2x.png"; sourceTree = "<group>"; };
 		43D3E22B16D33C8F00D0ABEA /* camera_iris.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_iris.png; sourceTree = "<group>"; };
 		43D3E22F16D3434000D0ABEA /* floating_item_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "floating_item_back@2x.png"; sourceTree = "<group>"; };
@@ -1431,6 +1434,8 @@
 				437C3F7716BE249800822EDD /* ARAugmentedView.m */,
 				437EE22016C8559100F6D9B3 /* AROverlayTitleView.h */,
 				437EE22116C8559100F6D9B3 /* AROverlayTitleView.m */,
+				43CFF7D1170BD660003E11D0 /* ARCentroidView.h */,
+				43CFF7D2170BD660003E11D0 /* ARCentroidView.m */,
 				437C3F7816BE249800822EDD /* AROverlayBuilderAnnotationView.h */,
 				437C3F7916BE249800822EDD /* AROverlayBuilderAnnotationView.m */,
 				437C3F7A16BE249800822EDD /* AROverlayBuilderView.h */,
@@ -2237,6 +2242,7 @@
 				4252DD4E16D3628E0029D635 /* PVButton.m in Sources */,
 				43D3E26D16D42EF000D0ABEA /* PVSlidingViewController.m in Sources */,
 				4252DD7016D479260029D635 /* ARLoadingView.m in Sources */,
+				43CFF7D3170BD660003E11D0 /* ARCentroidView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
