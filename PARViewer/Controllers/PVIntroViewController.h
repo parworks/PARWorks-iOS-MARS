@@ -11,7 +11,7 @@
 #import "GPUImageView.h"
 #import "GRCameraOverlayView.h"
 
-@interface PVIntroViewController : UIViewController <PSUICollectionViewDataSource, PSUICollectionViewDelegate>
+@interface PVIntroViewController : UIViewController <PSUICollectionViewDataSource, PSUICollectionViewDelegate, GRCameraOverlayViewDelegate>
 {
     NSTimer             * _hintTimer;
     GPUImageView        * _bgCopyImageView;

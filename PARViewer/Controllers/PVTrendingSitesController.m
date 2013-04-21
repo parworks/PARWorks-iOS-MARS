@@ -9,6 +9,7 @@
 #import "PVTrendingSitesController.h"
 #import "PVSiteDetailViewController.h"
 #import "ASIHTTPRequest.h"
+#import "ARLoadingView.h"
 #import "ARManager.h"
 #import "ARManager+MARS_Extensions.h"
 #import "ARSite.h"

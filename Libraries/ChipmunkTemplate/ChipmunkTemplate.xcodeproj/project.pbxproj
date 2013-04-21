@@ -119,6 +119,7 @@
 		A008233816B79BE9009EE42F /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = A008221B16B799B2009EE42F /* iTunesArtwork */; };
 		A008233916B79BF9009EE42F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A008220C16B799B2009EE42F /* main.m */; };
 		A008234016B79F4F009EE42F /* libChipmunkPro-iPhone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A008224716B79A43009EE42F /* libChipmunkPro-iPhone.a */; };
+		A04A6216172399FE00F8100B /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A050E39016A3770E00FD8802 /* ImageIO.framework */; };
 		A050E1CB16A376AE00FD8802 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A050E1CA16A376AE00FD8802 /* QuartzCore.framework */; };
 		A050E1CD16A376AE00FD8802 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A050E1CC16A376AE00FD8802 /* OpenGLES.framework */; };
 		A050E1CF16A376AE00FD8802 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A050E1CE16A376AE00FD8802 /* OpenAL.framework */; };
@@ -532,6 +533,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A04A6216172399FE00F8100B /* ImageIO.framework in Frameworks */,
 				A0A44D7D16BE2DC8003809D3 /* Foundation.framework in Frameworks */,
 				A0A44D8816BE2DEB003809D3 /* libChipmunkPro-iPhone.a in Frameworks */,
 			);
@@ -1378,6 +1380,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = ChipmunkTemplate;
+				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1407,6 +1410,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = ChipmunkTemplate;
+				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -1488,7 +1492,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/ChipmunkTemplate/libs/ChipmunkPro-iPhone\"",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1561,6 +1565,7 @@
 				A0A44D8616BE2DC8003809D3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

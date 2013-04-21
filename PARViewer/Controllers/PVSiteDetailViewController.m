@@ -8,6 +8,7 @@
 
 #import "PVAugmentedPhotoViewController.h"
 #import "PVSiteDetailViewController.h"
+#import "ARLoadingView.h"
 #import "ARSite+MARS_Extensions.h"
 #import "UIImageView+AFNetworking.h"
 #import "PVImageCacheManager.h"
@@ -381,7 +382,7 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     _cameraOverlayView = [[GRCameraOverlayView alloc] initWithFrame:self.view.bounds];
     _cameraOverlayView.site = _site;
     
-    UIImagePickerController *picker = [self imagePicker];
+    UIImagePickerController *picker = [GRCameraOverlayView defaultImagePicker];
     picker.delegate = _cameraOverlayView;
     if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
         picker.cameraOverlayView = _cameraOverlayView;
@@ -411,22 +412,6 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
     }];
 }
 
-- (UIImagePickerController *)imagePicker
-{
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-
-    // Certain properties aren't set until we present the picker since they are dependent on
-    // the camera overlay view.
-    if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
-        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        picker.mediaTypes = @[(NSString *) kUTTypeImage];
-        picker.showsCameraControls = NO;
-    } else {
-        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    }
-    
-    return picker;
-}
 
 - (void)presentNavController:(NSNotification*)notification
 {

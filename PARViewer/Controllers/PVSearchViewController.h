@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ARAugmentedPhotoSource.h"
 #import "PVBaseViewController.h"
 
 
 @interface PVSearchViewController : PVBaseViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
+    NSObject<ARAugmentedPhotoSource>* _augmentedPhotoSource;
+    ARAugmentedPhoto *_curAugmentedPhoto;
 }
 
 @property (weak, nonatomic) IBOutlet UITextField * searchTextField;

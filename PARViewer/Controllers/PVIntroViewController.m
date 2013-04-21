@@ -13,6 +13,10 @@
 #import "UIViewController+Transitions.h"
 #import "UIView+ImageCapture.h"
 #import "UIViewAdditions.h"
+#import "GPUImagePicture.h"
+#import "GPUImageGaussianBlurFilter.h"
+#import "GPUImageBrightnessFilter.h"
+#import "UIImageAdditions.h"
 
 
 @implementation PVIntroViewController
@@ -158,8 +162,9 @@
     
     _cameraOverlayView = [[GRCameraOverlayView alloc] initWithFrame:self.view.bounds];
     _cameraOverlayView.site = _currentExampleSite;
+    _cameraOverlayView.delegate = self;
     
-    UIImagePickerController *picker = [self imagePicker];
+    UIImagePickerController *picker = [GRCameraOverlayView defaultImagePicker];
     picker.delegate = _cameraOverlayView;
     if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
         picker.cameraOverlayView = _cameraOverlayView;
@@ -179,20 +184,27 @@
     [[lastCard skipButton] setTitle:@"Done!" forState:UIControlStateNormal];
 }
 
-
-- (UIImagePickerController *)imagePicker
+#pragma mark - GRCameraOverlayViewDelegate
+- (id)contentsForWaitingOnImage:(UIImage*)img
 {
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
-        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        picker.mediaTypes = @[(NSString *) kUTTypeImage];
-        picker.showsCameraControls = NO;
-    } else {
-        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    }
+    GPUImagePicture * picture = [[GPUImagePicture alloc] initWithImage:[img scaledImage:0.10] smoothlyScaleOutput: NO];
+    GPUImageGaussianBlurFilter * blurFilter = [[GPUImageGaussianBlurFilter alloc] init];
+    GPUImageBrightnessFilter * brightnessFilter = [[GPUImageBrightnessFilter alloc] init];
     
-    return picker;
+    [blurFilter setBlurSize: 0.35];
+    [picture addTarget: blurFilter];
+    [blurFilter addTarget: brightnessFilter];
+    [brightnessFilter setBrightness: -0.1];
+    
+    [picture processImage];
+    
+    UIImage *result = [brightnessFilter imageFromCurrentlyProcessedOutput];
+    return (id)result.CGImage;
 }
 
+- (void)dismissImagePicker
+{
+    [self unpeelViewController];
+}
 
 @end

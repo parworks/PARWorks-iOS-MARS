@@ -8,12 +8,16 @@
 
 #import "PVSearchViewController.h"
 #import "JSSlidingViewController.h"
+#import "ARAugmentedPhoto.h"
 #import "ARManager.h"
 #import "ARManager+MARS_Extensions.h"
+#import "ARMultiSite.h"
 #import "PVBorderedWhiteCell.h"
 #import "PVSiteDetailViewController.h"
 #import "PVSiteTableViewCell.h"
+#import "UIViewController+Transitions.h"
 #import "UIViewAdditions.h"
+#import "UIView+ImageCapture.h"
 
 typedef enum {
     FilteredTagsTableState_NoResults = 0,
@@ -25,6 +29,7 @@ typedef enum {
 @implementation PVSearchViewController
 {
     FilteredTagsTableState _filteredTagTableState;
+    GRCameraOverlayView *_cameraOverlayView;
 }
 
 
@@ -231,7 +236,7 @@ typedef enum {
     if (tableView == _filteredTagsTableView)
         return [_filteredTags count];
     else
-        return [_searchResultSites count];
+        return [_searchResultSites count] + 1;  // +1 for "augment all" option
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -249,10 +254,19 @@ typedef enum {
 
     } else {
         PVSiteTableViewCell * c = (PVSiteTableViewCell*)[tableView dequeueReusableCellWithIdentifier: @"siteCell"];
-        if (!c)
+        if (!c) {
             c = [[PVSiteTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"siteCell"];
-        ARSite * site = [_searchResultSites objectAtIndex: [indexPath row]];
-        [c setSite: site];
+        }
+        
+        if (indexPath.row == 0) {
+            [c setSite: nil];
+            c.textLabel.text = @"Augment Site List";
+            
+        } else {
+            ARSite * site = [_searchResultSites objectAtIndex: [indexPath row] - 1];
+            [c setSite: site];
+        }
+        
         return c;
     }
 }
@@ -267,12 +281,48 @@ typedef enum {
         [_searchTextField resignFirstResponder];
         [self hidePopularSites];
         [self performSearch];
-    
     } else {
-        ARSite * site = [_searchResultSites objectAtIndex: [indexPath row]];
-        PVSiteDetailViewController * siteDetailController = [[PVSiteDetailViewController alloc] initWithSite: site];
-        [self presentViewController:[[UINavigationController alloc] initWithRootViewController:siteDetailController] animated:YES completion:NULL];
+        if (indexPath.row == 0) {
+            // TOOD: Augment all sites here.
+            
+            
+        } else {
+            ARSite * site = [_searchResultSites objectAtIndex: [indexPath row] - 1];
+            PVSiteDetailViewController * siteDetailController = [[PVSiteDetailViewController alloc] initWithSite: site];
+            [self presentViewController:[[UINavigationController alloc] initWithRootViewController:siteDetailController] animated:YES completion:NULL];            
+        }
     }
+}
+
+- (void)showCameraPickerWithSiteIDs:(NSArray *)ids
+{
+    if (ids == nil || ids.count == 0)
+        return;
+    
+    UIImage * screenCap = [self.view imageRepresentationAtScale: 1.0];
+    UIImage * depthImage = [UIImage imageNamed:@"unfold_depth_image.png"];
+    self.view.hidden = YES;
+    
+    _cameraOverlayView = [[GRCameraOverlayView alloc] initWithFrame:self.view.bounds];
+    _augmentedPhotoSource = [[ARMultiSite alloc] initWithSiteIdentifiers: ids];
+    _cameraOverlayView.site = _augmentedPhotoSource;
+    _cameraOverlayView.delegate = self;
+    
+    UIImagePickerController *picker = [GRCameraOverlayView defaultImagePicker];
+    picker.delegate = _cameraOverlayView;
+    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+        picker.cameraOverlayView = _cameraOverlayView;
+        _cameraOverlayView.imagePicker = picker;
+    }
+    
+    UIImage * background = nil;
+    if (self.view.frame.size.height < 500)
+        background = [UIImage imageNamed:@"camera_iris.png"];
+    else
+        background = [UIImage imageNamed:@"camera_iris_568h.png"];
+    
+    [self peelPresentViewController:picker withBackgroundImage:background andContentImage:screenCap depthImage:depthImage];
+
 }
 
 
