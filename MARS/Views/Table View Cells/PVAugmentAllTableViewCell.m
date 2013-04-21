@@ -26,7 +26,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        [self setBackgroundColor: [UIColor colorWithWhite:0.88 alpha:1]];
+        [self.contentView setBackgroundColor: [UIColor whiteColor]];
         [self setSelectionStyle: UITableViewCellSelectionStyleNone];
         
         self.whiteLayer = [CAShapeLayer layer];
@@ -36,7 +36,7 @@
         _whiteLayer.shadowOpacity = 0.2;
         _whiteLayer.shouldRasterize = YES;
         _whiteLayer.rasterizationScale = [UIScreen mainScreen].scale;
-        [self.layer insertSublayer:_whiteLayer atIndex:0];
+        [self.contentView.layer insertSublayer:_whiteLayer atIndex:0];
         
         [self textLabel].font = [UIFont boldParworksFontWithSize: 18];
         [self detailTextLabel].font = [UIFont parworksFontWithSize: 14];

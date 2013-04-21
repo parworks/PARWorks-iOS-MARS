@@ -91,6 +91,10 @@ typedef enum {
         [self updateFilteredTableViewForState:FilteredTagsTableState_Popular];
         [_filteredTagsTableView addSubview:_labelsContainer];
     }
+    
+    if ([self.presentedViewController isKindOfClass:[UIImagePickerController class]]) {
+        [self returnFromPhotoInterface];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -189,38 +193,6 @@ typedef enum {
 }
 
 
-- (void)showCameraPickerWithSiteIDs:(NSArray *)ids
-{
-    if (ids == nil || ids.count == 0)
-        return;
-    
-    UIImage * screenCap = [self.view imageRepresentationAtScale: 1.0];
-    UIImage * depthImage = [UIImage imageNamed:@"unfold_depth_image.png"];
-    self.view.hidden = YES;
-    
-    _cameraOverlayView = [[GRCameraOverlayView alloc] initWithFrame:self.view.bounds];
-    _augmentedPhotoSource = [[ARMultiSite alloc] initWithSiteIdentifiers: ids];
-    _cameraOverlayView.site = _augmentedPhotoSource;
-    _cameraOverlayView.delegate = self;
-    
-    UIImagePickerController *picker = [GRCameraOverlayView defaultImagePicker];
-    picker.delegate = _cameraOverlayView;
-    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
-        picker.cameraOverlayView = _cameraOverlayView;
-        _cameraOverlayView.imagePicker = picker;
-    }
-    
-    UIImage * background = nil;
-    if (self.view.frame.size.height < 500)
-        background = [UIImage imageNamed:@"camera_iris.png"];
-    else
-        background = [UIImage imageNamed:@"camera_iris_568h.png"];
-    
-    [self peelPresentViewController:picker withBackgroundImage:background andContentImage:screenCap depthImage:depthImage];
-    
-}
-
-
 #pragma mark - FilteredTagsTableView Helper
 - (void)updateFilteredTableViewForState:(FilteredTagsTableState)state
 {
@@ -270,6 +242,47 @@ typedef enum {
 }
 
 
+#pragma mark - Camera Interface Helpers
+- (void)showCameraPickerWithSiteIDs:(NSArray *)ids
+{
+    if (ids == nil || ids.count == 0)
+        return;
+    
+    UIImage * screenCap = [[[[UIApplication sharedApplication] windows] objectAtIndex:0] imageRepresentationAtScale: 1.0];
+    UIImage * depthImage = [UIImage imageNamed:@"unfold_depth_image.png"];
+    self.navigationController.navigationBar.hidden = YES;
+    self.view.hidden = YES;
+    
+    _cameraOverlayView = [[GRCameraOverlayView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    _augmentedPhotoSource = [[ARMultiSite alloc] initWithSiteIdentifiers: ids];
+    _cameraOverlayView.site = _augmentedPhotoSource;
+    _cameraOverlayView.delegate = self;
+    
+    UIImagePickerController *picker = [GRCameraOverlayView defaultImagePicker];
+    picker.delegate = _cameraOverlayView;
+    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+        picker.cameraOverlayView = _cameraOverlayView;
+        _cameraOverlayView.imagePicker = picker;
+    }
+    
+    UIImage * background = nil;
+    if (self.view.frame.size.height < 500)
+        background = [UIImage imageNamed:@"camera_iris.png"];
+    else
+        background = [UIImage imageNamed:@"camera_iris_568h.png"];
+    
+    [self peelPresentViewController:picker withBackgroundImage:background andContentImage:screenCap depthImage:depthImage];
+}
+
+- (void)returnFromPhotoInterface
+{
+    [UIView animateWithDuration:1.0 delay:0.1 options:UIViewAnimationOptionAllowAnimatedContent animations:^{
+        self.navigationController.navigationBar.hidden = NO;
+        self.view.hidden = NO;
+    } completion:nil];
+}
+
+
 #pragma mark - GRCameraOverlayViewDelegate
 - (id)contentsForWaitingOnImage:(UIImage*)img
 {
@@ -278,7 +291,7 @@ typedef enum {
 
 - (void)dismissImagePicker
 {
-    [self unpeelViewController];
+    [_cameraOverlayView.imagePicker unpeelViewController];
 }
 
 
@@ -313,7 +326,7 @@ typedef enum {
 {
     if (tableView == _filteredTagsTableView) {
         PVBorderedWhiteCell * c = (PVBorderedWhiteCell*)[tableView dequeueReusableCellWithIdentifier: @"cell"];
-        if (!c){
+        if (!c) {
             c = [[PVBorderedWhiteCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         }
         
@@ -326,7 +339,7 @@ typedef enum {
         UITableViewCell *c;
         if (indexPath.row == 0) {
             c = [[PVAugmentAllTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-            c.textLabel.text = @"Augment Site List";
+            c.textLabel.text = @"Augment Sites Listed Below";
         } else {
             c = (PVSiteTableViewCell*)[tableView dequeueReusableCellWithIdentifier: @"siteCell"];
             if (!c) {

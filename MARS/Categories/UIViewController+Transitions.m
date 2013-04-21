@@ -1,6 +1,6 @@
 //
 //  UIViewController+Transitions.m
-//  CameraTransitionTest
+//  MARS
 //
 //  Copyright 2013 PAR Works, Inc.
 //
@@ -36,7 +36,7 @@
     CGRect bounds;
     if (self.navigationController) {
         windowOffset = 0;
-        bounds = self.navigationController.view.bounds;
+        bounds = mainWindow.bounds;
     } else {
         windowOffset = 20;
         bounds = self.view.bounds;

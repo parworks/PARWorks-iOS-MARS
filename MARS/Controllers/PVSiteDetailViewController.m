@@ -427,14 +427,6 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 }
 
 
-- (void)presentNavController:(NSNotification*)notification
-{
-    UINavigationController *controller = [notification object];
-    [controller setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-    [_cameraOverlayView.imagePicker presentViewController:controller animated:YES completion:nil];
-}
-
-
 #pragma mark - GRCameraOverlayViewDelegate
 - (id)contentsForWaitingOnImage:(UIImage*)img;
 {

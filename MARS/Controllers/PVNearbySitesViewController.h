@@ -17,17 +17,24 @@
 //  limitations under the License.
 //
 
-#import "PVBaseViewController.h"
-#import "PVParallaxTableView.h"
 #import <MapKit/MapKit.h>
+#import "GRCameraOverlayView.h"
+#import "ARAugmentedPhotoSource.h"
+#import "PVBaseViewController.h"
 #import "PVButton.h"
+#import "PVParallaxTableView.h"
 
-@interface PVNearbySitesViewController : PVBaseViewController<UITableViewDataSource, UITableViewDelegate, PVParallaxTableViewDelegate, MKMapViewDelegate>{
+
+@interface PVNearbySitesViewController : PVBaseViewController<UITableViewDataSource, UITableViewDelegate, GRCameraOverlayViewDelegate, PVParallaxTableViewDelegate, MKMapViewDelegate>{
     CLLocationCoordinate2D centerCoordinate;
     MKCoordinateRegion region;
     BOOL bLoadedOnce;
     NSTimer *_panTimer;
     BOOL _firstNearbySitesLoadOccurred;
+    
+    GRCameraOverlayView *_cameraOverlayView;
+    NSObject<ARAugmentedPhotoSource>* _augmentedPhotoSource;
+    ARAugmentedPhoto *_curAugmentedPhoto;
 }
 
 @property (nonatomic, strong) MKMapView *mapView;

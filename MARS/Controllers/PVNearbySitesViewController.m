@@ -17,6 +17,9 @@
 //  limitations under the License.
 //
 
+#import "ARAugmentedPhoto.h"
+#import "ARMultiSite.h"
+#import "PVAugmentAllTableViewCell.h"
 #import "PVNearbySitesViewController.h"
 #import "ARManager+MARS_Extensions.h"
 #import "PVSiteDetailViewController.h"
@@ -24,6 +27,10 @@
 #import "MapAnnotation.h"
 #import "UIFont+ThemeAdditions.h"
 #import "UINavigationItem+PVAdditions.h"
+#import "UIViewController+Transitions.h"
+#import "UIView+ImageCapture.h"
+
+#import "Util.h"
 
 #define PARALLAX_WINDOW_HEIGHT 165.0
 #define PARALLAX_IMAGE_HEIGHT 300.0
@@ -105,6 +112,10 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [_parallaxView updateContentOffset];
+    
+    if ([self.presentedViewController isKindOfClass:[UIImagePickerController class]]) {
+        [self returnFromPhotoInterface];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -114,6 +125,68 @@
 }
 
 
+#pragma mark - Camera Interface Helpers
+- (void)showCameraPickerWithSiteIDs:(NSArray *)ids
+{
+    if (ids == nil || ids.count == 0)
+        return;
+    
+    UIImage * screenCap = [[[[UIApplication sharedApplication] windows] objectAtIndex:0] imageRepresentationAtScale: 1.0];
+    UIImage * depthImage = [UIImage imageNamed:@"unfold_depth_image.png"];
+    self.navigationController.navigationBar.hidden = YES;
+    self.view.hidden = YES;
+    
+    _cameraOverlayView = [[GRCameraOverlayView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    _augmentedPhotoSource = [[ARMultiSite alloc] initWithSiteIdentifiers: ids];
+    _cameraOverlayView.site = _augmentedPhotoSource;
+    _cameraOverlayView.delegate = self;
+    
+    UIImagePickerController *picker = [GRCameraOverlayView defaultImagePicker];
+    picker.delegate = _cameraOverlayView;
+    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+        picker.cameraOverlayView = _cameraOverlayView;
+        _cameraOverlayView.imagePicker = picker;
+    }
+    
+    UIImage * background = nil;
+    if (self.view.frame.size.height < 500)
+        background = [UIImage imageNamed:@"camera_iris.png"];
+    else
+        background = [UIImage imageNamed:@"camera_iris_568h.png"];
+    
+    [self peelPresentViewController:picker withBackgroundImage:background andContentImage:screenCap depthImage:depthImage];
+}
+
+- (void)returnFromPhotoInterface
+{
+    [UIView animateWithDuration:1.0 delay:0.1 options:UIViewAnimationOptionAllowAnimatedContent animations:^{
+        self.navigationController.navigationBar.hidden = NO;
+        self.view.hidden = NO;
+    } completion:nil];
+}
+
+
+#pragma mark - GRCameraOverlayViewDelegate
+- (id)contentsForWaitingOnImage:(UIImage*)img
+{
+    return [Util blurredImageWithImage:img];
+}
+
+- (void)dismissImagePicker
+{
+    [_cameraOverlayView.imagePicker unpeelViewController];
+}
+
+#pragma mark - UITableViewDelegate/DataSource
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0) {
+        return 52;
+    } else {
+        return 220;
+    }
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (!_firstNearbySitesLoadOccurred) return 0;
@@ -121,7 +194,7 @@
     if([_nearbySites count] == 0)
         return 1;
     else
-        return [_nearbySites count];
+        return [_nearbySites count] + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -150,12 +223,20 @@
         
         return c;
     }
-    else{
-        PVSiteTableViewCell * c = (PVSiteTableViewCell*)[tableView dequeueReusableCellWithIdentifier: @"siteCell"];
-        if (!c)
-            c = [[PVSiteTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"siteCell"];
-        ARSite * site = [_nearbySites objectAtIndex: [indexPath row]];
-        [c setSite: site];
+    else {
+        UITableViewCell *c;
+        if (indexPath.row == 0) {
+            c = [[PVAugmentAllTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+            c.textLabel.text = @"Augment Sites Listed Below";
+        } else {
+            c = (PVSiteTableViewCell*)[tableView dequeueReusableCellWithIdentifier: @"siteCell"];
+            if (!c)
+                c = [[PVSiteTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"siteCell"];
+            ARSite * site = [_nearbySites objectAtIndex: [indexPath row] - 1];
+            [(PVSiteTableViewCell*)c setSite: site];
+
+        }
+
         return c;
     }
 }
@@ -164,15 +245,20 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if([_nearbySites count] > 0){
-        ARSite * site = [_nearbySites objectAtIndex: [indexPath row]];
-        PVSiteDetailViewController * siteDetailController = [[PVSiteDetailViewController alloc] initWithSite: site];
-        [self presentViewController:[[UINavigationController alloc] initWithRootViewController:siteDetailController] animated:YES completion:NULL];
+        if (indexPath.row == 0) {
+            NSMutableArray *siteIDs = [NSMutableArray array];
+            for (ARSite *s in _nearbySites) {
+                [siteIDs addObject:s.identifier];
+            }
+            [self showCameraPickerWithSiteIDs:siteIDs];
+        } else {
+            ARSite * site = [_nearbySites objectAtIndex: [indexPath row]];
+            PVSiteDetailViewController * siteDetailController = [[PVSiteDetailViewController alloc] initWithSite: site];
+            [self presentViewController:[[UINavigationController alloc] initWithRootViewController:siteDetailController] animated:YES completion:NULL];            
+        }
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 220.0;
-}
 
 - (void)closeMap
 {

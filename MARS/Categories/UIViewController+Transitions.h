@@ -1,6 +1,6 @@
 //
 //  UIViewController+Transitions.h
-//  CameraTransitionTest
+//  MARS
 //
 //  Copyright 2013 PAR Works, Inc.
 //
