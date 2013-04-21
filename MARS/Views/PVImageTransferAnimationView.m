@@ -23,7 +23,7 @@
 #import "UIImageView+AnimationAdditions.h"
 #import "CATextLayer+Loading.h"
 #import "PARWorks.h"
-#import "EPUtil.h"
+#import "Util.h"
 
 #define WIDTH 20
 #define HEIGHT 20
@@ -154,7 +154,7 @@
     }
     
     // Step 2: Render the layer contents one by one
-    [EPUtil smallImagesWithWidth:WIDTH height:HEIGHT fromImage:_image withImageReadyCallback: ^(int i, UIImage* img) {
+    [Util smallImagesWithWidth:WIDTH height:HEIGHT fromImage:_image withImageReadyCallback: ^(int i, UIImage* img) {
         [(CALayer*)[_layers objectAtIndex: i] performSelectorOnMainThread:@selector(setContents:) withObject:(id)[img CGImage] waitUntilDone:NO];
     }];
     

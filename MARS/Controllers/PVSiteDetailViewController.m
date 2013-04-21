@@ -38,6 +38,7 @@
 #import "UIView+ImageCapture.h"
 #import "UIViewAdditions.h"
 #import "UIImageAdditions.h"
+#import "Util.h"
 
 #define PARALLAX_WINDOW_HEIGHT 165.0
 #define PARALLAX_IMAGE_HEIGHT 300.0
@@ -434,21 +435,10 @@ static NSString *cellIdentifier = @"AugmentedViewCellIdentifier";
 }
 
 
+#pragma mark - GRCameraOverlayViewDelegate
 - (id)contentsForWaitingOnImage:(UIImage*)img;
 {
-    GPUImagePicture * picture = [[GPUImagePicture alloc] initWithImage:[img scaledImage:0.10] smoothlyScaleOutput: NO];
-    GPUImageGaussianBlurFilter * blurFilter = [[GPUImageGaussianBlurFilter alloc] init];
-    GPUImageBrightnessFilter * brightnessFilter = [[GPUImageBrightnessFilter alloc] init];
-    
-    [blurFilter setBlurSize: 0.35];
-    [picture addTarget: blurFilter];
-    [blurFilter addTarget: brightnessFilter];
-    [brightnessFilter setBrightness: -0.1];
-    
-    [picture processImage];
-    
-    UIImage *result = [brightnessFilter imageFromCurrentlyProcessedOutput];
-    return (id)result.CGImage;
+    return [Util blurredImageWithImage:img];
 }
 
 - (void)dismissImagePicker

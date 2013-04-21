@@ -17,18 +17,21 @@
 //  limitations under the License.
 //
 
-#import "PVSearchViewController.h"
-#import "JSSlidingViewController.h"
+
 #import "ARAugmentedPhoto.h"
 #import "ARManager.h"
 #import "ARManager+MARS_Extensions.h"
 #import "ARMultiSite.h"
+#import "JSSlidingViewController.h"
+#import "PVAugmentAllTableViewCell.h"
 #import "PVBorderedWhiteCell.h"
+#import "PVSearchViewController.h"
 #import "PVSiteDetailViewController.h"
 #import "PVSiteTableViewCell.h"
 #import "UIViewController+Transitions.h"
 #import "UIViewAdditions.h"
 #import "UIView+ImageCapture.h"
+#import "Util.h"
 
 typedef enum {
     FilteredTagsTableState_NoResults = 0,
@@ -266,6 +269,19 @@ typedef enum {
     }];
 }
 
+
+#pragma mark - GRCameraOverlayViewDelegate
+- (id)contentsForWaitingOnImage:(UIImage*)img
+{
+    return [Util blurredImageWithImage:img];
+}
+
+- (void)dismissImagePicker
+{
+    [self unpeelViewController];
+}
+
+
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
@@ -277,7 +293,7 @@ typedef enum {
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == _searchResultsTableView && indexPath.row == 0) {
-        return 44;
+        return 52;
     } else {
         return tableView.rowHeight;
     }
@@ -285,10 +301,12 @@ typedef enum {
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (tableView == _filteredTagsTableView)
+    if (tableView == _filteredTagsTableView) {
         return [_filteredTags count];
-    else
-        return [_searchResultSites count] + 1;  // +1 for "augment all" option
+    } else {
+        // +1 for "augment all" option
+        return ([_searchResultSites count] > 0) ? ([_searchResultSites count] + 1) : 0;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -307,7 +325,7 @@ typedef enum {
     } else {
         UITableViewCell *c;
         if (indexPath.row == 0) {
-            c = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+            c = [[PVAugmentAllTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
             c.textLabel.text = @"Augment Site List";
         } else {
             c = (PVSiteTableViewCell*)[tableView dequeueReusableCellWithIdentifier: @"siteCell"];
@@ -335,8 +353,11 @@ typedef enum {
         [self performSearch];
     } else {
         if (indexPath.row == 0) {
-            // TOOD: Augment all sites here.
-            
+            NSMutableArray *siteIDs = [NSMutableArray array];
+            for (ARSite *s in _searchResultSites) {
+                [siteIDs addObject:s.identifier];
+            }
+            [self showCameraPickerWithSiteIDs:siteIDs];
         } else {
             ARSite * site = [_searchResultSites objectAtIndex: [indexPath row] - 1];
             PVSiteDetailViewController * siteDetailController = [[PVSiteDetailViewController alloc] initWithSite: site];

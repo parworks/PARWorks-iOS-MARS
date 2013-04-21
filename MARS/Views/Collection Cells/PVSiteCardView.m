@@ -17,7 +17,7 @@
 //  limitations under the License.
 //
 
-#import "EPUtil.h"
+#import "Util.h"
 #import "PVSiteCardView.h"
 #import "PVImageCacheManager.h"
 #import "PVTrendingSitesController.h"
@@ -42,7 +42,7 @@
         [self.layer setCornerRadius: 5];
         
         CGRect posterFrame = CGRectMake(0, 0, kPVSiteCardPosterWidth, kPVSiteCardPosterHeight);
-        CGPathRef shadowPath = [EPUtil newPathForRoundedRect: posterFrame radius: 5];
+        CGPathRef shadowPath = [Util newPathForRoundedRect: posterFrame radius: 5];
         self.posterContainer = [[UIView alloc] initWithFrame: posterFrame];
         _posterContainer.backgroundColor = [UIColor clearColor];
         _posterContainer.layer.shadowOffset = CGSizeMake(0, 2.5);

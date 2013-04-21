@@ -1,8 +1,8 @@
 //
-//  EPUtil.h
-//  EasyPAR
+//  PVAugmentAllTableViewCell.h
+//  MARS
 //
-//  Copyright 2012 PAR Works, Inc.
+//  Copyright 2013 PAR Works, Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -15,16 +15,11 @@
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
-//
 
+#import <UIKit/UIKit.h>
 
-#import <Foundation/Foundation.h>
+@interface PVAugmentAllTableViewCell : UITableViewCell
 
-@interface EPUtil : NSObject
+@property (nonatomic, strong) CALayer * whiteLayer;
 
-+ (int)smallImagesWithWidth:(int)width height:(int)height fromImage:(UIImage *)image withImageReadyCallback:(void (^)(int i, UIImage* img))imgCallback;
-+ (int)arrayIndexForCols:(int)cols rowIndex:(int)r columnIndex:(int)c;
-+ (CGPathRef)newPathForRoundedRect:(CGRect)rect radius:(CGFloat)radius;
-
-void draw1PxStroke(CGContextRef context, CGPoint startPoint, CGPoint endPoint, UIColor *color);
 @end

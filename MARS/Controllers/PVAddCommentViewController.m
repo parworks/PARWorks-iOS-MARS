@@ -24,7 +24,7 @@
 #import "UIFont+ThemeAdditions.h"
 #import "UINavigationItem+PVAdditions.h"
 #import "UINavigationBar+Additions.h"
-#import "EPUtil.h"
+#import "Util.h"
 
 @implementation PVAddCommentViewController
 
@@ -48,7 +48,7 @@
         
     _commentTextView.font = [UIFont parworksFontWithSize:18.0];
     
-    CGPathRef shadowPath = [EPUtil newPathForRoundedRect:_addCommentView.layer.bounds radius: 5];
+    CGPathRef shadowPath = [Util newPathForRoundedRect:_addCommentView.layer.bounds radius: 5];
     _addCommentView.contentMode = UIViewContentModeScaleAspectFill;
     _addCommentView.layer.cornerRadius = 5;
     _addCommentView.clipsToBounds = YES;

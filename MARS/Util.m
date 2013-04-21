@@ -17,10 +17,13 @@
 //  limitations under the License.
 //
 
+#import "GPUImagePicture.h"
+#import "GPUImageGaussianBlurFilter.h"
+#import "GPUImageBrightnessFilter.h"
+#import "UIImageAdditions.h"
+#import "Util.h"
 
-#import "EPUtil.h"
-
-@implementation EPUtil
+@implementation Util
 
 static NSMutableDictionary * smallImages;
 
@@ -105,6 +108,23 @@ static NSMutableDictionary * smallImages;
 	CGPathCloseSubpath(retPath);
     
 	return retPath;
+}
+
++ (id)blurredImageWithImage:(UIImage *)img
+{
+    GPUImagePicture * picture = [[GPUImagePicture alloc] initWithImage:[img scaledImage:0.10] smoothlyScaleOutput: NO];
+    GPUImageGaussianBlurFilter * blurFilter = [[GPUImageGaussianBlurFilter alloc] init];
+    GPUImageBrightnessFilter * brightnessFilter = [[GPUImageBrightnessFilter alloc] init];
+    
+    [blurFilter setBlurSize: 0.35];
+    [picture addTarget: blurFilter];
+    [blurFilter addTarget: brightnessFilter];
+    [brightnessFilter setBrightness: -0.1];
+    
+    [picture processImage];
+    
+    UIImage *result = [brightnessFilter imageFromCurrentlyProcessedOutput];
+    return (id)result.CGImage;
 }
 
 

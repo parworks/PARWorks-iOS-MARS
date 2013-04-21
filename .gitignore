@@ -1,7 +1,16 @@
+# Mac OS X
+*.DS_Store
+
+# Xcode
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.xcuserstate
+project.xcworkspace/
+xcuserdata/
+
 /.DS_Store
-/PARViewer.xcodeproj/project.xcworkspace
-/PARViewer.xcodeproj/xcuserdata
-/PARViewer/.DS_Store
 /build/
 /DerivedData/
 /Submodules/.DS_Store
@@ -9,5 +18,3 @@
 /Subprojects/ChipmunkTemplate/ChipmunkTemplate.xcodeproj/project.xcworkspace/xcuserdata/bengotow.xcuserdatad/
 /Subprojects/ChipmunkTemplate/ChipmunkTemplate.xcodeproj/xcuserdata/bengotow.xcuserdatad/
 /Subprojects/ChipmunkTemplate/DerivedData/
-.DS_Store
-/Resources/.DS_Store
