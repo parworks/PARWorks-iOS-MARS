@@ -1445,7 +1445,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = PV;
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Ben Gotow";
 			};
 			buildConfigurationList = 4351D0AD16B4C5DB0039FE88 /* Build configuration list for PBXProject "PARViewer" */;
