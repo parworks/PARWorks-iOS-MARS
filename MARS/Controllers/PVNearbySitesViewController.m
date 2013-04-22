@@ -252,7 +252,8 @@
             }
             [self showCameraPickerWithSiteIDs:siteIDs];
         } else {
-            ARSite * site = [_nearbySites objectAtIndex: [indexPath row]];
+            
+            ARSite * site = [_nearbySites objectAtIndex: [indexPath row] - 1];
             PVSiteDetailViewController * siteDetailController = [[PVSiteDetailViewController alloc] initWithSite: site];
             [self presentViewController:[[UINavigationController alloc] initWithRootViewController:siteDetailController] animated:YES completion:NULL];            
         }
