@@ -17,12 +17,14 @@
 //  limitations under the License.
 //
 #import "ARAugmentedView.h"
+#import "ARLoadingView.h"
 #import "ARTotalAugmentedImagesView.h"
 #import "PVSiteTableViewCell.h"
 #import "PVImageCacheManager.h"
 #import "UIColor+ThemeAdditions.h"
 #import "UIFont+ThemeAdditions.h"
 #import "ARManager.h"
+#import "UIColor+Utils.h"
 
 @implementation PVSiteTableViewCell
 
@@ -45,6 +47,7 @@
         
         
         self.posterImageView = [[ARAugmentedView alloc] initWithFrame: CGRectZero];
+        _posterImageView.backgroundColor = [UIColor colorWithHexRGBValue:0xCCCCCC];
         _posterImageView.clipsToBounds = YES;
         _posterImageView.animateOutlineViewDrawing = NO;
         _posterImageView.showOutlineViewsOnly = YES;
@@ -55,6 +58,11 @@
         _posterImageView.layer.borderColor = [[UIColor whiteColor] CGColor];
         _posterImageView.layer.borderWidth = 1;
         [self addSubview: self.posterImageView];
+        
+        // TODO: Removing the loading view for now since there isn't really time to make it work right...
+        // We should do some caching so we show the loading view the first time
+        // we attempt to load the augmented photo
+        [_posterImageView.loadingView removeFromSuperview];
         
         [self textLabel].font = [UIFont boldParworksFontWithSize: 18];
         [self detailTextLabel].font = [UIFont parworksFontWithSize: 14];
@@ -88,50 +96,63 @@
 
 - (void)setSite:(ARSite*)site
 {
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
+
     if (site == _site)
         return;
     
     _site = site;
-    [self siteUpdated: nil];
     
-    [[NSNotificationCenter defaultCenter] removeObserver: self];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteUpdated:) name:NOTIF_SITE_UPDATED object:_site];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteUpdated:) name:NOTIF_IMAGE_READY object:_site.posterImageURL];
-
-    if (_site.location.latitude != 0) {
-        CLLocation *locA = [[CLLocation alloc] initWithLatitude:_site.location.latitude longitude:_site.location.longitude];
-        CLLocation *locB = [[ARManager shared] deviceLocation];
-        CLLocationDistance distance = [locA distanceFromLocation:locB];
+    if (site) {
+        [_posterImageView.loadingView setHidden:NO];
+        [self siteUpdated: nil];
         
-        // convert to miles, round to two decimal places
-        double miles = roundf((distance / 1609.34) * 10.0) / 10.0;
-        if (miles >= 0.1)
-            [_distanceButton setTitle:[NSString stringWithFormat:@"%.1f mi", miles] forState:UIControlStateNormal];
-        else
-            [_distanceButton setTitle:[NSString stringWithFormat:@"%.0f ft", miles * 5280.0] forState:UIControlStateNormal];
-
-        [_distanceButton setHidden: NO];
-    } else {
-        [_distanceButton setHidden: YES];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteUpdated:) name:NOTIF_SITE_UPDATED object:_site];
+        
+        // set the poster image
+        UIImage * img = [[PVImageCacheManager shared] imageForURL: [_site posterImageURL]];
+        if (img) {
+            float scale = img.size.width / _site.posterImageOriginalWidth;
+            [self.posterImageView setAugmentedPhoto: [[ARAugmentedPhoto alloc] initWithScaledImage:img atScale:scale andOverlayJSON:[_site posterImageOverlayJSON]]];
+        } else {
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(siteImageReady:) name:NOTIF_IMAGE_READY object: nil];
+        }
+        
+        // Set the location info
+        if (_site.location.latitude != 0) {
+            CLLocation *locA = [[CLLocation alloc] initWithLatitude:_site.location.latitude longitude:_site.location.longitude];
+            CLLocation *locB = [[ARManager shared] deviceLocation];
+            CLLocationDistance distance = [locA distanceFromLocation:locB];
+            
+            // convert to miles, round to two decimal places
+            double miles = roundf((distance / 1609.34) * 10.0) / 10.0;
+            if (miles >= 0.1)
+                [_distanceButton setTitle:[NSString stringWithFormat:@"%.1f mi", miles] forState:UIControlStateNormal];
+            else
+                [_distanceButton setTitle:[NSString stringWithFormat:@"%.0f ft", miles * 5280.0] forState:UIControlStateNormal];
+            
+            [_distanceButton setHidden: NO];
+        } else {
+            [_distanceButton setHidden: YES];
+        } 
     }
 }
 
 - (void)siteUpdated:(NSNotification*)notif
 {
-    UIImage * img = [[PVImageCacheManager shared] imageForURL: _site.posterImageURL];
-    NSDictionary * overlays = _site.posterImageOverlayJSON;
-    if (!img) {
-        img = [UIImage imageNamed: @"missing_image_300x150.png"];
-        overlays = nil;
-    }
-    
-    float scale = img.size.width / _site.posterImageOriginalWidth;
-    ARAugmentedPhoto *photo = [[ARAugmentedPhoto alloc] initWithScaledImage: img atScale: scale andOverlayJSON: overlays];
-    [self.posterImageView setAugmentedPhoto: photo];
-    [self.posterImageView.totalAugmentedImagesView setCount:_site.totalAugmentedImages];
     [self.textLabel setText: [_site name] ? [_site name] : @"Loading..."];
-    [self.detailTextLabel setText: @"Hiya"];
 }
+
+- (void)siteImageReady:(NSNotification*)notif
+{
+    if (![[notif object] isEqual: [_site posterImageURL]])
+        return;
+    
+    UIImage * img = [[PVImageCacheManager shared] imageForURL: [_site posterImageURL]];
+    float scale = img.size.width / _site.posterImageOriginalWidth;
+    [self.posterImageView setAugmentedPhoto: [[ARAugmentedPhoto alloc] initWithScaledImage:img atScale:scale andOverlayJSON:[_site posterImageOverlayJSON]]];
+}
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
@@ -152,6 +173,9 @@
 - (void)prepareForReuse
 {
     [[NSNotificationCenter defaultCenter] removeObserver: self];
+    [self setSite:nil];
+    [self.posterImageView setAugmentedPhoto: nil];
+    [_posterImageView.loadingView setHidden:YES];
     [super prepareForReuse];
 }
 

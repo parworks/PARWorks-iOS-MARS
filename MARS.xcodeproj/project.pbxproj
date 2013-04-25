@@ -239,6 +239,7 @@
 		A04A622E1724353900F8100B /* PVAugmentAllTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A04A622D1724353800F8100B /* PVAugmentAllTableViewCell.m */; };
 		A057A68917247B7700662670 /* ARCore.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A057A59B17244CC400662670 /* ARCore.bundle */; };
 		A057A68B17248A9200662670 /* HTML in Resources */ = {isa = PBXBuildFile; fileRef = A057A68A17248A9100662670 /* HTML */; };
+		A074AB781728C7A900BC7F75 /* test_gpx.gpx in Resources */ = {isa = PBXBuildFile; fileRef = A074AB771728C7A900BC7F75 /* test_gpx.gpx */; };
 		A07578AA16CE6D88009B8654 /* PVIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A07578A816CE6D88009B8654 /* PVIntroViewController.m */; };
 		A07578AB16CE6D88009B8654 /* PVIntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A07578A916CE6D88009B8654 /* PVIntroViewController.xib */; };
 		A07578B416CE709D009B8654 /* PVIntroCard.m in Sources */ = {isa = PBXBuildFile; fileRef = A07578B316CE709D009B8654 /* PVIntroCard.m */; };
@@ -655,6 +656,7 @@
 		A04A622C1724353800F8100B /* PVAugmentAllTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVAugmentAllTableViewCell.h; sourceTree = "<group>"; };
 		A04A622D1724353800F8100B /* PVAugmentAllTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVAugmentAllTableViewCell.m; sourceTree = "<group>"; };
 		A057A68A17248A9100662670 /* HTML */ = {isa = PBXFileReference; lastKnownFileType = folder; path = HTML; sourceTree = "<group>"; };
+		A074AB771728C7A900BC7F75 /* test_gpx.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = test_gpx.gpx; path = ../../Desktop/test_gpx.gpx; sourceTree = "<group>"; };
 		A07578A716CE6D88009B8654 /* PVIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVIntroViewController.h; sourceTree = "<group>"; };
 		A07578A816CE6D88009B8654 /* PVIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PVIntroViewController.m; sourceTree = "<group>"; };
 		A07578A916CE6D88009B8654 /* PVIntroViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PVIntroViewController.xib; sourceTree = "<group>"; };
@@ -705,6 +707,7 @@
 		4351D0A816B4C5DB0039FE88 = {
 			isa = PBXGroup;
 			children = (
+				A074AB771728C7A900BC7F75 /* test_gpx.gpx */,
 				4351D0BD16B4C5DB0039FE88 /* MARS */,
 				4351D0B616B4C5DB0039FE88 /* Frameworks */,
 				4351D0B416B4C5DB0039FE88 /* Products */,
@@ -1524,6 +1527,7 @@
 				A04A550517238D2B00F8100B /* toolbar@2x.png in Resources */,
 				A04A550817238D2B00F8100B /* try_it_now@2x.png in Resources */,
 				A057A68B17248A9200662670 /* HTML in Resources */,
+				A074AB781728C7A900BC7F75 /* test_gpx.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
